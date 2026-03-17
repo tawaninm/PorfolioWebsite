@@ -1,6 +1,7 @@
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import SkillMarquee from "@/components/SkillMarquee";
+import About from "@/components/About";
 
 export default function Home() {
   return (
@@ -9,6 +10,7 @@ export default function Home() {
       <main>
         <Hero />
         <SkillMarquee />
+        <About />
       </main>
     </>
   );
