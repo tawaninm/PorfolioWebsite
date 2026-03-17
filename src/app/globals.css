@@ -1,0 +1,120 @@
+@import "tailwindcss";
+
+/* ========================================
+   CITY POP RETRO — Design Tokens (Tailwind v4)
+   ======================================== */
+
+@theme inline {
+  /* ---- Primary Backgrounds (pastel, dreamy) ---- */
+  --color-lavender: #C8A8E8;
+  --color-sakura-pink: #F0B0D0;
+  --color-sky-cyan: #88D8E8;
+  --color-mint: #A8E8D0;
+  --color-sunset-gold: #F8E0A0;
+  --color-peach: #F8A078;
+
+  /* ---- Accent / Neon Pop ---- */
+  --color-hot-pink: #FF6090;
+  --color-electric-blue: #5080F0;
+  --color-neon-teal: #40C8A0;
+  --color-coral-red: #F06848;
+  --color-retro-yellow: #F0D040;
+
+  /* ---- Neutral / Text ---- */
+  --color-dark-navy: #1A1A2E;
+  --color-deep-purple: #2D1B4E;
+  --color-soft-white: #FFF8F0;
+  --color-muted-lilac: #B0A0C8;
+
+  /* ---- Font families ---- */
+  --font-display: var(--font-righteous), cursive;
+  --font-body: var(--font-dm-sans), sans-serif;
+  --font-mono: var(--font-jetbrains-mono), monospace;
+
+  /* ---- Marquee animation (infinite skill scroll) ---- */
+  --animate-marquee: marquee 30s linear infinite;
+  --animate-marquee-reverse: marquee-reverse 30s linear infinite;
+
+  @keyframes marquee {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+
+  @keyframes marquee-reverse {
+    0% { transform: translateX(-50%); }
+    100% { transform: translateX(0); }
+  }
+}
+
+/* ========================================
+   Base Styles
+   ======================================== */
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--color-dark-navy);
+  color: var(--color-soft-white);
+  font-family: var(--font-body);
+}
+
+/* Selection highlight — sakura pink */
+::selection {
+  background-color: #F0B0D0;
+  color: #1A1A2E;
+}
+
+/* ========================================
+   Utility Classes
+   ======================================== */
+
+/* Hero gradient */
+.gradient-hero {
+  background: linear-gradient(135deg, #C8A8E8 0%, #F0B0D0 40%, #88D8E8 100%);
+}
+
+/* Sunset gradient */
+.gradient-sunset {
+  background: linear-gradient(135deg, #F8A078 0%, #F0B0D0 50%, #C8A8E8 100%);
+}
+
+/* Gradient text effect */
+.gradient-text {
+  background: linear-gradient(90deg, #FF6090, #5080F0, #40C8A0);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Neon glow — pink */
+.glow-pink {
+  box-shadow: 0 0 30px rgba(255, 96, 144, 0.4);
+}
+
+/* Glassmorphism */
+.glass {
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  background: rgba(200, 168, 232, 0.15);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* ========================================
+   Reduced Motion
+   ======================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
