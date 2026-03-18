@@ -152,7 +152,7 @@ function ProjectCard({
   isFirst: boolean;
 }) {
   const number = String(index + 1).padStart(2, "0");
-  const rotation = index % 2 === 0 ? "rotate-[-1deg]" : "rotate-[1deg]";
+  const rotation = index % 2 === 0 ? "md:rotate-[-1deg]" : "md:rotate-[1deg]";
 
   return (
     <motion.article

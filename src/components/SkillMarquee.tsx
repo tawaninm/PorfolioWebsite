@@ -66,7 +66,7 @@ function SkillPill({ name, bgClass, dotClass }: { name: string; bgClass: string;
 
 export default function SkillMarquee() {
   return (
-    <section className="w-full overflow-visible bg-dark-navy relative z-20">
+    <section className="w-full overflow-visible bg-dark-navy relative z-20" aria-label="Skills marquee">
       {/* Diagonal comic panel cut — overlaps the Hero section above */}
       <div
         className="absolute -top-8 left-0 w-full h-10 bg-dark-navy pointer-events-none"
@@ -94,6 +94,7 @@ export default function SkillMarquee() {
             style={{ animation: "marquee 30s linear infinite" }}
             onMouseEnter={e => (e.currentTarget.style.animationPlayState = "paused")}
             onMouseLeave={e => (e.currentTarget.style.animationPlayState = "running")}
+            aria-hidden="true"
           >
             {[...row1, ...row1, ...row1, ...row1, ...row1, ...row1, ...row1, ...row1].map((skill, i) => (
               <SkillPill
@@ -111,6 +112,7 @@ export default function SkillMarquee() {
             style={{ animation: "marquee-reverse 30s linear infinite" }}
             onMouseEnter={e => (e.currentTarget.style.animationPlayState = "paused")}
             onMouseLeave={e => (e.currentTarget.style.animationPlayState = "running")}
+            aria-hidden="true"
           >
             {[...row2, ...row2, ...row2, ...row2, ...row2, ...row2, ...row2, ...row2].map((skill, i) => (
               <SkillPill

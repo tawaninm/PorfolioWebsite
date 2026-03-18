@@ -1,10 +1,13 @@
 import type { Metadata } from "next";
 import { Righteous, DM_Sans, JetBrains_Mono, Zen_Maru_Gothic } from "next/font/google";
 import "./globals.css";
+import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import MotionProvider from "@/components/MotionProvider";
 import ThemeProvider from "@/components/ThemeProvider";
 import ThreeProvider from "@/components/ThreeProvider";
+import WelcomeBurst from "@/components/WelcomeBurst";
+import ScrollSpeedLines from "@/components/ScrollSpeedLines";
 
 /* ---- Google Fonts via next/font ---- */
 const righteous = Righteous({
@@ -57,6 +60,9 @@ export default function RootLayout({
         <ThemeProvider>
           <MotionProvider>
             <ThreeProvider />
+            <WelcomeBurst />
+            <ScrollSpeedLines />
+            <Navbar />
             <div className="flex-grow">
               {children}
             </div>

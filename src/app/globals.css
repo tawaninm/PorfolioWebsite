@@ -161,6 +161,23 @@ body {
   animation: comic-shake 0.3s ease infinite;
 }
 
+/* ── Global primary button comic-shake on hover ── */
+button[class*="bg-hot-pink"]:hover,
+button[class*="bg-neon-magenta"]:hover,
+a[class*="bg-hot-pink"]:hover,
+a[class*="bg-neon-magenta"]:hover {
+  animation: comic-shake 0.3s ease infinite;
+}
+
+/* ── Global card consistent lift + glow ── */
+.card-hover {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.card-hover:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 32px rgba(255, 45, 120, 0.2);
+}
+
 /* Custom scrollbar */
 ::-webkit-scrollbar {
   width: 6px;
