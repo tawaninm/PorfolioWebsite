@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Righteous, DM_Sans, JetBrains_Mono } from "next/font/google";
+import { Righteous, DM_Sans, JetBrains_Mono, Zen_Maru_Gothic } from "next/font/google";
 import "./globals.css";
 import Footer from "@/components/Footer";
 import MotionProvider from "@/components/MotionProvider";
@@ -27,6 +27,13 @@ const jetbrainsMono = JetBrains_Mono({
   display: "swap",
 });
 
+const zenMaruGothic = Zen_Maru_Gothic({
+  subsets: ["latin"],
+  weight: ["400", "500", "700"],
+  variable: "--font-zen",
+  display: "swap",
+});
+
 /* ---- Metadata ---- */
 export const metadata: Metadata = {
   title: "Portfolio | UX/UI Designer · Programmer · CI Artist",
@@ -43,7 +50,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${righteous.variable} ${dmSans.variable} ${jetbrainsMono.variable}`}
+      className={`${righteous.variable} ${dmSans.variable} ${jetbrainsMono.variable} ${zenMaruGothic.variable}`}
     >
       <body className="font-body antialiased bg-soft-white text-dark-navy dark:bg-space-navy dark:text-soft-white flex flex-col min-h-screen transition-colors duration-300">
         <ThemeProvider>
