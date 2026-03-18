@@ -4,6 +4,7 @@ import "./globals.css";
 import Footer from "@/components/Footer";
 import MotionProvider from "@/components/MotionProvider";
 import ThemeProvider from "@/components/ThemeProvider";
+import ThreeProvider from "@/components/ThreeProvider";
 
 /* ---- Google Fonts via next/font ---- */
 const righteous = Righteous({
@@ -55,6 +56,7 @@ export default function RootLayout({
       <body className="font-body antialiased bg-soft-white text-dark-navy dark:bg-space-navy dark:text-soft-white flex flex-col min-h-screen transition-colors duration-300">
         <ThemeProvider>
           <MotionProvider>
+            <ThreeProvider />
             <div className="flex-grow">
               {children}
             </div>
