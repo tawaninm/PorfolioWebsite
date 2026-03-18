@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Righteous, DM_Sans, JetBrains_Mono, Zen_Maru_Gothic } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
@@ -43,6 +43,13 @@ export const metadata: Metadata = {
   title: "Portfolio | UX/UI Designer · Programmer · CI Artist",
   description:
     "City pop retro portfolio — UX/UI design, programming, and corporate identity art. Built with Next.js, Tailwind CSS, and Framer Motion.",
+};
+
+// Ensure proper mobile viewport so the site doesn't render as a tiny desktop page
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 1,
 };
 
 /* ---- Root Layout ---- */
