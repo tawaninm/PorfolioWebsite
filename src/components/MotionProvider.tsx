@@ -7,5 +7,5 @@ export default function MotionProvider({
 }: {
   children: React.ReactNode;
 }) {
-  return <MotionConfig reducedMotion="user">{children}</MotionConfig>;
+  return <MotionConfig>{children}</MotionConfig>;
 }
