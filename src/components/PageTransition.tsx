@@ -1,9 +1,7 @@
 "use client";
 
-import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { usePathname } from "next/navigation";
-import { useReducedMotion } from "framer-motion";
 
 export default function PageTransition({
   children,
@@ -11,21 +9,6 @@ export default function PageTransition({
   children: React.ReactNode;
 }) {
   const pathname = usePathname();
-  const prefersReducedMotion = useReducedMotion();
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
-
-  // Only respect reduced-motion preference after hydration to avoid SSR mismatch
-  if (mounted && prefersReducedMotion) {
-    return (
-      <div className="min-h-screen">
-        {children}
-      </div>
-    );
-  }
 
   return (
     <AnimatePresence mode="wait">

@@ -74,18 +74,7 @@ const MAX_PETALS = 100;
 
 const SakuraPetals = React.memo(function SakuraPetals() {
   const meshRef = useRef<THREE.InstancedMesh>(null);
-  const [count, setCount] = useState(MAX_PETALS);
-  const [reducedMotion, setReducedMotion] = useState(false);
-
-  // Detect mobile + reduced-motion
-  useEffect(() => {
-    setCount(window.innerWidth < 768 ? 30 : MAX_PETALS);
-    const mql = window.matchMedia("(prefers-reduced-motion: reduce)");
-    setReducedMotion(mql.matches);
-    const handler = (e: MediaQueryListEvent) => setReducedMotion(e.matches);
-    mql.addEventListener("change", handler);
-    return () => mql.removeEventListener("change", handler);
-  }, []);
+  const [count] = useState(MAX_PETALS);
 
   const dummy = useMemo(() => new THREE.Object3D(), []);
 
@@ -134,7 +123,7 @@ const SakuraPetals = React.memo(function SakuraPetals() {
 
   useFrame((state) => {
     const mesh = meshRef.current;
-    if (!mesh || reducedMotion) return;
+    if (!mesh) return;
 
     const t = state.clock.elapsedTime;
 
@@ -189,15 +178,6 @@ const SakuraPetals = React.memo(function SakuraPetals() {
 const MouseParallax = React.memo(function MouseParallax() {
   const { camera } = useThree();
   const mouse = useRef({ x: 0, y: 0 });
-  const [reducedMotion, setReducedMotion] = useState(false);
-
-  useEffect(() => {
-    const mql = window.matchMedia("(prefers-reduced-motion: reduce)");
-    setReducedMotion(mql.matches);
-    const handler = (e: MediaQueryListEvent) => setReducedMotion(e.matches);
-    mql.addEventListener("change", handler);
-    return () => mql.removeEventListener("change", handler);
-  }, []);
 
   const onMouseMove = useCallback((e: MouseEvent) => {
     mouse.current.x = (e.clientX / window.innerWidth) * 2 - 1;
@@ -210,7 +190,6 @@ const MouseParallax = React.memo(function MouseParallax() {
   }, [onMouseMove]);
 
   useFrame(() => {
-    if (reducedMotion) return;
     const tx = mouse.current.x * 0.3;
     const ty = -mouse.current.y * 0.3;
     camera.position.x += (tx - camera.position.x) * 0.05;

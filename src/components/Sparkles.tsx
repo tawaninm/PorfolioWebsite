@@ -16,16 +16,8 @@ interface Particle {
 
 export default function Sparkles() {
   const [particles, setParticles] = useState<Particle[]>([]);
-  const [reduceMotion, setReduceMotion] = useState(false);
 
   useEffect(() => {
-    // Check for reduced motion preference
-    const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
-    setReduceMotion(mediaQuery.matches);
-    
-    const listener = (e: MediaQueryListEvent) => setReduceMotion(e.matches);
-    mediaQuery.addEventListener("change", listener);
-
     // Determine particle count based on screen width
     const isMobile = window.innerWidth < 640;
     const count = isMobile ? 15 : 40;
@@ -42,8 +34,6 @@ export default function Sparkles() {
     }));
 
     setParticles(newParticles);
-
-    return () => mediaQuery.removeEventListener("change", listener);
   }, []);
 
   if (particles.length === 0) return null;
@@ -51,10 +41,9 @@ export default function Sparkles() {
   return (
     <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
       {particles.map((p) => {
-        // If reduced motion is on, we just scatter static particles
-        const animateY = reduceMotion ? p.y : [p.y, -20];
-        const animateX = reduceMotion ? p.x : [p.x, p.x + (Math.random() > 0.5 ? 5 : -5)];
-        const pulseOpacity = reduceMotion ? p.opacity : [p.opacity, p.opacity + 0.3, p.opacity];
+        const animateY = [p.y, -20];
+        const animateX = [p.x, p.x + (Math.random() > 0.5 ? 5 : -5)];
+        const pulseOpacity = [p.opacity, p.opacity + 0.3, p.opacity];
 
         return (
           <motion.div

@@ -1,21 +1,17 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { useReducedMotion } from "framer-motion";
 
 const LINE_COUNT = 8;
 
 /** Thin diagonal speed-line SVGs shown at screen edges when scrolling fast */
 export default function ScrollSpeedLines() {
-  const prefersReduced = useReducedMotion();
   const [opacity, setOpacity] = useState(0);
   const lastY = useRef(0);
   const rafRef = useRef<number | null>(null);
   const fadeOutTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   useEffect(() => {
-    if (prefersReduced) return;
-
     const onScroll = () => {
       const currentY = window.scrollY;
       const velocity = Math.abs(currentY - lastY.current);
@@ -43,9 +39,9 @@ export default function ScrollSpeedLines() {
       if (rafRef.current) cancelAnimationFrame(rafRef.current);
       if (fadeOutTimer.current) clearTimeout(fadeOutTimer.current);
     };
-  }, [prefersReduced]);
+  }, []);
 
-  if (prefersReduced || opacity === 0) return null;
+  if (opacity === 0) return null;
 
   return (
     <div

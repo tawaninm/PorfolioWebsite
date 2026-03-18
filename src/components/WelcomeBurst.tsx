@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 
 const SPOKES = 16;
 const SESSION_KEY = "portfolio_welcomed";
@@ -40,11 +40,9 @@ function StarBurstSVG() {
 }
 
 export default function WelcomeBurst() {
-  const prefersReduced = useReducedMotion();
   const [show, setShow] = useState(false);
 
   useEffect(() => {
-    if (prefersReduced) return;
     // Only show on first visit per browser session
     if (!sessionStorage.getItem(SESSION_KEY)) {
       setShow(true);
@@ -53,7 +51,7 @@ export default function WelcomeBurst() {
       const t = setTimeout(() => setShow(false), 1200);
       return () => clearTimeout(t);
     }
-  }, [prefersReduced]);
+  }, []);
 
   return (
     <AnimatePresence>
