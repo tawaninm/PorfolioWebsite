@@ -2,23 +2,24 @@
 
 import { useState, useEffect } from "react";
 import { useTheme } from "next-themes";
+import { usePathname } from "next/navigation";
 import { motion, AnimatePresence, useScroll, useMotionValueEvent } from "framer-motion";
 import { FiSun, FiMoon } from "react-icons/fi";
 
 const navLinks = [
-  { label: "Home", href: "#home" },
-  { label: "About", href: "#about" },
-  { label: "Works", href: "#works" },
-  { label: "Projects", href: "#projects" },
-  { label: "Contact", href: "#contact" },
+  { label: "Home", href: "/#home" },
+  { label: "About", href: "/#about" },
+  { label: "Projects", href: "/#works" },
+  { label: "Contact", href: "/#contact" },
 ];
 
 export default function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [hidden, setHidden] = useState(false);
-  const [activeSection, setActiveSection] = useState("#home");
+  const [activeSection, setActiveSection] = useState("/#home");
   const [mounted, setMounted] = useState(false);
   const { theme, setTheme } = useTheme();
+  const pathname = usePathname();
 
   useEffect(() => setMounted(true), []);
 
@@ -34,19 +35,28 @@ export default function Navbar() {
     }
   });
 
-  // Track active section based on scroll position
+  // Track active section based on scroll position or pathname
   useEffect(() => {
+    // If we are on a project detail page, force the Projects tab to be active
+    if (pathname && pathname.startsWith("/projects")) {
+      setActiveSection("/#works");
+      return;
+    }
+
     const handleScroll = () => {
-      const sections = navLinks.map(link => link.href.substring(1));
+      // If we are not on the homepage, don't try to calculate scroll sections
+      if (pathname !== "/") return;
+
+      const sections = navLinks.map(link => link.href.substring(2)); // strip "/#"
       
       let current = "";
       for (const section of sections) {
+        if (!section) continue; // skip empty
         const element = document.getElementById(section);
         if (element) {
           const rect = element.getBoundingClientRect();
-          // Adjust threshold to detect when section reaches upper part of viewport
           if (rect.top <= 200) {
-            current = `#${section}`;
+            current = `/#${section}`;
           }
         }
       }
@@ -54,15 +64,14 @@ export default function Navbar() {
       if (current) {
         setActiveSection(current);
       } else if (window.scrollY < 100) {
-        // Fallback to home at the very top
-        setActiveSection("#home");
+        setActiveSection("/#home");
       }
     };
 
     window.addEventListener("scroll", handleScroll);
     handleScroll(); // Initial check
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  }, [pathname]);
 
   return (
     <motion.nav
@@ -76,7 +85,7 @@ export default function Navbar() {
     >
       <div className="mx-auto max-w-7xl flex items-center justify-between px-6 py-4 relative z-50">
         {/* Logo */}
-        <a href="#home" className="font-display text-2xl text-dark-navy dark:text-soft-white tracking-widest flex items-center group">
+        <a href="/#home" className="font-display text-2xl text-dark-navy dark:text-soft-white tracking-widest flex items-center group">
           TW<span className="text-hot-pink transition-colors duration-300 group-hover:text-sky-cyan">.</span>
         </a>
 
