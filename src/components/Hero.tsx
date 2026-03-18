@@ -1,7 +1,9 @@
 "use client";
 
+import dynamic from "next/dynamic";
 import { motion } from "framer-motion";
-import Sparkles from "./Sparkles";
+
+const Sparkles = dynamic(() => import("./Sparkles"), { ssr: false });
 
 export default function Hero() {
   const titleText = "Crafting Playful & Innovative Digital Experiences";
@@ -24,7 +26,7 @@ export default function Hero() {
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] as const },
+      transition: { duration: 0.7, ease: [0.16, 1, 0.3, 1] as const },
     },
   };
 
@@ -114,7 +116,7 @@ export default function Hero() {
           className="col-span-1 lg:col-span-5 h-full w-full flex items-center justify-center relative mt-12 lg:mt-0"
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.8, delay: 0.8, ease: [0.16, 1, 0.3, 1] }}
+          transition={{ duration: 0.7, delay: 0.8, ease: [0.16, 1, 0.3, 1] }}
         >
           {/* Floating animation wrapper */}
           <motion.div

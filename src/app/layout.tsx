@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Righteous, DM_Sans, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import Footer from "@/components/Footer";
+import MotionProvider from "@/components/MotionProvider";
 
 /* ---- Google Fonts via next/font ---- */
 const righteous = Righteous({
@@ -44,10 +45,12 @@ export default function RootLayout({
       className={`${righteous.variable} ${dmSans.variable} ${jetbrainsMono.variable}`}
     >
       <body className="font-body antialiased bg-dark-navy text-soft-white flex flex-col min-h-screen">
-        <div className="flex-grow">
-          {children}
-        </div>
-        <Footer />
+        <MotionProvider>
+          <div className="flex-grow">
+            {children}
+          </div>
+          <Footer />
+        </MotionProvider>
       </body>
     </html>
   );
