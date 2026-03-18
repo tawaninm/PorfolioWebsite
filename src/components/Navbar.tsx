@@ -1,7 +1,9 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { useTheme } from "next-themes";
 import { motion, AnimatePresence, useScroll, useMotionValueEvent } from "framer-motion";
+import { FiSun, FiMoon } from "react-icons/fi";
 
 const navLinks = [
   { label: "Home", href: "#home" },
@@ -15,6 +17,10 @@ export default function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [hidden, setHidden] = useState(false);
   const [activeSection, setActiveSection] = useState("#home");
+  const [mounted, setMounted] = useState(false);
+  const { theme, setTheme } = useTheme();
+
+  useEffect(() => setMounted(true), []);
 
   const { scrollY } = useScroll();
 
@@ -66,11 +72,11 @@ export default function Navbar() {
       }}
       animate={hidden ? "hidden" : "visible"}
       transition={{ duration: 0.35, ease: "easeInOut" }}
-      className="fixed top-0 left-0 w-full z-50 backdrop-blur-md bg-lavender/10 border-b border-soft-white/10"
+      className="fixed top-0 left-0 w-full z-50 backdrop-blur-md bg-soft-white/80 dark:bg-lavender/10 border-b border-dark-navy/10 dark:border-soft-white/10"
     >
       <div className="mx-auto max-w-7xl flex items-center justify-between px-6 py-4 relative z-50">
         {/* Logo */}
-        <a href="#home" className="font-display text-2xl text-soft-white tracking-widest flex items-center group">
+        <a href="#home" className="font-display text-2xl text-dark-navy dark:text-soft-white tracking-widest flex items-center group">
           TW<span className="text-hot-pink transition-colors duration-300 group-hover:text-sky-cyan">.</span>
         </a>
 
@@ -81,7 +87,7 @@ export default function Navbar() {
               <a
                 href={link.href}
                 className={`relative font-body text-sm font-medium transition-colors duration-300
-                            ${activeSection === link.href ? "text-hot-pink" : "text-soft-white/80 hover:text-soft-white"}`}
+                            ${activeSection === link.href ? "text-hot-pink" : "text-dark-navy/70 dark:text-soft-white/80 hover:text-dark-navy dark:hover:text-soft-white"}`}
               >
                 {link.label}
                 {activeSection === link.href && (
@@ -96,25 +102,39 @@ export default function Navbar() {
           ))}
         </ul>
 
-        {/* Mobile hamburger */}
-        <button
-          onClick={() => setMobileOpen(!mobileOpen)}
-          className="md:hidden flex flex-col items-center justify-center w-10 h-10 gap-1.5 focus:outline-none"
-          aria-label={mobileOpen ? "Close menu" : "Open menu"}
-        >
-          <motion.span
-            animate={mobileOpen ? { rotate: 45, y: 8 } : { rotate: 0, y: 0 }}
-            className={`block w-6 h-0.5 rounded-full transition-colors duration-300 ${mobileOpen ? 'bg-dark-navy' : 'bg-soft-white'}`}
-          />
-          <motion.span
-            animate={mobileOpen ? { opacity: 0 } : { opacity: 1 }}
-            className="block w-6 h-0.5 bg-soft-white rounded-full"
-          />
-          <motion.span
-            animate={mobileOpen ? { rotate: -45, y: -8 } : { rotate: 0, y: 0 }}
-            className={`block w-6 h-0.5 rounded-full transition-colors duration-300 ${mobileOpen ? 'bg-dark-navy' : 'bg-soft-white'}`}
-          />
-        </button>
+        {/* Theme Toggle & Mobile Menu container */}
+        <div className="flex items-center gap-4">
+          {/* Theme Toggle */}
+          {mounted && (
+            <button
+              onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+              className="p-2 rounded-full bg-soft-white/10 dark:bg-dark-navy/10 border border-soft-white/20 text-soft-white dark:text-dark-navy hover:text-hot-pink dark:hover:text-hot-pink transition-all duration-300"
+              aria-label="Toggle theme"
+            >
+              {theme === "dark" ? <FiSun size={20} /> : <FiMoon size={20} />}
+            </button>
+          )}
+
+          {/* Mobile hamburger */}
+          <button
+            onClick={() => setMobileOpen(!mobileOpen)}
+            className="md:hidden flex flex-col items-center justify-center w-10 h-10 gap-1.5 focus:outline-none"
+            aria-label={mobileOpen ? "Close menu" : "Open menu"}
+          >
+            <motion.span
+              animate={mobileOpen ? { rotate: 45, y: 8 } : { rotate: 0, y: 0 }}
+              className={`block w-6 h-0.5 rounded-full transition-colors duration-300 ${mobileOpen ? 'bg-dark-navy' : 'bg-soft-white dark:bg-dark-navy'}`}
+            />
+            <motion.span
+              animate={mobileOpen ? { opacity: 0 } : { opacity: 1 }}
+              className="block w-6 h-0.5 bg-soft-white dark:bg-dark-navy rounded-full"
+            />
+            <motion.span
+              animate={mobileOpen ? { rotate: -45, y: -8 } : { rotate: 0, y: 0 }}
+              className={`block w-6 h-0.5 rounded-full transition-colors duration-300 ${mobileOpen ? 'bg-dark-navy' : 'bg-soft-white dark:bg-dark-navy'}`}
+            />
+          </button>
+        </div>
       </div>
 
       {/* Mobile slide-in panel */}

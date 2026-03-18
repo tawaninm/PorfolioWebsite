@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@custom-variant dark (&:is(.dark *));
 
 /* ========================================
    CITY POP RETRO — Design Tokens (Tailwind v4)
@@ -22,8 +23,9 @@
 
   /* ---- Neutral / Text ---- */
   --color-dark-navy: #1A1A2E;
+  --color-space-navy: #0D0D1A;
   --color-deep-purple: #2D1B4E;
-  --color-soft-white: #FFF8F0;
+  --color-soft-white: #F4ECE4;
   --color-muted-lilac: #B0A0C8;
 
   /* ---- Font families ---- */
@@ -55,8 +57,7 @@ html {
 }
 
 body {
-  background-color: var(--color-dark-navy);
-  color: var(--color-soft-white);
+  /* Colors are managed via Tailwind classes in layout.tsx for next-themes support */
   font-family: var(--font-body);
 }
 

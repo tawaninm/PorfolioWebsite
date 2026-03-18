@@ -68,11 +68,11 @@ export default function Contact() {
 
         {/* ---- Right Column: Retro Postcard Form ---- */}
         <FadeSection delay={0.2} className="w-full max-w-md mx-auto lg:ml-auto">
-          <div className="relative glass p-8 md:p-10 rounded-[20px] shadow-[0_20px_60px_rgba(45,27,78,0.15)] transform rotate-1 hover:rotate-0 transition-transform duration-500 border border-soft-white/40 bg-soft-white/60 backdrop-blur-xl">
+          <div className="relative glass p-8 md:p-10 rounded-[20px] shadow-[0_20px_60px_rgba(45,27,78,0.15)] transform rotate-1 hover:rotate-0 transition-all duration-500 border border-soft-white/40 dark:border-soft-white/10 bg-soft-white/80 dark:bg-dark-navy/70 backdrop-blur-xl">
             {/* Postmark / Stamp decoration */}
             <div className="absolute top-4 right-4 md:top-6 md:right-6 opacity-40 pointer-events-none select-none flex flex-col items-center">
-               <div className="w-12 h-16 border-2 border-dashed border-dark-navy/30 rounded flex items-center justify-center p-1">
-                 <span className="text-[10px] uppercase font-bold text-center text-dark-navy/50 leading-tight">Place<br/>Stamp<br/>Here</span>
+               <div className="w-12 h-16 border-2 border-dashed border-dark-navy/30 dark:border-soft-white/30 rounded flex items-center justify-center p-1">
+                 <span className="text-[10px] uppercase font-bold text-center text-dark-navy/50 dark:text-soft-white/50 leading-tight transition-colors duration-300">Place<br/>Stamp<br/>Here</span>
                </div>
                <div className="mt-2 w-16 h-16 border-4 border-double border-coral-red/30 rounded-full flex items-center justify-center rotate-[-15deg]">
                  <span className="text-[10px] font-bold text-coral-red/40 uppercase whitespace-nowrap">City Pop Mail</span>
@@ -86,7 +86,7 @@ export default function Contact() {
                   type="text"
                   id="name"
                   placeholder="Your Name"
-                  className="w-full px-5 py-3 rounded-full bg-lavender/20 border border-lavender/40 text-dark-navy placeholder:text-dark-navy/50 font-body outline-none focus:ring-2 focus:ring-electric-blue/50 focus:border-transparent transition-all"
+                  className="w-full px-5 py-3 rounded-full bg-lavender/10 dark:bg-dark-navy/50 border border-lavender/40 dark:border-soft-white/10 text-dark-navy dark:text-soft-white placeholder:text-dark-navy/50 dark:placeholder:text-soft-white/50 font-body outline-none focus:ring-2 focus:ring-electric-blue/50 focus:border-transparent transition-all duration-300"
                   required
                 />
               </div>
@@ -97,7 +97,7 @@ export default function Contact() {
                   type="email"
                   id="email"
                   placeholder="Your Email"
-                  className="w-full px-5 py-3 rounded-full bg-lavender/20 border border-lavender/40 text-dark-navy placeholder:text-dark-navy/50 font-body outline-none focus:ring-2 focus:ring-electric-blue/50 focus:border-transparent transition-all"
+                  className="w-full px-5 py-3 rounded-full bg-lavender/10 dark:bg-dark-navy/50 border border-lavender/40 dark:border-soft-white/10 text-dark-navy dark:text-soft-white placeholder:text-dark-navy/50 dark:placeholder:text-soft-white/50 font-body outline-none focus:ring-2 focus:ring-electric-blue/50 focus:border-transparent transition-all duration-300"
                   required
                 />
               </div>
@@ -108,7 +108,7 @@ export default function Contact() {
                   id="message"
                   placeholder="What's on your mind?"
                   rows={4}
-                  className="w-full px-5 py-4 rounded-3xl bg-lavender/20 border border-lavender/40 text-dark-navy placeholder:text-dark-navy/50 font-body outline-none focus:ring-2 focus:ring-electric-blue/50 focus:border-transparent transition-all resize-none"
+                  className="w-full px-5 py-4 rounded-3xl bg-lavender/10 dark:bg-dark-navy/50 border border-lavender/40 dark:border-soft-white/10 text-dark-navy dark:text-soft-white placeholder:text-dark-navy/50 dark:placeholder:text-soft-white/50 font-body outline-none focus:ring-2 focus:ring-electric-blue/50 focus:border-transparent transition-all duration-300 resize-none"
                   required
                 />
               </div>

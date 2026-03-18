@@ -49,7 +49,7 @@ export default function Works() {
       <div className="mx-auto max-w-6xl relative z-10">
         {/* Section heading */}
         <motion.h2
-          className="font-display text-4xl md:text-5xl text-center mb-4 text-soft-white"
+          className="font-display text-4xl md:text-5xl text-center mb-4 text-dark-navy dark:text-soft-white transition-colors duration-300"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-80px" }}
@@ -73,7 +73,7 @@ export default function Works() {
               className={`relative px-5 py-2 rounded-full font-body text-sm font-bold transition-all duration-300 ${
                 active === f.key
                   ? "bg-hot-pink text-soft-white shadow-[0_0_20px_rgba(255,96,144,0.4)]"
-                  : "bg-transparent text-muted-lilac border border-muted-lilac/40 hover:border-soft-white/60 hover:text-soft-white"
+                  : "bg-transparent text-dark-navy/60 dark:text-muted-lilac border border-dark-navy/20 dark:border-muted-lilac/40 hover:border-dark-navy hover:text-dark-navy dark:hover:border-soft-white/60 dark:hover:text-soft-white"
               }`}
             >
               {f.label}
@@ -181,12 +181,12 @@ function ProjectCard({
           </span>
 
           {/* Title */}
-          <h3 className="font-display text-2xl md:text-3xl text-soft-white leading-tight">
+          <h3 className="font-display text-2xl md:text-3xl text-dark-navy dark:text-soft-white leading-tight transition-colors duration-300">
             {project.title}
           </h3>
 
           {/* Summary */}
-          <p className="font-body text-soft-white/70 leading-relaxed">
+          <p className="font-body text-dark-navy/70 dark:text-soft-white/70 leading-relaxed transition-colors duration-300">
             {project.summary}
           </p>
 
