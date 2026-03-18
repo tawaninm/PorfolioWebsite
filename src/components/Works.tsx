@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { projects, categoryLabels } from "@/data/projects";
 import type { Project } from "@/data/projects";
@@ -202,13 +203,13 @@ function ProjectCard({
           </div>
 
           {/* CTA button */}
-          <a
-            href={`#project-${project.slug}`}
+          <Link
+            href={`/projects/${project.slug}`}
             className="inline-flex items-center gap-2 mt-3 w-fit px-6 py-2.5 rounded-full bg-hot-pink text-soft-white font-body font-bold text-sm transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_0_24px_rgba(255,96,144,0.5)]"
           >
             View Case Study
             <span aria-hidden="true">→</span>
-          </a>
+          </Link>
         </div>
       </div>
     </motion.article>
