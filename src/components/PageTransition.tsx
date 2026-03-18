@@ -12,9 +12,13 @@ export default function PageTransition({
   const pathname = usePathname();
   const shouldReduceMotion = useReducedMotion();
 
-  // If user prefers reduced motion, skip the panel wipe and just render the page
+  // If user prefers reduced motion, skip the panel wipe and render a matching structure
   if (shouldReduceMotion) {
-    return <>{children}</>;
+    return (
+      <div key={pathname} className="min-h-screen">
+        {children}
+      </div>
+    );
   }
 
   return (
