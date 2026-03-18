@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { projects, categoryLabels } from "@/data/projects";
 import type { Project } from "@/data/projects";
@@ -48,11 +49,11 @@ export default function Works() {
       <div className="mx-auto max-w-6xl relative z-10">
         {/* Section heading */}
         <motion.h2
-          className="font-display text-4xl md:text-5xl text-center mb-4 text-soft-white"
+          className="font-display text-4xl md:text-5xl text-center mb-4 text-dark-navy dark:text-soft-white transition-colors duration-300"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-80px" }}
-          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] as const }}
+          transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] as const }}
         >
           Projects I&apos;m Proud Of
         </motion.h2>
@@ -63,7 +64,7 @@ export default function Works() {
           initial={{ opacity: 0, y: 12 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-60px" }}
-          transition={{ duration: 0.5, delay: 0.15 }}
+          transition={{ duration: 0.7, delay: 0.15, ease: [0.16, 1, 0.3, 1] as const }}
         >
           {filters.map((f) => (
             <button
@@ -72,7 +73,7 @@ export default function Works() {
               className={`relative px-5 py-2 rounded-full font-body text-sm font-bold transition-all duration-300 ${
                 active === f.key
                   ? "bg-hot-pink text-soft-white shadow-[0_0_20px_rgba(255,96,144,0.4)]"
-                  : "bg-transparent text-muted-lilac border border-muted-lilac/40 hover:border-soft-white/60 hover:text-soft-white"
+                  : "bg-transparent text-dark-navy/60 dark:text-muted-lilac border border-dark-navy/20 dark:border-muted-lilac/40 hover:border-dark-navy hover:text-dark-navy dark:hover:border-soft-white/60 dark:hover:text-soft-white"
               }`}
             >
               {f.label}
@@ -125,7 +126,7 @@ function ProjectCard({
       whileInView={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: 20, transition: { duration: 0.25 } }}
       viewport={{ once: true, margin: "-60px" }}
-      transition={{ duration: 0.6, delay: index * 0.1, ease: [0.16, 1, 0.3, 1] as const }}
+      transition={{ duration: 0.7, delay: index * 0.1, ease: [0.16, 1, 0.3, 1] as const }}
       className="relative"
     >
       {/* Large number watermark */}
@@ -180,12 +181,12 @@ function ProjectCard({
           </span>
 
           {/* Title */}
-          <h3 className="font-display text-2xl md:text-3xl text-soft-white leading-tight">
+          <h3 className="font-display text-2xl md:text-3xl text-dark-navy dark:text-soft-white leading-tight transition-colors duration-300">
             {project.title}
           </h3>
 
           {/* Summary */}
-          <p className="font-body text-soft-white/70 leading-relaxed">
+          <p className="font-body text-dark-navy/70 dark:text-soft-white/70 leading-relaxed transition-colors duration-300">
             {project.summary}
           </p>
 
@@ -202,13 +203,13 @@ function ProjectCard({
           </div>
 
           {/* CTA button */}
-          <a
-            href={`#project-${project.slug}`}
+          <Link
+            href={`/projects/${project.slug}`}
             className="inline-flex items-center gap-2 mt-3 w-fit px-6 py-2.5 rounded-full bg-hot-pink text-soft-white font-body font-bold text-sm transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_0_24px_rgba(255,96,144,0.5)]"
           >
             View Case Study
             <span aria-hidden="true">→</span>
-          </a>
+          </Link>
         </div>
       </div>
     </motion.article>

@@ -1,7 +1,9 @@
 "use client";
 
+import dynamic from "next/dynamic";
 import { motion } from "framer-motion";
-import Sparkles from "./Sparkles";
+
+const Sparkles = dynamic(() => import("./Sparkles"), { ssr: false });
 
 export default function Hero() {
   const titleText = "Crafting Playful & Innovative Digital Experiences";
@@ -24,7 +26,7 @@ export default function Hero() {
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] as const },
+      transition: { duration: 0.7, ease: [0.16, 1, 0.3, 1] as const },
     },
   };
 
@@ -45,7 +47,7 @@ export default function Hero() {
           {/* Greeting */}
           <motion.span 
             variants={wordVariants}
-            className="font-body text-xl md:text-2xl font-bold text-deep-purple mb-4"
+            className="font-body text-xl md:text-2xl font-bold text-deep-purple dark:text-soft-white mb-4 transition-colors duration-300"
           >
             Hello, I'm [Your Name] 👋
           </motion.span>
@@ -57,7 +59,7 @@ export default function Hero() {
             {titleWords.map((word, index) => (
               <motion.span 
                 key={index} 
-                className="inline-block mr-3 md:mr-5 text-dark-navy"
+                className="inline-block mr-3 md:mr-5 text-dark-navy dark:text-soft-white transition-colors duration-300"
                 variants={wordVariants}
               >
                 {/* Add gradient to specific words like "Playful" and "Innovative" */}
@@ -75,7 +77,7 @@ export default function Hero() {
             variants={wordVariants}
             className="inline-block px-6 py-2 rounded-full bg-lavender/40 border border-lavender/60 backdrop-blur-sm mb-6"
           >
-            <span className="font-body text-sm font-bold tracking-wider text-dark-navy uppercase">
+            <span className="font-body text-sm font-bold tracking-wider text-dark-navy dark:text-soft-white uppercase transition-colors duration-300">
               X+ Years / UX Designer · Programmer · CI Artist
             </span>
           </motion.div>
@@ -83,7 +85,7 @@ export default function Hero() {
           {/* Tagline */}
           <motion.p 
             variants={wordVariants}
-            className="font-body text-lg md:text-xl text-dark-navy/80 max-w-md mb-10 leading-relaxed"
+            className="font-body text-lg md:text-xl text-dark-navy/80 dark:text-soft-white/80 max-w-md mb-10 leading-relaxed transition-colors duration-300"
           >
             I blend thoughtful UX, clean code, and city pop aesthetics to build 
             digital products that feel alive. Welcome to my creative universe.
@@ -114,7 +116,7 @@ export default function Hero() {
           className="col-span-1 lg:col-span-5 h-full w-full flex items-center justify-center relative mt-12 lg:mt-0"
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.8, delay: 0.8, ease: [0.16, 1, 0.3, 1] }}
+          transition={{ duration: 0.7, delay: 0.8, ease: [0.16, 1, 0.3, 1] }}
         >
           {/* Floating animation wrapper */}
           <motion.div
@@ -128,7 +130,7 @@ export default function Hero() {
 
              <div className="relative z-10">
                <span className="font-display text-3xl text-hot-pink block mb-4">Space for Art ✦</span>
-               <p className="font-body text-sm text-deep-purple/80">
+               <p className="font-body text-sm text-deep-purple/80 dark:text-soft-white/80 transition-colors duration-300">
                  Drop your city pop illustration in <br/>
                  <code className="text-xs font-mono bg-dark-navy/10 px-2 py-1 rounded">public/images/hero/</code>
                </p>
@@ -145,16 +147,16 @@ export default function Hero() {
         animate={{ opacity: 1 }}
         transition={{ delay: 1.5, duration: 1 }}
       >
-        <span className="font-body text-xs font-bold tracking-widest text-deep-purple uppercase">Scroll</span>
+        <span className="font-body text-xs font-bold tracking-widest text-deep-purple dark:text-soft-white uppercase transition-colors duration-300">Scroll</span>
         <motion.div
           animate={{ y: [0, 8, 0] }}
           transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-          className="w-5 h-8 border-2 border-deep-purple rounded-full flex justify-center p-1"
+          className="w-5 h-8 border-2 border-deep-purple dark:border-soft-white rounded-full flex justify-center p-1 transition-colors duration-300"
         >
           <motion.div 
             animate={{ y: [0, 12, 0], opacity: [1, 0, 1] }}
             transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-            className="w-1 h-2 bg-deep-purple rounded-full"
+            className="w-1 h-2 bg-deep-purple dark:bg-soft-white rounded-full transition-colors duration-300"
           />
         </motion.div>
       </motion.div>

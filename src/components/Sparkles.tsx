@@ -27,7 +27,7 @@ export default function Sparkles() {
     mediaQuery.addEventListener("change", listener);
 
     // Determine particle count based on screen width
-    const isMobile = window.innerWidth < 768;
+    const isMobile = window.innerWidth < 640;
     const count = isMobile ? 15 : 40;
 
     const newParticles = Array.from({ length: count }).map((_, i) => ({

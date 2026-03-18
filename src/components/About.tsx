@@ -3,14 +3,14 @@
 import { motion } from "framer-motion";
 
 const cardBase =
-  "bg-soft-white/70 backdrop-blur-md rounded-2xl border border-lavender/30 p-6 transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_8px_30px_rgba(240,176,208,0.35)] relative overflow-hidden";
+  "bg-soft-white/70 dark:bg-dark-navy/70 backdrop-blur-md rounded-2xl border border-lavender/30 dark:border-soft-white/10 p-6 transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_8px_30px_rgba(240,176,208,0.35)] relative overflow-hidden";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 40 },
   visible: (i: number) => ({
     opacity: 1,
     y: 0,
-    transition: { duration: 0.6, delay: i * 0.1, ease: [0.16, 1, 0.3, 1] as const },
+    transition: { duration: 0.7, delay: i * 0.1, ease: [0.16, 1, 0.3, 1] as const },
   }),
 };
 
@@ -50,11 +50,11 @@ export default function About() {
       <div className="mx-auto max-w-6xl relative z-10">
         {/* Section Heading */}
         <motion.h2
-          className="font-display text-4xl md:text-5xl text-center mb-14 text-soft-white"
+          className="font-display text-4xl md:text-5xl text-center mb-14 text-dark-navy dark:text-soft-white transition-colors duration-300"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-80px" }}
-          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+          transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
         >
           About Me ✦
         </motion.h2>
@@ -76,7 +76,7 @@ export default function About() {
                 <span>👤</span>
               </div>
               <div>
-                <p className="font-body text-dark-navy/90 leading-relaxed mb-4">
+                <p className="font-body text-dark-navy/90 dark:text-soft-white/90 leading-relaxed mb-4 transition-colors duration-300">
                   I&apos;m a multidisciplinary designer and developer who loves blending
                   thoughtful UX, clean code, and city pop aesthetics. I build digital
                   products that feel alive — from concept to pixel-perfect delivery.
@@ -101,10 +101,10 @@ export default function About() {
             whileInView="visible"
             viewport={{ once: true, margin: "-60px" }}
           >
-            <span className="font-display text-6xl text-dark-navy leading-none">
+            <span className="font-display text-6xl text-dark-navy dark:text-soft-white leading-none transition-colors duration-300">
               X+
             </span>
-            <span className="font-body text-sm font-bold text-dark-navy/70 mt-2 uppercase tracking-wider">
+            <span className="font-body text-sm font-bold text-dark-navy/70 dark:text-soft-white/70 mt-2 uppercase tracking-wider transition-colors duration-300">
               Years Experience
             </span>
           </motion.div>
@@ -121,10 +121,10 @@ export default function About() {
             <span className="text-2xl mb-1" aria-hidden="true">
               📍
             </span>
-            <span className="font-display text-xl text-dark-navy">
+            <span className="font-display text-xl text-dark-navy dark:text-soft-white transition-colors duration-300">
               Your City
             </span>
-            <span className="font-body text-sm text-dark-navy/60 mt-1">
+            <span className="font-body text-sm text-dark-navy/60 dark:text-soft-white/60 mt-1 transition-colors duration-300">
               Country
             </span>
             {/* Decorative corner shape */}
@@ -140,7 +140,7 @@ export default function About() {
             whileInView="visible"
             viewport={{ once: true, margin: "-60px" }}
           >
-            <span className="font-display text-lg text-dark-navy mb-3 block">
+            <span className="font-display text-lg text-dark-navy dark:text-soft-white mb-3 block transition-colors duration-300">
               Skills
             </span>
             <div className="flex flex-wrap gap-2">
@@ -167,7 +167,7 @@ export default function About() {
             <span className="font-mono text-xs text-muted-lilac mb-2 uppercase tracking-widest">
               Fun Fact
             </span>
-            <p className="font-body text-dark-navy/90 italic leading-relaxed">
+            <p className="font-body text-dark-navy/90 dark:text-soft-white/90 italic leading-relaxed transition-colors duration-300">
               &ldquo;I listen to city pop playlists on repeat while I design — it
               keeps the pixels dancing.&rdquo;
             </p>

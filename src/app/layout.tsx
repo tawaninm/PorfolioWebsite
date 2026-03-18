@@ -1,6 +1,10 @@
 import type { Metadata } from "next";
 import { Righteous, DM_Sans, JetBrains_Mono, Zen_Maru_Gothic } from "next/font/google";
 import "./globals.css";
+import Footer from "@/components/Footer";
+import MotionProvider from "@/components/MotionProvider";
+import ThemeProvider from "@/components/ThemeProvider";
+import ThreeProvider from "@/components/ThreeProvider";
 
 /* ---- Google Fonts via next/font ---- */
 const righteous = Righteous({
@@ -49,8 +53,16 @@ export default function RootLayout({
       lang="en"
       className={`${righteous.variable} ${dmSans.variable} ${jetbrainsMono.variable} ${zenMaruGothic.variable}`}
     >
-      <body className="font-body antialiased bg-dark-navy text-soft-white">
-        {children}
+      <body className="font-body antialiased bg-soft-white text-dark-navy dark:bg-space-navy dark:text-soft-white flex flex-col min-h-screen transition-colors duration-300">
+        <ThemeProvider>
+          <MotionProvider>
+            <ThreeProvider />
+            <div className="flex-grow">
+              {children}
+            </div>
+            <Footer />
+          </MotionProvider>
+        </ThemeProvider>
       </body>
     </html>
   );
