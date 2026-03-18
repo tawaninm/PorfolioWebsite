@@ -28,10 +28,18 @@
   --color-soft-white: #F4ECE4;
   --color-muted-lilac: #B0A0C8;
 
+  /* ---- Anime City Pop ---- */
+  --color-neon-magenta: #FF2D78;
+  --color-ocean-blue: #1A3A5C;
+  --color-sakura-white: #FFE8F0;
+  --color-vinyl-dark: #1C1C2E;
+  --color-deep-black: #0A0A0A;
+
   /* ---- Font families ---- */
   --font-display: var(--font-righteous), cursive;
   --font-body: var(--font-dm-sans), sans-serif;
   --font-mono: var(--font-jetbrains-mono), monospace;
+  --font-zen: var(--font-zen), sans-serif;
 
   /* ---- Marquee animation (infinite skill scroll) ---- */
   --animate-marquee: marquee 30s linear infinite;
@@ -45,6 +53,28 @@
   @keyframes marquee-reverse {
     0% { transform: translateX(-50%); }
     100% { transform: translateX(0); }
+  }
+
+  /* ---- Anime City Pop keyframes ---- */
+  --animate-sakura-fall: sakura-fall 6s linear infinite;
+  --animate-comic-shake: comic-shake 0.3s ease infinite;
+  --animate-pulse-glow: pulse-glow 2s ease-in-out infinite;
+
+  @keyframes sakura-fall {
+    0% { transform: translateY(-100vh) rotate(0deg); }
+    100% { transform: translateY(100vh) rotate(720deg); }
+  }
+
+  @keyframes comic-shake {
+    0%, 100% { transform: translate(0, 0); }
+    25% { transform: translate(-2px, -2px); }
+    50% { transform: translate(2px, -2px); }
+    75% { transform: translate(-2px, 2px); }
+  }
+
+  @keyframes pulse-glow {
+    0%, 100% { box-shadow: 0 0 5px currentColor; }
+    50% { box-shadow: 0 0 20px currentColor; }
   }
 }
 
@@ -61,10 +91,10 @@ body {
   font-family: var(--font-body);
 }
 
-/* Selection highlight — sakura pink */
+/* Selection highlight — neon magenta */
 ::selection {
-  background-color: #F0B0D0;
-  color: #1A1A2E;
+  background-color: #FF2D78;
+  color: #ffffff;
 }
 
 /* ========================================
@@ -102,4 +132,45 @@ body {
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
+/* Halftone dot pattern overlay */
+.halftone-bg {
+  background-image: radial-gradient(circle, #000000 0.5px, transparent 0.5px);
+  background-size: 8px 8px;
+  opacity: 0.04;
+}
 
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #F0B0D0;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #FF6090;
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #FF2D78;
+}
+
+/* ========================================
+   Reduced Motion
+   ======================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
