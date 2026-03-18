@@ -1,283 +1,203 @@
 "use client";
 
-import React, { useRef, useMemo, useEffect, useState, useCallback } from "react";
+import React, { useMemo, useRef, useState, useEffect } from "react";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import * as THREE from "three";
+import { useReducedMotion } from "framer-motion";
 
-/* ------------------------------------------------------------------ */
-/*  Sakura Petals — InstancedMesh                                     */
-/* ------------------------------------------------------------------ */
+const SHAPE_COLORS = [
+  "#B4B5FA", // lavender
+  "#00F0FF", // sky-cyan
+  "#A0FFD9", // mint
+  "#FFB7C5", // sakura-pink
+  "#0055FF", // electric-blue
+  "#FFF200"  // retro-yellow
+];
 
-interface PetalData {
-  x: number;
-  y: number;
-  z: number;
-  rotX: number;
-  rotZ: number;
-  speedY: number;
-  driftPhase: number;
-  driftAmp: number;
-  rotSpeedX: number;
-  rotSpeedZ: number;
-}
-
-function initPetal(startHigh: boolean): PetalData {
-  return {
-    x: (Math.random() - 0.5) * 10,
-    y: startHigh ? Math.random() * 5 + 5 : Math.random() * 15 - 5,
-    z: (Math.random() - 0.5) * 6,
-    rotX: Math.random() * Math.PI * 2,
-    rotZ: Math.random() * Math.PI * 2,
-    speedY: Math.random() * 0.01 + 0.005,
-    driftPhase: Math.random() * Math.PI * 2,
-    driftAmp: Math.random() * 0.3 + 0.1,
-    rotSpeedX: Math.random() * 0.02 + 0.01,
-    rotSpeedZ: Math.random() * 0.015 + 0.005,
-  };
-}
-
-const PETAL_COLORS = [0xffb7c5, 0xfff0f5];
-const dummy = new THREE.Object3D();
-
-function SakuraPetals({ count, animate }: { count: number; animate: boolean }) {
+const SakuraPetals = () => {
   const meshRef = useRef<THREE.InstancedMesh>(null);
-  const petals = useRef<PetalData[]>([]);
-  const timeRef = useRef(0);
+  const [count, setCount] = useState(100);
+  const shouldReduceMotion = useReducedMotion();
 
-  const [geo, mat] = useMemo(() => {
-    const g = new THREE.PlaneGeometry(0.04, 0.04);
-    const m = new THREE.MeshBasicMaterial({
-      color: PETAL_COLORS[0],
-      transparent: true,
-      opacity: 0.7,
-      side: THREE.DoubleSide,
-    });
-    return [g, m];
+  useEffect(() => {
+    const handleResize = () => {
+      setCount(window.innerWidth < 768 ? 30 : 100);
+    };
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  // Initialize petals
+  const dummy = useMemo(() => new THREE.Object3D(), []);
+  
+  const petals = useMemo(() => {
+    return new Array(100).fill(0).map(() => ({
+      position: new THREE.Vector3(
+        (Math.random() - 0.5) * 10,
+        Math.random() * 10,
+        (Math.random() - 0.5) * 6
+      ),
+      rotation: new THREE.Vector3(
+        Math.random() * Math.PI,
+        Math.random() * Math.PI,
+        Math.random() * Math.PI
+      ),
+      speed: Math.random() * 0.01 + 0.005,
+      rSpeed: new THREE.Vector3(
+        Math.random() * 0.05,
+        Math.random() * 0.05,
+        Math.random() * 0.05
+      ),
+      driftOff: Math.random() * 100,
+    }));
+  }, []);
+
+  // Initialize positions on first render to avoid jumping
   useEffect(() => {
-    petals.current = Array.from({ length: count }, () => initPetal(false));
-
-    // Set initial instance colors
-    if (meshRef.current) {
-      const color = new THREE.Color();
-      for (let i = 0; i < count; i++) {
-        color.set(PETAL_COLORS[i % 2]);
-        meshRef.current.setColorAt(i, color);
-      }
-      if (meshRef.current.instanceColor)
-        meshRef.current.instanceColor.needsUpdate = true;
-    }
-  }, [count]);
-
-  useFrame((_, delta) => {
     if (!meshRef.current) return;
+    petals.forEach((petal, i) => {
+      dummy.position.copy(petal.position);
+      dummy.rotation.set(petal.rotation.x, petal.rotation.y, petal.rotation.z);
+      dummy.updateMatrix();
+      meshRef.current?.setMatrixAt(i, dummy.matrix);
+    });
+    meshRef.current.instanceMatrix.needsUpdate = true;
+  }, [petals, dummy]);
 
-    if (animate) timeRef.current += delta;
+  useFrame((state) => {
+    if (!meshRef.current || shouldReduceMotion) return;
 
-    for (let i = 0; i < count; i++) {
-      const p = petals.current[i];
-      if (!p) continue;
+    petals.forEach((petal, i) => {
+      if (i >= count) return;
+      
+      petal.position.y -= petal.speed;
+      petal.position.x += Math.sin(state.clock.elapsedTime + petal.driftOff) * 0.005;
+      
+      petal.rotation.x += petal.rSpeed.x;
+      petal.rotation.y += petal.rSpeed.y;
+      petal.rotation.z += petal.rSpeed.z;
 
-      if (animate) {
-        p.y -= p.speedY;
-        p.rotX += p.rotSpeedX;
-        p.rotZ += p.rotSpeedZ;
-
-        // Sine wave horizontal drift
-        const drift =
-          Math.sin(timeRef.current * 0.5 + p.driftPhase) * p.driftAmp * 0.01;
-        p.x += drift;
-
-        // Reset when fallen below view
-        if (p.y < -5) {
-          p.y = Math.random() * 5 + 5;
-          p.x = (Math.random() - 0.5) * 10;
-          p.z = (Math.random() - 0.5) * 6;
-        }
+      if (petal.position.y < -5) {
+        petal.position.y = 5 + Math.random() * 5;
+        petal.position.x = (Math.random() - 0.5) * 10;
       }
 
-      dummy.position.set(p.x, p.y, p.z);
-      dummy.rotation.set(p.rotX, 0, p.rotZ);
+      dummy.position.copy(petal.position);
+      dummy.rotation.set(petal.rotation.x, petal.rotation.y, petal.rotation.z);
       dummy.updateMatrix();
-      meshRef.current.setMatrixAt(i, dummy.matrix);
-    }
+      meshRef.current?.setMatrixAt(i, dummy.matrix);
+    });
 
     meshRef.current.instanceMatrix.needsUpdate = true;
   });
 
   return (
-    <instancedMesh ref={meshRef} args={[geo, mat, count]} frustumCulled={false} />
+    <instancedMesh ref={meshRef} args={[undefined, undefined, count]}>
+      <planeGeometry args={[0.04, 0.04]} />
+      <meshBasicMaterial 
+        color="#FFB7C5" 
+        side={THREE.DoubleSide} 
+        transparent 
+        opacity={0.7} 
+      />
+    </instancedMesh>
   );
-}
+};
 
-/* ------------------------------------------------------------------ */
-/*  Floating Wireframe Shapes                                         */
-/* ------------------------------------------------------------------ */
-
-const SHAPE_CONFIGS = [
-  { type: "torus", color: 0xc8a8e8, pos: [-3, 2, -2], rotSpeed: [0.003, 0.005, 0] },
-  { type: "torus", color: 0x88d8e8, pos: [3, -1, -3], rotSpeed: [0.004, 0.003, 0] },
-  { type: "octahedron", color: 0xa8e8d0, pos: [-2, -2, -1], rotSpeed: [0.005, 0.008, 0] },
-  { type: "octahedron", color: 0xf0b0d0, pos: [2, 3, -2], rotSpeed: [0.006, 0.004, 0] },
-  { type: "icosahedron", color: 0x5080f0, pos: [4, 0, -4], rotSpeed: [0.004, 0.006, 0] },
-  { type: "icosahedron", color: 0xf0d040, pos: [-4, 1, -3], rotSpeed: [0.007, 0.003, 0] },
-] as const;
-
-function WireframeShape({
-  type,
-  color,
-  pos,
-  rotSpeed,
-  animate,
-}: {
-  type: string;
-  color: number;
-  pos: readonly [number, number, number];
-  rotSpeed: readonly [number, number, number];
-  animate: boolean;
-}) {
-  const meshRef = useRef<THREE.Mesh>(null);
-  const baseY = pos[1];
-  const timeRef = useRef(Math.random() * Math.PI * 2);
-
-  const geometry = useMemo(() => {
-    switch (type) {
-      case "torus":
-        return new THREE.TorusGeometry(0.4, 0.15, 8, 16);
-      case "octahedron":
-        return new THREE.OctahedronGeometry(0.35);
-      case "icosahedron":
-        return new THREE.IcosahedronGeometry(0.35);
-      default:
-        return new THREE.OctahedronGeometry(0.35);
+const FloatingShapes = () => {
+  const groupRef = useRef<THREE.Group>(null);
+  const shouldReduceMotion = useReducedMotion();
+  
+  const shapesData = useMemo(() => {
+    const data = [];
+    const geometries = ['torus', 'torus', 'octahedron', 'octahedron', 'icosahedron', 'icosahedron'];
+    
+    for (let i = 0; i < 6; i++) {
+      data.push({
+        type: geometries[i],
+        color: SHAPE_COLORS[i % SHAPE_COLORS.length],
+        position: new THREE.Vector3(
+          (Math.random() - 0.5) * 12,
+          (Math.random() - 0.5) * 8,
+          (Math.random() - 0.5) * 4 - 2
+        ),
+        rotation: new THREE.Vector3(
+          Math.random() * Math.PI,
+          Math.random() * Math.PI,
+          Math.random() * Math.PI
+        ),
+        rSpeed: new THREE.Vector3(
+          (Math.random() * 0.005) + 0.003,
+          (Math.random() * 0.005) + 0.003,
+          (Math.random() * 0.005) + 0.003
+        ),
+        floatOff: Math.random() * 100,
+        floatSpeed: Math.random() * 0.5 + 0.5,
+      });
     }
-  }, [type]);
+    return data;
+  }, []);
 
-  const material = useMemo(
-    () =>
-      new THREE.MeshBasicMaterial({
-        color,
-        wireframe: true,
-        transparent: true,
-        opacity: 0.35,
-      }),
-    [color],
-  );
-
-  useFrame((_, delta) => {
-    if (!meshRef.current || !animate) return;
-    timeRef.current += delta;
-    meshRef.current.rotation.x += rotSpeed[0];
-    meshRef.current.rotation.y += rotSpeed[1];
-    meshRef.current.position.y = baseY + Math.sin(timeRef.current * 0.5) * 0.3;
+  useFrame((state) => {
+    if (!groupRef.current || shouldReduceMotion) return;
+    
+    groupRef.current.children.forEach((child, i) => {
+      const data = shapesData[i];
+      child.rotation.x += data.rSpeed.x;
+      child.rotation.y += data.rSpeed.y;
+      child.rotation.z += data.rSpeed.z;
+      
+      child.position.y = data.position.y + Math.sin(state.clock.elapsedTime * data.floatSpeed + data.floatOff) * 0.2;
+    });
   });
 
   return (
-    <mesh
-      ref={meshRef}
-      geometry={geometry}
-      material={material}
-      position={[pos[0], pos[1], pos[2]]}
-    />
+    <group ref={groupRef}>
+      {shapesData.map((data, i) => (
+        <mesh 
+          key={i} 
+          position={data.position} 
+          rotation={[data.rotation.x, data.rotation.y, data.rotation.z]}
+        >
+          {data.type === 'torus' && <torusGeometry args={[0.3, 0.1, 8, 16]} />}
+          {data.type === 'octahedron' && <octahedronGeometry args={[0.4]} />}
+          {data.type === 'icosahedron' && <icosahedronGeometry args={[0.4]} />}
+          <meshBasicMaterial color={data.color} wireframe />
+        </mesh>
+      ))}
+    </group>
   );
-}
+};
 
-/* ------------------------------------------------------------------ */
-/*  Mouse Parallax Camera Controller                                  */
-/* ------------------------------------------------------------------ */
-
-function CameraRig({ animate }: { animate: boolean }) {
-  const { camera } = useThree();
-  const mouse = useRef({ x: 0, y: 0 });
-
-  useEffect(() => {
-    if (!animate) return;
-    const onMove = (e: MouseEvent) => {
-      mouse.current.x = (e.clientX / window.innerWidth - 0.5) * 2;
-      mouse.current.y = (e.clientY / window.innerHeight - 0.5) * 2;
-    };
-    window.addEventListener("mousemove", onMove);
-    return () => window.removeEventListener("mousemove", onMove);
-  }, [animate]);
+const MouseParallax = () => {
+  const { camera, pointer } = useThree();
+  const targetPosition = useRef(new THREE.Vector3(0, 0, 5));
+  const shouldReduceMotion = useReducedMotion();
 
   useFrame(() => {
-    if (!animate) return;
-    const targetX = mouse.current.x * 0.3;
-    const targetY = -mouse.current.y * 0.3;
-    camera.position.x += (targetX - camera.position.x) * 0.05;
-    camera.position.y += (targetY - camera.position.y) * 0.05;
+    if (shouldReduceMotion) return;
+    
+    targetPosition.current.x = (pointer.x * 2) * 0.3;
+    targetPosition.current.y = (pointer.y * 2) * 0.3;
+
+    camera.position.x += (targetPosition.current.x - camera.position.x) * 0.05;
+    camera.position.y += (targetPosition.current.y - camera.position.y) * 0.05;
     camera.lookAt(0, 0, 0);
   });
 
   return null;
-}
+};
 
-/* ------------------------------------------------------------------ */
-/*  Scene Root                                                        */
-/* ------------------------------------------------------------------ */
-
-function Scene({ petalCount, animate }: { petalCount: number; animate: boolean }) {
+const ThreeScene = () => {
   return (
-    <>
-      <CameraRig animate={animate} />
-      <SakuraPetals count={petalCount} animate={animate} />
-      {SHAPE_CONFIGS.map((cfg, i) => (
-        <WireframeShape
-          key={i}
-          type={cfg.type}
-          color={cfg.color}
-          pos={cfg.pos}
-          rotSpeed={cfg.rotSpeed}
-          animate={animate}
-        />
-      ))}
-    </>
-  );
-}
-
-const MemoScene = React.memo(Scene);
-
-/* ------------------------------------------------------------------ */
-/*  Exported ThreeScene Component                                     */
-/* ------------------------------------------------------------------ */
-
-function ThreeScene() {
-  const [petalCount, setPetalCount] = useState(100);
-  const [reducedMotion, setReducedMotion] = useState(false);
-
-  useEffect(() => {
-    const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
-    setReducedMotion(mq.matches);
-    const handler = (e: MediaQueryListEvent) => setReducedMotion(e.matches);
-    mq.addEventListener("change", handler);
-
-    const updateCount = () => setPetalCount(window.innerWidth < 768 ? 30 : 100);
-    updateCount();
-    window.addEventListener("resize", updateCount);
-
-    return () => {
-      mq.removeEventListener("change", handler);
-      window.removeEventListener("resize", updateCount);
-    };
-  }, []);
-
-  return (
-    <div
-      className="fixed inset-0 pointer-events-none"
-      style={{ zIndex: -1 }}
-    >
-      <Canvas
-        camera={{ fov: 60, position: [0, 0, 5] }}
-        dpr={[1, 1.5]}
-        gl={{ antialias: false, alpha: true }}
-        style={{ background: "transparent" }}
-      >
-        <MemoScene petalCount={petalCount} animate={!reducedMotion} />
+    <div className="fixed inset-0 z-[-1] pointer-events-none">
+      <Canvas camera={{ position: [0, 0, 5], fov: 60 }} dpr={[1, 2]}>
+        <SakuraPetals />
+        <FloatingShapes />
+        <MouseParallax />
       </Canvas>
     </div>
   );
-}
+};
 
 export default React.memo(ThreeScene);
