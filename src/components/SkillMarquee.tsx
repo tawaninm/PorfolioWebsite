@@ -1,4 +1,4 @@
-import Image from "next/image";
+"use client";
 
 const row1 = [
   { name: "Figma", color: "bg-sakura-pink/20 text-sakura-pink", dot: "bg-sakura-pink" },
@@ -35,7 +35,12 @@ export default function SkillMarquee() {
       >
         
         {/* Row 1 — Scrolls left */}
-        <div className="flex w-max animate-marquee hover:[animation-play-state:paused] gap-4">
+        <div
+          className="flex w-max gap-4"
+          style={{ animation: "marquee 30s linear infinite" }}
+          onMouseEnter={e => (e.currentTarget.style.animationPlayState = "paused")}
+          onMouseLeave={e => (e.currentTarget.style.animationPlayState = "running")}
+        >
           {[...row1, ...row1, ...row1, ...row1, ...row1, ...row1, ...row1, ...row1].map((skill, i) => (
             <div 
               key={`r1-${i}`} 
@@ -51,7 +56,12 @@ export default function SkillMarquee() {
         </div>
 
         {/* Row 2 — Scrolls right (reverse) */}
-        <div className="flex w-max animate-marquee-reverse hover:[animation-play-state:paused] gap-4">
+        <div
+          className="flex w-max gap-4"
+          style={{ animation: "marquee-reverse 30s linear infinite" }}
+          onMouseEnter={e => (e.currentTarget.style.animationPlayState = "paused")}
+          onMouseLeave={e => (e.currentTarget.style.animationPlayState = "running")}
+        >
           {[...row2, ...row2, ...row2, ...row2, ...row2, ...row2, ...row2, ...row2].map((skill, i) => (
             <div 
               key={`r2-${i}`} 
