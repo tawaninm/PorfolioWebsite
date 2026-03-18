@@ -10,18 +10,6 @@ import * as THREE from "three";
 
 const PETAL_COLORS = ["#FFB7C5", "#FFF0F5", "#FFE4E1"]; // sakura pink, lavender blush, misty rose
 
-const SHAPE_CONFIGS: {
-  type: "torus" | "octahedron" | "icosahedron";
-  color: string;
-}[] = [
-  { type: "torus", color: "#C8A8E8" },       // lavender
-  { type: "torus", color: "#88D8E8" },        // sky-cyan
-  { type: "octahedron", color: "#A8E8D0" },   // mint
-  { type: "octahedron", color: "#F0B0D0" },   // sakura-pink
-  { type: "icosahedron", color: "#5080F0" },   // electric-blue
-  { type: "icosahedron", color: "#F0D040" },   // retro-yellow
-];
-
 /* ------------------------------------------------------------------ */
 /*  Custom petal shape (adapted from gist bezier-curve approach)       */
 /* ------------------------------------------------------------------ */
@@ -194,111 +182,6 @@ const SakuraPetals = React.memo(function SakuraPetals() {
 });
 
 /* ------------------------------------------------------------------ */
-/*  Floating wireframe shapes                                          */
-/* ------------------------------------------------------------------ */
-
-interface ShapeData {
-  type: string;
-  color: string;
-  px: number;
-  py: number;
-  pz: number;
-  rx: number;
-  ry: number;
-  rz: number;
-  rSx: number;
-  rSy: number;
-  rSz: number;
-  floatOffset: number;
-}
-
-const FloatingShapes = React.memo(function FloatingShapes() {
-  const groupRef = useRef<THREE.Group>(null);
-  const [reducedMotion, setReducedMotion] = useState(false);
-
-  useEffect(() => {
-    const mql = window.matchMedia("(prefers-reduced-motion: reduce)");
-    setReducedMotion(mql.matches);
-    const handler = (e: MediaQueryListEvent) => setReducedMotion(e.matches);
-    mql.addEventListener("change", handler);
-    return () => mql.removeEventListener("change", handler);
-  }, []);
-
-  const shapesData = useMemo<ShapeData[]>(() => {
-    return SHAPE_CONFIGS.map((cfg, i) => ({
-      type: cfg.type,
-      color: cfg.color,
-      px: (Math.random() * 8 - 4),
-      py: (Math.random() * 5 - 2),
-      pz: -(Math.random() * 3 + 2),
-      rx: Math.random() * Math.PI,
-      ry: Math.random() * Math.PI,
-      rz: Math.random() * Math.PI,
-      rSx: Math.random() * 0.005 + 0.003,
-      rSy: Math.random() * 0.005 + 0.003,
-      rSz: Math.random() * 0.005 + 0.003,
-      floatOffset: i * 1.5,
-    }));
-  }, []);
-
-  const geometries = useMemo(() => {
-    return {
-      torus: new THREE.TorusGeometry(0.35, 0.12, 8, 20),
-      octahedron: new THREE.OctahedronGeometry(0.4),
-      icosahedron: new THREE.IcosahedronGeometry(0.4),
-    };
-  }, []);
-
-  const materials = useMemo(() => {
-    return shapesData.map(
-      (s) =>
-        new THREE.MeshBasicMaterial({
-          color: s.color,
-          wireframe: true,
-          transparent: true,
-          opacity: 0.6,
-        })
-    );
-  }, [shapesData]);
-
-  // Cleanup
-  useEffect(() => {
-    return () => {
-      Object.values(geometries).forEach((g) => g.dispose());
-      materials.forEach((m) => m.dispose());
-    };
-  }, [geometries, materials]);
-
-  useFrame((state) => {
-    if (!groupRef.current || reducedMotion) return;
-    const t = state.clock.elapsedTime;
-
-    groupRef.current.children.forEach((child, i) => {
-      const d = shapesData[i];
-      if (!d) return;
-      child.rotation.x += d.rSx;
-      child.rotation.y += d.rSy;
-      child.rotation.z += d.rSz;
-      child.position.y = d.py + Math.sin(t * 0.5 + d.floatOffset) * 0.5;
-    });
-  });
-
-  return (
-    <group ref={groupRef}>
-      {shapesData.map((s, i) => (
-        <mesh
-          key={i}
-          geometry={geometries[s.type as keyof typeof geometries]}
-          material={materials[i]}
-          position={[s.px, s.py, s.pz]}
-          rotation={[s.rx, s.ry, s.rz]}
-        />
-      ))}
-    </group>
-  );
-});
-
-/* ------------------------------------------------------------------ */
 /*  Mouse parallax camera                                              */
 /* ------------------------------------------------------------------ */
 
@@ -351,7 +234,6 @@ const ThreeScene = () => {
         style={{ background: "transparent" }}
       >
         <SakuraPetals />
-        <FloatingShapes />
         <MouseParallax />
       </Canvas>
     </div>
