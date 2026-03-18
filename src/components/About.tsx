@@ -3,7 +3,7 @@
 import { motion } from "framer-motion";
 
 const cardBase =
-  "bg-soft-white/70 dark:bg-dark-navy/70 backdrop-blur-md rounded-2xl border border-lavender/30 dark:border-soft-white/10 p-6 transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_8px_30px_rgba(240,176,208,0.35)] relative overflow-hidden";
+  "bg-soft-white/70 dark:bg-dark-navy/70 backdrop-blur-md rounded-2xl border-2 border-vinyl-dark/30 dark:border-soft-white/10 p-6 transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_8px_30px_rgba(240,176,208,0.35)] relative overflow-hidden";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 40 },
@@ -20,9 +20,52 @@ const skillCategories = [
   { label: "CI Art", color: "bg-mint text-dark-navy" },
 ];
 
+/* Anime sparkle shape */
+function Sparkle({ size, style }: { size: number; style: React.CSSProperties }) {
+  return (
+    <svg
+      viewBox="0 0 40 40"
+      width={size}
+      height={size}
+      className="absolute pointer-events-none select-none"
+      style={style}
+      aria-hidden="true"
+    >
+      <path
+        d="M20 2 L22.5 17.5 L38 20 L22.5 22.5 L20 38 L17.5 22.5 L2 20 L17.5 17.5 Z"
+        fill="#F0B0D0"
+        opacity={0.8}
+      />
+    </svg>
+  );
+}
+
+/* Vinyl record icon */
+function VinylRecord() {
+  return (
+    <svg viewBox="0 0 40 40" width={40} height={40} aria-hidden="true">
+      <circle cx="20" cy="20" r="19" fill="#0A0A0A" stroke="#C8A8E8" strokeWidth="1" />
+      <circle cx="20" cy="20" r="14" fill="#1C1C2E" />
+      <circle cx="20" cy="20" r="10" fill="#0A0A0A" />
+      <circle cx="20" cy="20" r="4" fill="#C8A8E8" />
+      <circle cx="20" cy="20" r="2" fill="#1C1C2E" />
+      {/* Grooves */}
+      {[7, 9, 11, 13].map((r) => (
+        <circle key={r} cx="20" cy="20" r={r} fill="none" stroke="#333" strokeWidth="0.5" opacity="0.6" />
+      ))}
+    </svg>
+  );
+}
+
 export default function About() {
   return (
     <section id="about" className="relative py-24 px-6 overflow-hidden">
+      {/* Comic panel divider at top — thick line with halftone fade */}
+      <div className="absolute top-0 left-0 w-full pointer-events-none">
+        <div className="w-full h-1 bg-gradient-to-r from-transparent via-dark-navy/40 dark:via-soft-white/20 to-transparent" />
+        <div className="halftone-bg w-full h-8 opacity-[0.08]" />
+      </div>
+
       {/* Decorative floating shapes */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
         <motion.div
@@ -49,18 +92,24 @@ export default function About() {
 
       <div className="mx-auto max-w-6xl relative z-10">
         {/* Section Heading */}
-        <motion.h2
-          className="font-display text-4xl md:text-5xl text-center mb-14 text-dark-navy dark:text-soft-white transition-colors duration-300"
+        <motion.div
+          className="text-center mb-14"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-80px" }}
           transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
         >
-          About Me ✦
-        </motion.h2>
+          <h2 className="font-display text-4xl md:text-5xl text-dark-navy dark:text-soft-white transition-colors duration-300">
+            About Me ✦
+          </h2>
+          <p className="font-zen text-base text-muted-lilac mt-1 tracking-widest">
+            私について
+          </p>
+        </motion.div>
 
         {/* Bento Grid */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+
           {/* 1. Bio Card — col-span-2 */}
           <motion.div
             className={`${cardBase} md:col-span-2`}
@@ -70,17 +119,55 @@ export default function About() {
             whileInView="visible"
             viewport={{ once: true, margin: "-60px" }}
           >
-            <div className="flex flex-col sm:flex-row gap-5 items-start">
-              {/* Avatar placeholder */}
-              <div className="shrink-0 w-20 h-20 rounded-2xl bg-gradient-to-br from-lavender to-sakura-pink flex items-center justify-center text-3xl shadow-md">
-                <span>👤</span>
+            {/* Subtle halftone on this card */}
+            <div className="absolute inset-0 halftone-bg opacity-[0.04] pointer-events-none rounded-2xl" />
+
+            <div className="flex flex-col sm:flex-row gap-5 items-start relative z-10">
+              {/* Avatar area with sparkles */}
+              <div className="relative shrink-0">
+                <div className="w-20 h-20 rounded-2xl bg-gradient-to-br from-lavender to-sakura-pink flex items-center justify-center text-3xl shadow-md">
+                  <span>👤</span>
+                </div>
+                {/* Anime sparkles around avatar */}
+                <Sparkle size={14} style={{ top: -8, right: -6, transform: "rotate(15deg)" }} />
+                <Sparkle size={10} style={{ top: 4, right: -14, transform: "rotate(-20deg)", opacity: 0.6 }} />
+                <Sparkle size={12} style={{ bottom: -4, left: -8, transform: "rotate(40deg)" }} />
+                <Sparkle size={8}  style={{ bottom: 8, right: -10, transform: "rotate(-10deg)", opacity: 0.7 }} />
               </div>
-              <div>
+
+              <div className="flex-1">
                 <p className="font-body text-dark-navy/90 dark:text-soft-white/90 leading-relaxed mb-4 transition-colors duration-300">
                   I&apos;m a multidisciplinary designer and developer who loves blending
                   thoughtful UX, clean code, and city pop aesthetics. I build digital
                   products that feel alive — from concept to pixel-perfect delivery.
                 </p>
+
+                {/* Manga speech bubble quote */}
+                <div className="relative inline-block mb-4">
+                  <div className="bg-soft-white dark:bg-vinyl-dark border-2 border-dark-navy/20 dark:border-soft-white/20 rounded-2xl px-4 py-2 max-w-xs">
+                    <p className="font-body text-xs italic text-dark-navy/70 dark:text-soft-white/70 leading-relaxed">
+                      &ldquo;Design is music you can see.&rdquo;
+                    </p>
+                  </div>
+                  {/* Bubble tail */}
+                  <div
+                    className="absolute -bottom-[9px] left-6 w-0 h-0"
+                    style={{
+                      borderLeft: "7px solid transparent",
+                      borderRight: "7px solid transparent",
+                      borderTop: "9px solid rgba(26,28,46,0.2)",
+                    }}
+                  />
+                  <div
+                    className="absolute -bottom-[7px] left-[26px] w-0 h-0"
+                    style={{
+                      borderLeft: "5px solid transparent",
+                      borderRight: "5px solid transparent",
+                      borderTop: "7px solid #F4ECE4",
+                    }}
+                  />
+                </div>
+
                 <a
                   href="#"
                   className="inline-flex items-center gap-2 font-body font-bold text-sm text-hot-pink hover:text-electric-blue transition-colors"
@@ -101,7 +188,15 @@ export default function About() {
             whileInView="visible"
             viewport={{ once: true, margin: "-60px" }}
           >
-            <span className="font-display text-6xl text-dark-navy dark:text-soft-white leading-none transition-colors duration-300">
+            <span
+              className="font-display text-6xl leading-none"
+              style={{
+                background: "linear-gradient(135deg, #FF2D78, #F06848)",
+                WebkitBackgroundClip: "text",
+                WebkitTextFillColor: "transparent",
+                backgroundClip: "text",
+              }}
+            >
               X+
             </span>
             <span className="font-body text-sm font-bold text-dark-navy/70 dark:text-soft-white/70 mt-2 uppercase tracking-wider transition-colors duration-300">
@@ -118,16 +213,13 @@ export default function About() {
             whileInView="visible"
             viewport={{ once: true, margin: "-60px" }}
           >
-            <span className="text-2xl mb-1" aria-hidden="true">
-              📍
-            </span>
+            <span className="text-2xl mb-1" aria-hidden="true">📍</span>
             <span className="font-display text-xl text-dark-navy dark:text-soft-white transition-colors duration-300">
               Your City
             </span>
             <span className="font-body text-sm text-dark-navy/60 dark:text-soft-white/60 mt-1 transition-colors duration-300">
               Country
             </span>
-            {/* Decorative corner shape */}
             <div className="absolute -bottom-3 -right-3 w-12 h-12 rounded-full bg-sky-cyan/25 blur-lg" />
           </motion.div>
 
@@ -171,9 +263,53 @@ export default function About() {
               &ldquo;I listen to city pop playlists on repeat while I design — it
               keeps the pixels dancing.&rdquo;
             </p>
-            {/* Retro decorative line */}
             <div className="mt-3 h-0.5 w-12 bg-gradient-to-r from-hot-pink to-electric-blue rounded-full" />
           </motion.div>
+
+          {/* 6. Vibe Card — col-span-1 */}
+          <motion.div
+            className="rounded-2xl border-2 border-vinyl-dark/40 dark:border-lavender/20 p-6 transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_8px_30px_rgba(200,168,232,0.3)] relative overflow-hidden bg-vinyl-dark md:col-span-1 flex flex-col justify-between"
+            custom={5}
+            variants={fadeUp}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-60px" }}
+          >
+            {/* Subtle halftone on vibe card */}
+            <div className="absolute inset-0 halftone-bg opacity-[0.06] pointer-events-none rounded-2xl" />
+
+            <div className="relative z-10">
+              <span className="font-mono text-[10px] text-muted-lilac uppercase tracking-widest block mb-3">
+                ♫ Now Playing
+              </span>
+              <div className="flex items-center gap-4">
+                {/* Vinyl record — spins on card hover */}
+                <div
+                  className="shrink-0 group-hover:[animation:spin_3s_linear_infinite]"
+                  style={{ animation: "none" }}
+                  onMouseEnter={e => {
+                    (e.currentTarget as HTMLDivElement).style.animation = "spin 3s linear infinite";
+                  }}
+                  onMouseLeave={e => {
+                    (e.currentTarget as HTMLDivElement).style.animation = "none";
+                  }}
+                >
+                  <VinylRecord />
+                </div>
+                <div>
+                  <p className="font-display text-sakura-white text-base leading-snug">
+                    City Pop ✦ Vaporwave
+                  </p>
+                  <p className="font-body text-muted-lilac text-xs mt-1">
+                    Mariya Takeuchi · 竹内まりや
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div className="relative z-10 mt-4 h-0.5 w-full bg-gradient-to-r from-lavender/40 via-sakura-pink/40 to-transparent rounded-full" />
+          </motion.div>
+
         </div>
       </div>
     </section>

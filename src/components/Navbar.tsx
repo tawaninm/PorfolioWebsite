@@ -9,9 +9,10 @@ import { FiSun, FiMoon } from "react-icons/fi";
 const navLinks = [
   { label: "Home", href: "/#home" },
   { label: "About", href: "/#about" },
-  { label: "Experience", href: "/#experience" },
+  { label: "Experience", href: "/experience" },
   { label: "Projects", href: "/#works" },
   { label: "Activities", href: "/#activities" },
+  { label: "Resume", href: "/resume" },
   { label: "Contact", href: "/#contact" },
 ];
 

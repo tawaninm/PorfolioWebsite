@@ -151,6 +151,16 @@ body {
   opacity: 0.04;
 }
 
+/* Contact section gradient */
+.gradient-contact {
+  background: linear-gradient(135deg, #1C1C2E 0%, #1A3A5C 100%);
+}
+
+/* Comic-shake on hover (applied to button) */
+.hover-comic-shake:hover {
+  animation: comic-shake 0.3s ease infinite;
+}
+
 /* Custom scrollbar */
 ::-webkit-scrollbar {
   width: 6px;
