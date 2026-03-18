@@ -6,6 +6,7 @@ import { usePathname } from "next/navigation";
 import Link from "next/link";
 import { motion, AnimatePresence, useScroll, useMotionValueEvent } from "framer-motion";
 import { FiSun, FiMoon } from "react-icons/fi";
+import MusicPlayer from "./MusicPlayer";
 
 const navLinks = [
   { label: "Home",       href: "/#home" },
@@ -139,6 +140,9 @@ export default function Navbar() {
 
           {/* Right controls */}
           <div className="flex items-center gap-3">
+
+            {/* Music Player */}
+            <MusicPlayer />
 
             {/* Theme Toggle */}
             {mounted && (
