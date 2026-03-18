@@ -66,7 +66,7 @@ function SkillPill({ name, bgClass, dotClass }: { name: string; bgClass: string;
 
 export default function SkillMarquee() {
   return (
-    <section className="w-full overflow-visible bg-dark-navy relative z-20" aria-label="Skills marquee">
+    <section className="w-full overflow-hidden bg-dark-navy relative z-20" aria-label="Skills marquee">
       {/* Diagonal comic panel cut — overlaps the Hero section above */}
       <div
         className="absolute -top-8 left-0 w-full h-10 bg-dark-navy pointer-events-none"

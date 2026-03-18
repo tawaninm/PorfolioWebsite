@@ -96,11 +96,15 @@
 
 html {
   scroll-behavior: smooth;
+  max-width: 100%;
+  overflow-x: hidden;
 }
 
 body {
   /* Colors are managed via Tailwind classes in layout.tsx for next-themes support */
   font-family: var(--font-body);
+  max-width: 100%;
+  overflow-x: hidden;
 }
 
 /* Selection highlight — neon magenta */
