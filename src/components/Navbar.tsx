@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { useTheme } from "next-themes";
 import { usePathname } from "next/navigation";
+import Link from "next/link";
 import { motion, AnimatePresence, useScroll, useMotionValueEvent } from "framer-motion";
 import { FiSun, FiMoon } from "react-icons/fi";
 
@@ -97,14 +98,14 @@ export default function Navbar() {
       <div className="mx-auto max-w-7xl flex items-center justify-between px-6 py-4 relative z-10">
 
         {/* Logo */}
-        <a href="/#home" className="flex flex-col items-start group shrink-0">
+        <Link href="/#home" className="flex flex-col items-start group shrink-0">
           <span className="font-display text-2xl text-soft-white tracking-widest leading-none">
             TW<span className="text-hot-pink transition-colors duration-300 group-hover:text-sky-cyan">.</span>
           </span>
           <span className="font-zen text-[10px] text-muted-lilac tracking-wider leading-none mt-0.5">
             ポートフォリオ
           </span>
-        </a>
+        </Link>
 
         {/* Desktop links */}
         <ul className="hidden md:flex items-center gap-6 lg:gap-8">
@@ -112,7 +113,7 @@ export default function Navbar() {
             const isActive = activeSection === link.href;
             return (
               <li key={link.href}>
-                <a
+                <Link
                   href={link.href}
                   className={`relative font-body text-sm font-medium transition-colors duration-300 ${
                     isActive
@@ -129,7 +130,7 @@ export default function Navbar() {
                       transition={{ type: "spring", stiffness: 300, damping: 30 }}
                     />
                   )}
-                </a>
+                </Link>
               </li>
             );
           })}
@@ -193,13 +194,22 @@ export default function Navbar() {
       {/* Mobile slide-in panel */}
       <AnimatePresence>
         {mobileOpen && (
-          <motion.div
-            initial={{ opacity: 0, x: "100%" }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: "100%" }}
-            transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-            className="fixed inset-0 z-40 bg-vinyl-dark flex flex-col justify-center items-center overflow-hidden"
-          >
+          <motion.div className="fixed inset-0 z-40">
+            {/* Backdrop */}
+            <button
+              type="button"
+              aria-label="Close menu"
+              className="absolute inset-0 bg-black/40"
+              onClick={() => setMobileOpen(false)}
+            />
+            {/* Side drawer */}
+            <motion.div
+              initial={{ x: "100%" }}
+              animate={{ x: 0 }}
+              exit={{ x: "100%" }}
+              transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+              className="absolute right-0 top-0 h-full w-72 max-w-[80%] bg-vinyl-dark border-l border-neon-magenta/30 flex flex-col justify-center items-stretch overflow-hidden px-8"
+            >
             {/* Scattered sakura petals */}
             <SakuraPetal className="absolute top-[8%]  left-[12%]  w-5 h-6 text-sakura-pink/20 rotate-[20deg]"  />
             <SakuraPetal className="absolute top-[15%] right-[18%] w-4 h-5 text-lavender/25  rotate-[-35deg]" />
@@ -215,13 +225,13 @@ export default function Navbar() {
               <button
                 onClick={() => setTheme(isDark ? "light" : "dark")}
                 aria-label="Toggle theme"
-                className="absolute top-6 right-6 w-10 h-10 rounded-full border border-muted-lilac/30 bg-soft-white/5 flex items-center justify-center text-soft-white hover:border-neon-magenta/60 transition-all duration-300"
+                className="absolute top-6 right-6 w-10 h-10 rounded-full border border-muted-lilac/30 bg-soft-white/5 flex items-center justify-center text-soft-white hover:border-neon-magenta/60 transition-all duration-300 z-20"
               >
                 {isDark ? <FiSun size={18} /> : <FiMoon size={18} />}
               </button>
             )}
 
-            <ul className="flex flex-col gap-8 text-center relative z-10">
+            <ul className="flex flex-col gap-6 text-left relative z-10 mt-10">
               {navLinks.map((link, i) => (
                 <motion.li
                   key={link.href}
@@ -229,20 +239,21 @@ export default function Navbar() {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.1 + i * 0.07, ease: [0.16, 1, 0.3, 1] }}
                 >
-                  <a
+                  <Link
                     href={link.href}
                     onClick={() => setMobileOpen(false)}
-                    className={`font-display tracking-wide text-3xl md:text-4xl transition-colors duration-300 ${
+                    className={`font-display tracking-wide text-2xl transition-colors duration-300 ${
                       activeSection === link.href
                         ? "text-hot-pink"
                         : "text-soft-white/80 hover:text-soft-white"
                     }`}
                   >
                     {link.label}
-                  </a>
+                  </Link>
                 </motion.li>
               ))}
             </ul>
+            </motion.div>
           </motion.div>
         )}
       </AnimatePresence>
