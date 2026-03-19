@@ -4,6 +4,7 @@ import dynamic from "next/dynamic";
 import { motion } from "framer-motion";
 
 const Sparkles = dynamic(() => import("./Sparkles"), { ssr: false });
+const CardFlipGallery = dynamic(() => import("./CardFlipGallery"), { ssr: false });
 
 /* ---- Comic decorative components ---- */
 
@@ -250,23 +251,7 @@ export default function Hero() {
             X+ Years Experience
           </motion.div>
 
-          {/* Floating card */}
-          <motion.div
-            animate={{ y: [0, -15, 0] }}
-            transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-            className="w-full max-w-md aspect-square md:aspect-[4/5] glass rounded-[40px] border-2 border-soft-white/20 flex flex-col items-center justify-center p-8 text-center relative overflow-hidden shadow-[0_20px_60px_rgba(26,58,92,0.5)] glow-pink"
-          >
-            <div className="absolute -top-10 -right-10 w-32 h-32 bg-sky-cyan rounded-full mix-blend-multiply filter blur-2xl opacity-40 animate-pulse" />
-            <div className="absolute -bottom-10 -left-10 w-40 h-40 bg-sakura-pink rounded-full mix-blend-multiply filter blur-2xl opacity-40" />
-
-            <div className="relative z-10">
-              <span className="font-display text-3xl text-hot-pink block mb-4">Space for Art ✦</span>
-              <p className="font-body text-sm text-soft-white/70">
-                Drop your city pop illustration in <br />
-                <code className="text-xs font-mono bg-dark-navy/30 px-2 py-1 rounded">public/images/hero/</code>
-              </p>
-            </div>
-          </motion.div>
+          <CardFlipGallery />
         </motion.div>
 
       </div>

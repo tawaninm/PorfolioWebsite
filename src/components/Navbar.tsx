@@ -9,22 +9,21 @@ import { FiSun, FiMoon } from "react-icons/fi";
 import MusicPlayer from "./MusicPlayer";
 
 const navLinks = [
-  { label: "Home",       href: "/#home" },
-  { label: "About",      href: "/#about" },
-  { label: "Experience", href: "/experience" },
-  { label: "Projects",   href: "/#works" },
+  { label: "Home",       href: "/" },
+  { label: "About",      href: "/about" },
+  { label: "Project",    href: "/projects" },
   { label: "Activities", href: "/activities" },
   { label: "Resume",     href: "/resume" },
-  { label: "Contact",    href: "/#contact" },
 ];
 
 /** Maps a pathname to the matching navLink href so active underline works on every page */
 function resolveActiveFromPath(pathname: string): string | null {
-  if (pathname === "/experience") return "/experience";
-  if (pathname === "/activities")  return "/activities";
-  if (pathname === "/resume")      return "/resume";
-  if (pathname.startsWith("/projects")) return "/#works";
-  return null; // home — handled by scroll
+  if (pathname === "/about")                return "/about";
+  if (pathname.startsWith("/projects"))     return "/projects";
+  if (pathname === "/activities")           return "/activities";
+  if (pathname === "/resume")               return "/resume";
+  if (pathname === "/")                     return "/";
+  return null;
 }
 
 /* Small sakura petal SVG for mobile menu decoration */
@@ -40,7 +39,7 @@ function SakuraPetal({ className }: { className?: string }) {
 export default function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [hidden, setHidden] = useState(false);
-  const [activeSection, setActiveSection] = useState<string>("/#home");
+  const [activeSection, setActiveSection] = useState<string>("/");
   const [mounted, setMounted] = useState(false);
   const { theme, setTheme } = useTheme();
   const pathname = usePathname();
@@ -65,18 +64,7 @@ export default function Navbar() {
     // Home page — track by scroll
     const handleScroll = () => {
       if (pathname !== "/") return;
-      const sectionIds = navLinks
-        .filter((l) => l.href.startsWith("/#"))
-        .map((l) => l.href.slice(2));
-
-      let current = "";
-      for (const id of sectionIds) {
-        const el = document.getElementById(id);
-        if (el && el.getBoundingClientRect().top <= 200) {
-          current = `/#${id}`;
-        }
-      }
-      setActiveSection(current || "/#home");
+      setActiveSection("/");
     };
 
     window.addEventListener("scroll", handleScroll, { passive: true });
@@ -100,7 +88,7 @@ export default function Navbar() {
         <div className="mx-auto max-w-7xl flex items-center justify-between px-6 py-4 relative z-10">
 
           {/* Logo */}
-          <Link href="/#home" className="flex flex-col items-start group shrink-0">
+          <Link href="/" className="flex flex-col items-start group shrink-0">
             <span className="font-display text-2xl text-soft-white tracking-widest leading-none">
               TW<span className="text-hot-pink transition-colors duration-300 group-hover:text-sky-cyan">.</span>
             </span>
