@@ -1,149 +1,189 @@
 # My Profile Data
 # Fill in your real info — the About page reads directly from this file's exported data.
 
-## Identity
+# Home page
+## Identity 
 
-name: Your Name
-tagline: Designer · Developer · Creator
+name: Tawan
+Fullname : Thanatpat promthong
+tagline: coding Tutor · Game Developer · UI/UX Designer
+1+ Years Experience in tutor coding
 location: Bangkok, Thailand
 
-## Bio
+## Hero Section detail
 
-paragraph1: I'm a multidisciplinary designer and developer who loves blending thoughtful UX, clean code, and city pop aesthetics. I build digital products that feel alive — from concept to pixel-perfect delivery.
+hero_title: I'm Tawan
+hero_subtitle: Game Developer · UI/UX Designer
+hero_description: I am Coding tutor, Game Developer and UI/UX Designer. I am a student at the School of Information Technology, KMITL. I spend time learning new things and developing my skills to make a help tool to entertain and help life easier.
 
-paragraph2: Currently studying at the School of Information Technology, KMITL. I spend my days designing interfaces, writing TypeScript, and daydreaming about vaporwave sunsets.
 
-paragraph3: When I'm not at my desk, you'll find me rewatching anime, exploring game mechanics, or hunting for the perfect lo-fi playlist to code to.
+## about me home page detail
+A programmer and game developer deeply focused on UX. I blend an observant eye for user needs with diverse inspirations from manga, anime, medicine, and science to craft engaging digital experiences.
+skill : 
+UX / UI Tool : Adobe Illustrator, Figma , Canva , NotebookLM , Chatgbt , Gemini
+UX Methods : User Interview, Persona, Experience Map, User Needs, Wireframe, Prototype, Usability Testing (basic)
+Game Development : Medium Godot engine, Medium Unity engine, Medium Unreal engine , Beginner Roblox studio
+Coding Languages: C# , GDscript , Java , HTML ,CSS , JavaScript , Lua, SQL
 
-## Quotes
+# About me page
+## about me page detail
 
-quote1: Design is music you can see.
-quote2: Every pixel is a decision. Make it count.
-quote3: The best interface is the one that disappears.
+paragraph1: By bridging the gap between the user's needs and the developer's architecture, I channel my technical skills into creating impactful programs and games.
+
+paragraph2: Currently 2nd year student at the School of Information Technology, KMITL. Major in Multimedia and Game Technology.
+
+paragraph3: I am constantly eager to learn new skills and love participating in campus activities. While pursuing my degree, I actively seek hands-on experience—balancing my time between tutoring and study.
+
+“take care of your work, and your work will take care of you.”
+
+hero_description: Second-year IT student at KMITL specializing in UX/UI and game development. I combine my background as an OOP teaching assistant and coding tutor with hands-on experience in human interface design. Using tools like Figma, Illustrator, and AI, I translate user research and experience mapping into actionable, pixel-perfect designs. Friendly, patient, and detail-oriented, I'm dedicated to creating intuitive, user-centered experiences that entertain and make life easier.
+
+
+MOTTOS 
+quote1: stay hungry stay foolish  -Steve Jobs-
+quote2: Live as if you were to die tomorrow. Learn as if you were to live forever.-Mahatma Gandhi-
+quote3: What is not started today is never finished tomorrow. -Johann Wolfgang von Goethe-
 
 ## Gallery
 # Add your real image paths under /public/gallery/
 # Example: /gallery/photo1.jpg
 
-photo1: /gallery/placeholder-1.jpg
-photo1_caption: At the studio
+profile image : public/images/gallery/Profile.jpg
+photo1: public/images/gallery/ITKMITL-OpenHouse.jpg
+photo1_caption: 2567 Open house IT kmitl
 
-photo2: /gallery/placeholder-2.jpg
-photo2_caption: Workshop day
+photo2: public/images/gallery/ITCamp21_Day02_staff.jpg
+photo2_caption: ITCamp21 staff
 
-photo3: /gallery/placeholder-3.jpg
-photo3_caption: Hackathon night
+photo3: public/images/gallery/Life style.jpg
+photo3_caption: 2568 Open house IT kmitl
 
-photo4: /gallery/placeholder-4.jpg
-photo4_caption: Team vibes
+photo4: public/images/gallery/catTorawaheng.jpg
+photo4_caption: Cat Tora wanHeng
 
-photo5: /gallery/placeholder-5.jpg
-photo5_caption: Sunset coding
+photo5: public/images/gallery/Acane.jpg
+photo5_caption: Acane world
 
-photo6: /gallery/placeholder-6.jpg
-photo6_caption: Campus life
+photo6: public/images/gallery/Japanpro.jpg
+photo6_caption: Japan lover
 
 ## Education
-
-edu1_year: 2023 – Present
+edu1_year: 2024 – Present
 edu1_school: King Mongkut's Institute of Technology Ladkrabang (KMITL)
-edu1_degree: Bachelor of Science in Information Technology
-edu1_desc: Majoring in IT with focus on software engineering, UX design, and game development. Maintaining strong GPA while leading extracurricular tech events.
+edu1_degree: Bachelor of Science Program in Information Technology
+edu1_desc: Module : Multimedia & Game Development. Majoring in IT with focus on UX/UI design, and game development. 
 
-edu2_year: 2020 – 2023
-edu2_school: Your High School
-edu2_degree: Science-Math Program
-edu2_desc: Participated in national software contests and developed a passion for programming and design.
+edu2_year: 2017 – 2023
+edu2_school: Rayongwittayakom School
+edu2_degree: Computer math and science program (Wit-com)
+edu2_desc: Participated in national software contests and developed a passion for programming and games developer
 
 ## Experience
 # Same data as the existing /experience page — fill with your real history
 
-exp1_year: 2024
-exp1_role: Senior UX Designer
-exp1_company: Company A
-exp1_desc: Led end-to-end product design for three flagship products. Established a cross-platform design system used by 10+ engineers.
-exp1_tech: Figma, FigJam, Maze, Notion, Lottie
+exp1_year: 2026-Present
+exp1_role: Part-time Tutor coding
+exp1_company: Code genius Emquartier
+exp1_desc:  Instructed group classes of primary school students in basic computer skills, delivering lessons in both Thai and English.
+exp1_tech: Scratch, Python , Microbit
 
-exp2_year: 2023
-exp2_role: Frontend Developer
-exp2_company: Company B
-exp2_desc: Built responsive, accessible interfaces with React and TypeScript. Collaborated closely with design teams to translate pixel-perfect specs into production-ready components.
-exp2_tech: React, TypeScript, Next.js, Tailwind CSS, Framer Motion
+exp2_year: 2026
+exp2_role: Part time TA Java OOP
+exp2_company: School of Information Technology KMITL
+exp2_desc: Assisting the course instructor for Object-Oriented Programming (OOP) by evaluating weekly laboratory assignments and posing conceptual questions to students to reinforce their understanding and facilitate further learning
+exp2_tech: OOP Java
 
-exp3_year: 2022
-exp3_role: CI Artist & Designer
-exp3_company: Company C
-exp3_desc: Created corporate identity materials, illustration assets, and print collateral. Developed brand guidelines and mascot characters.
-exp3_tech: Procreate, Adobe Illustrator, Photoshop, InDesign
+exp3_year: 2024-2026
+exp3_role: Part-time Tutor Math Physic and coding
+exp3_company: Login learning
+exp3_desc: The tutor manages projects for students to submit to competitions, such as national software contests and portfolio projects for university applications.
+The tutor teaches the Godot game engine and mathematics to junior high school and senior high school students.
+exp2_tech: Godot engine, Math, Physic
 
-exp4_year: 2021
-exp4_role: Junior Designer
-exp4_company: Company D
-exp4_desc: Designed marketing visuals, social media assets, and UI wireframes. Gained foundational skills in user research, prototyping, and design handoff.
-exp4_tech: Figma, Photoshop, Illustrator, Notion
+exp4_year: 2025
+exp4_role: Part time Phoenix next Book fair staff
+exp4_company: Phoenix next
+exp4_desc: Worked as booth staff responsible for preparing and arranging book displays. Managed cashier duties, processed payments, and assisted with booth teardown at the end of the event.
+
+exp4_year: 2024
+exp4_role: Part time Luckpim Book fair staff
+exp4_company: Luckpim
+exp4_desc: Worked as booth staff responsible for preparing and arranging book displays. Managed cashier duties, processed payments, and assisted with booth teardown at the end of the event.
 
 ## Hobbies — Anime
 
-anime1_title: Bocchi the Rock!
-anime1_genre: Slice of Life / Music
+anime1_title: Full metal alchemist
+anime1_genre: Adventure / Fantasy
 anime1_gradient: from-sakura-pink/40 to-lavender/30
+anime1_image: public/images/gallery/fullmetal.jpg
 
-anime2_title: Yuru Camp
-anime2_genre: Slice of Life
+anime2_title: Frieren: Beyond Journey's End
+anime2_genre: Adventure / Fantasy
 anime2_gradient: from-mint/40 to-sky-cyan/30
+anime2_image: public/images/gallery/Frieren Beyond Journeys End.jpg
 
-anime3_title: Cyberpunk Edgerunners
-anime3_genre: Sci-Fi / Action
+anime3_title: Demon Slayer: Kimetsu no Yaiba
+anime3_genre: Action / Adventure
 anime3_gradient: from-neon-magenta/30 to-deep-purple/40
+anime3_image: public/images/gallery/Demon SlayerKimetsu no Yaiba.jpg
 
-anime4_title: K-On!
-anime4_genre: Slice of Life / Music
+anime4_title: Delicious in Dungeon
+anime4_genre: Adventure / Fantasy
 anime4_gradient: from-retro-yellow/30 to-peach/30
+anime4_image: public/images/gallery/Delicious in Dungeon.jpg
 
-anime5_title: Made in Abyss
-anime5_genre: Adventure / Fantasy
+anime5_title: 86 EIGHTY-SIX
+anime5_genre: Sci-Fi / Drama
 anime5_gradient: from-sky-cyan/30 to-ocean-blue/40
+anime5_image: public/images/gallery/86 EIGHTY-SIX.jpg
 
-anime6_title: Vinland Saga
-anime6_genre: Historical / Action
+anime6_title: The Apothecary Diaries
+anime6_genre: Mystery / Historical
 anime6_gradient: from-sunset-gold/30 to-peach/40
+anime6_image: public/images/gallery/The Apothecary Diaries.jpg
 
 ## Hobbies — Games
 
-game1_title: Hollow Knight
-game1_genre: Metroidvania
+game1_title: Goddess of Victory: Nikke
+game1_genre: Action RPG
 game1_gradient: from-deep-purple/50 to-lavender/20
+game1_image: public/images/gallery/nikke.jpg
 
-game2_title: Stardew Valley
-game2_genre: Simulation / RPG
+game2_title: League of legends wild rift
+game2_genre: MOBA
 game2_gradient: from-mint/40 to-retro-yellow/25
+game2_image: public\images\gallery\league of legends wild rift.jpg
 
-game3_title: Celeste
-game3_genre: Platformer
+game3_title: Wuthering waves
+game3_genre: Action RPG
 game3_gradient: from-sakura-pink/35 to-sky-cyan/30
+game3_image: public\images\gallery\wuthering waves.png
 
-game4_title: Hades
-game4_genre: Roguelite
+game4_title: Stardew Valley
+game4_genre: Simulation / RPG
 game4_gradient: from-coral-red/30 to-neon-magenta/25
+game4_image: public\images\gallery\Stardew Valley.jpg
 
-game5_title: Disco Elysium
-game5_genre: RPG / Detective
+game5_title: Golden Spatula 
+game5_genre: Auto battler
 game5_gradient: from-ocean-blue/40 to-muted-lilac/30
+game5_image: public\images\gallery\Goden spatula.jpg
 
-game6_title: Unreal Engine Dev
-game6_genre: Game Dev
+game6_title: Zenless zone zero
+game6_genre: Action RPG
 game6_gradient: from-electric-blue/30 to-sky-cyan/25
+game6_image: public\images\gallery\Zenless zone zero.jpg
 
 ## Hobbies — Other
 
-hobby1_title: City Pop & Music
+hobby1_title: J-pop and K-pop music
 hobby1_emoji: 🎵
-hobby1_desc: Curating playlists of 80s Japanese city pop and vaporwave. Mariya Takeuchi is a permanent resident of my Spotify.
+hobby1_desc: i listen anime opening and ending song and k-pop song
 hobby1_gradient: from-lavender/30 to-sakura-pink/25
 
-hobby2_title: Digital Illustration
-hobby2_emoji: 🎨
-hobby2_desc: Drawing character art and UI concepts in Procreate. Blending anime aesthetics with product design sensibilities.
+hobby2_title: Read novel managa
+hobby2_emoji: 📖
+hobby2_desc: i reand japan manga korean mahwa comic novel and productive book crime novel 
 hobby2_gradient: from-sky-cyan/30 to-mint/25
 
 hobby3_title: Coffee & Cafés
@@ -153,7 +193,7 @@ hobby3_gradient: from-sunset-gold/30 to-peach/25
 
 ## Contact
 
-email: your@email.com
-github: https://github.com/yourusername
-linkedin: https://linkedin.com/in/yourusername
-twitter: https://twitter.com/yourusername
+email: tawaninm13@gmail.com
+github: https://github.com/tawaninm
+linkedin: www.linkedin.com/in/thanatpat-promthong-9084a4212
+email :[tawaninm13@gmail.com]

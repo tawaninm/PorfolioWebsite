@@ -8,37 +8,6 @@ const CardFlipGallery = dynamic(() => import("./CardFlipGallery"), { ssr: false 
 
 /* ---- Comic decorative components ---- */
 
-function SpeechBubble() {
-  return (
-    <motion.div
-      className="absolute top-20 right-[6%] z-0 select-none pointer-events-none"
-      animate={{ y: [0, -10, 0] }}
-      transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-    >
-      <div className="relative bg-soft-white border-2 border-dark-navy rounded-2xl px-4 py-2 shadow-md">
-        <span className="font-display text-sm text-dark-navy tracking-wide">Welcome! ✦</span>
-        {/* Tail */}
-        <div
-          className="absolute -bottom-[10px] left-5 w-0 h-0"
-          style={{
-            borderLeft: "8px solid transparent",
-            borderRight: "8px solid transparent",
-            borderTop: "10px solid #1A1A2E",
-          }}
-        />
-        <div
-          className="absolute -bottom-[8px] left-[22px] w-0 h-0"
-          style={{
-            borderLeft: "6px solid transparent",
-            borderRight: "6px solid transparent",
-            borderTop: "8px solid #F4ECE4",
-          }}
-        />
-      </div>
-    </motion.div>
-  );
-}
-
 function StarBurst({ size, top, left, right, bottom, rotate, delay }: {
   size: number;
   top?: string;
@@ -128,7 +97,6 @@ export default function Hero() {
       <Sparkles />
 
       {/* Comic decorative elements */}
-      <SpeechBubble />
       <StarBurst size={28} top="18%" left="5%" rotate={15} delay={0} />
       <StarBurst size={20} top="35%" right="3%" rotate={-10} delay={0.6} />
       <StarBurst size={16} bottom="28%" left="18%" rotate={30} delay={1} />
@@ -188,7 +156,7 @@ export default function Hero() {
           >
             <div className="inline-block px-6 py-2 rounded-full bg-lavender/20 border border-lavender/40 backdrop-blur-sm">
               <span className="font-body text-sm font-bold tracking-wider text-soft-white uppercase">
-                X+ Years / UX Designer · Programmer · CI Artist
+                1+ Years · Coding Tutor · Game Developer · UI/UX Designer
               </span>
             </div>
             {/* Japanese subtitle */}
@@ -202,8 +170,7 @@ export default function Hero() {
             variants={wordVariants}
             className="font-body text-lg md:text-xl text-soft-white/70 max-w-md mb-10 leading-relaxed"
           >
-            I blend thoughtful UX, clean code, and city pop aesthetics to build
-            digital products that feel alive. Welcome to my creative universe.
+            I am Coding tutor, Game Developer and UI/UX Designer. I am a student at the School of Information Technology, KMITL. I spend time learning new things and developing my skills to make tools that entertain and help life easier.
           </motion.p>
 
           {/* CTA Buttons */}
@@ -218,9 +185,7 @@ export default function Hero() {
               View My Work
             </a>
             <a
-              href="/resume.pdf"
-              target="_blank"
-              rel="noopener noreferrer"
+              href="/resume"
               className="inline-block px-8 py-3.5 bg-transparent text-electric-blue font-body font-bold rounded-full text-base transition-all duration-300 border-2 border-electric-blue hover:bg-electric-blue/10 hover:shadow-[0_0_20px_rgba(80,128,240,0.3)]"
             >
               Download Resume
@@ -241,16 +206,6 @@ export default function Hero() {
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.7, delay: 0.8, ease: [0.16, 1, 0.3, 1] }}
         >
-          {/* Experience badge */}
-          <motion.div
-            className="absolute -top-4 -left-4 z-20 px-4 py-2 bg-retro-yellow text-deep-black font-body font-bold text-sm rounded-lg border-2 border-dark-navy shadow-md"
-            style={{ rotate: "-3deg" }}
-            animate={{ y: [0, -4, 0] }}
-            transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-          >
-            X+ Years Experience
-          </motion.div>
-
           <CardFlipGallery />
         </motion.div>
 

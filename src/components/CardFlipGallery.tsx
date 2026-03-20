@@ -146,6 +146,43 @@ export default function CardFlipGallery() {
       {/* Card + sparkles container */}
       <div className="relative" style={{ perspective: "1000px" }}>
 
+        {/* Experience badge */}
+        <motion.div
+          className="absolute -top-10 -left-14 z-30 px-4 py-2 bg-retro-yellow text-deep-black font-body font-bold text-sm rounded-lg border-2 border-dark-navy shadow-md pointer-events-none select-none"
+          style={{ rotate: "-3deg" }}
+          animate={{ y: [0, -4, 0] }}
+          transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+        >
+          X+ Years Experience
+        </motion.div>
+
+        {/* Speech bubble */}
+        <motion.div
+          className="absolute -top-10 -right-14 z-30 select-none pointer-events-none"
+          animate={{ y: [0, -6, 0] }}
+          transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+        >
+          <div className="relative bg-soft-white border-2 border-dark-navy rounded-2xl px-4 py-2 shadow-md">
+            <span className="font-display text-sm text-dark-navy tracking-wide">Welcome! ✦</span>
+            <div
+              className="absolute -bottom-[10px] left-5 w-0 h-0"
+              style={{
+                borderLeft: "8px solid transparent",
+                borderRight: "8px solid transparent",
+                borderTop: "10px solid #1A1A2E",
+              }}
+            />
+            <div
+              className="absolute -bottom-[8px] left-[22px] w-0 h-0"
+              style={{
+                borderLeft: "6px solid transparent",
+                borderRight: "6px solid transparent",
+                borderTop: "8px solid #F4ECE4",
+              }}
+            />
+          </div>
+        </motion.div>
+
         {/* Manga sparkles */}
         <MangaStar size={20} top="-16px" left="-12px"               delay={0}   />
         <MangaStar size={14} top="-8px"  right="-8px"               delay={0.7} />
@@ -168,7 +205,7 @@ export default function CardFlipGallery() {
           onClick={handleFlip}
           className="relative cursor-pointer"
           style={{
-            width: "260px",
+            width: "320px",
             aspectRatio: "3/4",
             transformStyle: "preserve-3d",
           }}

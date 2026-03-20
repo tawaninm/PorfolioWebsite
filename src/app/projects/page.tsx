@@ -11,6 +11,7 @@ const filters = [
   { key: "all",         label: "All" },
   { key: "uxui",        label: "UX/UI" },
   { key: "programming", label: "Programming" },
+  { key: "game",        label: "Game Dev" },
   { key: "ci-art",      label: "CI Art" },
 ] as const;
 
@@ -20,6 +21,7 @@ const categoryColor: Record<Project["category"], string> = {
   uxui:        "text-sakura-pink",
   programming: "text-sky-cyan",
   "ci-art":    "text-mint",
+  game:        "text-retro-yellow",
 };
 
 const ease = [0.16, 1, 0.3, 1] as const;

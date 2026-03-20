@@ -16,9 +16,19 @@ const fadeUp = {
 };
 
 const skillCategories = [
-  { label: "UX/UI", color: "bg-sakura-pink text-dark-navy" },
-  { label: "Programming", color: "bg-sky-cyan text-dark-navy" },
-  { label: "CI Art", color: "bg-mint text-dark-navy" },
+  { label: "Figma", color: "bg-sakura-pink text-dark-navy" },
+  { label: "Adobe Illustrator", color: "bg-lavender text-dark-navy" },
+  { label: "Canva", color: "bg-sky-cyan text-dark-navy" },
+  { label: "Godot Engine", color: "bg-mint text-dark-navy" },
+  { label: "Unity", color: "bg-mint text-dark-navy" },
+  { label: "Unreal Engine", color: "bg-sunset-gold text-dark-navy" },
+  { label: "C#", color: "bg-sakura-pink text-dark-navy" },
+  { label: "GDScript", color: "bg-lavender text-dark-navy" },
+  { label: "Java", color: "bg-coral-red text-soft-white" },
+  { label: "JavaScript", color: "bg-retro-yellow text-dark-navy" },
+  { label: "Python", color: "bg-sky-cyan text-dark-navy" },
+  { label: "HTML", color: "bg-coral-red text-soft-white" },
+  { label: "CSS", color: "bg-electric-blue text-soft-white" },
 ];
 
 /* Anime sparkle shape */
@@ -114,16 +124,14 @@ export default function About() {
 
               <div className="flex-1">
                 <p className="font-body text-dark-navy/90 dark:text-soft-white/90 leading-relaxed transition-colors duration-300">
-                  I&apos;m a multidisciplinary designer and developer blending thoughtful UX,
-                  clean code, and city pop aesthetics. I build digital products that feel
-                  alive — from concept to pixel-perfect delivery.
+                  A programmer and game developer deeply focused on UX. I blend an observant eye for user needs with diverse inspirations from manga, anime, medicine, and science to craft engaging digital experiences.
                 </p>
 
                 {/* Manga speech bubble quote */}
                 <div className="relative inline-block mt-4">
                   <div className="bg-soft-white dark:bg-vinyl-dark border-2 border-dark-navy/20 dark:border-soft-white/20 rounded-2xl px-4 py-2 max-w-xs">
                     <p className="font-body text-xs italic text-dark-navy/70 dark:text-soft-white/70 leading-relaxed">
-                      &ldquo;Design is music you can see.&rdquo;
+                      &ldquo;take care of your work, and your work will take care of you.&rdquo;
                     </p>
                   </div>
                   <div
@@ -165,7 +173,7 @@ export default function About() {
                 backgroundClip: "text",
               }}
             >
-              X+
+              1+
             </span>
             <span className="font-body text-sm font-bold text-dark-navy/70 dark:text-soft-white/70 mt-2 uppercase tracking-wider transition-colors duration-300">
               Years Experience

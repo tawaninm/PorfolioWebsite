@@ -6,7 +6,7 @@ import { motion, AnimatePresence } from "framer-motion";
 /* ─────────────────────────────────────────
    TYPES & DATA
 ───────────────────────────────────────── */
-type ActivityType = "camp" | "workshop" | "hackathon" | "training" | "volunteer";
+type ActivityType = "camp" | "workshop" | "hackathon" | "training" | "volunteer" | "work";
 
 interface Activity {
   id: string;
@@ -73,11 +73,41 @@ const activities: Activity[] = [
     id: "login-tutor",
     name: "IT & Math Tutor",
     type: "volunteer",
-    date: "Sep 2024 – Present",
+    date: "Sep 2024 – 2026",
     description:
       "Teach Godot game engine fundamentals and mathematics to junior- and senior-high students. Guide competition teams building portfolio projects for university applications.",
     organizer: "Login-Engineering Academy",
     gradient: "from-sakura-pink/30 to-lavender/25",
+  },
+  {
+    id: "code-genius-tutor",
+    name: "Coding Tutor — Primary School",
+    type: "work",
+    date: "2026 – Present",
+    description:
+      "Instructed group classes of primary school students in basic computer skills, delivering lessons in both Thai and English. Topics include Scratch, Python, and Microbit.",
+    organizer: "Code Genius Emquartier",
+    gradient: "from-electric-blue/30 to-mint/25",
+  },
+  {
+    id: "phoenix-bookfair",
+    name: "Phoenix Next Book Fair Staff",
+    type: "work",
+    date: "2025",
+    description:
+      "Worked as booth staff responsible for preparing and arranging book displays. Managed cashier duties, processed payments, and assisted with booth teardown at the end of the event.",
+    organizer: "Phoenix Next",
+    gradient: "from-sunset-gold/30 to-peach/25",
+  },
+  {
+    id: "luckpim-bookfair",
+    name: "Luckpim Book Fair Staff",
+    type: "work",
+    date: "2024",
+    description:
+      "Worked as booth staff responsible for preparing and arranging book displays. Managed cashier duties, processed payments, and assisted with booth teardown at the end of the event.",
+    organizer: "Luckpim",
+    gradient: "from-coral-red/25 to-retro-yellow/20",
   },
 ];
 
@@ -91,6 +121,7 @@ const filters = [
   { key: "hackathon", label: "Hackathons" },
   { key: "training",  label: "Training" },
   { key: "volunteer", label: "Volunteer" },
+  { key: "work",      label: "Work" },
 ] as const;
 
 type FilterKey = (typeof filters)[number]["key"];
@@ -101,6 +132,7 @@ const typeBadge: Record<ActivityType, string> = {
   hackathon: "bg-neon-magenta text-white",
   training:  "bg-retro-yellow text-deep-black",
   volunteer: "bg-sakura-pink text-deep-purple",
+  work:      "bg-lavender text-dark-navy",
 };
 
 const typeLabel: Record<ActivityType, string> = {
@@ -109,14 +141,15 @@ const typeLabel: Record<ActivityType, string> = {
   hackathon: "Hackathon",
   training:  "Training",
   volunteer: "Volunteer",
+  work:      "Work",
 };
 
 /* ─────────────────────────────────────────
    STATS
 ───────────────────────────────────────── */
 const stats = [
-  { number: "6+",   label: "Activities",    from: "#FF2D78", to: "#F06848" },
-  { number: "200+", label: "Hours",         from: "#5080F0", to: "#40C8A0" },
+  { number: "10+",  label: "Activities",    from: "#FF2D78", to: "#F06848" },
+  { number: "300+", label: "Hours",         from: "#5080F0", to: "#40C8A0" },
   { number: "15+",  label: "Skills Gained", from: "#F0D040", to: "#F8A078" },
   { number: "2",    label: "Certificates",  from: "#F0B0D0", to: "#FF2D78" },
 ];

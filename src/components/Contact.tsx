@@ -2,7 +2,6 @@
 
 import { motion } from "framer-motion";
 import { FiGithub, FiLinkedin, FiMail } from "react-icons/fi";
-import { FaDribbble } from "react-icons/fa";
 
 /* ---- Fade-in wrapper ---- */
 function FadeSection({
@@ -161,10 +160,9 @@ export default function Contact() {
 
           {/* Social Links */}
           <div className="flex flex-wrap justify-center lg:justify-start gap-4">
-            <SocialLink href="https://github.com"          icon={<FiGithub size={22} />}   label="GitHub"   color="hover:shadow-[0_0_20px_rgba(200,168,232,0.7)]" />
-            <SocialLink href="https://linkedin.com"        icon={<FiLinkedin size={22} />} label="LinkedIn" color="hover:shadow-[0_0_20px_rgba(80,128,240,0.7)]" />
-            <SocialLink href="https://dribbble.com"        icon={<FaDribbble size={22} />} label="Dribbble" color="hover:shadow-[0_0_20px_rgba(255,96,144,0.7)]" />
-            <SocialLink href="mailto:hello@example.com"    icon={<FiMail size={22} />}     label="Email"    color="hover:shadow-[0_0_20px_rgba(255,45,120,0.7)]" />
+            <SocialLink href="https://github.com/tawaninm"                                          icon={<FiGithub size={22} />}   label="GitHub"   color="hover:shadow-[0_0_20px_rgba(200,168,232,0.7)]" />
+            <SocialLink href="https://www.linkedin.com/in/thanatpat-promthong-9084a4212"           icon={<FiLinkedin size={22} />} label="LinkedIn" color="hover:shadow-[0_0_20px_rgba(80,128,240,0.7)]" />
+            <SocialLink href="mailto:tawaninm13@gmail.com"                                         icon={<FiMail size={22} />}     label="Email"    color="hover:shadow-[0_0_20px_rgba(255,45,120,0.7)]" />
           </div>
         </FadeSection>
 
