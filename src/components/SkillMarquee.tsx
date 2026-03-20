@@ -1,25 +1,47 @@
 "use client";
 
-const row1 = [
-  { name: "Figma",        color: "bg-sakura-pink/20 text-sakura-pink", dot: "bg-sakura-pink" },
-  { name: "Adobe XD",     color: "bg-lavender/20 text-lavender",       dot: "bg-lavender" },
-  { name: "Photoshop",    color: "bg-sky-cyan/20 text-sky-cyan",       dot: "bg-sky-cyan" },
-  { name: "Illustrator",  color: "bg-sunset-gold/20 text-sunset-gold", dot: "bg-sunset-gold" },
-  { name: "Procreate",    color: "bg-mint/20 text-mint",               dot: "bg-mint" },
-  { name: "Framer",       color: "bg-hot-pink/20 text-hot-pink",       dot: "bg-hot-pink" },
-  { name: "After Effects",color: "bg-lavender/20 text-lavender",       dot: "bg-lavender" },
-  { name: "Rive",         color: "bg-neon-magenta/20 text-neon-magenta", dot: "bg-neon-magenta" },
+import {
+  SiFigma, SiUnrealengine, SiUnity,
+  SiGodotengine, SiGooglegemini, SiOpenai, SiAnthropic,
+  SiNotion, SiRoblox, SiReact, SiNextdotjs, SiTypescript, SiTailwindcss,
+  SiNodedotjs, SiHtml5, SiJavascript, SiPython, SiSharp, SiGit, SiLua, SiC,
+} from "react-icons/si";
+import { FaJava } from "react-icons/fa";
+import { DiPhotoshop, DiIllustrator } from "react-icons/di";
+import { TbBrandAdobePremier } from "react-icons/tb";
+import { IconType } from "react-icons";
+
+const row1: { name: string; color: string; icon: IconType }[] = [
+  { name: "Figma", color: "bg-sakura-pink/20 text-sakura-pink", icon: SiFigma },
+  { name: "Illustrator", color: "bg-lavender/20 text-lavender", icon: DiIllustrator },
+  { name: "Photoshop", color: "bg-sky-cyan/20 text-sky-cyan", icon: DiPhotoshop },
+  { name: "Unreal Engine", color: "bg-sunset-gold/20 text-sunset-gold", icon: SiUnrealengine },
+  { name: "Unity", color: "bg-mint/20 text-mint", icon: SiUnity },
+  { name: "Premiere Pro", color: "bg-hot-pink/20 text-hot-pink", icon: TbBrandAdobePremier },
+  { name: "Godot Engine", color: "bg-lavender/20 text-lavender", icon: SiGodotengine },
+  { name: "Gemini", color: "bg-neon-magenta/20 text-neon-magenta", icon: SiGooglegemini },
+  { name: "ChatGPT", color: "bg-neon-magenta/20 text-neon-magenta", icon: SiOpenai },
+  { name: "Claude", color: "bg-neon-magenta/20 text-neon-magenta", icon: SiAnthropic },
+  { name: "NotebookLM", color: "bg-neon-magenta/20 text-neon-magenta", icon: SiGooglegemini },
+  { name: "Roblox Studio", color: "bg-neon-magenta/20 text-neon-magenta", icon: SiRoblox },
+  { name: "Notion", color: "bg-neon-magenta/20 text-neon-magenta", icon: SiNotion },
 ];
 
-const row2 = [
-  { name: "React",       color: "bg-sky-cyan/20 text-sky-cyan",           dot: "bg-sky-cyan" },
-  { name: "Next.js",     color: "bg-soft-white/20 text-soft-white",       dot: "bg-soft-white" },
-  { name: "TypeScript",  color: "bg-electric-blue/20 text-electric-blue", dot: "bg-electric-blue" },
-  { name: "Tailwind CSS",color: "bg-neon-teal/20 text-neon-teal",         dot: "bg-neon-teal" },
-  { name: "Node.js",     color: "bg-mint/20 text-mint",                   dot: "bg-mint" },
-  { name: "Python",      color: "bg-retro-yellow/20 text-retro-yellow",   dot: "bg-retro-yellow" },
-  { name: "Three.js",    color: "bg-sakura-pink/20 text-sakura-pink",     dot: "bg-sakura-pink" },
-  { name: "Git",         color: "bg-coral-red/20 text-coral-red",         dot: "bg-coral-red" },
+const row2: { name: string; color: string; icon: IconType }[] = [
+  { name: "React", color: "bg-sky-cyan/20 text-sky-cyan", icon: SiReact },
+  { name: "Next.js", color: "bg-soft-white/20 text-soft-white", icon: SiNextdotjs },
+  { name: "TypeScript", color: "bg-electric-blue/20 text-electric-blue", icon: SiTypescript },
+  { name: "Tailwind CSS", color: "bg-neon-teal/20 text-neon-teal", icon: SiTailwindcss },
+  { name: "Node.js", color: "bg-mint/20 text-mint", icon: SiNodedotjs },
+  { name: "HTML", color: "bg-coral-red/20 text-coral-red", icon: SiHtml5 },
+  { name: "JavaScript", color: "bg-coral-red/20 text-coral-red", icon: SiJavascript },
+  { name: "Python", color: "bg-retro-yellow/20 text-retro-yellow", icon: SiPython },
+  { name: "C#", color: "bg-sakura-pink/20 text-sakura-pink", icon: SiSharp },
+  { name: "Git", color: "bg-coral-red/20 text-coral-red", icon: SiGit },
+  { name: "Java", color: "bg-coral-red/20 text-coral-red", icon: FaJava },
+  { name: "C", color: "bg-coral-red/20 text-coral-red", icon: SiC },
+  { name: "GDScript", color: "bg-lavender/20 text-lavender", icon: SiGodotengine },
+  { name: "Lua", color: "bg-coral-red/20 text-coral-red", icon: SiLua },
 ];
 
 function SakuraPetal({ style }: { style: React.CSSProperties }) {
@@ -38,7 +60,7 @@ function SakuraPetal({ style }: { style: React.CSSProperties }) {
 }
 
 /* Pill card with 3D depth effect */
-function SkillPill({ name, bgClass, dotClass }: { name: string; bgClass: string; dotClass: string }) {
+function SkillPill({ name, bgClass, icon: Icon }: { name: string; bgClass: string; icon: IconType }) {
   return (
     <div
       className={`flex items-center gap-3 px-6 py-3 rounded-full whitespace-nowrap border border-soft-white/10 glass ${bgClass} cursor-default`}
@@ -58,7 +80,7 @@ function SkillPill({ name, bgClass, dotClass }: { name: string; bgClass: string;
         el.style.filter = "drop-shadow(3px 3px 0 rgba(0,0,0,0.15))";
       }}
     >
-      <div className={`w-3 h-3 rounded-full flex-shrink-0 ${dotClass}`} />
+      <Icon className="w-4 h-4 flex-shrink-0" />
       <span className="font-body text-sm font-medium text-soft-white tracking-wide">{name}</span>
     </div>
   );
@@ -101,7 +123,7 @@ export default function SkillMarquee() {
                 key={`r1-${i}`}
                 name={skill.name}
                 bgClass={skill.color.split(" ")[0]}
-                dotClass={skill.dot}
+                icon={skill.icon}
               />
             ))}
           </div>
@@ -119,7 +141,7 @@ export default function SkillMarquee() {
                 key={`r2-${i}`}
                 name={skill.name}
                 bgClass={skill.color.split(" ")[0]}
-                dotClass={skill.dot}
+                icon={skill.icon}
               />
             ))}
           </div>
