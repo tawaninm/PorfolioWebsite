@@ -3,6 +3,8 @@
 import { useState, useCallback, useEffect } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
+import { FiGithub, FiLinkedin, FiMail } from "react-icons/fi";
+import { FaDribbble } from "react-icons/fa";
 
 /* ═══════════════════════════════════════════
    DATA  (edit src/data/my-profile.md to update)
@@ -725,58 +727,164 @@ function HobbiesSection() {
 /* ═══════════════════════════════════════════
    SECTION 8 — CONTACT CTA
 ═══════════════════════════════════════════ */
+
+/* Sakura petal — same as home Contact */
+function SakuraPetal({ size, style }: { size: number; style: React.CSSProperties }) {
+  return (
+    <svg viewBox="0 0 30 30" width={size} height={size}
+      className="absolute pointer-events-none select-none"
+      style={{ ...style, animationName: "sakura-fall", animationTimingFunction: "linear", animationIterationCount: "infinite" }}
+      aria-hidden="true">
+      <ellipse cx="15" cy="15" rx="8" ry="13" fill="#F0B0D0" opacity="0.7" transform="rotate(-20 15 15)" />
+    </svg>
+  );
+}
+
+/* Manga happy face */
+function MangaFace() {
+  return (
+    <svg viewBox="0 0 28 28" width={24} height={24} aria-hidden="true" className="shrink-0">
+      <circle cx="14" cy="14" r="13" fill="#FFE8F0" stroke="#FF2D78" strokeWidth="1.5" />
+      <ellipse cx="9.5"  cy="12" rx="1.8" ry="2.2" fill="#1A1A2E" />
+      <ellipse cx="18.5" cy="12" rx="1.8" ry="2.2" fill="#1A1A2E" />
+      <circle cx="10.3" cy="11" r="0.7" fill="white" />
+      <circle cx="19.3" cy="11" r="0.7" fill="white" />
+      <path d="M9 17 Q14 22 19 17" stroke="#FF2D78" strokeWidth="1.5" fill="none" strokeLinecap="round" />
+    </svg>
+  );
+}
+
+/* 3D social icon — same as home Contact */
+function SocialLink({ href, icon, label, color }: { href: string; icon: React.ReactNode; label: string; color: string }) {
+  return (
+    <a href={href} target="_blank" rel="noopener noreferrer" aria-label={label}
+      className={`w-14 h-14 rounded-full bg-vinyl-dark border border-muted-lilac/30 flex items-center justify-center text-soft-white backdrop-blur-sm transition-all duration-300 hover:-translate-y-[4px] hover:bg-neon-magenta/20 hover:border-neon-magenta/60 ${color}`}
+      style={{ filter: "drop-shadow(3px 3px 0 rgba(0,0,0,0.35))", transform: "perspective(400px) rotateY(-6deg)" }}
+      onMouseEnter={e => { (e.currentTarget as HTMLAnchorElement).style.transform = "perspective(400px) rotateY(0deg) translateY(-4px)"; }}
+      onMouseLeave={e => { (e.currentTarget as HTMLAnchorElement).style.transform = "perspective(400px) rotateY(-6deg)"; }}
+    >
+      {icon}
+    </a>
+  );
+}
+
+const aboutPetals = [
+  { size: 18, style: { top: "8%",  left: "4%",  animationDuration: "7s",   animationDelay: "0s"   } },
+  { size: 14, style: { top: "15%", left: "18%", animationDuration: "9s",   animationDelay: "1.5s" } },
+  { size: 20, style: { top: "5%",  left: "40%", animationDuration: "8s",   animationDelay: "0.7s" } },
+  { size: 12, style: { top: "10%", left: "60%", animationDuration: "10s",  animationDelay: "2s"   } },
+  { size: 16, style: { top: "3%",  left: "75%", animationDuration: "7.5s", animationDelay: "0.3s" } },
+  { size: 22, style: { top: "20%", left: "85%", animationDuration: "11s",  animationDelay: "1s"   } },
+];
+
 function ContactCTA() {
   return (
-    <section className="relative py-24 px-6 overflow-hidden">
+    <section
+      id="contact"
+      className="relative py-24 px-6 overflow-hidden gradient-contact"
+    >
+      {/* Halftone overlay */}
+      <div className="halftone-bg absolute inset-0 pointer-events-none" style={{ opacity: 0.04 }} />
+
+      {/* Sakura petals */}
+      {aboutPetals.map((p, i) => (
+        <SakuraPetal key={i} size={p.size} style={p.style as React.CSSProperties} />
+      ))}
+
+      {/* Background blur shapes */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
-        <motion.div className="absolute top-8 left-[15%] w-40 h-40 rounded-full bg-hot-pink/10 blur-3xl"
-          animate={{ y: [0, -18, 0] }} transition={{ duration: 9, repeat: Infinity, ease: "easeInOut" }} />
-        <motion.div className="absolute bottom-8 right-[15%] w-48 h-48 rounded-full bg-electric-blue/10 blur-3xl"
-          animate={{ y: [0, 14, 0] }} transition={{ duration: 11, repeat: Infinity, ease: "easeInOut" }} />
+        <motion.div className="absolute top-10 left-[10%] w-48 h-48 rounded-full bg-neon-magenta/10 blur-3xl"
+          animate={{ y: [0, -20, 0], scale: [1, 1.05, 1] }}
+          transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }} />
+        <motion.div className="absolute bottom-10 right-[10%] w-56 h-56 rounded-full bg-ocean-blue/40 blur-[100px]"
+          animate={{ y: [0, 20, 0], scale: [1, 1.1, 1] }}
+          transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }} />
       </div>
 
-      <div className="mx-auto max-w-2xl text-center relative z-10">
-        <motion.div {...fadeUp(0)}>
-          <h2 className="font-display text-4xl md:text-5xl text-dark-navy dark:text-soft-white mb-3 tracking-wide">
-            Want to work together?
-          </h2>
-          <p className="font-zen text-sm text-muted-lilac tracking-widest mb-6">一緒に働きましょう</p>
-          <p className="font-body text-dark-navy/70 dark:text-soft-white/60 leading-relaxed mb-10">
-            I&apos;m always open to interesting projects, collabs, and conversations. Drop me a line — I reply fast.
+      <div className="mx-auto max-w-6xl relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-8 items-center">
+
+        {/* Left — heading + socials */}
+        <motion.div {...fadeUp(0)} className="flex flex-col text-center lg:text-left">
+
+          {/* Speech bubble heading */}
+          <div className="relative inline-block mb-6">
+            <div className="relative border-2 border-neon-magenta/60 rounded-2xl px-6 py-5 bg-vinyl-dark/40 backdrop-blur-sm">
+              <h2 className="font-display text-4xl md:text-5xl lg:text-6xl leading-tight">
+                <span style={{
+                  background: "linear-gradient(90deg, #FF2D78, #F0D040)",
+                  WebkitBackgroundClip: "text",
+                  WebkitTextFillColor: "transparent",
+                  backgroundClip: "text",
+                }}>
+                  Want to Work Together?
+                </span>
+              </h2>
+              <p className="font-zen text-base text-muted-lilac mt-2 tracking-widest">一緒に働きましょう</p>
+            </div>
+            {/* Bubble tail */}
+            <div className="absolute -bottom-[11px] left-10 w-0 h-0"
+              style={{ borderLeft: "10px solid transparent", borderRight: "10px solid transparent", borderTop: "11px solid rgba(255,45,120,0.6)" }} />
+            <div className="absolute -bottom-[8px] left-[42px] w-0 h-0"
+              style={{ borderLeft: "7px solid transparent", borderRight: "7px solid transparent", borderTop: "8px solid rgba(28,28,46,0.6)" }} />
+          </div>
+
+          <p className="font-body text-soft-white/70 text-lg max-w-md mx-auto lg:mx-0 mb-10 leading-relaxed">
+            Whether you have a wild idea, need a fresh redesign, or just want to chat — my inbox is always open.
           </p>
+
+          {/* 3D social icons */}
+          <div className="flex flex-wrap justify-center lg:justify-start gap-4">
+            <SocialLink href={profile.contact.github}   icon={<FiGithub   size={22} />} label="GitHub"   color="hover:shadow-[0_0_20px_rgba(200,168,232,0.7)]" />
+            <SocialLink href={profile.contact.linkedin} icon={<FiLinkedin size={22} />} label="LinkedIn" color="hover:shadow-[0_0_20px_rgba(80,128,240,0.7)]" />
+            <SocialLink href="https://dribbble.com"     icon={<FaDribbble size={22} />} label="Dribbble" color="hover:shadow-[0_0_20px_rgba(255,96,144,0.7)]" />
+            <SocialLink href={`mailto:${profile.contact.email}`} icon={<FiMail size={22} />} label="Email" color="hover:shadow-[0_0_20px_rgba(255,45,120,0.7)]" />
+          </div>
         </motion.div>
 
-        {/* Email CTA */}
-        <motion.div {...fadeUp(0.1)} className="flex flex-col items-center gap-4">
-          <a
-            href={`mailto:${profile.contact.email}`}
-            className="group inline-flex items-center gap-2 px-8 py-4 rounded-full bg-hot-pink text-soft-white font-display text-lg font-bold tracking-wide shadow-[0_0_20px_rgba(255,96,144,0.4)] transition-all duration-300 hover:shadow-[0_0_45px_rgba(255,96,144,0.75)] hover:scale-105"
-          >
-            Send Me a Message
-            <span className="transition-transform duration-300 group-hover:translate-x-1" aria-hidden="true">→</span>
-          </a>
-          <p className="font-mono text-xs text-muted-lilac">{profile.contact.email}</p>
+        {/* Right — manga panel form */}
+        <motion.div {...fadeUp(0.2)} className="w-full max-w-md mx-auto lg:ml-auto">
+          <div className="relative border-2 border-vinyl-dark dark:border-muted-lilac/30 p-8 md:p-10 rounded-[20px] shadow-[0_20px_60px_rgba(0,0,0,0.4)] transform rotate-1 hover:rotate-0 transition-all duration-500 bg-vinyl-dark/90 backdrop-blur-xl">
+            {/* Postmark stamp */}
+            <div className="absolute top-4 right-4 md:top-6 md:right-6 opacity-40 pointer-events-none select-none flex flex-col items-center">
+              <div className="w-12 h-16 border-2 border-dashed border-muted-lilac/50 rounded flex items-center justify-center p-1">
+                <span className="text-[10px] uppercase font-bold text-center text-muted-lilac/70 leading-tight">Place<br/>Stamp<br/>Here</span>
+              </div>
+              <div className="mt-2 w-16 h-16 border-4 border-double border-neon-magenta/30 rounded-full flex items-center justify-center rotate-[-15deg]">
+                <span className="text-[10px] font-bold text-neon-magenta/40 uppercase whitespace-nowrap">City Pop Mail</span>
+              </div>
+            </div>
+
+            <form className="flex flex-col gap-5 mt-4 md:mt-0 relative z-10" onSubmit={(e) => e.preventDefault()}>
+              <div>
+                <label htmlFor="about-name" className="sr-only">Name</label>
+                <input type="text" id="about-name" placeholder="Your Name"
+                  className="w-full px-5 py-3 rounded-full bg-soft-white/5 border border-muted-lilac/30 text-soft-white placeholder:text-soft-white/40 font-body outline-none focus:ring-2 focus:ring-neon-magenta/50 focus:border-transparent transition-all duration-300"
+                  required />
+              </div>
+              <div>
+                <label htmlFor="about-email" className="sr-only">Email</label>
+                <input type="email" id="about-email" placeholder="Your Email"
+                  className="w-full px-5 py-3 rounded-full bg-soft-white/5 border border-muted-lilac/30 text-soft-white placeholder:text-soft-white/40 font-body outline-none focus:ring-2 focus:ring-neon-magenta/50 focus:border-transparent transition-all duration-300"
+                  required />
+              </div>
+              <div>
+                <label htmlFor="about-message" className="sr-only">Message</label>
+                <textarea id="about-message" placeholder="What's on your mind?" rows={4}
+                  className="w-full px-5 py-4 rounded-3xl bg-soft-white/5 border border-muted-lilac/30 text-soft-white placeholder:text-soft-white/40 font-body outline-none focus:ring-2 focus:ring-neon-magenta/50 focus:border-transparent transition-all duration-300 resize-none"
+                  required />
+              </div>
+              <div className="flex items-center gap-3 mt-2">
+                <button type="submit"
+                  className="hover-comic-shake flex-1 py-3.5 bg-neon-magenta text-soft-white font-body font-bold text-lg rounded-full shadow-lg transition-shadow duration-300 hover:shadow-[0_0_30px_rgba(255,45,120,0.6)] focus:outline-none focus:ring-4 focus:ring-neon-magenta/30 flex items-center justify-center gap-2">
+                  Send Message
+                  <span className="text-xl leading-none mb-[2px]">✉</span>
+                </button>
+                <MangaFace />
+              </div>
+            </form>
+          </div>
         </motion.div>
 
-        {/* Social links */}
-        <motion.div {...fadeUp(0.2)} className="flex justify-center gap-4 mt-8">
-          <a href={profile.contact.github} target="_blank" rel="noopener noreferrer"
-            className="px-5 py-2.5 rounded-full border-2 border-vinyl-dark/30 dark:border-muted-lilac/30 font-body text-sm text-dark-navy/70 dark:text-muted-lilac hover:border-electric-blue/60 hover:text-electric-blue hover:shadow-[0_0_14px_rgba(80,128,240,0.25)] transition-all duration-300">
-            GitHub
-          </a>
-          <a href={profile.contact.linkedin} target="_blank" rel="noopener noreferrer"
-            className="px-5 py-2.5 rounded-full border-2 border-vinyl-dark/30 dark:border-muted-lilac/30 font-body text-sm text-dark-navy/70 dark:text-muted-lilac hover:border-sky-cyan/60 hover:text-sky-cyan hover:shadow-[0_0_14px_rgba(136,216,232,0.25)] transition-all duration-300">
-            LinkedIn
-          </a>
-        </motion.div>
-
-        {/* Link back to home contact section */}
-        <motion.div {...fadeUp(0.25)} className="mt-6">
-          <Link href="/#contact"
-            className="font-body text-sm text-muted-lilac hover:text-hot-pink transition-colors duration-200 underline underline-offset-4">
-            Or fill out the contact form ↓
-          </Link>
-        </motion.div>
       </div>
     </section>
   );

@@ -149,7 +149,7 @@ export default function Hero() {
             variants={wordVariants}
             className="font-body text-xl md:text-2xl font-bold text-soft-white/90 mb-4"
           >
-            Hello, I'm [Your Name] 👋
+            Hello, I'm Tawan 👋
           </motion.span>
 
           {/* Kinetic Typography Title */}
