@@ -1,19 +1,9 @@
 "use client";
 
-import { useState } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { projects, categoryLabels } from "@/data/projects";
 import type { Project } from "@/data/projects";
-
-const filters = [
-  { key: "all", label: "All" },
-  { key: "uxui", label: "UX/UI" },
-  { key: "programming", label: "Programming" },
-  { key: "ci-art", label: "CI Art" },
-] as const;
-
-type FilterKey = (typeof filters)[number]["key"];
 
 const categoryColor: Record<Project["category"], string> = {
   uxui: "text-sakura-pink",
@@ -45,14 +35,9 @@ function Starburst() {
   );
 }
 
+const previewProjects = projects.slice(0, 3);
+
 export default function Works() {
-  const [active, setActive] = useState<FilterKey>("all");
-
-  const filtered =
-    active === "all"
-      ? projects
-      : projects.filter((p) => p.category === active);
-
   return (
     <section id="works" className="relative py-24 px-6 overflow-hidden">
       {/* Background decorative shapes */}
@@ -72,7 +57,7 @@ export default function Works() {
       <div className="mx-auto max-w-6xl relative z-10">
         {/* Section heading with starburst */}
         <motion.div
-          className="text-center mb-4 relative"
+          className="text-center mb-16 relative"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-80px" }}
@@ -89,40 +74,10 @@ export default function Works() {
           </p>
         </motion.div>
 
-        {/* Filter tabs — manga chapter style */}
-        <motion.div
-          className="flex flex-wrap justify-center gap-3 mb-16 mt-8"
-          initial={{ opacity: 0, y: 12 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-60px" }}
-          transition={{ duration: 0.7, delay: 0.15, ease: [0.16, 1, 0.3, 1] as const }}
-        >
-          {filters.map((f) => (
-            <button
-              key={f.key}
-              onClick={() => setActive(f.key)}
-              className={`relative px-5 py-2 rounded-full font-body text-sm font-bold transition-all duration-300 ${
-                active === f.key
-                  ? "bg-neon-magenta text-white border-2 border-deep-black shadow-[0_0_20px_rgba(255,45,120,0.4)]"
-                  : "bg-transparent text-dark-navy/60 dark:text-muted-lilac border-2 border-vinyl-dark/30 dark:border-muted-lilac/40 hover:border-neon-magenta/60 hover:text-dark-navy dark:hover:text-soft-white hover:shadow-[0_0_12px_rgba(255,45,120,0.2)]"
-              }`}
-            >
-              {f.label}
-              {active === f.key && (
-                <motion.span
-                  layoutId="activeFilter"
-                  className="absolute inset-0 rounded-full bg-neon-magenta -z-10"
-                  transition={{ type: "spring", stiffness: 380, damping: 30 }}
-                />
-              )}
-            </button>
-          ))}
-        </motion.div>
-
-        {/* Project cards */}
+        {/* Project cards — first 3 only */}
         <div className="flex flex-col gap-20">
           <AnimatePresence mode="popLayout">
-            {filtered.map((project, idx) => (
+            {previewProjects.map((project, idx) => (
               <ProjectCard
                 key={project.slug}
                 project={project}
@@ -133,6 +88,31 @@ export default function Works() {
             ))}
           </AnimatePresence>
         </div>
+
+        {/* "See More Projects" CTA */}
+        <motion.div
+          className="flex flex-col items-center mt-20 gap-2"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-40px" }}
+          transition={{ duration: 0.7, delay: 0.3, ease: [0.16, 1, 0.3, 1] as const }}
+        >
+          <Link
+            href="/projects"
+            className="group inline-flex items-center gap-2 px-8 py-4 rounded-full bg-neon-magenta text-white font-display text-lg font-bold tracking-wide shadow-[0_0_20px_rgba(255,45,120,0.4)] transition-all duration-300 hover:shadow-[0_0_45px_rgba(255,45,120,0.75)] hover:scale-105"
+          >
+            See More Projects
+            <span
+              className="transition-transform duration-300 group-hover:translate-x-1"
+              aria-hidden="true"
+            >
+              →
+            </span>
+          </Link>
+          <span className="font-zen text-xs text-muted-lilac tracking-widest mt-1">
+            すべてのプロジェクト
+          </span>
+        </motion.div>
       </div>
     </section>
   );

@@ -243,9 +243,9 @@ export default function ActivitiesPage() {
           transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
         >
           <h1 className="font-display text-5xl md:text-7xl tracking-widest text-dark-navy dark:text-soft-white">
-            ACTIVITIES
+            ALL ACTIVITIES
           </h1>
-          <p className="font-zen text-base text-muted-lilac mt-1 tracking-widest">活動</p>
+          <p className="font-zen text-base text-muted-lilac mt-1 tracking-widest">すべての活動</p>
           <p className="font-body text-sm text-muted-lilac/70 mt-2">
             Camps, Workshops &amp; Adventures
           </p>
@@ -253,7 +253,7 @@ export default function ActivitiesPage() {
 
         {/* ── Filter tabs ── */}
         <motion.div
-          className="flex flex-wrap justify-center gap-3 mt-8 mb-12"
+          className="flex flex-wrap justify-center gap-3 mt-8 mb-6"
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
@@ -279,6 +279,17 @@ export default function ActivitiesPage() {
             </button>
           ))}
         </motion.div>
+
+        {/* ── Count ── */}
+        <motion.p
+          key={`count-${active}`}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.3 }}
+          className="text-center font-mono text-xs text-muted-lilac mb-8 tracking-widest"
+        >
+          Showing {filtered.length} of {activities.length} activities
+        </motion.p>
 
         {/* ── Card grid ── */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">

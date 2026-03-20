@@ -4,6 +4,7 @@ import SkillMarquee from "@/components/SkillMarquee";
 import About from "@/components/About";
 
 const Works = dynamic(() => import("@/components/Works"));
+const ActivitiesPreview = dynamic(() => import("@/components/ActivitiesPreview"));
 const Contact = dynamic(() => import("@/components/Contact"));
 
 export default function Home() {
@@ -14,6 +15,7 @@ export default function Home() {
         <SkillMarquee />
         <About />
         <Works />
+        <ActivitiesPreview />
         <Contact />
       </main>
     </>

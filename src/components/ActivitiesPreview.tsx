@@ -1,0 +1,214 @@
+"use client";
+
+import Link from "next/link";
+import { motion } from "framer-motion";
+
+/* ── Types & data (inline — same source of truth as activities page) ── */
+type ActivityType = "camp" | "workshop" | "hackathon" | "training" | "volunteer";
+
+interface Activity {
+  id: string;
+  name: string;
+  type: ActivityType;
+  date: string;
+  gradient: string;
+}
+
+const activities: Activity[] = [
+  {
+    id: "itcamp21",
+    name: "ITCAMP21 — Unreal Engine TD",
+    type: "camp",
+    date: "Apr 28 – May 1, 2025",
+    gradient: "from-mint/40 to-sky-cyan/30",
+  },
+  {
+    id: "openhouse2025",
+    name: "IT Openhouse 2025 — Roblox Journey Workshop",
+    type: "workshop",
+    date: "Nov 28 – 29, 2025",
+    gradient: "from-sky-cyan/40 to-lavender/30",
+  },
+  {
+    id: "nsc2023",
+    name: "National Software Contest 2023",
+    type: "hackathon",
+    date: "2023",
+    gradient: "from-neon-magenta/25 to-deep-purple/30",
+  },
+  {
+    id: "nsc2022",
+    name: "National Software Contest 2022",
+    type: "hackathon",
+    date: "2022",
+    gradient: "from-retro-yellow/25 to-peach/30",
+  },
+];
+
+const typeBadge: Record<ActivityType, string> = {
+  camp:      "bg-mint text-dark-navy",
+  workshop:  "bg-sky-cyan text-dark-navy",
+  hackathon: "bg-neon-magenta text-white",
+  training:  "bg-retro-yellow text-deep-black",
+  volunteer: "bg-sakura-pink text-deep-purple",
+};
+
+const typeLabel: Record<ActivityType, string> = {
+  camp:      "Camp",
+  workshop:  "Workshop",
+  hackathon: "Hackathon",
+  training:  "Training",
+  volunteer: "Volunteer",
+};
+
+const rotations = ["rotate-[-2deg]", "rotate-[1deg]", "rotate-[2deg]", "rotate-[-1deg]"];
+
+/* ── Polaroid preview card ── */
+function PolaroidCard({ activity, index }: { activity: Activity; index: number }) {
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 40, scale: 0.95 }}
+      whileInView={{ opacity: 1, y: 0, scale: 1 }}
+      viewport={{ once: true, margin: "-40px" }}
+      transition={{ duration: 0.55, delay: index * 0.1, ease: [0.16, 1, 0.3, 1] }}
+      className={`group ${rotations[index % 4]} hover:rotate-0 hover:-translate-y-2 transition-all duration-300 shrink-0 w-56 md:w-auto`}
+      style={{ willChange: "transform" }}
+    >
+      {/* Polaroid frame */}
+      <div className="bg-soft-white dark:bg-vinyl-dark/90 p-3 rounded-lg shadow-lg hover:shadow-[0_12px_32px_rgba(80,128,240,0.3)] transition-shadow duration-300">
+        {/* Photo area */}
+        <div className={`relative aspect-video rounded-md overflow-hidden bg-gradient-to-br ${activity.gradient}`}>
+          <div className="absolute inset-0 flex items-center justify-center">
+            <span className="font-display text-5xl text-dark-navy/20 select-none">
+              {activity.name[0]}
+            </span>
+          </div>
+          {/* Halftone on hover */}
+          <div className="halftone-bg absolute inset-0 opacity-0 group-hover:opacity-[0.2] transition-opacity duration-500 pointer-events-none" />
+        </div>
+
+        {/* Caption */}
+        <div className="pt-3 pb-1 px-1 flex flex-col gap-1.5">
+          <div className="flex items-start justify-between gap-2">
+            <p className="font-body font-bold text-sm text-dark-navy dark:text-sakura-white leading-snug">
+              {activity.name}
+            </p>
+            <span className={`shrink-0 text-[10px] font-bold px-2 py-0.5 rounded-full ${typeBadge[activity.type]}`}>
+              {typeLabel[activity.type]}
+            </span>
+          </div>
+          <p className="font-mono text-xs text-muted-lilac">{activity.date}</p>
+        </div>
+      </div>
+    </motion.div>
+  );
+}
+
+/* ── Decorative starburst ── */
+function Starburst({ size, className }: { size: number; className?: string }) {
+  return (
+    <svg
+      viewBox="0 0 100 100"
+      width={size}
+      height={size}
+      className={`absolute pointer-events-none select-none ${className ?? ""}`}
+      aria-hidden="true"
+    >
+      {Array.from({ length: 12 }).map((_, i) => {
+        const a = (i * 360) / 12;
+        const r = (a * Math.PI) / 180;
+        return (
+          <line
+            key={i}
+            x1={50 + 18 * Math.cos(r)} y1={50 + 18 * Math.sin(r)}
+            x2={50 + 48 * Math.cos(r)} y2={50 + 48 * Math.sin(r)}
+            stroke="#5080F0" strokeWidth="3" strokeOpacity="0.35"
+          />
+        );
+      })}
+      <circle cx="50" cy="50" r="14" fill="#5080F0" opacity="0.15" />
+    </svg>
+  );
+}
+
+/* ── Section ── */
+export default function ActivitiesPreview() {
+  return (
+    <section id="activities-preview" className="relative py-24 px-6 overflow-hidden">
+      {/* Comic panel divider at top */}
+      <div className="absolute top-0 left-0 w-full pointer-events-none">
+        <div className="w-full h-1 bg-gradient-to-r from-transparent via-electric-blue/30 to-transparent" />
+        <div className="halftone-bg w-full h-8 opacity-[0.06]" />
+      </div>
+
+      {/* Decorative elements */}
+      <Starburst size={70} className="top-16 right-[7%] opacity-60 rotate-12" />
+      <Starburst size={50} className="bottom-32 left-[4%] opacity-45 -rotate-6" />
+
+      <div className="absolute inset-0 pointer-events-none overflow-hidden">
+        <motion.div
+          className="absolute top-24 left-[12%] w-28 h-28 rounded-full bg-electric-blue/10 blur-3xl"
+          animate={{ y: [0, -16, 0] }}
+          transition={{ duration: 9, repeat: Infinity, ease: "easeInOut" }}
+        />
+        <motion.div
+          className="absolute bottom-24 right-[10%] w-36 h-36 rounded-full bg-lavender/10 blur-3xl"
+          animate={{ y: [0, 14, 0] }}
+          transition={{ duration: 11, repeat: Infinity, ease: "easeInOut" }}
+        />
+      </div>
+
+      <div className="mx-auto max-w-6xl relative z-10">
+
+        {/* Section heading */}
+        <motion.div
+          className="text-center mb-14"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-80px" }}
+          transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+        >
+          <h2 className="font-display text-4xl md:text-5xl tracking-widest text-dark-navy dark:text-soft-white transition-colors duration-300">
+            ACTIVITIES ✦
+          </h2>
+          <p className="font-zen text-base text-muted-lilac mt-1 tracking-widest">活動</p>
+        </motion.div>
+
+        {/* Cards — horizontal scroll on mobile, grid on desktop */}
+        <div className="flex md:grid md:grid-cols-4 gap-6 overflow-x-auto md:overflow-visible pb-4 md:pb-0 snap-x snap-mandatory md:snap-none -mx-6 px-6 md:mx-0 md:px-0">
+          {activities.map((activity, idx) => (
+            <div key={activity.id} className="snap-start">
+              <PolaroidCard activity={activity} index={idx} />
+            </div>
+          ))}
+        </div>
+
+        {/* "See More Activities" CTA */}
+        <motion.div
+          className="flex flex-col items-center mt-16 gap-2"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-40px" }}
+          transition={{ duration: 0.7, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
+        >
+          <Link
+            href="/activities"
+            className="group inline-flex items-center gap-2 px-8 py-4 rounded-full bg-electric-blue text-white font-display text-lg font-bold tracking-wide shadow-[0_0_20px_rgba(80,128,240,0.4)] transition-all duration-300 hover:shadow-[0_0_45px_rgba(80,128,240,0.75)] hover:scale-105"
+          >
+            See More Activities
+            <span
+              className="transition-transform duration-300 group-hover:translate-x-1"
+              aria-hidden="true"
+            >
+              →
+            </span>
+          </Link>
+          <span className="font-zen text-xs text-muted-lilac tracking-widest mt-1">
+            すべての活動
+          </span>
+        </motion.div>
+
+      </div>
+    </section>
+  );
+}
