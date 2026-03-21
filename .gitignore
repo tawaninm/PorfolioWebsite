@@ -39,3 +39,21 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# personal/sensitive data files
+my-profile.md
+Project_Activity_data.md
+*.private.md
+secrets/
+private/
+
+# Claude memory and context files
+memory/
+MEMORY.md
+*.claude-context
+
+# API keys and credentials
+*.key
+*.secret
+credentials.json
+config.local.*
