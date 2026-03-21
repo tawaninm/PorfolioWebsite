@@ -7,7 +7,7 @@ import { FiMapPin, FiMail, FiPhone, FiGlobe, FiDownload, FiLinkedin } from "reac
 /* ─────────────────────────────────────────
    DATA
 ───────────────────────────────────────── */
-const RESUME_DRIVE_URL = "https://drive.google.com/file/d/1wTeEf2vm-o6X5sdmSKHd00QszzaHoJsh/view?usp=sharing"; // TODO: แทนที่ YOUR_FILE_ID ด้วย ID ไฟล์จาก Google Drive
+const RESUME_DRIVE_URL = "https://drive.google.com/file/d/18nSkCZXM5fqqbfZys5cT3O3ArMji6Vg3/view?usp=sharing"; // TODO: แทนที่ YOUR_FILE_ID ด้วย ID ไฟล์จาก Google Drive
 
 const stats = [
   { label: "UX/UI", pct: 80, from: "#FF2D78", to: "#F06848" },
