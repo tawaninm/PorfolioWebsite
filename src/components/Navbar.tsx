@@ -12,6 +12,7 @@ const navLinks = [
   { label: "Home",       href: "/" },
   { label: "About",      href: "/about" },
   { label: "Project",    href: "/projects" },
+  { label: "Mini Work",  href: "/mini-work" },
   { label: "Activities", href: "/activities" },
   { label: "Resume",     href: "/resume" },
 ];
@@ -20,6 +21,7 @@ const navLinks = [
 function resolveActiveFromPath(pathname: string): string | null {
   if (pathname === "/about")                return "/about";
   if (pathname.startsWith("/projects"))     return "/projects";
+  if (pathname.startsWith("/mini-work"))    return "/mini-work";
   if (pathname === "/activities")           return "/activities";
   if (pathname === "/resume")               return "/resume";
   if (pathname === "/")                     return "/";
