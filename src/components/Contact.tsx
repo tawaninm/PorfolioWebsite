@@ -67,16 +67,16 @@ function MangaFace() {
 
 /* ---- Sakura petals config ---- */
 const petals = [
-  { size: 18, style: { top: "8%",  left: "4%",  animationDuration: "7s",  animationDelay: "0s"   } },
-  { size: 14, style: { top: "15%", left: "18%", animationDuration: "9s",  animationDelay: "1.5s" } },
-  { size: 20, style: { top: "5%",  left: "40%", animationDuration: "8s",  animationDelay: "0.7s" } },
-  { size: 12, style: { top: "10%", left: "60%", animationDuration: "10s", animationDelay: "2s"   } },
-  { size: 16, style: { top: "3%",  left: "75%", animationDuration: "7.5s",animationDelay: "0.3s" } },
-  { size: 22, style: { top: "20%", left: "85%", animationDuration: "11s", animationDelay: "1s"   } },
-  { size: 13, style: { top: "0%",  left: "92%", animationDuration: "6.5s",animationDelay: "2.5s" } },
-  { size: 17, style: { top: "12%", left: "50%", animationDuration: "9.5s",animationDelay: "0.5s" } },
-  { size: 15, style: { top: "6%",  left: "30%", animationDuration: "8.5s",animationDelay: "3s"   } },
-  { size: 11, style: { top: "18%", left: "70%", animationDuration: "10.5s",animationDelay:"1.8s" } },
+  { size: 18, style: { top: "8%", left: "4%", animationDuration: "7s", animationDelay: "0s" } },
+  { size: 14, style: { top: "15%", left: "18%", animationDuration: "9s", animationDelay: "1.5s" } },
+  { size: 20, style: { top: "5%", left: "40%", animationDuration: "8s", animationDelay: "0.7s" } },
+  { size: 12, style: { top: "10%", left: "60%", animationDuration: "10s", animationDelay: "2s" } },
+  { size: 16, style: { top: "3%", left: "75%", animationDuration: "7.5s", animationDelay: "0.3s" } },
+  { size: 22, style: { top: "20%", left: "85%", animationDuration: "11s", animationDelay: "1s" } },
+  { size: 13, style: { top: "0%", left: "92%", animationDuration: "6.5s", animationDelay: "2.5s" } },
+  { size: 17, style: { top: "12%", left: "50%", animationDuration: "9.5s", animationDelay: "0.5s" } },
+  { size: 15, style: { top: "6%", left: "30%", animationDuration: "8.5s", animationDelay: "3s" } },
+  { size: 11, style: { top: "18%", left: "70%", animationDuration: "10.5s", animationDelay: "1.8s" } },
 ];
 
 export default function Contact() {
@@ -160,9 +160,9 @@ export default function Contact() {
 
           {/* Social Links */}
           <div className="flex flex-wrap justify-center lg:justify-start gap-4">
-            <SocialLink href="https://github.com/tawaninm"                                          icon={<FiGithub size={22} />}   label="GitHub"   color="hover:shadow-[0_0_20px_rgba(200,168,232,0.7)]" />
-            <SocialLink href="https://www.linkedin.com/in/thanatpat-promthong-9084a4212"           icon={<FiLinkedin size={22} />} label="LinkedIn" color="hover:shadow-[0_0_20px_rgba(80,128,240,0.7)]" />
-            <SocialLink href="mailto:tawaninm13@gmail.com"                                         icon={<FiMail size={22} />}     label="Email"    color="hover:shadow-[0_0_20px_rgba(255,45,120,0.7)]" />
+            <SocialLink href="https://github.com/tawaninm" icon={<FiGithub size={22} />} label="GitHub" color="hover:shadow-[0_0_20px_rgba(200,168,232,0.7)]" />
+            <SocialLink href="https://www.linkedin.com/in/thanatpat-promthong-9084a4212" icon={<FiLinkedin size={22} />} label="LinkedIn" color="hover:shadow-[0_0_20px_rgba(80,128,240,0.7)]" />
+            <SocialLink href="mailto:tawaninm13@gmail.com" icon={<FiMail size={22} />} label="Email" color="hover:shadow-[0_0_20px_rgba(255,45,120,0.7)]" />
           </div>
         </FadeSection>
 
@@ -181,7 +181,7 @@ export default function Contact() {
             {/* Postmark / Stamp */}
             <div className="absolute top-4 right-4 md:top-6 md:right-6 opacity-40 pointer-events-none select-none flex flex-col items-center">
               <div className="w-12 h-16 border-2 border-dashed border-muted-lilac/50 rounded flex items-center justify-center p-1">
-                <span className="text-[10px] uppercase font-bold text-center text-muted-lilac/70 leading-tight">Place<br/>Stamp<br/>Here</span>
+                <span className="text-[10px] uppercase font-bold text-center text-muted-lilac/70 leading-tight">Place<br />Stamp<br />Here</span>
               </div>
               <div className="mt-2 w-16 h-16 border-4 border-double border-neon-magenta/30 rounded-full flex items-center justify-center rotate-[-15deg]">
                 <span className="text-[10px] font-bold text-neon-magenta/40 uppercase whitespace-nowrap">City Pop Mail</span>

@@ -156,7 +156,7 @@ export default function Hero() {
           >
             <div className="inline-block px-6 py-2 rounded-full bg-lavender/20 border border-lavender/40 backdrop-blur-sm">
               <span className="font-body text-sm font-bold tracking-wider text-soft-white uppercase">
-                1+ Years · Coding Tutor · Game Developer · UI/UX Designer
+                1+ Years · Coding Tutor · Game Developer · UX/UI Designer
               </span>
             </div>
             {/* Japanese subtitle */}
@@ -170,7 +170,7 @@ export default function Hero() {
             variants={wordVariants}
             className="font-body text-lg md:text-xl text-soft-white/70 max-w-md mb-10 leading-relaxed"
           >
-            I am Coding tutor, Game Developer and UI/UX Designer. I am a student at the School of Information Technology, KMITL. I spend time learning new things and developing my skills to make tools that entertain and help life easier.
+            I am Coding tutor, Game Developer and UX/UI Designer. I am a student at the School of Information Technology, KMITL. I spend time learning new things and developing my skills to make tools that entertain and help life easier.
           </motion.p>
 
           {/* CTA Buttons */}

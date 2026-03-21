@@ -1,106 +1,112 @@
 "use client";
 
 import { useState, useCallback, useEffect } from "react";
-import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { FiGithub, FiLinkedin, FiMail } from "react-icons/fi";
-import { FaDribbble } from "react-icons/fa";
 
 /* ═══════════════════════════════════════════
    DATA  (edit src/data/my-profile.md to update)
 ═══════════════════════════════════════════ */
 
 const profile = {
-  name: "Your Name",
-  tagline: "Designer · Developer · Creator",
+  name: "Thanatpat Promthong",
+  tagline: "Coding Tutor · Game Developer · UX/UI Designer",
   location: "Bangkok, Thailand",
   bio: [
-    "I'm a multidisciplinary designer and developer who loves blending thoughtful UX, clean code, and city pop aesthetics. I build digital products that feel alive — from concept to pixel-perfect delivery.",
-    "Currently studying at the School of Information Technology, KMITL. I spend my days designing interfaces, writing TypeScript, and daydreaming about vaporwave sunsets.",
-    "When I'm not at my desk, you'll find me rewatching anime, exploring game mechanics, or hunting for the perfect lo-fi playlist to code to.",
+    "By bridging the gap between the user's needs and the developer's architecture, I channel my technical skills into creating impactful programs and games.",
+    "Currently 2nd year student at the School of Information Technology, KMITL. Major in Multimedia and Game Technology.",
+    "I am constantly eager to learn new skills and love participating in campus activities. While pursuing my degree, I actively seek hands-on experience—balancing my time between tutoring and study.",
   ],
   quotes: [
-    { text: "Design is music you can see.", bg: "bg-lavender/20", rotate: "-rotate-1" },
-    { text: "Every pixel is a decision. Make it count.", bg: "bg-sky-cyan/20", rotate: "rotate-1" },
-    { text: "The best interface is the one that disappears.", bg: "bg-sakura-pink/20", rotate: "-rotate-[0.5deg]" },
+    { text: "stay hungry stay foolish  —Steve Jobs", bg: "bg-lavender/20", rotate: "-rotate-1" },
+    { text: "Live as if you were to die tomorrow. Learn as if you were to live forever. —Mahatma Gandhi", bg: "bg-sky-cyan/20", rotate: "rotate-1" },
+    { text: "What is not started today is never finished tomorrow. —Johann Wolfgang von Goethe", bg: "bg-sakura-pink/20", rotate: "-rotate-[0.5deg]" },
   ],
   gallery: [
-    { caption: "At the studio",   gradient: "from-lavender/40 to-sakura-pink/30" },
-    { caption: "Workshop day",    gradient: "from-sky-cyan/40 to-mint/30" },
-    { caption: "Hackathon night", gradient: "from-neon-magenta/25 to-deep-purple/30" },
-    { caption: "Team vibes",      gradient: "from-retro-yellow/25 to-peach/30" },
-    { caption: "Sunset coding",   gradient: "from-mint/35 to-sky-cyan/25" },
-    { caption: "Campus life",     gradient: "from-sakura-pink/30 to-lavender/25" },
+    { src: "/images/gallery/Profile.jpg", caption: "Profile", gradient: "from-lavender/40 to-sakura-pink/30" },
+    { src: "/images/gallery/ITKMITL-OpenHouse.jpg", caption: "2567 Open house IT KMITL", gradient: "from-sky-cyan/40 to-mint/30" },
+    { src: "/images/gallery/ITCamp21_Day02_staff.jpg", caption: "ITCamp21 staff", gradient: "from-neon-magenta/25 to-deep-purple/30" },
+    { src: "/images/gallery/Life style.jpg", caption: "2568 Open house IT KMITL", gradient: "from-retro-yellow/25 to-peach/30" },
+    { src: "/images/gallery/catTorawaheng.jpg", caption: "Cat Tora wanHeng", gradient: "from-mint/35 to-sky-cyan/25" },
+    { src: "/images/gallery/Acane.jpg", caption: "Acane world", gradient: "from-sakura-pink/30 to-lavender/25" },
+    { src: "/images/gallery/Japanpro.jpg", caption: "Japan lover", gradient: "from-sunset-gold/30 to-peach/25" },
   ],
   education: [
     {
-      year: "2023 – Present",
+      year: "2024 – Present",
       school: "King Mongkut's Institute of Technology Ladkrabang (KMITL)",
-      degree: "B.Sc. Information Technology",
-      desc: "Majoring in IT with focus on software engineering, UX design, and game development. Maintaining strong GPA while leading extracurricular tech events.",
+      degree: "Bachelor of Science Program in Information Technology",
+      desc: "Module: Multimedia & Game Development. Majoring in IT with focus on UX/UI design, and game development.",
     },
     {
-      year: "2020 – 2023",
-      school: "Your High School",
-      degree: "Science-Math Program",
-      desc: "Participated in national software contests and developed a passion for programming and design.",
+      year: "2017 – 2023",
+      school: "Rayongwittayakom School",
+      degree: "Computer Math and Science Program (Wit-com)",
+      desc: "Participated in national software contests and developed a passion for programming and game development.",
     },
   ],
   experience: [
     {
+      year: "2026 – Present",
+      role: "Part-time Tutor — Coding",
+      company: "Code Genius Emquartier",
+      desc: "Instructed group classes of primary school students in basic computer skills, delivering lessons in both Thai and English.",
+      tech: ["Scratch", "Python", "Microbit"],
+    },
+    {
+      year: "2026",
+      role: "Part-time TA — Java OOP",
+      company: "School of Information Technology, KMITL",
+      desc: "Assisting the course instructor for Object-Oriented Programming (OOP) by evaluating weekly laboratory assignments and posing conceptual questions to students to reinforce their understanding and facilitate further learning.",
+      tech: ["OOP Java"],
+    },
+    {
+      year: "2024 – 2026",
+      role: "Part-time Tutor — Math, Physics & Coding",
+      company: "Login Learning",
+      desc: "Managed student projects for competitions such as national software contests and portfolio projects for university applications. Taught the Godot game engine and mathematics to junior and senior high school students.",
+      tech: ["Godot Engine", "Math", "Physics"],
+    },
+    {
+      year: "2025",
+      role: "Part-time Book Fair Staff",
+      company: "Phoenix Next",
+      desc: "Worked as booth staff responsible for preparing and arranging book displays. Managed cashier duties, processed payments, and assisted with booth teardown at the end of the event.",
+      tech: [],
+    },
+    {
       year: "2024",
-      role: "Senior UX Designer",
-      company: "Company A",
-      desc: "Led end-to-end product design for three flagship products. Established a cross-platform design system used by 10+ engineers.",
-      tech: ["Figma", "FigJam", "Maze", "Notion", "Lottie"],
-    },
-    {
-      year: "2023",
-      role: "Frontend Developer",
-      company: "Company B",
-      desc: "Built responsive, accessible interfaces with React and TypeScript. Collaborated closely with design teams to translate pixel-perfect specs into production-ready components.",
-      tech: ["React", "TypeScript", "Next.js", "Tailwind CSS", "Framer Motion"],
-    },
-    {
-      year: "2022",
-      role: "CI Artist & Designer",
-      company: "Company C",
-      desc: "Created corporate identity materials, illustration assets, and print collateral. Developed brand guidelines and mascot characters.",
-      tech: ["Procreate", "Adobe Illustrator", "Photoshop", "InDesign"],
-    },
-    {
-      year: "2021",
-      role: "Junior Designer",
-      company: "Company D",
-      desc: "Designed marketing visuals, social media assets, and UI wireframes. Gained foundational skills in user research, prototyping, and design handoff.",
-      tech: ["Figma", "Photoshop", "Illustrator", "Notion"],
+      role: "Part-time Book Fair Staff",
+      company: "Luckpim",
+      desc: "Worked as booth staff responsible for preparing and arranging book displays. Managed cashier duties, processed payments, and assisted with booth teardown at the end of the event.",
+      tech: [],
     },
   ],
   anime: [
-    { title: "Bocchi the Rock!", genre: "Slice of Life / Music",  gradient: "from-sakura-pink/40 to-lavender/30" },
-    { title: "Yuru Camp",        genre: "Slice of Life",           gradient: "from-mint/40 to-sky-cyan/30" },
-    { title: "Cyberpunk Edgerunners", genre: "Sci-Fi / Action",   gradient: "from-neon-magenta/30 to-deep-purple/40" },
-    { title: "K-On!",            genre: "Slice of Life / Music",  gradient: "from-retro-yellow/30 to-peach/30" },
-    { title: "Made in Abyss",    genre: "Adventure / Fantasy",    gradient: "from-sky-cyan/30 to-ocean-blue/40" },
-    { title: "Vinland Saga",     genre: "Historical / Action",    gradient: "from-sunset-gold/30 to-peach/40" },
+    { title: "Full Metal Alchemist", genre: "Adventure / Fantasy", gradient: "from-sakura-pink/40 to-lavender/30", src: "/images/gallery/fullmetal.jpg" },
+    { title: "Frieren: Beyond Journey's End", genre: "Adventure / Fantasy", gradient: "from-mint/40 to-sky-cyan/30", src: "/images/gallery/Frieren Beyond Journeys End.jpg" },
+    { title: "Demon Slayer: Kimetsu no Yaiba", genre: "Action / Adventure", gradient: "from-neon-magenta/30 to-deep-purple/40", src: "/images/gallery/Demon SlayerKimetsu no Yaiba.jpg" },
+    { title: "Delicious in Dungeon", genre: "Adventure / Fantasy", gradient: "from-retro-yellow/30 to-peach/30", src: "/images/gallery/Delicious in Dungeon.jpg" },
+    { title: "86 EIGHTY-SIX", genre: "Sci-Fi / Drama", gradient: "from-sky-cyan/30 to-ocean-blue/40", src: "/images/gallery/86 EIGHTY-SIX.jpg" },
+    { title: "The Apothecary Diaries", genre: "Mystery / Historical", gradient: "from-sunset-gold/30 to-peach/40", src: "/images/gallery/The Apothecary Diaries.jpg" },
   ],
   games: [
-    { title: "Hollow Knight",   genre: "Metroidvania",     gradient: "from-deep-purple/50 to-lavender/20" },
-    { title: "Stardew Valley",  genre: "Simulation / RPG", gradient: "from-mint/40 to-retro-yellow/25" },
-    { title: "Celeste",         genre: "Platformer",       gradient: "from-sakura-pink/35 to-sky-cyan/30" },
-    { title: "Hades",           genre: "Roguelite",        gradient: "from-coral-red/30 to-neon-magenta/25" },
-    { title: "Disco Elysium",   genre: "RPG / Detective",  gradient: "from-ocean-blue/40 to-muted-lilac/30" },
-    { title: "Unreal Engine Dev", genre: "Game Dev",       gradient: "from-electric-blue/30 to-sky-cyan/25" },
+    { title: "Goddess of Victory: Nikke", genre: "Action RPG", gradient: "from-deep-purple/50 to-lavender/20", src: "/images/gallery/nikke.jpg" },
+    { title: "League of Legends Wild Rift", genre: "MOBA", gradient: "from-mint/40 to-retro-yellow/25", src: "/images/gallery/league of legends wild rift.jpg" },
+    { title: "Wuthering Waves", genre: "Action RPG", gradient: "from-sakura-pink/35 to-sky-cyan/30", src: "/images/gallery/wuthering waves.png" },
+    { title: "Stardew Valley", genre: "Simulation / RPG", gradient: "from-coral-red/30 to-neon-magenta/25", src: "/images/gallery/Stardew Valley.jpg" },
+    { title: "Golden Spatula", genre: "Auto Battler", gradient: "from-ocean-blue/40 to-muted-lilac/30", src: "/images/gallery/Goden spatula.jpg" },
+    { title: "Zenless Zone Zero", genre: "Action RPG", gradient: "from-electric-blue/30 to-sky-cyan/25", src: "/images/gallery/Zenless zone zero.jpg" },
   ],
   otherHobbies: [
-    { title: "City Pop & Music",     emoji: "🎵", desc: "Curating playlists of 80s Japanese city pop and vaporwave. Mariya Takeuchi is a permanent resident of my Spotify.", gradient: "from-lavender/30 to-sakura-pink/25" },
-    { title: "Digital Illustration", emoji: "🎨", desc: "Drawing character art and UI concepts in Procreate. Blending anime aesthetics with product design.", gradient: "from-sky-cyan/30 to-mint/25" },
-    { title: "Coffee & Cafés",       emoji: "☕", desc: "Hunting for Bangkok's best specialty coffee shops. A good café doubles as a perfect remote office.", gradient: "from-sunset-gold/30 to-peach/25" },
+    { title: "J-pop & K-pop Music", emoji: "🎵", desc: "I listen to anime opening and ending songs and K-pop. Always finding new tracks from anime and artist playlists.", gradient: "from-lavender/30 to-sakura-pink/25" },
+    { title: "Read Manga & Novels", emoji: "📖", desc: "I read Japanese manga, Korean manhwa, comic novels, productive books, and crime novels.", gradient: "from-sky-cyan/30 to-mint/25" },
+    { title: "Coffee & Cafés", emoji: "☕", desc: "Hunting for Bangkok's best specialty coffee shops. A good café doubles as a perfect remote office.", gradient: "from-sunset-gold/30 to-peach/25" },
   ],
   contact: {
-    email: "your@email.com",
-    github: "https://github.com/yourusername",
-    linkedin: "https://linkedin.com/in/yourusername",
+    email: "tawaninm13@gmail.com",
+    github: "https://github.com/tawaninm",
+    linkedin: "https://www.linkedin.com/in/thanatpat-promthong-9084a4212",
   },
 };
 
@@ -201,11 +207,18 @@ function HeroBanner() {
             {/* Outer glow ring */}
             <div className="absolute inset-0 rounded-full"
               style={{ boxShadow: "0 0 0 3px rgba(80,128,240,0.5), 0 0 40px rgba(80,128,240,0.25)" }} />
-            {/* Avatar placeholder */}
-            <div className="w-full h-full rounded-full bg-gradient-to-br from-ocean-blue via-electric-blue to-lavender flex items-center justify-center border-2 border-electric-blue/50">
-              <span className="font-display text-4xl md:text-5xl text-soft-white/30 select-none">
-                {profile.name[0]}
-              </span>
+            {/* Avatar */}
+            <div className="w-full h-full rounded-full bg-gradient-to-br from-ocean-blue via-electric-blue to-lavender border-2 border-electric-blue/50 overflow-hidden">
+              <img
+                src="/images/gallery/Profile.jpg"
+                alt={profile.name}
+                className="w-full h-full object-cover"
+                onError={(e) => {
+                  const el = e.currentTarget as HTMLImageElement;
+                  el.style.display = "none";
+                  el.parentElement!.innerHTML += `<span class="font-display text-4xl md:text-5xl text-soft-white/30 select-none flex items-center justify-center w-full h-full">${profile.name[0]}</span>`;
+                }}
+              />
             </div>
             {/* Anime decorative border dots */}
             {[0, 60, 120, 180, 240, 300].map((deg) => {
@@ -347,16 +360,18 @@ function GallerySection() {
               onClick={() => openLightbox(i)}
               className="group relative rounded-xl overflow-hidden aspect-[4/3] cursor-pointer focus:outline-none focus:ring-2 focus:ring-electric-blue"
             >
-              {/* Gradient placeholder (replace with next/image when real photos available) */}
+              {/* Gradient fallback */}
               <div className={`absolute inset-0 bg-gradient-to-br ${photo.gradient}`} />
-              <div className="absolute inset-0 flex items-center justify-center">
-                <span className="font-display text-5xl text-dark-navy/20 select-none">{String(i + 1).padStart(2,"0")}</span>
-              </div>
+              {/* Real photo */}
+              <img
+                src={photo.src}
+                alt={photo.caption}
+                className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                onError={(e) => { (e.currentTarget as HTMLImageElement).style.display = "none"; }}
+              />
               {/* Hover overlay */}
               <div className="absolute inset-0 bg-dark-navy/0 group-hover:bg-dark-navy/40 transition-all duration-400" />
               <div className="halftone-bg absolute inset-0 opacity-0 group-hover:opacity-20 transition-opacity duration-400 pointer-events-none" />
-              {/* Scale on hover */}
-              <div className="absolute inset-0 transition-transform duration-500 group-hover:scale-105" />
               {/* Caption on hover */}
               <div className="absolute bottom-0 left-0 right-0 p-3 translate-y-full group-hover:translate-y-0 transition-transform duration-300 bg-gradient-to-t from-dark-navy/80 to-transparent">
                 <p className="font-body text-sm text-soft-white font-medium">{photo.caption}</p>
@@ -401,14 +416,17 @@ function GallerySection() {
               <motion.div key={lightboxIdx}
                 initial={{ opacity: 0, scale: 0.92 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0.92 }}
                 transition={{ duration: 0.3, ease }}
-                className="relative z-10 w-[90vw] max-w-3xl aspect-[4/3] rounded-2xl overflow-hidden"
+                className="relative z-10 w-[90vw] max-w-3xl rounded-2xl overflow-hidden"
               >
                 <div className={`absolute inset-0 bg-gradient-to-br ${profile.gallery[lightboxIdx].gradient}`} />
-                <div className="absolute inset-0 flex flex-col items-center justify-center gap-3">
-                  <span className="font-display text-6xl text-dark-navy/20 select-none">
-                    {String(lightboxIdx + 1).padStart(2, "0")}
-                  </span>
-                  <p className="font-body text-sm text-dark-navy/50">{profile.gallery[lightboxIdx].caption}</p>
+                <img
+                  src={profile.gallery[lightboxIdx].src}
+                  alt={profile.gallery[lightboxIdx].caption}
+                  className="relative w-full max-h-[80vh] object-contain"
+                  onError={(e) => { (e.currentTarget as HTMLImageElement).style.display = "none"; }}
+                />
+                <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-dark-navy/80 to-transparent">
+                  <p className="font-body text-sm text-soft-white font-medium text-center">{profile.gallery[lightboxIdx].caption}</p>
                 </div>
               </motion.div>
             </AnimatePresence>
@@ -647,11 +665,10 @@ function HobbiesSection() {
             <button
               key={t.key}
               onClick={() => setTab(t.key)}
-              className={`relative px-5 py-2.5 rounded-full font-body text-sm font-bold transition-all duration-300 ${
-                tab === t.key
-                  ? "bg-electric-blue text-white border-2 border-deep-black shadow-[0_0_20px_rgba(80,128,240,0.45)]"
-                  : "bg-transparent text-dark-navy/60 dark:text-muted-lilac border-2 border-vinyl-dark/30 dark:border-muted-lilac/40 hover:border-electric-blue/60"
-              }`}
+              className={`relative px-5 py-2.5 rounded-full font-body text-sm font-bold transition-all duration-300 ${tab === t.key
+                ? "bg-electric-blue text-white border-2 border-deep-black shadow-[0_0_20px_rgba(80,128,240,0.45)]"
+                : "bg-transparent text-dark-navy/60 dark:text-muted-lilac border-2 border-vinyl-dark/30 dark:border-muted-lilac/40 hover:border-electric-blue/60"
+                }`}
             >
               <span>{t.label}</span>
               <span className="font-zen text-[10px] block opacity-60">{t.ja}</span>
@@ -669,10 +686,13 @@ function HobbiesSection() {
                 <motion.div key={a.title} {...fadeUp(i * 0.06)}
                   className="group relative rounded-xl overflow-hidden aspect-[3/4] hover:-translate-y-2 hover:shadow-[0_12px_30px_rgba(255,45,120,0.3)] transition-all duration-300">
                   <div className={`absolute inset-0 bg-gradient-to-br ${a.gradient}`} />
-                  <div className="absolute inset-0 flex flex-col items-center justify-center p-2 text-center">
-                    <span className="font-display text-3xl text-dark-navy/20 mb-2">{a.title[0]}</span>
-                  </div>
-                  <div className="absolute inset-x-0 bottom-0 p-2 bg-gradient-to-t from-dark-navy/80 to-transparent">
+                  <img
+                    src={a.src}
+                    alt={a.title}
+                    className="absolute inset-0 w-full h-full object-cover"
+                    onError={(e) => { (e.currentTarget as HTMLImageElement).style.display = "none"; }}
+                  />
+                  <div className="absolute inset-x-0 bottom-0 p-2 bg-gradient-to-t from-dark-navy/90 to-transparent">
                     <p className="font-body text-xs text-soft-white font-bold leading-tight">{a.title}</p>
                     <p className="font-mono text-[9px] text-muted-lilac mt-0.5">{a.genre}</p>
                   </div>
@@ -690,10 +710,13 @@ function HobbiesSection() {
                 <motion.div key={g.title} {...fadeUp(i * 0.06)}
                   className="group relative rounded-xl overflow-hidden aspect-[3/4] hover:-translate-y-2 hover:shadow-[0_12px_30px_rgba(80,128,240,0.3)] transition-all duration-300">
                   <div className={`absolute inset-0 bg-gradient-to-br ${g.gradient}`} />
-                  <div className="absolute inset-0 flex flex-col items-center justify-center p-2 text-center">
-                    <span className="font-display text-3xl text-dark-navy/20 mb-2">{g.title[0]}</span>
-                  </div>
-                  <div className="absolute inset-x-0 bottom-0 p-2 bg-gradient-to-t from-dark-navy/80 to-transparent">
+                  <img
+                    src={g.src}
+                    alt={g.title}
+                    className="absolute inset-0 w-full h-full object-cover"
+                    onError={(e) => { (e.currentTarget as HTMLImageElement).style.display = "none"; }}
+                  />
+                  <div className="absolute inset-x-0 bottom-0 p-2 bg-gradient-to-t from-dark-navy/90 to-transparent">
                     <p className="font-body text-xs text-soft-white font-bold leading-tight">{g.title}</p>
                     <p className="font-mono text-[9px] text-muted-lilac mt-0.5">{g.genre}</p>
                   </div>
@@ -745,7 +768,7 @@ function MangaFace() {
   return (
     <svg viewBox="0 0 28 28" width={24} height={24} aria-hidden="true" className="shrink-0">
       <circle cx="14" cy="14" r="13" fill="#FFE8F0" stroke="#FF2D78" strokeWidth="1.5" />
-      <ellipse cx="9.5"  cy="12" rx="1.8" ry="2.2" fill="#1A1A2E" />
+      <ellipse cx="9.5" cy="12" rx="1.8" ry="2.2" fill="#1A1A2E" />
       <ellipse cx="18.5" cy="12" rx="1.8" ry="2.2" fill="#1A1A2E" />
       <circle cx="10.3" cy="11" r="0.7" fill="white" />
       <circle cx="19.3" cy="11" r="0.7" fill="white" />
@@ -769,12 +792,12 @@ function SocialLink({ href, icon, label, color }: { href: string; icon: React.Re
 }
 
 const aboutPetals = [
-  { size: 18, style: { top: "8%",  left: "4%",  animationDuration: "7s",   animationDelay: "0s"   } },
-  { size: 14, style: { top: "15%", left: "18%", animationDuration: "9s",   animationDelay: "1.5s" } },
-  { size: 20, style: { top: "5%",  left: "40%", animationDuration: "8s",   animationDelay: "0.7s" } },
-  { size: 12, style: { top: "10%", left: "60%", animationDuration: "10s",  animationDelay: "2s"   } },
-  { size: 16, style: { top: "3%",  left: "75%", animationDuration: "7.5s", animationDelay: "0.3s" } },
-  { size: 22, style: { top: "20%", left: "85%", animationDuration: "11s",  animationDelay: "1s"   } },
+  { size: 18, style: { top: "8%", left: "4%", animationDuration: "7s", animationDelay: "0s" } },
+  { size: 14, style: { top: "15%", left: "18%", animationDuration: "9s", animationDelay: "1.5s" } },
+  { size: 20, style: { top: "5%", left: "40%", animationDuration: "8s", animationDelay: "0.7s" } },
+  { size: 12, style: { top: "10%", left: "60%", animationDuration: "10s", animationDelay: "2s" } },
+  { size: 16, style: { top: "3%", left: "75%", animationDuration: "7.5s", animationDelay: "0.3s" } },
+  { size: 22, style: { top: "20%", left: "85%", animationDuration: "11s", animationDelay: "1s" } },
 ];
 
 function ContactCTA() {
@@ -834,9 +857,8 @@ function ContactCTA() {
 
           {/* 3D social icons */}
           <div className="flex flex-wrap justify-center lg:justify-start gap-4">
-            <SocialLink href={profile.contact.github}   icon={<FiGithub   size={22} />} label="GitHub"   color="hover:shadow-[0_0_20px_rgba(200,168,232,0.7)]" />
+            <SocialLink href={profile.contact.github} icon={<FiGithub size={22} />} label="GitHub" color="hover:shadow-[0_0_20px_rgba(200,168,232,0.7)]" />
             <SocialLink href={profile.contact.linkedin} icon={<FiLinkedin size={22} />} label="LinkedIn" color="hover:shadow-[0_0_20px_rgba(80,128,240,0.7)]" />
-            <SocialLink href="https://dribbble.com"     icon={<FaDribbble size={22} />} label="Dribbble" color="hover:shadow-[0_0_20px_rgba(255,96,144,0.7)]" />
             <SocialLink href={`mailto:${profile.contact.email}`} icon={<FiMail size={22} />} label="Email" color="hover:shadow-[0_0_20px_rgba(255,45,120,0.7)]" />
           </div>
         </motion.div>
@@ -847,7 +869,7 @@ function ContactCTA() {
             {/* Postmark stamp */}
             <div className="absolute top-4 right-4 md:top-6 md:right-6 opacity-40 pointer-events-none select-none flex flex-col items-center">
               <div className="w-12 h-16 border-2 border-dashed border-muted-lilac/50 rounded flex items-center justify-center p-1">
-                <span className="text-[10px] uppercase font-bold text-center text-muted-lilac/70 leading-tight">Place<br/>Stamp<br/>Here</span>
+                <span className="text-[10px] uppercase font-bold text-center text-muted-lilac/70 leading-tight">Place<br />Stamp<br />Here</span>
               </div>
               <div className="mt-2 w-16 h-16 border-4 border-double border-neon-magenta/30 rounded-full flex items-center justify-center rotate-[-15deg]">
                 <span className="text-[10px] font-bold text-neon-magenta/40 uppercase whitespace-nowrap">City Pop Mail</span>

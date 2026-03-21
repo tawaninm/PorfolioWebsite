@@ -6,15 +6,15 @@
 
 name: Tawan
 Fullname : Thanatpat promthong
-tagline: coding Tutor · Game Developer · UI/UX Designer
+tagline: coding Tutor · Game Developer · UX/UI Designer
 1+ Years Experience in tutor coding
 location: Bangkok, Thailand
 
 ## Hero Section detail
 
 hero_title: I'm Tawan
-hero_subtitle: Game Developer · UI/UX Designer
-hero_description: I am Coding tutor, Game Developer and UI/UX Designer. I am a student at the School of Information Technology, KMITL. I spend time learning new things and developing my skills to make a help tool to entertain and help life easier.
+hero_subtitle: Game Developer · UX/UI Designer
+hero_description: I am Coding tutor, Game Developer and UX/UI Designer. I am a student at the School of Information Technology, KMITL. I spend time learning new things and developing my skills to make a help tool to entertain and help life easier.
 
 
 ## about me home page detail
@@ -46,7 +46,6 @@ quote3: What is not started today is never finished tomorrow. -Johann Wolfgang v
 
 ## Gallery
 # Add your real image paths under /public/gallery/
-# Example: /gallery/photo1.jpg
 
 profile image : public/images/gallery/Profile.jpg
 photo1: public/images/gallery/ITKMITL-OpenHouse.jpg
@@ -194,6 +193,6 @@ hobby3_gradient: from-sunset-gold/30 to-peach/25
 ## Contact
 
 email: tawaninm13@gmail.com
-github: https://github.com/tawaninm
+github: https://github.com/tawaninmtawaninm
 linkedin: www.linkedin.com/in/thanatpat-promthong-9084a4212
 email :[tawaninm13@gmail.com]

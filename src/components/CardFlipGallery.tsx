@@ -153,7 +153,7 @@ export default function CardFlipGallery() {
           animate={{ y: [0, -4, 0] }}
           transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
         >
-          X+ Years Experience
+          1+ Years Experience
         </motion.div>
 
         {/* Speech bubble */}
@@ -184,10 +184,10 @@ export default function CardFlipGallery() {
         </motion.div>
 
         {/* Manga sparkles */}
-        <MangaStar size={20} top="-16px" left="-12px"               delay={0}   />
-        <MangaStar size={14} top="-8px"  right="-8px"               delay={0.7} />
-        <MangaStar size={16} bottom="-10px" right="-14px"           delay={1.2} />
-        <MangaStar size={12} bottom="-12px" left="20%"              delay={0.4} />
+        <MangaStar size={20} top="-16px" left="-12px" delay={0} />
+        <MangaStar size={14} top="-8px" right="-8px" delay={0.7} />
+        <MangaStar size={16} bottom="-10px" right="-14px" delay={1.2} />
+        <MangaStar size={12} bottom="-12px" left="20%" delay={0.4} />
 
         {/* Neon glow ring */}
         <div

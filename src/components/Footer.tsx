@@ -1,7 +1,6 @@
 "use client";
 
 import { FiGithub, FiLinkedin, FiMail, FiArrowUp } from "react-icons/fi";
-import { FaDribbble } from "react-icons/fa";
 
 /* ── Vinyl Record ── */
 function VinylRecord() {
@@ -61,10 +60,9 @@ export default function Footer() {
 
         {/* ── Social Icons ── */}
         <div className="flex items-center gap-4 mb-6">
-          <SocialIcon href="https://github.com"        icon={<FiGithub size={18} />}   label="GitHub" />
-          <SocialIcon href="https://linkedin.com"      icon={<FiLinkedin size={18} />} label="LinkedIn" />
-          <SocialIcon href="https://dribbble.com"      icon={<FaDribbble size={18} />} label="Dribbble" />
-          <SocialIcon href="mailto:hello@example.com"  icon={<FiMail size={18} />}     label="Email" />
+          <SocialIcon href="https://github.com/tawaninm"                                       icon={<FiGithub size={18} />}   label="GitHub" />
+          <SocialIcon href="https://www.linkedin.com/in/thanatpat-promthong-9084a4212"     icon={<FiLinkedin size={18} />} label="LinkedIn" />
+          <SocialIcon href="mailto:tawaninm13@gmail.com"                                   icon={<FiMail size={18} />}     label="Email" />
         </div>
 
         {/* ── Tagline & Copyright ── */}

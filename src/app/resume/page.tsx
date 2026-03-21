@@ -7,13 +7,13 @@ import { FiMapPin, FiMail, FiPhone, FiGlobe, FiDownload, FiLinkedin } from "reac
 /* ─────────────────────────────────────────
    DATA
 ───────────────────────────────────────── */
-const RESUME_DRIVE_URL = "https://drive.google.com/file/d/YOUR_FILE_ID/view?usp=sharing";
+const RESUME_DRIVE_URL = "https://drive.google.com/file/d/YOUR_FILE_ID/view?usp=sharing"; // TODO: แทนที่ YOUR_FILE_ID ด้วย ID ไฟล์จาก Google Drive
 
 const stats = [
-  { label: "UX/UI",     pct: 80, from: "#FF2D78", to: "#F06848" },
-  { label: "Frontend",  pct: 65, from: "#5080F0", to: "#40C8A0" },
-  { label: "Game Dev",  pct: 70, from: "#F0D040", to: "#F8A078" },
-  { label: "CI Art",    pct: 75, from: "#F0B0D0", to: "#FF2D78" },
+  { label: "UX/UI", pct: 80, from: "#FF2D78", to: "#F06848" },
+  { label: "Frontend", pct: 65, from: "#5080F0", to: "#40C8A0" },
+  { label: "Game Dev", pct: 70, from: "#F0D040", to: "#F8A078" },
+  { label: "CI Art", pct: 75, from: "#F0B0D0", to: "#FF2D78" },
 ];
 
 const education = [
@@ -92,17 +92,17 @@ const workExperience = [
 ];
 
 const skillGroups = [
-  { label: "UX / UI Tool",      items: ["Adobe Illustrator", "Figma", "Canva"] },
-  { label: "AI Tools",          items: ["NotebookLM", "ChatGPT", "Gemini", "Claude"] },
-  { label: "Game Development",  items: ["Godot Engine (Intermediate)", "Unity (Intermediate)", "Unreal Engine (Intermediate)", "Roblox Studio (Beginner)", "Git"] },
-  { label: "Coding Languages",  items: ["C#", "GDScript", "Java", "HTML", "CSS", "JavaScript", "Lua", "SQL", "Python"] },
-  { label: "Coding Knowledge",  items: ["OOP Java", "Python Data Structure", "Algorithm"] },
+  { label: "UX / UI Tool", items: ["Adobe Illustrator", "Figma", "Canva"] },
+  { label: "AI Tools", items: ["NotebookLM", "ChatGPT", "Gemini", "Claude"] },
+  { label: "Game Development", items: ["Godot Engine (Intermediate)", "Unity (Intermediate)", "Unreal Engine (Intermediate)", "Roblox Studio (Beginner)", "Git"] },
+  { label: "Coding Languages", items: ["C#", "GDScript", "Java", "HTML", "CSS", "JavaScript", "Lua", "SQL", "Python"] },
+  { label: "Coding Knowledge", items: ["OOP Java", "Python Data Structure", "Algorithm"] },
 ];
 
 const languages = [
-  { lang: "Thai",     pct: 100, native: true },
-  { lang: "English",  pct: 70,  native: false },
-  { lang: "Japanese", pct: 20,  native: false },
+  { lang: "Thai", pct: 100, native: true },
+  { lang: "English", pct: 70, native: false },
+  { lang: "Japanese", pct: 20, native: false },
 ];
 
 const awards = [
@@ -276,17 +276,17 @@ export default function ResumePage() {
               <div>
                 <h2 className="font-display text-3xl text-sakura-white print:text-black">THANATPAT PROMTHONG</h2>
                 <p className="font-body font-bold text-neon-magenta text-base mt-0.5 print:text-pink-600">
-                  Coding Tutor · Game Developer · UI/UX Designer
+                  Coding Tutor · Game Developer · UX/UI Designer
                 </p>
               </div>
 
               <div className="flex flex-wrap gap-x-6 gap-y-1.5">
                 {[
-                  { icon: <FiMapPin size={13}/>, text: "451/1 Chalongkrung Rd, Lat Krabang, Bangkok 10520" },
-                  { icon: <FiPhone size={13}/>,  text: "096-876-5392" },
-                  { icon: <FiMail size={13}/>,   text: "tawaninm13@gmail.com" },
-                  { icon: <FiGlobe size={13}/>,  text: "porfolio-website-five-inky.vercel.app" },
-                  { icon: <FiLinkedin size={13}/>, text: "linkedin.com/in/thanatpat-promthong-9084a4212" },
+                  { icon: <FiMapPin size={13} />, text: "451/1 Chalongkrung Rd, Lat Krabang, Bangkok 10520" },
+                  { icon: <FiPhone size={13} />, text: "096-876-5392" },
+                  { icon: <FiMail size={13} />, text: "tawaninm13@gmail.com" },
+                  { icon: <FiGlobe size={13} />, text: "porfolio-website-five-inky.vercel.app" },
+                  { icon: <FiLinkedin size={13} />, text: "linkedin.com/in/thanatpat-promthong-9084a4212" },
                 ].map(({ icon, text }) => (
                   <span key={text} className="flex items-center gap-1.5 font-body text-xs text-muted-lilac print:text-gray-600">
                     <span className="text-neon-magenta/70">{icon}</span>
