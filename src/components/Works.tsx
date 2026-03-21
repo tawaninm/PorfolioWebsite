@@ -9,6 +9,7 @@ const categoryColor: Record<Project["category"], string> = {
   uxui: "text-sakura-pink",
   programming: "text-sky-cyan",
   "ci-art": "text-mint",
+  game: "text-retro-yellow",
 };
 
 /* Retro starburst SVG behind heading */
