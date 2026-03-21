@@ -1,36 +1,103 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+<div align="center">
+
+# ✦ Tawan's Portfolio
+
+**[porfolio-website-five-inky.vercel.app](https://porfolio-website-five-inky.vercel.app/)**
+
+[![Next.js](https://img.shields.io/badge/Next.js-16-black?style=flat-square&logo=next.js)](https://nextjs.org/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.9-3178C6?style=flat-square&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind-v4-06B6D4?style=flat-square&logo=tailwindcss&logoColor=white)](https://tailwindcss.com/)
+[![Framer Motion](https://img.shields.io/badge/Framer_Motion-12-EF0275?style=flat-square&logo=framer&logoColor=white)](https://www.framer.com/motion/)
+[![Deployed on Vercel](https://img.shields.io/badge/Deployed_on-Vercel-000?style=flat-square&logo=vercel)](https://porfolio-website-five-inky.vercel.app/)
+
+<br/>
+
+> **UX/UI Designer · Programmer · Coding Tutor**
+> A retro city-pop themed portfolio with 3D effects, kinetic typography, and smooth animations.
+
+<br/>
+
+[![Visit Portfolio](https://img.shields.io/badge/🌐_Visit_Portfolio-FF2D78?style=for-the-badge)](https://porfolio-website-five-inky.vercel.app/)
+
+</div>
+
+---
+
+## Preview
+
+| Home | Projects | Resume |
+|------|----------|--------|
+| Hero with kinetic typography | Filterable project gallery | Interactive CV with skill bars |
+| Sparkle & starburst effects | UX/UI · Programming · Game Dev | Print-friendly layout |
+
+---
+
+## Features
+
+- **City Pop Aesthetic** — retro 80s color palette with hot pink, electric blue, and pastel accents
+- **Smooth Animations** — Framer Motion page transitions + Lenis smooth scrolling
+- **3D Scene** — Three.js with React Three Fiber rendering
+- **Dark / Light Mode** — full theme switching support
+- **Project Case Studies** — detailed write-ups with problem → process → result structure
+- **Interactive Resume** — animated skill bars, exportable/printable
+- **Music Player** — built-in ambient music widget
+- **Responsive** — mobile-first design
+
+---
+
+## Pages
+
+| Route | Description |
+|-------|-------------|
+| `/` | Landing page — hero, skills, works, activities, contact |
+| `/projects` | Project gallery with category filter |
+| `/projects/[slug]` | Individual project case study |
+| `/about` | Bio, background, and experience |
+| `/resume` | Full interactive resume |
+| `/activities` | Events and activities |
+
+---
+
+## Tech Stack
+
+```
+Framework    Next.js 16 (App Router)
+Language     TypeScript 5.9
+Styling      Tailwind CSS v4
+Animation    Framer Motion 12
+3D           Three.js + React Three Fiber
+Scrolling    Lenis
+Deployment   Vercel
+```
+
+---
 
 ## Getting Started
 
-First, run the development server:
-
 ```bash
+# Install dependencies
+npm install
+
+# Run development server
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Author
 
-## Learn More
+**Thanatpat Promthong (Tawan)**
+KMITL · Bangkok, Thailand
 
-To learn more about Next.js, take a look at the following resources:
+[![GitHub](https://img.shields.io/badge/GitHub-tawaninm-181717?style=flat-square&logo=github)](https://github.com/tawaninm)
+[![Email](https://img.shields.io/badge/Email-tawaninm13@gmail.com-EA4335?style=flat-square&logo=gmail&logoColor=white)](mailto:tawaninm13@gmail.com)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+---
 
-You can check out [the Next.js GitHub repository](https://github.com/tawaninmvercel/next.js) - your feedback and contributions are welcome!
+<div align="center">
 
-## Deploy on Vercel
+Made with love and city pop vibes ♪
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+</div>
