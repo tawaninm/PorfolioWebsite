@@ -14,6 +14,7 @@ const categoryBg: Record<Project["category"], string> = {
   uxui: "bg-sakura-pink/20 text-sakura-pink border-sakura-pink/30",
   programming: "bg-sky-cyan/20 text-sky-cyan border-sky-cyan/30",
   "ci-art": "bg-mint/20 text-mint border-mint/30",
+  game: "bg-retro-yellow/20 text-retro-yellow border-retro-yellow/30",
 };
 
 /* ---- Fade-in wrapper ---- */
