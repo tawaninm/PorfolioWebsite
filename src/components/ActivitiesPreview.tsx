@@ -2,64 +2,8 @@
 
 import Link from "next/link";
 import { motion } from "framer-motion";
-
-/* ── Types & data (inline — same source of truth as activities page) ── */
-type ActivityType = "camp" | "workshop" | "hackathon" | "training" | "volunteer";
-
-interface Activity {
-  id: string;
-  name: string;
-  type: ActivityType;
-  date: string;
-  gradient: string;
-}
-
-const activities: Activity[] = [
-  {
-    id: "itcamp21",
-    name: "ITCAMP21 — Unreal Engine TD",
-    type: "camp",
-    date: "Apr 28 – May 1, 2025",
-    gradient: "from-mint/40 to-sky-cyan/30",
-  },
-  {
-    id: "openhouse2025",
-    name: "IT Openhouse 2025 — Roblox Journey Workshop",
-    type: "workshop",
-    date: "Nov 28 – 29, 2025",
-    gradient: "from-sky-cyan/40 to-lavender/30",
-  },
-  {
-    id: "nsc2023",
-    name: "National Software Contest 2023",
-    type: "hackathon",
-    date: "2023",
-    gradient: "from-neon-magenta/25 to-deep-purple/30",
-  },
-  {
-    id: "nsc2022",
-    name: "National Software Contest 2022",
-    type: "hackathon",
-    date: "2022",
-    gradient: "from-retro-yellow/25 to-peach/30",
-  },
-];
-
-const typeBadge: Record<ActivityType, string> = {
-  camp:      "bg-mint text-dark-navy",
-  workshop:  "bg-sky-cyan text-dark-navy",
-  hackathon: "bg-neon-magenta text-white",
-  training:  "bg-retro-yellow text-deep-black",
-  volunteer: "bg-sakura-pink text-deep-purple",
-};
-
-const typeLabel: Record<ActivityType, string> = {
-  camp:      "Camp",
-  workshop:  "Workshop",
-  hackathon: "Hackathon",
-  training:  "Training",
-  volunteer: "Volunteer",
-};
+import { featuredActivities, typeBadge, typeLabel } from "@/data/activities";
+import type { Activity } from "@/data/activities";
 
 const rotations = ["rotate-[-2deg]", "rotate-[1deg]", "rotate-[2deg]", "rotate-[-1deg]"];
 
@@ -176,7 +120,7 @@ export default function ActivitiesPreview() {
 
         {/* Cards — horizontal scroll on mobile, grid on desktop */}
         <div className="flex md:grid md:grid-cols-4 gap-6 overflow-x-auto md:overflow-visible pb-4 md:pb-0 snap-x snap-mandatory md:snap-none -mx-6 px-6 md:mx-0 md:px-0">
-          {activities.map((activity, idx) => (
+          {featuredActivities.map((activity, idx) => (
             <div key={activity.id} className="snap-start">
               <PolaroidCard activity={activity} index={idx} />
             </div>

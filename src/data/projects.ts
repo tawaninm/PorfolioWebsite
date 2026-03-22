@@ -1,4 +1,8 @@
 // Project data — Thanatpat Promthong
+export interface ProjectPhase {
+  title: string;
+  description: string;
+}
 
 export interface Project {
   slug: string;
@@ -12,6 +16,7 @@ export interface Project {
   summary: string;
   problem: string;
   process: string;
+  phases?: ProjectPhase[];
   result: string;
   gallery: string[];
 }
@@ -25,11 +30,67 @@ export const categoryLabels: Record<Project["category"], string> = {
 
 export const projects: Project[] = [
   {
+    slug: "chao-dom",
+    title: "Chao-dom",
+    category: "uxui",
+    thumbnail: "/images/Project/Preview.chaodom.png",
+    heroImage: "/images/Project/Preview.chaodom.png",
+    date: "2026",
+    tags: ["UX/UI", "Figma", "Research", "iOS", "Human Interface Design"],
+    techStack: ["Figma", "Microsoft Word", "Canva", "Adobe Premiere Pro", "Gemini", "NotebookLM"],
+    summary: "EasyDom (Chao-dom) เป็น Term Project วิชา Human Interface Design คณะ IT สจล. หัวข้อ How to help freshy find rooms ดำเนินการ UX/UI ครบ 5 เฟส ตั้งแต่เก็บข้อมูล วิจัยผู้ใช้ วิเคราะห์ Persona/Experience Map ออกแบบ Conceptual Design ไปจนถึง Detailed Prototype iOS ตาม Apple HIG และ Guerilla Usability Testing ผลลัพธ์คือ Prototype แอป iOS ที่แก้ปัญหาข้อมูลล้าสมัย สถานะห้องไม่ชัดเจน และการติดต่อเจ้าของหอที่ยุ่งยาก",
+    problem: "นักศึกษาใหม่ สจล. ประสบปัญหาหาหอพักนอกสถาบัน ข้อมูลบน RentHub Google Maps Facebook ไม่เป็นปัจจุบัน ราคา สถานะห้อง รูปภาพ เบอร์ติดต่อ ไม่ตรงความจริง ติดต่อแล้วถูกปฏิเสธ ต้องลงพื้นที่สำรวจเอง ระบบจองหอในไม่โปร่งใส ข้อมูลการเดินทาง ขนส่ง สภาพแวดล้อม นิสัยเจ้าของหอไม่มีแพลตฟอร์มใดให้ครบ สัมภาษณ์ผู้ใช้ 3 คน (โปเต้ ฟ้าใส ทัก) ทุกคนประสบปัญหาเดียวกัน ใช้เวลา 1 วัน ถึง 3 เดือนกว่าจะได้หอ",
+    process: "กระบวนการ UX ครบวงจร 5 เฟส โดยเริ่มตั้งแต่การค้นคว้าปัญหาจริง การสัมภาษณ์ผู้ใช้ การวิเคราะห์ Persona/Experience Map ไปจนถึงการออกแบบ Prototype และทำ Usability Testing",
+    phases: [
+      {
+        title: "Phase 1: Data Gathering",
+        description: "ผลการค้นคว้าเบื้องต้น ทำการค้นคว้าในหัวข้อ EasyDom ไปหากลุ่มเป้าหมายที่มีปัญหาเกี่ยวกับการหาหอพักโดยอิงจากเรื่องจริง และพูดถึงปัญหาหลัก ได้ข้อมูล Pain Points สำคัญ เช่น ข้อมูลออนไลน์ไม่อัปเดต ติดต่อออนไลน์แล้วถูกปฏิเสธ สถานะห้องไม่แน่ชัด เข้าใจความลำบากในการหาหอพัก"
+      },
+      {
+        title: "Phase 2: User and Task Analysis",
+        description: "ศึกษา Background จากผลศึกษาเบื้องต้น กำหนด Research Scope เป็นนักศึกษา สจล. หมวด Accommodation ทำการสัมภาษณ์ User 3 คน ผ่าน Microsoft Teams ถอดคำพูดบทสัมภาษณ์ เก็บ Observation ภาพค้นหาหอพัก และลงพื้นที่ถ่ายสถานที่จริง"
+      },
+      {
+        title: "Phase 3: Conceptual Design",
+        description: "สรุป User Characteristics สร้าง Persona วิเคราะห์คุณลักษณะร่วม สร้าง Experience Map บน FigJam กำหนด Pain and Gain Statements โหวต Priority กำหนด Functional และ Usability Requirements"
+      },
+      {
+        title: "Phase 4: Detailed Design",
+        description: "วิเคราะห์ Task Lists 8 ข้อ ทำ Dialog Design วิเคราะห์ Essential และ Concrete Use Case กำหนด Task Objects 6 รายการ และออกแบบ Window Diagram พร้อม Container Specification"
+      },
+      {
+        title: "Phase 5: Evaluation and Prototype",
+        description: "Target Platform iOS (Apple HIG) ทำ UI Components 25+ รายการ ออกแบบ Detailed Screen ทุุกหน้า สร้าง Prototype ใน Figma ทำ Guerilla Usability Testing 3 คน โดยใช้ Thinking Aloud พบจุดที่ต้องปรับปรุงและแก้ไข"
+      }
+    ],
+    result: "The Solution: iOS Prototype สำหรับนักศึกษา สจล. มีฟีเจอร์ สถานะห้องว่าง Real-time ค้นหาขั้นสูง แผนที่โต้ตอบ เปรียบเทียบ Side-by-side Wishlist แจ้งเตือนห้องว่าง ติดต่อเจ้าของยืนยันตัวตน รีวิวจากผู้พักจริง Customer Support Chat\nImpact: สัมภาษณ์เชิงลึก 3 คน Observation สถานที่จริง Persona/Experience Map จากข้อมูลจริง iOS Prototype 10+ หน้าจอ ตาม Apple HIG Usability Testing 3 คน พบ 15+ จุดปรับปรุง กระบวนการ UX ครบวงจรใน 5 สัปดาห์",
+    gallery: [
+      "/images/Project/1.png",
+      "/images/Project/2.png",
+      "/images/Project/3.png",
+      "/images/Project/4.png",
+      "/images/Project/5.png",
+      "/images/Project/6.png",
+      "/images/Project/7.png",
+      "/images/Project/8.png",
+      "/images/Project/9.png",
+      "/images/Project/10.png",
+      "/images/Project/11.png",
+      "/images/Project/12.png",
+      "/images/Project/13.png",
+      "/images/Project/14.png",
+      "/images/Project/15.png",
+      "/images/Project/16.png",
+      "/images/Project/17.png",
+      "/images/Project/18.png"
+    ],
+  },
+  {
     slug: "drive-kmitl",
     title: "Drive@Kmitl",
     category: "programming",
-    thumbnail: "/images/works/drive-kmitl-thumb.webp",
-    heroImage: "/images/works/drive-kmitl-hero.webp",
+    thumbnail: "",
+    heroImage: "",
     date: "2024",
     tags: ["Next.js", "Python", "Web App", "Chat"],
     techStack: ["Next.js", "Python", "HTML", "CSS", "JavaScript"],
@@ -47,8 +108,8 @@ export const projects: Project[] = [
     slug: "vpstycoon",
     title: "VPSTycoon",
     category: "game",
-    thumbnail: "/images/works/vpstycoon-thumb.webp",
-    heroImage: "/images/works/vpstycoon-hero.webp",
+    thumbnail: "",
+    heroImage: "",
     date: "2024",
     tags: ["Java", "Game Development", "OOP"],
     techStack: ["Java"],
@@ -66,8 +127,8 @@ export const projects: Project[] = [
     slug: "synchro",
     title: "Synchro",
     category: "game",
-    thumbnail: "/images/works/synchro-thumb.webp",
-    heroImage: "/images/works/synchro-hero.webp",
+    thumbnail: "",
+    heroImage: "",
     date: "2024",
     tags: ["Arduino", "Rhythm Game", "Hardware", "Game Development"],
     techStack: ["Arduino", "C++"],
@@ -85,8 +146,8 @@ export const projects: Project[] = [
     slug: "detectcheat",
     title: "Detectcheat",
     category: "game",
-    thumbnail: "/images/works/detectcheat-thumb.webp",
-    heroImage: "/images/works/detectcheat-hero.webp",
+    thumbnail: "",
+    heroImage: "",
     date: "2022",
     tags: ["Unity", "Mobile App", "Education", "NSC 2022"],
     techStack: ["Unity", "C#"],
@@ -104,8 +165,8 @@ export const projects: Project[] = [
     slug: "criminalmind",
     title: "CriminalMind",
     category: "game",
-    thumbnail: "/images/works/criminalmind-thumb.webp",
-    heroImage: "/images/works/criminalmind-hero.webp",
+    thumbnail: "",
+    heroImage: "",
     date: "2023",
     tags: ["Unity", "Computer Game", "NSC 2023"],
     techStack: ["Unity", "C#"],

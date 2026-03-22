@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { projects, categoryLabels } from "@/data/projects";
 import type { Project } from "@/data/projects";
@@ -192,21 +193,26 @@ function ProjectCard({
           className="group/thumb relative rounded-xl overflow-hidden bg-deep-purple/30 aspect-[4/3]"
           style={reverse ? { direction: "ltr" } : undefined}
         >
-          {/* Placeholder */}
-          <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-lavender/30 to-sakura-pink/20">
-            <span className="font-display text-6xl text-soft-white/30">
-              {project.title[0]}
-            </span>
-          </div>
+          {/* Thumbnail */}
+          {project.thumbnail ? (
+            <Image
+              src={project.thumbnail}
+              alt={project.title}
+              fill
+              className="object-cover transition-transform duration-500 group-hover/thumb:scale-105"
+              sizes="(max-width: 768px) 100vw, 50vw"
+            />
+          ) : (
+            <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-lavender/30 to-sakura-pink/20">
+              <span className="font-display text-6xl text-soft-white/30">{project.title[0]}</span>
+            </div>
+          )}
 
           {/* Hover tint */}
           <div className="absolute inset-0 bg-hot-pink/0 group-hover/thumb:bg-hot-pink/10 transition-all duration-500" />
 
           {/* Halftone overlay on hover */}
           <div className="halftone-bg absolute inset-0 opacity-0 group-hover/thumb:opacity-30 transition-opacity duration-500 pointer-events-none" />
-
-          {/* Scale layer */}
-          <div className="absolute inset-0 transition-transform duration-500 group-hover/thumb:scale-105" />
 
           {/* Category badge on image */}
           <div className="absolute bottom-3 left-3 z-10">

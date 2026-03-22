@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useCallback } from "react";
+import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 
 interface ImageLightboxProps {
@@ -81,7 +82,7 @@ export default function ImageLightbox({
         >
           {/* Backdrop */}
           <div
-            className="absolute inset-0 bg-dark-navy/90 backdrop-blur-sm"
+            className="absolute inset-0 bg-black/80 backdrop-blur-sm"
             onClick={onClose}
           />
 
@@ -131,17 +132,13 @@ export default function ImageLightbox({
               animate="visible"
               exit="exit"
             >
-              {/* Placeholder — swap with next/image when real images are added */}
-              <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-lavender/20 to-sakura-pink/10">
-                <div className="text-center">
-                  <span className="font-display text-5xl text-soft-white/30 block mb-2">
-                    ✦
-                  </span>
-                  <span className="font-body text-sm text-soft-white/40">
-                    Screenshot {currentIndex + 1}
-                  </span>
-                </div>
-              </div>
+              <Image
+                src={images[currentIndex]}
+                alt={`Screenshot ${currentIndex + 1}`}
+                fill
+                className="object-contain"
+                sizes="90vw"
+              />
             </motion.div>
           </AnimatePresence>
         </motion.div>

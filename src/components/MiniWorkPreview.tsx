@@ -19,7 +19,7 @@ export const miniWorks: MiniWork[] = [
     id: "mw1",
     name: "Sticker Pack Design",
     type: "graphic",
-    date: "2024",
+    date: "2026",
     gradient: "from-hot-pink/40 to-peach/30",
   },
   {
@@ -47,16 +47,16 @@ export const miniWorks: MiniWork[] = [
 
 export const typeBadge: Record<MiniWorkType, string> = {
   graphic: "bg-hot-pink text-white",
-  ui:      "bg-neon-magenta text-white",
-  code:    "bg-electric-blue text-white",
-  other:   "bg-sakura-pink text-deep-purple",
+  ui: "bg-neon-magenta text-white",
+  code: "bg-electric-blue text-white",
+  other: "bg-sakura-pink text-deep-purple",
 };
 
 export const typeLabel: Record<MiniWorkType, string> = {
   graphic: "Graphic",
-  ui:      "UI",
-  code:    "Code",
-  other:   "Other",
+  ui: "UI",
+  code: "Code",
+  other: "Other",
 };
 
 const rotations = ["rotate-[-2deg]", "rotate-[1deg]", "rotate-[2deg]", "rotate-[-1deg]"];

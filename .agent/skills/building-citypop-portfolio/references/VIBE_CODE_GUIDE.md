@@ -167,7 +167,7 @@ export const projects: Project[] = [
     category: 'uxui',
     thumbnail: '/images/works/project-01-thumb.webp',
     heroImage: '/images/works/project-01-hero.webp',
-    date: '2024',
+    date: '2026',
     tags: ['Figma', 'React', 'Tailwind'],
     summary: 'Brief one-liner about the project.',
     problem: 'What problem did this solve?',

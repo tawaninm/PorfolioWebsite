@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { motion } from "framer-motion";
 import type { Project } from "@/data/projects";
 import { projects, categoryLabels } from "@/data/projects";
@@ -140,14 +141,23 @@ export default function ProjectDetailClient({
         style={{ clipPath: "polygon(0 0, 100% 0, 100% 88%, 94% 100%, 0 100%)" }}
       >
         <div className="aspect-[21/9] md:aspect-[21/7] relative">
-          {/* Gradient background */}
-          <div className="absolute inset-0 bg-gradient-to-br from-lavender/30 via-sakura-pink/20 to-sky-cyan/10">
-            <div className="absolute inset-0 flex items-center justify-center">
-              <span className="font-display text-8xl md:text-9xl text-soft-white/10 select-none">
-                {project.title[0]}
-              </span>
+          {/* Hero image */}
+          {project.heroImage ? (
+            <Image
+              src={project.heroImage}
+              alt={project.title}
+              fill
+              className="object-cover"
+              priority
+              sizes="100vw"
+            />
+          ) : (
+            <div className="absolute inset-0 bg-gradient-to-br from-lavender/30 via-sakura-pink/20 to-sky-cyan/10">
+              <div className="absolute inset-0 flex items-center justify-center">
+                <span className="font-display text-8xl md:text-9xl text-soft-white/10 select-none">{project.title[0]}</span>
+              </div>
             </div>
-          </div>
+          )}
 
           {/* Manga gradient overlay: vinyl-dark/70 → transparent */}
           <div className="absolute inset-0 bg-gradient-to-r from-vinyl-dark/70 via-vinyl-dark/30 to-transparent" />
@@ -230,7 +240,37 @@ export default function ProjectDetailClient({
         <div className="h-px bg-gradient-to-r from-transparent via-soft-white/10 to-transparent" />
         <ContentSection title="The Problem"  content={project.problem} number="02" delay={0.05} extra={<ImpactBubble />} />
         <div className="h-px bg-gradient-to-r from-transparent via-soft-white/10 to-transparent" />
-        <ContentSection title="The Process"  content={project.process} number="03" delay={0.05} />
+        <div className="py-14">
+          <FadeSection delay={0.05}>
+            <div className="mx-auto max-w-3xl">
+              <SectionNumber n="03" />
+              <h2 className="font-display text-3xl md:text-4xl text-soft-white mb-6 -mt-2">
+                The Process
+              </h2>
+              <p className="font-body text-base md:text-lg text-soft-white/75 leading-relaxed">
+                {project.process}
+              </p>
+            </div>
+          </FadeSection>
+
+          {project.phases && project.phases.length > 0 && (
+            <div className="mt-12 space-y-8 mx-auto max-w-4xl">
+              {project.phases.map((phase, idx) => (
+                <FadeSection key={idx} delay={0.1 + idx * 0.05} className="bg-soft-white/5 border border-soft-white/10 rounded-3xl p-6 md:p-8 relative overflow-hidden group hover:border-sakura-pink/30 hover:bg-soft-white/10 transition-all duration-300">
+                  <div className="absolute top-0 right-0 p-6 opacity-5 font-display text-8xl md:text-9xl pointer-events-none group-hover:scale-110 group-hover:opacity-10 transition-all duration-500 text-sakura-pink">
+                    {idx + 1}
+                  </div>
+                  <div className="relative z-10">
+                    <div className="text-left">
+                      <h3 className="font-display text-2xl md:text-3xl text-sakura-pink mb-3 group-hover:text-neon-magenta transition-colors duration-300">{phase.title}</h3>
+                      <p className="font-body text-base md:text-lg text-soft-white/80 leading-relaxed">{phase.description}</p>
+                    </div>
+                  </div>
+                </FadeSection>
+              ))}
+            </div>
+          )}
+        </div>
       </div>
 
       {/* ── Image Gallery ── */}
@@ -239,7 +279,7 @@ export default function ProjectDetailClient({
           <h2 className="font-display text-3xl md:text-4xl text-soft-white">Gallery</h2>
         </div>
         <div className="mx-auto max-w-6xl px-4 md:px-6 grid grid-cols-1 md:grid-cols-2 gap-4">
-          {galleryImages.map((_img, idx) => (
+          {galleryImages.map((img, idx) => (
             <motion.button
               key={idx}
               className="group relative aspect-video rounded-2xl overflow-hidden bg-deep-purple/30 border border-soft-white/5 cursor-pointer focus:outline-none focus:ring-2 focus:ring-hot-pink/50 focus:ring-offset-2 focus:ring-offset-dark-navy"
@@ -247,14 +287,13 @@ export default function ProjectDetailClient({
               whileHover={{ scale: 1.02 }}
               transition={{ duration: 0.3 }}
             >
-              <div className="absolute inset-0 bg-gradient-to-br from-lavender/15 to-sakura-pink/10 group-hover:from-lavender/25 group-hover:to-sakura-pink/20 transition-all duration-500">
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="text-center">
-                    <span className="font-display text-4xl text-soft-white/20 block mb-1">✦</span>
-                    <span className="font-body text-xs text-soft-white/30">Screenshot {idx + 1}</span>
-                  </div>
-                </div>
-              </div>
+              <Image
+                src={img}
+                alt={`Gallery image ${idx + 1}`}
+                fill
+                className="object-cover"
+                sizes="(max-width: 768px) 100vw, 50vw"
+              />
               {/* Halftone overlay on hover */}
               <div className="halftone-bg absolute inset-0 opacity-0 group-hover:opacity-[0.2] transition-opacity duration-500 pointer-events-none" />
               {/* Pink tint hover */}

@@ -21,7 +21,7 @@ const education = [
     school: "King Mongkut's Institute of Technology Ladkrabang (KMITL)",
     degree: "Bachelor of Science Program in Information Technology",
     module: "Module: Multimedia & Game Development",
-    year: "Aug 2024 – Now",
+    year: "Aug 2026 – Now",
     notes: [
       "Freshman project on Python Web Next.js: Chat website \"Drive@Kmitl\"",
       "Freshman project on Java Game project \"VPSTycoon\"",

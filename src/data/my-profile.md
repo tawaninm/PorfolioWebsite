@@ -67,7 +67,7 @@ photo6: public/images/gallery/Japanpro.jpg
 photo6_caption: Japan lover
 
 ## Education
-edu1_year: 2024 – Present
+edu1_year: 2026 – Present
 edu1_school: King Mongkut's Institute of Technology Ladkrabang (KMITL)
 edu1_degree: Bachelor of Science Program in Information Technology
 edu1_desc: Module : Multimedia & Game Development. Majoring in IT with focus on UX/UI design, and game development. 
@@ -92,7 +92,7 @@ exp2_company: School of Information Technology KMITL
 exp2_desc: Assisting the course instructor for Object-Oriented Programming (OOP) by evaluating weekly laboratory assignments and posing conceptual questions to students to reinforce their understanding and facilitate further learning
 exp2_tech: OOP Java
 
-exp3_year: 2024-2026
+exp3_year: 2026-2026
 exp3_role: Part-time Tutor Math Physic and coding
 exp3_company: Login learning
 exp3_desc: The tutor manages projects for students to submit to competitions, such as national software contests and portfolio projects for university applications.
@@ -104,7 +104,7 @@ exp4_role: Part time Phoenix next Book fair staff
 exp4_company: Phoenix next
 exp4_desc: Worked as booth staff responsible for preparing and arranging book displays. Managed cashier duties, processed payments, and assisted with booth teardown at the end of the event.
 
-exp4_year: 2024
+exp4_year: 2026
 exp4_role: Part time Luckpim Book fair staff
 exp4_company: Luckpim
 exp4_desc: Worked as booth staff responsible for preparing and arranging book displays. Managed cashier duties, processed payments, and assisted with booth teardown at the end of the event.
@@ -193,6 +193,5 @@ hobby3_gradient: from-sunset-gold/30 to-peach/25
 ## Contact
 
 email: tawaninm13@gmail.com
-github: https://github.com/tawaninmtawaninm
+github: https://github.com/tawaninm
 linkedin: www.linkedin.com/in/thanatpat-promthong-9084a4212
-email :[tawaninm13@gmail.com]

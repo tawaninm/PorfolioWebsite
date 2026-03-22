@@ -2,114 +2,8 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-
-/* ─────────────────────────────────────────
-   TYPES & DATA
-───────────────────────────────────────── */
-type ActivityType = "camp" | "workshop" | "hackathon" | "training" | "volunteer" | "work";
-
-interface Activity {
-  id: string;
-  name: string;
-  type: ActivityType;
-  date: string;
-  description: string;
-  organizer: string;
-  gradient: string;
-}
-
-const activities: Activity[] = [
-  {
-    id: "itcamp21",
-    name: "ITCAMP21 — Unreal Engine TD",
-    type: "camp",
-    date: "Apr 28 – May 1, 2025",
-    description:
-      "Served as Technical Director for the Unreal Engine track. Supported student teams building competition-grade games and interactive experiences over a 4-day intensive camp.",
-    organizer: "School of Information Technology, KMITL",
-    gradient: "from-mint/40 to-sky-cyan/30",
-  },
-  {
-    id: "openhouse2025",
-    name: "IT Openhouse 2025 — Roblox Journey Workshop",
-    type: "workshop",
-    date: "Nov 28 – 29, 2025",
-    description:
-      "Acted as Project Head for the Roblox Training Program. Designed the curriculum, sourced TAs and TDs, and led two days of hands-on workshops for incoming students.",
-    organizer: "School of Information Technology, KMITL",
-    gradient: "from-sky-cyan/40 to-lavender/30",
-  },
-  {
-    id: "nsc2023",
-    name: "National Software Contest 2023",
-    type: "hackathon",
-    date: "2023",
-    description:
-      "Reached the second round with \"CriminalMind\", a Unity-based computer game. Competed against university teams nationwide in the game development category.",
-    organizer: "NECTEC / National Science and Technology Development Agency",
-    gradient: "from-neon-magenta/25 to-deep-purple/30",
-  },
-  {
-    id: "nsc2022",
-    name: "National Software Contest 2022",
-    type: "hackathon",
-    date: "2022",
-    description:
-      "Reached the final round with \"Detectcheat\", a Unity mobile app teaching users how to recognise and respond to online fraud. One of few high-school finalists.",
-    organizer: "NECTEC / National Science and Technology Development Agency",
-    gradient: "from-retro-yellow/25 to-peach/30",
-  },
-  {
-    id: "java-ta",
-    name: "Java OOP Teaching Assistant",
-    type: "training",
-    date: "Nov 2025 – Present",
-    description:
-      "Assist the course instructor for the Object-Oriented Programming course — evaluating lab work, posing conceptual questions, and facilitating further learning.",
-    organizer: "School of Information Technology, KMITL",
-    gradient: "from-retro-yellow/30 to-mint/20",
-  },
-  {
-    id: "login-tutor",
-    name: "IT & Math Tutor",
-    type: "volunteer",
-    date: "Sep 2024 – 2026",
-    description:
-      "Teach Godot game engine fundamentals and mathematics to junior- and senior-high students. Guide competition teams building portfolio projects for university applications.",
-    organizer: "Login-Engineering Academy",
-    gradient: "from-sakura-pink/30 to-lavender/25",
-  },
-  {
-    id: "code-genius-tutor",
-    name: "Coding Tutor — Primary School",
-    type: "work",
-    date: "2026 – Present",
-    description:
-      "Instructed group classes of primary school students in basic computer skills, delivering lessons in both Thai and English. Topics include Scratch, Python, and Microbit.",
-    organizer: "Code Genius Emquartier",
-    gradient: "from-electric-blue/30 to-mint/25",
-  },
-  {
-    id: "phoenix-bookfair",
-    name: "Phoenix Next Book Fair Staff",
-    type: "work",
-    date: "2025",
-    description:
-      "Worked as booth staff responsible for preparing and arranging book displays. Managed cashier duties, processed payments, and assisted with booth teardown at the end of the event.",
-    organizer: "Phoenix Next",
-    gradient: "from-sunset-gold/30 to-peach/25",
-  },
-  {
-    id: "luckpim-bookfair",
-    name: "Luckpim Book Fair Staff",
-    type: "work",
-    date: "2024",
-    description:
-      "Worked as booth staff responsible for preparing and arranging book displays. Managed cashier duties, processed payments, and assisted with booth teardown at the end of the event.",
-    organizer: "Luckpim",
-    gradient: "from-coral-red/25 to-retro-yellow/20",
-  },
-];
+import { activities, typeBadge, typeLabel } from "@/data/activities";
+import type { Activity, ActivityType } from "@/data/activities";
 
 /* ─────────────────────────────────────────
    FILTER CONFIG
@@ -125,24 +19,6 @@ const filters = [
 ] as const;
 
 type FilterKey = (typeof filters)[number]["key"];
-
-const typeBadge: Record<ActivityType, string> = {
-  camp:      "bg-mint text-dark-navy",
-  workshop:  "bg-sky-cyan text-dark-navy",
-  hackathon: "bg-neon-magenta text-white",
-  training:  "bg-retro-yellow text-deep-black",
-  volunteer: "bg-sakura-pink text-deep-purple",
-  work:      "bg-lavender text-dark-navy",
-};
-
-const typeLabel: Record<ActivityType, string> = {
-  camp:      "Camp",
-  workshop:  "Workshop",
-  hackathon: "Hackathon",
-  training:  "Training",
-  volunteer: "Volunteer",
-  work:      "Work",
-};
 
 /* ─────────────────────────────────────────
    STATS
@@ -188,7 +64,7 @@ function Starburst({ size, className }: { size: number; className?: string }) {
 }
 
 /* ─────────────────────────────────────────
-   POLAROID CARD
+   ACTIVITY CARD
 ───────────────────────────────────────── */
 function ActivityCard({ activity, index }: { activity: Activity; index: number }) {
   const rotationClass =
@@ -212,13 +88,11 @@ function ActivityCard({ activity, index }: { activity: Activity; index: number }
 
         {/* Photo area */}
         <div className={`relative aspect-video rounded-md overflow-hidden bg-gradient-to-br ${activity.gradient}`}>
-          {/* Icon/initial */}
           <div className="absolute inset-0 flex items-center justify-center">
             <span className="font-display text-5xl text-dark-navy/20 select-none">
               {activity.name[0]}
             </span>
           </div>
-          {/* Halftone on hover */}
           <div className="halftone-bg absolute inset-0 opacity-0 group-hover:opacity-[0.2] transition-opacity duration-500 pointer-events-none" />
         </div>
 
@@ -250,7 +124,7 @@ export default function ActivitiesPage() {
   const [active, setActive] = useState<FilterKey>("all");
 
   const filtered =
-    active === "all" ? activities : activities.filter((a) => a.type === active);
+    active === "all" ? activities : activities.filter((a) => a.type === (active as ActivityType));
 
   return (
     <main className="relative min-h-screen pt-28 pb-24 px-6 overflow-hidden bg-soft-white dark:bg-dark-navy transition-colors duration-300">
@@ -341,7 +215,6 @@ export default function ActivitiesPage() {
           viewport={{ once: true, margin: "-60px" }}
           transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
         >
-          {/* Header */}
           <div className="flex items-center gap-4 mb-8">
             <div className="flex-1 h-[2px] bg-gradient-to-r from-transparent via-retro-yellow/50 to-transparent" />
             <div className="text-center shrink-0">
@@ -352,7 +225,6 @@ export default function ActivitiesPage() {
             <div className="flex-1 h-[2px] bg-gradient-to-r from-transparent via-retro-yellow/50 to-transparent" />
           </div>
 
-          {/* Stat cards — retro game style */}
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
             {stats.map((s, i) => (
               <motion.div
@@ -362,11 +234,8 @@ export default function ActivitiesPage() {
                 viewport={{ once: true, margin: "-40px" }}
                 transition={{ duration: 0.5, delay: i * 0.1, ease: [0.16, 1, 0.3, 1] }}
                 className="bg-vinyl-dark border-2 border-retro-yellow/50 rounded-lg p-5 text-center relative overflow-hidden"
-                style={{
-                  boxShadow: "3px 3px 0 rgba(240,208,64,0.25)",
-                }}
+                style={{ boxShadow: "3px 3px 0 rgba(240,208,64,0.25)" }}
               >
-                {/* Pixel corner accents */}
                 <span className="absolute top-1 left-1 w-2 h-2 border-t-2 border-l-2 border-retro-yellow/60" />
                 <span className="absolute top-1 right-1 w-2 h-2 border-t-2 border-r-2 border-retro-yellow/60" />
                 <span className="absolute bottom-1 left-1 w-2 h-2 border-b-2 border-l-2 border-retro-yellow/60" />
