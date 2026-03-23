@@ -37,7 +37,7 @@ function Starburst() {
   );
 }
 
-const previewProjects = projects.slice(0, 3);
+const previewProjects = projects.slice(0, 4);
 
 export default function Works() {
   return (
