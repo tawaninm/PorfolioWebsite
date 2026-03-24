@@ -60,9 +60,9 @@ export default function Footer() {
 
         {/* ── Social Icons ── */}
         <div className="flex items-center gap-4 mb-6">
-          <SocialIcon href="https://github.com/tawaninm"                                       icon={<FiGithub size={18} />}   label="GitHub" />
-          <SocialIcon href="https://www.linkedin.com/in/thanatpat-promthong-9084a4212"     icon={<FiLinkedin size={18} />} label="LinkedIn" />
-          <SocialIcon href="mailto:tawaninm13@gmail.com"                                   icon={<FiMail size={18} />}     label="Email" />
+          <SocialIcon href="https://github.com/tawaninm" icon={<FiGithub size={18} />} label="GitHub" />
+          <SocialIcon href="https://www.linkedin.com/in/thanatpat-promthong-9084a4212" icon={<FiLinkedin size={18} />} label="LinkedIn" />
+          <SocialIcon href="mailto:tawaninm13@gmail.com" icon={<FiMail size={18} />} label="Email" />
         </div>
 
         {/* ── Tagline & Copyright ── */}
@@ -70,7 +70,7 @@ export default function Footer() {
           Built with ♥, city pop playlists &amp; sakura petals
         </p>
         <p className="font-mono text-xs text-soft-white/50 mb-3">
-          © {year} [Your Name]. All rights reserved.
+          © {year} Thanatpat Promthong. All rights reserved.
         </p>
 
         {/* ── Japanese sign-off ── */}
