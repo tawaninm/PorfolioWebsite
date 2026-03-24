@@ -86,45 +86,76 @@ export const projects: Project[] = [
     ],
   },
   {
+    slug: "polygon-mesh",
+    title: "Multimedia Learning Polygon Mesh",
+    category: "uxui",
+    thumbnail: "/images/Project/preview-polygon-mesh.png",
+    heroImage: "/images/Project/preview-polygon-mesh.png",
+    date: "2025",
+    tags: ["Figma", "Interactive Media", "Educational Design", "Game-Based Learning"],
+    techStack: ["Figma", "Figma Prototype", "Figma Site", "Pen Tool", "Image Cutter (Plugin)", "Property Randomizer (Plugin)"],
+    summary: "โปรเจกต์นี้เป็นสื่อการเรียนรู้ที่พาผู้ใช้เข้าใจตั้งแต่ vertices, edges, faces ไปจนถึงการเกิด polygon mesh และ 3D object representation พร้อมต่อยอดด้วย jigsaw game ที่ให้ผู้เรียนประกอบ face ของโมเดลด้วยตัวเอง",
+    problem: "หัวข้อ polygon mesh ยากต่อการจินตนาการจาก text-only หรือ slide แบบนิ่ง จึงจำเป็นต้องมีสื่อที่แสดงลำดับการเกิดรูปทรงอย่างเป็นภาพและมี interaction ช่วยให้ผู้เรียนเชื่อมโยงแนวคิดได้ง่ายขึ้น",
+    process: "ออกแบบ home และ topic navigation → แยกเนื้อหา 2D และ 3D พร้อมลูกศร next/back และ dropdown config → ใช้ hover / prototype linking / while hovering เพื่อทำให้เนื้อหามีความเคลื่อนไหว → สร้าง jigsaw game ด้วย Pen Tool, Image Cutter และ Property Randomizer",
+    result: "The Solution: สื่อการเรียนรู้ที่ผู้ใช้สามารถเห็นการเปลี่ยนแปลงของ object ทีละส่วน กดสำรวจหัวข้อเชิงลึก และลงมือเล่นผ่าน jigsaw เพื่อ reinforce ความเข้าใจ\nImpact: ช่วยเปลี่ยนเนื้อหาพื้นฐาน 3D modeling ให้เข้าใจง่าย สนุก และจดจำได้ดีขึ้นผ่านการมีส่วนร่วมของผู้เรียน\nChallenges: ทำให้เรื่อง polygon mesh และ 3D object representation ซึ่งค่อนข้าง abstract เข้าใจง่ายขึ้นผ่าน interaction, animation, hover states, draggable pieces และ content flow ที่ผู้เรียนกดสำรวจได้เอง",
+    gallery: [
+      "/images/Project/polygon-home.png",
+      "/images/Project/polygon-2d.png",
+      "/images/Project/polygon-2d-process.png",
+      "/images/Project/polygon-2d-config.png",
+      "/images/Project/polygon-3d.png",
+      "/images/Project/polygon-3d-process.png",
+      "/images/Project/polygon-3d-config.png",
+      "/images/Project/polygon-study.png",
+      "/images/Project/polygon-3d-object.png",
+      "/images/Project/polygon-finalizing.png",
+      "/images/Project/polygon-creating-mesh.png",
+      "/images/Project/polygon-jigsaw-menu.png",
+      "/images/Project/polygon-jigsaw-game.png",
+    ],
+  },
+  {
     slug: "vps-tycoon",
     title: "VPS-Tycoon",
     category: "programming",
-    thumbnail: "/images/Project/vps-tycoon/1.png",
-    heroImage: "/images/Project/vps-tycoon/1.png",
+    thumbnail: "/images/Project/preview-vps-tycoon.png",
+    heroImage: "/images/Project/vps-cover.png",
     date: "2025",
-    tags: ["Java", "JavaFX", "OOP", "Game Dev", "GitHub"],
-    techStack: ["Java", "JavaFX", "GitHub", "Aseprite", "Canva"],
-    summary: "เกมจำลองธุรกิจเช่าเซิร์ฟเวอร์ VPS Hosting ผู้เล่นสวมบทบาทเจ้าของบริษัท จัดการ VM แก้ปัญหาเทคนิคผ่านมินิเกม พัฒนาด้วย Java/JavaFX สถาปัตยกรรม OOP ทีม 11 คน 1 ภาคเรียน",
-    problem: "การจำลองระบบธุรกิจซับซ้อน (จัดสรร CPU, RAM, Storage, ลูกค้า, เรตติ้ง) ให้เป็นเกมที่เข้าใจง่าย นำหลักการ OOP มาประยุกต์ในโครงสร้างซับซ้อน",
-    process: "การพัฒนาเกม VPS-Tycoon แบ่งออกเป็น 5 เฟส โดยเริ่มจากการศึกษาเทคโนโลยีไปจนถึงการพัฒนา UI และระบบบันทึกเกม",
+    tags: ["Java", "JavaFX", "OOP", "Game Dev", "GitHub", "Cyberpunk"],
+    techStack: ["Java", "JavaFX", "IntelliJ IDEA", "GitHub", "Aseprite", "Canva", "Discord"],
+    summary: "ผู้เล่นเริ่มต้นในปี 2000 บริหารบริษัท VPS hosting ด้วยทรัพยากรหลักคือ money และ rating ซื้อ server ติดตั้งบน rack รับ requests จากลูกค้าผ่าน messenger ปรับสเปก VM จัดการเวลา deploy รับมือ event ระหว่างเช่า และอัปเกรด skill 6 ด้านเพื่อขยายกิจการ",
+    problem: "การนำหัวข้อเทคนิคอย่าง VPS, rack, virtual machine, network และ security มาทำให้เข้าใจง่ายพอสำหรับผู้เล่นทั่วไปโดยยังคงความลึกของระบบ",
+    process: "วาง core concept และ game loop → ออกแบบ data relationship ของ company, requests, rack และ VM → พัฒนาระบบเวลาและ event system → สร้าง UI ธีม cyberpunk พร้อม pixel art",
     phases: [
       {
-        title: "Phase 1: ศึกษา Java + JavaFX",
-        description: "ศึกษาโครงสร้างและแนวคิดสถาปัตยกรรม"
+        title: "Phase 1: Core Concept & Game Loop Design",
+        description: "วาง core loop: รับ request → จัดสรร VM → deploy → รับรายได้ → อัปเกรดระบบ ออกแบบ mechanic หลักและ win/lose condition"
       },
       {
-        title: "Phase 2: ออกแบบ Class Diagram",
-        description: "ออกแบบระบบ (Server, Customer, Game Economy)"
+        title: "Phase 2: Data Relationship Design",
+        description: "ออกแบบความสัมพันธ์ของ company, customer requests, rack configuration และ VM assignments ให้เป็น OOP architecture ที่ยืดหยุ่น"
       },
       {
-        title: "Phase 3: พัฒนา Game Loop + ระบบจัดการทรัพยากร",
-        description: "พัฒนาระบบหลังบ้านในการจัดสรรทรัพยากรผู้ให้บริการ"
+        title: "Phase 3: Time System & Event System",
+        description: "พัฒนาระบบเวลา (30 วินาทีจริง = 1 วันในเกม) และ event system เพื่อสร้างแรงกดดันและ progression ระหว่างการเช่า"
       },
       {
-        title: "Phase 4: สร้างมินิเกม",
-        description: "สร้างมินิเกม Firewall Defense, File Recovery, Task System"
-      },
-      {
-        title: "Phase 5: ออกแบบ UI Cyberpunk + ระบบ Save/Load",
-        description: "ปรับกราฟิกสไตล์ Cyberpunk และการเซฟเกม"
+        title: "Phase 4: Cyberpunk UI & Pixel Art Graphics",
+        description: "สร้าง UI ธีม cyberpunk ด้วย JavaFX และใช้ pixel art / graphic support เพื่อให้เกมมีเอกลักษณ์ที่จดจำได้"
       }
     ],
-    result: "The Solution: เกม OOP ยืดหยุ่น เริ่มปี 2000 จัดการเงิน+เรตติ้ง Messenger ลูกค้า อัปเกรด Network/Security/Marketing กราฟิก Cyberpunk\nImpact: พัฒนา Java ขั้นสูง ทำงานเป็นทีม 11 คน\nChallenges: จัดการโครงสร้างข้อมูล/อัลกอริทึมซับซ้อนเพื่อจัดสรรทรัพยากรแม่นยำ",
+    result: "The Solution: เกมจำลองธุรกิจเชิงระบบที่มีทั้งความรู้สึกของ tycoon game และการจัดการ resource เชิงเทคนิค พร้อมระบบ save/load และ event-driven progression\nImpact: ได้ฝึก OOP, game system design, state management, และการทำงานร่วมกันในโปรเจกต์ขนาดทีม\nChallenges: จำลองระบบธุรกิจ VPS ที่มีทรัพยากรหลายชั้นให้เล่นสนุกและเข้าใจง่าย, ออกแบบความสัมพันธ์ระหว่าง rack / VM / requests / skill / events, และทำ UI ธีม cyberpunk ให้เข้ากับเนื้อหาเชิงเทคนิค\nIdeation: เปลี่ยนแนวคิดเรื่อง server management และ VPS hosting ซึ่งดู technical มาก ให้กลายเป็นเกมบริหารธุรกิจที่มีความก้าวหน้า มีการตัดสินใจ และมีระบบอัปเกรดชัดเจน",
     gallery: [
-      "/images/Project/vps-tycoon/1.png",
-      "/images/Project/vps-tycoon/2.png",
-      "/images/Project/vps-tycoon/3.png",
-      "/images/Project/vps-tycoon/4.png"
+      "/images/Project/vps-cover.png",
+      "/images/Project/vps-abstract.png",
+      "/images/Project/vps-tools.png",
+      "/images/Project/vps-theme.png",
+      "/images/Project/vps-gameloop-time.png",
+      "/images/Project/vps-gameloop-core.png",
+      "/images/Project/vps-messenger.png",
+      "/images/Project/vps-rack.png",
+      "/images/Project/vps-events.png",
+      "/images/Project/vps-save-load.png",
     ],
   },
   {
@@ -164,35 +195,6 @@ export const projects: Project[] = [
       "/synchrobox.jpg",
       "/SYNCHROPoster.png",
       "/SynchroController/Teacher.png"
-    ],
-  },
-  {
-    slug: "polygon-mesh",
-    title: "Multimedia Learning Polygon Mesh",
-    category: "uxui",
-    thumbnail: "/images/Project/preview-polygon-mesh.png",
-    heroImage: "/images/Project/preview-polygon-mesh.png",
-    date: "2025",
-    tags: ["Figma", "Interactive Media", "Educational Design", "Game-Based Learning"],
-    techStack: ["Figma", "Figma Prototype", "Figma Site", "Pen Tool", "Image Cutter (Plugin)", "Property Randomizer (Plugin)"],
-    summary: "โปรเจกต์นี้เป็นสื่อการเรียนรู้ที่พาผู้ใช้เข้าใจตั้งแต่ vertices, edges, faces ไปจนถึงการเกิด polygon mesh และ 3D object representation พร้อมต่อยอดด้วย jigsaw game ที่ให้ผู้เรียนประกอบ face ของโมเดลด้วยตัวเอง",
-    problem: "หัวข้อ polygon mesh ยากต่อการจินตนาการจาก text-only หรือ slide แบบนิ่ง จึงจำเป็นต้องมีสื่อที่แสดงลำดับการเกิดรูปทรงอย่างเป็นภาพและมี interaction ช่วยให้ผู้เรียนเชื่อมโยงแนวคิดได้ง่ายขึ้น",
-    process: "ออกแบบ home และ topic navigation → แยกเนื้อหา 2D และ 3D พร้อมลูกศร next/back และ dropdown config → ใช้ hover / prototype linking / while hovering เพื่อทำให้เนื้อหามีความเคลื่อนไหว → สร้าง jigsaw game ด้วย Pen Tool, Image Cutter และ Property Randomizer",
-    result: "The Solution: สื่อการเรียนรู้ที่ผู้ใช้สามารถเห็นการเปลี่ยนแปลงของ object ทีละส่วน กดสำรวจหัวข้อเชิงลึก และลงมือเล่นผ่าน jigsaw เพื่อ reinforce ความเข้าใจ\nImpact: ช่วยเปลี่ยนเนื้อหาพื้นฐาน 3D modeling ให้เข้าใจง่าย สนุก และจดจำได้ดีขึ้นผ่านการมีส่วนร่วมของผู้เรียน\nChallenges: ทำให้เรื่อง polygon mesh และ 3D object representation ซึ่งค่อนข้าง abstract เข้าใจง่ายขึ้นผ่าน interaction, animation, hover states, draggable pieces และ content flow ที่ผู้เรียนกดสำรวจได้เอง",
-    gallery: [
-      "/images/Project/polygon-home.png",
-      "/images/Project/polygon-2d.png",
-      "/images/Project/polygon-2d-process.png",
-      "/images/Project/polygon-2d-config.png",
-      "/images/Project/polygon-3d.png",
-      "/images/Project/polygon-3d-process.png",
-      "/images/Project/polygon-3d-config.png",
-      "/images/Project/polygon-study.png",
-      "/images/Project/polygon-3d-object.png",
-      "/images/Project/polygon-finalizing.png",
-      "/images/Project/polygon-creating-mesh.png",
-      "/images/Project/polygon-jigsaw-menu.png",
-      "/images/Project/polygon-jigsaw-game.png",
     ],
   },
   {

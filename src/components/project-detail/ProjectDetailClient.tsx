@@ -140,6 +140,7 @@ export default function ProjectDetailClient({ project }: { project: Project }) {
 
   const isChaodom = project.slug === "chao-dom";
   const isPolygonMesh = project.slug === "polygon-mesh";
+  const isVpsTycoon = project.slug === "vps-tycoon";
 
   function openLightbox(images: string[], index: number) {
     setLightboxImages(images);
@@ -261,9 +262,31 @@ export default function ProjectDetailClient({ project }: { project: Project }) {
         <FadeSection delay={0} className="py-14">
           <SectionNumber n="01" />
           <h2 className="font-display text-3xl md:text-4xl text-soft-white mb-6 -mt-2">
-            {isPolygonMesh ? "Learning Goal" : "Overview"}
+            {isPolygonMesh ? "Learning Goal" : isVpsTycoon ? "Project Pitch" : "Overview"}
           </h2>
           <p className="font-body text-base md:text-lg text-soft-white/75 leading-relaxed">{project.summary}</p>
+
+          {isVpsTycoon && (
+            <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-4">
+              {[
+                { src: "/images/Project/vps-cover.png", label: "Cover Art" },
+                { src: "/images/Project/vps-abstract.png", label: "Abstract" },
+              ].map(({ src, label }, i) => (
+                <motion.button
+                  key={i}
+                  className="group relative aspect-video rounded-2xl overflow-hidden bg-deep-purple/30 border border-soft-white/5 cursor-pointer focus:outline-none focus:ring-2 focus:ring-sky-cyan/50"
+                  onClick={() => openLightbox(["/images/Project/vps-cover.png", "/images/Project/vps-abstract.png"], i)}
+                  whileHover={{ scale: 1.02 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  <Image src={src} alt={label} fill className="object-cover" sizes="(max-width: 768px) 100vw, 50vw" />
+                  <div className="absolute inset-0 bg-sky-cyan/0 group-hover:bg-sky-cyan/10 transition-colors duration-300 flex items-center justify-center">
+                    <span className="font-body text-sm text-soft-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-dark-navy/60 px-4 py-2 rounded-full backdrop-blur-sm">{label}</span>
+                  </div>
+                </motion.button>
+              ))}
+            </div>
+          )}
 
           {isPolygonMesh && (
             <div className="mt-8 relative w-full overflow-hidden rounded-2xl" style={{ clipPath: "polygon(0 0, 100% 0, 100% 92%, 97% 100%, 0 100%)" }}>
@@ -300,9 +323,24 @@ export default function ProjectDetailClient({ project }: { project: Project }) {
         <FadeSection delay={0.05} className="py-14">
           <SectionNumber n="02" extra={<ImpactBubble />} />
           <h2 className="font-display text-3xl md:text-4xl text-soft-white mb-6 -mt-2">
-            {isPolygonMesh ? "Why This Topic Is Hard" : "The Problem"}
+            {isPolygonMesh ? "Why This Topic Is Hard" : isVpsTycoon ? "The Challenge" : "The Problem"}
           </h2>
           <p className="font-body text-base md:text-lg text-soft-white/75 leading-relaxed">{project.problem}</p>
+
+          {isVpsTycoon && (
+            <div className="mt-8 relative bg-soft-white/5 border border-sky-cyan/30 rounded-2xl p-6 md:p-8 overflow-hidden">
+              <div className="absolute -top-4 -right-4 font-display text-9xl text-sky-cyan/5 pointer-events-none select-none">!?</div>
+              <div className="flex items-start gap-4">
+                <ImpactBubble />
+                <div>
+                  <p className="font-display text-lg text-sky-cyan mb-2">Technical Depth vs. Playability</p>
+                  <p className="font-body text-sm text-soft-white/75 leading-relaxed">
+                    VPS hosting, rack management, และ VM allocation เป็นแนวคิดที่ technical มาก — ความท้าทายคือออกแบบให้ผู้เล่นทั่วไปเข้าใจ mechanic เหล่านี้ได้ทันที โดยยังคงความลึกของระบบที่ทำให้เกมน่าสนใจในระยะยาว
+                  </p>
+                </div>
+              </div>
+            </div>
+          )}
 
           {isPolygonMesh && (
             <div className="mt-8 relative bg-soft-white/5 border border-hot-pink/30 rounded-2xl p-6 md:p-8 overflow-hidden">
@@ -368,12 +406,71 @@ export default function ProjectDetailClient({ project }: { project: Project }) {
           <FadeSection delay={0.05}>
             <SectionNumber n="03" />
             <h2 className="font-display text-3xl md:text-4xl text-soft-white mb-6 -mt-2">
-              {isPolygonMesh ? "Interaction Design Highlights" : "The Process"}
+              {isPolygonMesh ? "Interaction Design Highlights" : isVpsTycoon ? "Core Game Loop" : "The Process"}
             </h2>
-            {!isPolygonMesh && (
+            {!isPolygonMesh && !isVpsTycoon && (
               <p className="font-body text-base md:text-lg text-soft-white/75 leading-relaxed">{project.process}</p>
             )}
           </FadeSection>
+
+          {isVpsTycoon && (
+            <FadeSection delay={0.1}>
+              {/* Loop flow diagram */}
+              <div className="flex flex-col md:flex-row items-center justify-center gap-2 md:gap-0 mb-10">
+                {[
+                  { icon: "📨", step: "Receive Request", sub: "Customer via Messenger" },
+                  { icon: "⚙", step: "Allocate VM", sub: "CPU / RAM / Storage" },
+                  { icon: "🚀", step: "Deploy", sub: "Assign to Rack Slot" },
+                  { icon: "💰", step: "Earn Revenue", sub: "Money + Rating" },
+                  { icon: "⬆", step: "Upgrade Systems", sub: "6 Skill Trees" },
+                ].map((node, i, arr) => (
+                  <div key={i} className="flex flex-col md:flex-row items-center">
+                    <div className="flex flex-col items-center bg-soft-white/5 border border-sky-cyan/20 rounded-2xl px-5 py-4 min-w-[120px] text-center hover:border-sky-cyan/50 hover:bg-soft-white/8 transition-all duration-300">
+                      <span className="text-2xl mb-1">{node.icon}</span>
+                      <p className="font-display text-xs text-soft-white font-bold leading-tight mb-1">{node.step}</p>
+                      <p className="font-body text-xs text-soft-white/50 leading-tight">{node.sub}</p>
+                    </div>
+                    {i < arr.length - 1 && (
+                      <span
+                        className="font-display text-sky-cyan/40 text-2xl mx-2 rotate-90 md:rotate-0 my-1 md:my-0"
+                        aria-hidden="true"
+                      >→</span>
+                    )}
+                  </div>
+                ))}
+              </div>
+              {/* Time system callout */}
+              <div className="flex items-start gap-4 bg-soft-white/5 border border-retro-yellow/30 rounded-2xl p-5 mb-8">
+                <span className="font-display text-3xl text-retro-yellow/70 shrink-0">⏱</span>
+                <div>
+                  <p className="font-display text-sm text-retro-yellow font-bold mb-1">Time System</p>
+                  <p className="font-body text-sm text-soft-white/70 leading-relaxed">
+                    30 วินาทีจริง = 1 วันในเกม — สร้างแรงกดดันให้ผู้เล่นตัดสินใจเร็ว จัดลำดับ request และบริหาร resource ก่อนสัญญาเช่าหมดอายุ
+                  </p>
+                </div>
+              </div>
+              {/* Loop images */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                {[
+                  { src: "/images/Project/vps-gameloop-core.png", label: "Core Loop Diagram" },
+                  { src: "/images/Project/vps-gameloop-time.png", label: "Time System" },
+                ].map(({ src, label }, i) => (
+                  <motion.button
+                    key={i}
+                    className="group relative aspect-video rounded-2xl overflow-hidden bg-deep-purple/30 border border-soft-white/5 cursor-pointer focus:outline-none focus:ring-2 focus:ring-sky-cyan/50"
+                    onClick={() => openLightbox(["/images/Project/vps-gameloop-core.png", "/images/Project/vps-gameloop-time.png"], i)}
+                    whileHover={{ scale: 1.02 }}
+                    transition={{ duration: 0.3 }}
+                  >
+                    <Image src={src} alt={label} fill className="object-cover" sizes="(max-width: 768px) 100vw, 50vw" />
+                    <div className="absolute inset-0 bg-sky-cyan/0 group-hover:bg-sky-cyan/10 transition-colors duration-300 flex items-center justify-center">
+                      <span className="font-body text-sm text-soft-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-dark-navy/60 px-4 py-2 rounded-full backdrop-blur-sm">{label}</span>
+                    </div>
+                  </motion.button>
+                ))}
+              </div>
+            </FadeSection>
+          )}
 
           {isPolygonMesh && (
             <FadeSection delay={0.1}>
@@ -746,9 +843,9 @@ export default function ProjectDetailClient({ project }: { project: Project }) {
               <p className="font-body text-base md:text-lg text-soft-white/75 leading-relaxed whitespace-pre-line">{project.result}</p>
 
               {/* Challenges aside */}
-              <div className="mt-8 relative bg-soft-white/5 border border-retro-yellow/30 rounded-2xl p-6 overflow-hidden">
+              <div className="mt-10 relative bg-soft-white/5 border border-retro-yellow/30 rounded-2xl px-6 pb-6 pt-7">
                 <div className="absolute -top-3 left-6 bg-retro-yellow text-dark-navy font-body text-xs font-bold px-3 py-1 rounded-full">Challenges</div>
-                <p className="font-body text-sm text-soft-white/75 leading-relaxed mt-2">
+                <p className="font-body text-sm text-soft-white/75 leading-relaxed">
                   ทำให้เรื่อง polygon mesh และ 3D object representation ซึ่งค่อนข้าง abstract เข้าใจง่ายขึ้นผ่าน interaction, animation, hover states, draggable pieces และ content flow ที่ผู้เรียนกดสำรวจได้เอง
                 </p>
               </div>
@@ -802,6 +899,164 @@ export default function ProjectDetailClient({ project }: { project: Project }) {
             <div className="h-px bg-gradient-to-r from-transparent via-soft-white/10 to-transparent" />
           </>
         )}
+
+        {/* ════════════════════════════════════════
+            04 KEY SYSTEMS (vps-tycoon only)
+        ════════════════════════════════════════ */}
+        {isVpsTycoon && (
+          <>
+            <FadeSection delay={0.05} className="py-14">
+              <SectionNumber n="04" />
+              <h2 className="font-display text-3xl md:text-4xl text-soft-white mb-6 -mt-2">Key Systems</h2>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-10">
+                {[
+                  { icon: "🖥", name: "Rack Management", desc: "ซื้อ server และติดตั้งบน rack slot เพื่อขยาย capacity ของบริษัท" },
+                  { icon: "⚙", name: "VM Specification Matching", desc: "จัดสรร CPU, RAM, Storage ให้ตรงกับ request spec ของลูกค้าแต่ละราย" },
+                  { icon: "💬", name: "Messenger Request System", desc: "รับ customer requests ผ่านระบบ messenger แบบ real-time" },
+                  { icon: "📈", name: "6 Skill Trees", desc: "Deploy · Networks · Security · Marketing · Management · Rack Slot — อัปเกรดได้อิสระ" },
+                  { icon: "⚡", name: "Event System", desc: "random events ระหว่างช่วง rental สร้างแรงกดดันและ decision points" },
+                  { icon: "💾", name: "Save / Load System", desc: "บันทึกและโหลดสถานะเกมเพื่อเล่นต่อได้ทุกเวลา" },
+                  { icon: "⭐", name: "Rating Progression", desc: "rating บริษัทเพิ่ม/ลดตามคุณภาพ service — ส่งผลต่อ request tier" },
+                ].map((sys, i) => (
+                  <div key={i} className="flex items-start gap-4 bg-soft-white/5 border border-soft-white/10 rounded-2xl p-5 hover:border-sky-cyan/30 hover:bg-soft-white/8 transition-all duration-300">
+                    <span className="text-2xl shrink-0 mt-0.5">{sys.icon}</span>
+                    <div>
+                      <p className="font-display text-sm text-soft-white font-bold mb-1">{sys.name}</p>
+                      <p className="font-body text-xs text-soft-white/60 leading-relaxed">{sys.desc}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                {[
+                  { src: "/images/Project/vps-messenger.png", label: "Messenger" },
+                  { src: "/images/Project/vps-rack.png", label: "Rack Management" },
+                  { src: "/images/Project/vps-events.png", label: "Event System" },
+                  { src: "/images/Project/vps-save-load.png", label: "Save / Load" },
+                ].map(({ src, label }, i) => {
+                  const imgs = ["/images/Project/vps-messenger.png", "/images/Project/vps-rack.png", "/images/Project/vps-events.png", "/images/Project/vps-save-load.png"];
+                  return (
+                    <motion.button
+                      key={i}
+                      className="group relative aspect-video rounded-2xl overflow-hidden bg-deep-purple/30 border border-soft-white/5 cursor-pointer focus:outline-none focus:ring-2 focus:ring-sky-cyan/50"
+                      onClick={() => openLightbox(imgs, i)}
+                      whileHover={{ scale: 1.02 }}
+                      transition={{ duration: 0.3 }}
+                    >
+                      <Image src={src} alt={label} fill className="object-cover" sizes="(max-width: 768px) 50vw, 25vw" />
+                      <div className="absolute inset-0 bg-sky-cyan/0 group-hover:bg-sky-cyan/10 transition-colors duration-300 flex items-center justify-center">
+                        <span className="font-body text-xs text-soft-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-dark-navy/60 px-3 py-1.5 rounded-full backdrop-blur-sm">{label}</span>
+                      </div>
+                    </motion.button>
+                  );
+                })}
+              </div>
+            </FadeSection>
+
+            <div className="h-px bg-gradient-to-r from-transparent via-soft-white/10 to-transparent" />
+
+            {/* ════════════════════════════════════════
+                05 DEVELOPMENT PROCESS (vps-tycoon only)
+            ════════════════════════════════════════ */}
+            <FadeSection delay={0.05} className="py-14">
+              <SectionNumber n="05" />
+              <h2 className="font-display text-3xl md:text-4xl text-soft-white mb-6 -mt-2">Development Process</h2>
+              <div className="space-y-4 mb-10">
+                {(project.phases ?? []).map((phase, i) => (
+                  <div key={i} className="flex items-start gap-5 bg-soft-white/5 border border-soft-white/10 rounded-2xl p-5 hover:border-sky-cyan/30 transition-all duration-300">
+                    <span
+                      className="font-display text-4xl leading-none shrink-0 mt-0.5"
+                      style={{
+                        background: "linear-gradient(135deg, #00C2FF 0%, #B026FF 100%)",
+                        WebkitBackgroundClip: "text",
+                        WebkitTextFillColor: "transparent",
+                        opacity: 0.7,
+                      }}
+                    >
+                      {String(i + 1).padStart(2, "0")}
+                    </span>
+                    <div>
+                      <p className="font-display text-base text-soft-white mb-1">{phase.title}</p>
+                      <p className="font-body text-sm text-soft-white/60 leading-relaxed">{phase.description}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                {[
+                  { src: "/images/Project/vps-tools.png", label: "Tools & Stack" },
+                  { src: "/images/Project/vps-theme.png", label: "Cyberpunk Theme" },
+                ].map(({ src, label }, i) => (
+                  <motion.button
+                    key={i}
+                    className="group relative aspect-video rounded-2xl overflow-hidden bg-deep-purple/30 border border-soft-white/5 cursor-pointer focus:outline-none focus:ring-2 focus:ring-neon-magenta/50"
+                    onClick={() => openLightbox(["/images/Project/vps-tools.png", "/images/Project/vps-theme.png"], i)}
+                    whileHover={{ scale: 1.02 }}
+                    transition={{ duration: 0.3 }}
+                  >
+                    <Image src={src} alt={label} fill className="object-cover" sizes="(max-width: 768px) 100vw, 50vw" />
+                    <div className="absolute inset-0 bg-neon-magenta/0 group-hover:bg-neon-magenta/10 transition-colors duration-300 flex items-center justify-center">
+                      <span className="font-body text-sm text-soft-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-dark-navy/60 px-4 py-2 rounded-full backdrop-blur-sm">{label}</span>
+                    </div>
+                  </motion.button>
+                ))}
+              </div>
+            </FadeSection>
+
+            <div className="h-px bg-gradient-to-r from-transparent via-soft-white/10 to-transparent" />
+
+            {/* ════════════════════════════════════════
+                06 SOLUTION & IMPACT (vps-tycoon only)
+            ════════════════════════════════════════ */}
+            <FadeSection delay={0.05} className="py-14">
+              <SectionNumber n="06" />
+              <h2 className="font-display text-3xl md:text-4xl text-soft-white mb-6 -mt-2">Solution &amp; Impact</h2>
+              <p className="font-body text-base md:text-lg text-soft-white/75 leading-relaxed whitespace-pre-line">{project.result}</p>
+
+              {/* Challenges aside */}
+              <div className="mt-10 relative bg-soft-white/5 border border-retro-yellow/30 rounded-2xl px-6 pb-6 pt-7">
+                <div className="absolute -top-3 left-6 bg-retro-yellow text-dark-navy font-body text-xs font-bold px-3 py-1 rounded-full">Challenges</div>
+                <p className="font-body text-sm text-soft-white/75 leading-relaxed">
+                  จำลองระบบธุรกิจ VPS ที่มีทรัพยากรหลายชั้นให้เล่นสนุกและเข้าใจง่าย — ออกแบบความสัมพันธ์ระหว่าง rack / VM / requests / skill / events ในสถาปัตยกรรม OOP ที่ยืดหยุ่น และทำ UI ธีม cyberpunk ให้เข้ากับเนื้อหาเชิงเทคนิค
+                </p>
+              </div>
+
+              {/* Ideation callout */}
+              <div className="mt-8 relative bg-soft-white/5 border border-neon-magenta/20 rounded-2xl px-6 pb-6 pt-7">
+                <div className="absolute -top-3 left-6 bg-neon-magenta/80 text-dark-navy font-body text-xs font-bold px-3 py-1 rounded-full">Ideation</div>
+                <p className="font-body text-sm text-soft-white/70 leading-relaxed">
+                  เปลี่ยนแนวคิดเรื่อง server management ซึ่งดู technical มาก ให้กลายเป็นเกมบริหารธุรกิจที่มีความก้าวหน้า มีการตัดสินใจชัดเจน และมีระบบอัปเกรดที่ผู้เล่นรู้สึกเติบโตได้จริง
+                </p>
+              </div>
+
+              {/* Project info sidebar */}
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-10 mb-8">
+                <div>
+                  <p className="font-body text-xs text-soft-white/40 uppercase tracking-widest mb-2">Role</p>
+                  <p className="font-body text-sm text-soft-white/80">Developer / Programmer</p>
+                </div>
+                <div>
+                  <p className="font-body text-xs text-soft-white/40 uppercase tracking-widest mb-2">Tech Stack</p>
+                  <div className="flex flex-col gap-1">
+                    {project.techStack.map((t) => (
+                      <span key={t} className="font-body text-xs text-soft-white/70">{t}</span>
+                    ))}
+                  </div>
+                </div>
+                <div>
+                  <p className="font-body text-xs text-soft-white/40 uppercase tracking-widest mb-2">Timeline</p>
+                  <p className="font-body text-sm text-soft-white/80">1 ภาคเรียน</p>
+                </div>
+                <div>
+                  <p className="font-body text-xs text-soft-white/40 uppercase tracking-widest mb-2">Team</p>
+                  <p className="font-body text-sm text-soft-white/80">LoveJarnBank Group</p>
+                </div>
+              </div>
+            </FadeSection>
+
+            <div className="h-px bg-gradient-to-r from-transparent via-soft-white/10 to-transparent" />
+          </>
+        )}
       </div>
 
       {/* ════════════════════════════════════════
@@ -824,13 +1079,16 @@ export default function ProjectDetailClient({ project }: { project: Project }) {
               </span>
             </div>
             <h2 className="font-display text-3xl md:text-4xl text-soft-white -mt-2">
-              {isPolygonMesh ? "Full Gallery" : "Visual principles detail"}
+              {isPolygonMesh ? "Full Gallery" : isVpsTycoon ? "Full Gallery" : "Visual principles detail"}
             </h2>
             {isChaodom && (
               <p className="font-body text-sm text-soft-white/50 mt-2">UI Design Principles &amp; Visual Design Analysis</p>
             )}
             {isPolygonMesh && (
               <p className="font-body text-sm text-soft-white/50 mt-2">All 13 screens — 2D, 3D, Polygon Study, Jigsaw &amp; more</p>
+            )}
+            {isVpsTycoon && (
+              <p className="font-body text-sm text-soft-white/50 mt-2">All 10 images — Cover, Game Loop, Systems, Cyberpunk UI &amp; more</p>
             )}
           </div>
           <div className="mx-auto max-w-6xl px-4 md:px-6">
@@ -843,9 +1101,9 @@ export default function ProjectDetailClient({ project }: { project: Project }) {
       )}
 
       {/* ════════════════════════════════════════
-          05 THE SOLUTION (non-polygon-mesh only)
+          05 THE SOLUTION (non-polygon-mesh, non-vps-tycoon only)
       ════════════════════════════════════════ */}
-      {!isPolygonMesh && (
+      {!isPolygonMesh && !isVpsTycoon && (
       <div className="relative z-10 mx-auto max-w-5xl px-6">
         <div className="h-px bg-gradient-to-r from-transparent via-soft-white/10 to-transparent" />
         <FadeSection delay={0.05} className="py-14">
