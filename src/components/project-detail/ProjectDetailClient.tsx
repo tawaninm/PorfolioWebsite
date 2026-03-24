@@ -139,6 +139,7 @@ export default function ProjectDetailClient({ project }: { project: Project }) {
   const currentIndex = projects.findIndex((p) => p.slug === project.slug);
 
   const isChaodom = project.slug === "chao-dom";
+  const isPolygonMesh = project.slug === "polygon-mesh";
 
   function openLightbox(images: string[], index: number) {
     setLightboxImages(images);
@@ -254,13 +255,30 @@ export default function ProjectDetailClient({ project }: { project: Project }) {
       </div>
 
       {/* ════════════════════════════════════════
-          01 OVERVIEW
+          01 OVERVIEW / LEARNING GOAL
       ════════════════════════════════════════ */}
       <div className="relative z-10 mx-auto max-w-5xl px-6">
         <FadeSection delay={0} className="py-14">
           <SectionNumber n="01" />
-          <h2 className="font-display text-3xl md:text-4xl text-soft-white mb-6 -mt-2">Overview</h2>
+          <h2 className="font-display text-3xl md:text-4xl text-soft-white mb-6 -mt-2">
+            {isPolygonMesh ? "Learning Goal" : "Overview"}
+          </h2>
           <p className="font-body text-base md:text-lg text-soft-white/75 leading-relaxed">{project.summary}</p>
+
+          {isPolygonMesh && (
+            <div className="mt-8 relative w-full overflow-hidden rounded-2xl" style={{ clipPath: "polygon(0 0, 100% 0, 100% 92%, 97% 100%, 0 100%)" }}>
+              <div className="aspect-[21/9] relative">
+                <Image
+                  src="/images/Project/preview-polygon-mesh.png"
+                  alt="Multimedia Learning Polygon Mesh Preview"
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 768px) 100vw, 80vw"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-dark-navy/60 via-transparent to-transparent" />
+              </div>
+            </div>
+          )}
 
           {isChaodom && (
             <>
@@ -277,12 +295,29 @@ export default function ProjectDetailClient({ project }: { project: Project }) {
         <div className="h-px bg-gradient-to-r from-transparent via-soft-white/10 to-transparent" />
 
         {/* ════════════════════════════════════════
-            02 THE PROBLEM
+            02 THE PROBLEM / WHY THIS TOPIC IS HARD
         ════════════════════════════════════════ */}
         <FadeSection delay={0.05} className="py-14">
           <SectionNumber n="02" extra={<ImpactBubble />} />
-          <h2 className="font-display text-3xl md:text-4xl text-soft-white mb-6 -mt-2">The Problem</h2>
+          <h2 className="font-display text-3xl md:text-4xl text-soft-white mb-6 -mt-2">
+            {isPolygonMesh ? "Why This Topic Is Hard" : "The Problem"}
+          </h2>
           <p className="font-body text-base md:text-lg text-soft-white/75 leading-relaxed">{project.problem}</p>
+
+          {isPolygonMesh && (
+            <div className="mt-8 relative bg-soft-white/5 border border-hot-pink/30 rounded-2xl p-6 md:p-8 overflow-hidden">
+              <div className="absolute -top-4 -right-4 font-display text-9xl text-hot-pink/5 pointer-events-none select-none">!?</div>
+              <div className="flex items-start gap-4">
+                <ImpactBubble />
+                <div>
+                  <p className="font-display text-lg text-hot-pink mb-2">Abstract by Nature</p>
+                  <p className="font-body text-sm text-soft-white/75 leading-relaxed">
+                    Polygon mesh เป็นแนวคิดที่ต้องเห็น ไม่ใช่แค่อ่าน — การเข้าใจว่า vertices เชื่อมกันเป็น edges แล้วกลายเป็น faces และ faces รวมกันสร้างวัตถุ 3D นั้นต้องการ interaction และ visual step-by-step ที่ text หรือ slide นิ่ง ๆ ให้ไม่ได้
+                  </p>
+                </div>
+              </div>
+            </div>
+          )}
 
           {isChaodom && (
             <>
@@ -327,14 +362,69 @@ export default function ProjectDetailClient({ project }: { project: Project }) {
         <div className="h-px bg-gradient-to-r from-transparent via-soft-white/10 to-transparent" />
 
         {/* ════════════════════════════════════════
-            03 THE PROCESS
+            03 THE PROCESS / INTERACTION DESIGN HIGHLIGHTS
         ════════════════════════════════════════ */}
         <div className="py-14">
           <FadeSection delay={0.05}>
             <SectionNumber n="03" />
-            <h2 className="font-display text-3xl md:text-4xl text-soft-white mb-6 -mt-2">The Process</h2>
-            <p className="font-body text-base md:text-lg text-soft-white/75 leading-relaxed">{project.process}</p>
+            <h2 className="font-display text-3xl md:text-4xl text-soft-white mb-6 -mt-2">
+              {isPolygonMesh ? "Interaction Design Highlights" : "The Process"}
+            </h2>
+            {!isPolygonMesh && (
+              <p className="font-body text-base md:text-lg text-soft-white/75 leading-relaxed">{project.process}</p>
+            )}
           </FadeSection>
+
+          {isPolygonMesh && (
+            <FadeSection delay={0.1}>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-10">
+                {[
+                  { icon: "◻", name: "2D Process Polygon", desc: "เรียนรู้การเกิด polygon ทีละขั้นใน 2D พร้อมควบคุม step ด้วยลูกศร next/back" },
+                  { icon: "⚙", name: "2D Modify / Config", desc: "ปรับแต่ง properties ของ polygon 2D ผ่าน dropdown config แบบ interactive" },
+                  { icon: "◈", name: "3D Process Polygon", desc: "ดูกระบวนการสร้าง polygon mesh ใน 3D พร้อม step-by-step navigation" },
+                  { icon: "✦", name: "3D Config", desc: "ตั้งค่าโครงสร้าง 3D object และสำรวจรูปทรงในมุมมองต่างๆ" },
+                  { icon: "◉", name: "Polygon Study → 3D Object", desc: "เชื่อมโยง polygon study กับ 3D object representation อย่างชัดเจน" },
+                  { icon: "⬡", name: "Creating Polygon Mesh", desc: "แสดง hover explanation ให้เห็นว่า mesh เกิดขึ้นได้อย่างไร ทีละ face" },
+                  { icon: "🧩", name: "Jigsaw Polygonal", desc: "ภาพรวม jigsaw menu และการเลือกโมเดล" },
+                  { icon: "⟳", name: "Jigsaw Polygonal Game", desc: "ลากและประกอบชิ้นส่วน polygon แบบ draggable real-time บน Figma Site" },
+                ].map((f, i) => (
+                  <div key={i} className="flex items-start gap-4 bg-soft-white/5 border border-soft-white/10 rounded-2xl p-5 hover:border-neon-magenta/30 hover:bg-soft-white/8 transition-all duration-300">
+                    <span className="font-display text-2xl text-neon-magenta/70 shrink-0 mt-0.5">{f.icon}</span>
+                    <div>
+                      <p className="font-display text-sm text-soft-white font-bold mb-1">{f.name}</p>
+                      <p className="font-body text-xs text-soft-white/60 leading-relaxed">{f.desc}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                {[
+                  "/images/Project/polygon-2d.png",
+                  "/images/Project/polygon-3d.png",
+                  "/images/Project/polygon-study.png",
+                  "/images/Project/polygon-creating-mesh.png",
+                ].map((img, i) => (
+                  <motion.button
+                    key={i}
+                    className="group relative aspect-video rounded-2xl overflow-hidden bg-deep-purple/30 border border-soft-white/5 cursor-pointer focus:outline-none focus:ring-2 focus:ring-hot-pink/50"
+                    onClick={() => openLightbox([
+                      "/images/Project/polygon-2d.png",
+                      "/images/Project/polygon-3d.png",
+                      "/images/Project/polygon-study.png",
+                      "/images/Project/polygon-creating-mesh.png",
+                    ], i)}
+                    whileHover={{ scale: 1.02 }}
+                    transition={{ duration: 0.3 }}
+                  >
+                    <Image src={img} alt={`Feature ${i + 1}`} fill className="object-cover" sizes="(max-width: 768px) 100vw, 50vw" />
+                    <div className="absolute inset-0 bg-hot-pink/0 group-hover:bg-hot-pink/10 transition-colors duration-300 flex items-center justify-center">
+                      <span className="font-body text-sm text-soft-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-dark-navy/60 px-4 py-2 rounded-full backdrop-blur-sm">View Full Size</span>
+                    </div>
+                  </motion.button>
+                ))}
+              </div>
+            </FadeSection>
+          )}
 
           {project.phases && project.phases.length > 0 && (
             <div className="mt-12 space-y-8 mx-auto max-w-4xl">
@@ -524,6 +614,194 @@ export default function ProjectDetailClient({ project }: { project: Project }) {
         </div>
 
         <div className="h-px bg-gradient-to-r from-transparent via-soft-white/10 to-transparent" />
+
+        {/* ════════════════════════════════════════
+            04 CONTENT FLOW & BUILD PROCESS (polygon-mesh only)
+        ════════════════════════════════════════ */}
+        {isPolygonMesh && (
+          <>
+            <FadeSection delay={0.05} className="py-14">
+              <SectionNumber n="04" />
+              <h2 className="font-display text-3xl md:text-4xl text-soft-white mb-6 -mt-2">Content Flow &amp; Build Process</h2>
+              <div className="space-y-4 mb-10">
+                {[
+                  { step: "01", title: "Home & Topic Navigation Design", desc: "ออกแบบหน้า home และระบบ topic navigation ให้ผู้เรียนเลือกเส้นทางการเรียนได้ง่าย ไม่สับสน" },
+                  { step: "02", title: "2D/3D Content with Step Controls", desc: "แยกเนื้อหา 2D และ 3D พร้อมลูกศร next/back และ dropdown config เพื่อควบคุมการเรียนแบบ step-by-step ในแต่ละหัวข้อ" },
+                  { step: "03", title: "Hover / Animation / Prototype Linking", desc: "ใช้ hover states, prototype linking และ while-hovering triggers เพื่อทำให้เนื้อหานิ่ง ๆ มีความเคลื่อนไหวและตอบสนองต่อผู้เรียน" },
+                  { step: "04", title: "Jigsaw Game — Pen Tool + Plugins", desc: "สร้าง jigsaw game ด้วย Pen Tool ตัดชิ้นส่วน, Image Cutter สร้าง asset, Property Randomizer สุ่มตำแหน่งชิ้นส่วน — ให้ลากประกอบได้จริงบน Figma Site" },
+                ].map((s, i) => (
+                  <div key={i} className="flex items-start gap-5 bg-soft-white/5 border border-soft-white/10 rounded-2xl p-5 hover:border-sky-cyan/30 transition-all duration-300">
+                    <span
+                      className="font-display text-4xl leading-none shrink-0 mt-0.5"
+                      style={{
+                        background: "linear-gradient(135deg, #00C2FF 0%, #B026FF 100%)",
+                        WebkitBackgroundClip: "text",
+                        WebkitTextFillColor: "transparent",
+                        opacity: 0.7,
+                      }}
+                    >
+                      {s.step}
+                    </span>
+                    <div>
+                      <p className="font-display text-base text-soft-white mb-1">{s.title}</p>
+                      <p className="font-body text-sm text-soft-white/60 leading-relaxed">{s.desc}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                {[
+                  "/images/Project/polygon-home.png",
+                  "/images/Project/polygon-2d-process.png",
+                  "/images/Project/polygon-3d-process.png",
+                ].map((img, i) => (
+                  <motion.button
+                    key={i}
+                    className="group relative aspect-video rounded-2xl overflow-hidden bg-deep-purple/30 border border-soft-white/5 cursor-pointer focus:outline-none focus:ring-2 focus:ring-sky-cyan/50"
+                    onClick={() => openLightbox([
+                      "/images/Project/polygon-home.png",
+                      "/images/Project/polygon-2d-process.png",
+                      "/images/Project/polygon-3d-process.png",
+                    ], i)}
+                    whileHover={{ scale: 1.02 }}
+                    transition={{ duration: 0.3 }}
+                  >
+                    <Image src={img} alt={`Process step ${i + 1}`} fill className="object-cover" sizes="(max-width: 768px) 100vw, 33vw" />
+                    <div className="absolute inset-0 bg-sky-cyan/0 group-hover:bg-sky-cyan/10 transition-colors duration-300 flex items-center justify-center">
+                      <span className="font-body text-sm text-soft-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-dark-navy/60 px-4 py-2 rounded-full backdrop-blur-sm">View Full Size</span>
+                    </div>
+                  </motion.button>
+                ))}
+              </div>
+            </FadeSection>
+
+            <div className="h-px bg-gradient-to-r from-transparent via-soft-white/10 to-transparent" />
+
+            {/* ════════════════════════════════════════
+                05 JIGSAW GAME SHOWCASE (polygon-mesh only)
+            ════════════════════════════════════════ */}
+            <FadeSection delay={0.05} className="py-14">
+              <SectionNumber n="05" />
+              <h2 className="font-display text-3xl md:text-4xl text-soft-white mb-6 -mt-2">Jigsaw Polygonal Game</h2>
+              <div
+                className="relative bg-soft-white/5 border rounded-3xl p-6 md:p-8 mb-8 overflow-hidden"
+                style={{ borderColor: "rgba(176,38,255,0.4)", boxShadow: "0 0 40px rgba(176,38,255,0.12), inset 0 0 40px rgba(176,38,255,0.04)" }}
+              >
+                <div
+                  className="absolute inset-0 rounded-3xl pointer-events-none"
+                  style={{ boxShadow: "0 0 60px rgba(255,45,120,0.08)" }}
+                />
+                <p className="font-display text-neon-magenta text-sm tracking-widest uppercase mb-4">★ Feature Highlight</p>
+                <p className="font-body text-base text-soft-white/80 leading-relaxed mb-4">
+                  Jigsaw Polygonal Game คือ highlight ของสื่อชุดนี้ — ผู้เรียนต้องลากและประกอบชิ้นส่วน polygon faces เข้าด้วยกันเพื่อสร้างโมเดล 3D ด้วยตัวเอง บน Figma Site แบบ real-time
+                </p>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4 font-body text-sm">
+                  <div className="bg-soft-white/5 border border-neon-magenta/20 rounded-xl p-4">
+                    <p className="text-neon-magenta font-bold mb-1">Pen Tool Cutting</p>
+                    <p className="text-soft-white/60 text-xs">ตัดรูปทรง polygon จากโมเดลจริงด้วย Pen Tool เพื่อสร้างชิ้นส่วน jigsaw ที่แม่นยำ</p>
+                  </div>
+                  <div className="bg-soft-white/5 border border-neon-magenta/20 rounded-xl p-4">
+                    <p className="text-neon-magenta font-bold mb-1">Property Randomizer</p>
+                    <p className="text-soft-white/60 text-xs">ใช้ plugin สุ่มตำแหน่งและ rotation ของชิ้นส่วนแต่ละครั้ง ให้การเล่นไม่ซ้ำกัน</p>
+                  </div>
+                  <div className="bg-soft-white/5 border border-neon-magenta/20 rounded-xl p-4">
+                    <p className="text-neon-magenta font-bold mb-1">Draggable Assembly</p>
+                    <p className="text-soft-white/60 text-xs">ผู้เรียนลากชิ้นส่วนประกอบกลับเป็นโมเดล 3D ผ่าน Figma Site interaction โดยตรง</p>
+                  </div>
+                </div>
+              </div>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                {[
+                  "/images/Project/polygon-jigsaw-menu.png",
+                  "/images/Project/polygon-jigsaw-game.png",
+                ].map((img, i) => (
+                  <motion.button
+                    key={i}
+                    className="group relative aspect-video rounded-2xl overflow-hidden bg-deep-purple/30 cursor-pointer focus:outline-none"
+                    style={{ border: "1px solid rgba(176,38,255,0.3)", boxShadow: "0 0 24px rgba(176,38,255,0.1)" }}
+                    onClick={() => openLightbox([
+                      "/images/Project/polygon-jigsaw-menu.png",
+                      "/images/Project/polygon-jigsaw-game.png",
+                    ], i)}
+                    whileHover={{ scale: 1.02 }}
+                    transition={{ duration: 0.3 }}
+                  >
+                    <Image src={img} alt={`Jigsaw ${i + 1}`} fill className="object-cover" sizes="(max-width: 768px) 100vw, 50vw" />
+                    <div className="absolute inset-0 bg-neon-magenta/0 group-hover:bg-neon-magenta/10 transition-colors duration-300 flex items-center justify-center">
+                      <span className="font-body text-sm text-soft-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-dark-navy/60 px-4 py-2 rounded-full backdrop-blur-sm">View Full Size</span>
+                    </div>
+                  </motion.button>
+                ))}
+              </div>
+            </FadeSection>
+
+            <div className="h-px bg-gradient-to-r from-transparent via-soft-white/10 to-transparent" />
+
+            {/* ════════════════════════════════════════
+                06 SOLUTION & IMPACT (polygon-mesh only)
+            ════════════════════════════════════════ */}
+            <FadeSection delay={0.05} className="py-14">
+              <SectionNumber n="06" />
+              <h2 className="font-display text-3xl md:text-4xl text-soft-white mb-6 -mt-2">Solution &amp; Impact</h2>
+              <p className="font-body text-base md:text-lg text-soft-white/75 leading-relaxed whitespace-pre-line">{project.result}</p>
+
+              {/* Challenges aside */}
+              <div className="mt-8 relative bg-soft-white/5 border border-retro-yellow/30 rounded-2xl p-6 overflow-hidden">
+                <div className="absolute -top-3 left-6 bg-retro-yellow text-dark-navy font-body text-xs font-bold px-3 py-1 rounded-full">Challenges</div>
+                <p className="font-body text-sm text-soft-white/75 leading-relaxed mt-2">
+                  ทำให้เรื่อง polygon mesh และ 3D object representation ซึ่งค่อนข้าง abstract เข้าใจง่ายขึ้นผ่าน interaction, animation, hover states, draggable pieces และ content flow ที่ผู้เรียนกดสำรวจได้เอง
+                </p>
+              </div>
+
+              {/* Project info sidebar */}
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-10 mb-8">
+                <div>
+                  <p className="font-body text-xs text-soft-white/40 uppercase tracking-widest mb-2">Role</p>
+                  <p className="font-body text-sm text-soft-white/80">Head Figma Design / Interactive Flow Design</p>
+                </div>
+                <div>
+                  <p className="font-body text-xs text-soft-white/40 uppercase tracking-widest mb-2">Tech Stack</p>
+                  <div className="flex flex-col gap-1">
+                    {project.techStack.map((t) => (
+                      <span key={t} className="font-body text-xs text-soft-white/70">{t}</span>
+                    ))}
+                  </div>
+                </div>
+                <div>
+                  <p className="font-body text-xs text-soft-white/40 uppercase tracking-widest mb-2">Timeline</p>
+                  <p className="font-body text-sm text-soft-white/80">1 Month</p>
+                </div>
+                <div>
+                  <p className="font-body text-xs text-soft-white/40 uppercase tracking-widest mb-2">Team</p>
+                  <p className="font-body text-sm text-soft-white/80">3 Members</p>
+                  <p className="font-body text-xs text-soft-white/40 mt-1">จตุรภัทร กิติมาโภคิน, ณัฐวุฒิ ทิพย์รัตน์, ธนัทภัทร พรหมทอง</p>
+                </div>
+              </div>
+
+              {/* Link buttons */}
+              <div className="flex flex-wrap gap-3">
+                <a
+                  href="https://www.figma.com/design/Vm96Pu8bVEtEyFFNmL69Di/Creating-polygon-mesh?node-id=0-1&p=f&t=ukoom1RoA8INKIcZ-0"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-neon-magenta/10 border border-neon-magenta/30 font-body text-sm text-neon-magenta hover:bg-neon-magenta/20 transition-colors duration-200"
+                >
+                  Figma Editor →
+                </a>
+                <a
+                  href="https://www.figma.com/proto/Vm96Pu8bVEtEyFFNmL69Di/Creating-polygon-mesh?node-id=0-1&t=mIUyTzYXFmO7Nbu3-1"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-sakura-pink/10 border border-sakura-pink/30 font-body text-sm text-sakura-pink hover:bg-sakura-pink/20 transition-colors duration-200"
+                >
+                  Figma Prototype →
+                </a>
+              </div>
+            </FadeSection>
+
+            <div className="h-px bg-gradient-to-r from-transparent via-soft-white/10 to-transparent" />
+          </>
+        )}
       </div>
 
       {/* ════════════════════════════════════════
@@ -546,10 +824,13 @@ export default function ProjectDetailClient({ project }: { project: Project }) {
               </span>
             </div>
             <h2 className="font-display text-3xl md:text-4xl text-soft-white -mt-2">
-              Visual principles detail
+              {isPolygonMesh ? "Full Gallery" : "Visual principles detail"}
             </h2>
             {isChaodom && (
               <p className="font-body text-sm text-soft-white/50 mt-2">UI Design Principles &amp; Visual Design Analysis</p>
+            )}
+            {isPolygonMesh && (
+              <p className="font-body text-sm text-soft-white/50 mt-2">All 13 screens — 2D, 3D, Polygon Study, Jigsaw &amp; more</p>
             )}
           </div>
           <div className="mx-auto max-w-6xl px-4 md:px-6">
@@ -562,8 +843,9 @@ export default function ProjectDetailClient({ project }: { project: Project }) {
       )}
 
       {/* ════════════════════════════════════════
-          05 THE SOLUTION
+          05 THE SOLUTION (non-polygon-mesh only)
       ════════════════════════════════════════ */}
+      {!isPolygonMesh && (
       <div className="relative z-10 mx-auto max-w-5xl px-6">
         <div className="h-px bg-gradient-to-r from-transparent via-soft-white/10 to-transparent" />
         <FadeSection delay={0.05} className="py-14">
@@ -689,6 +971,7 @@ export default function ProjectDetailClient({ project }: { project: Project }) {
           </>
         )}
       </div>
+      )}
 
       {/* ── Bottom Navigation ── */}
       <div className="relative z-10 mx-auto max-w-5xl px-6 pb-16">
