@@ -160,41 +160,90 @@ export const projects: Project[] = [
   },
   {
     slug: "drive-kmitl",
-    title: "DriveChat@KMITL",
+    title: "Drive@KMITL",
     category: "programming",
-    thumbnail: "",
-    heroImage: "",
+    thumbnail: "/images/Project/preview-drivechat.png",
+    heroImage: "/images/Project/preview-drivechat.png",
     date: "2024",
-    tags: ["Next.js", "FastAPI", "WebSocket", "Tailwind"],
-    techStack: ["Next.js", "FastAPI (Python)", "WebSockets", "Tailwind CSS"],
-    summary: "เว็บไซต์แชทสำหรับพูดคุยกับคนแปลกหน้าแบบสุ่ม โดยเปลี่ยนบรรยากาศตามสถานที่ต่าง ๆ ในมหาวิทยาลัยเสมือนการเดินทางด้วยพาหนะ",
-    problem: "ผู้คนส่วนใหญ่มีความเครียดสะสมและต้องการพื้นที่ระบายความในใจกับคนที่ไม่รู้จักเพื่อความสบายใจ",
-    process: "ออกแบบ UI ใน Figma -> พัฒนา Backend API ด้วย FastAPI -> เชื่อมต่อ WebSocket -> พัฒนา Frontend ด้วย Next.js",
-    result: "The Solution: เว็บไซต์ที่รองรับการแชทหลายประเภท (Bicycle, Taxi, Songthaew) พร้อมพื้นหลังวิดีโอสถานที่จริงในมหาลัย\nImpact: สร้างสังคมออนไลน์ที่ปลอดภัยสำหรับการพูดคุยและช่วยลดความเครียดให้กับนักศึกษา",
+    tags: ["Next.js", "FastAPI", "WebSocket", "Tailwind CSS", "Full-Stack", "Real-Time"],
+    techStack: ["Next.js", "FastAPI (Python)", "WebSockets", "Tailwind CSS", "Figma", "GitHub Desktop"],
+    summary: "เว็บไซต์แชทสำหรับพูดคุยกับคนแปลกหน้าแบบสุ่ม โดยเปลี่ยนบรรยากาศตามสถานที่ต่าง ๆ ในมหาวิทยาลัย เสมือนกำลังเดินทางด้วยพาหนะ แบ่งผู้ใช้เป็น Driver และ Passenger มีระบบสร้างห้อง สุ่มเข้าห้อง จำกัดจำนวนคนตามประเภทรถ countdown ก่อนย้ายห้อง พื้นหลังวิดีโอแต่ละสถานที่ และบรรยากาศที่เปลี่ยนไปตาม room type",
+    problem: "ผู้ใช้หลายคนอยากมีพื้นที่ปลอดภัยสำหรับคุยกับคนไม่รู้จักโดยไม่ถูกตัดสิน แต่แพลตฟอร์มทั่วไปไม่ได้ออกแบบประสบการณ์ random chat แบบมีธีมและ room transition ชัดเจน",
+    process: "ออกแบบ flow หน้าหลัก, join room, create room และ chat room ใน Figma → พัฒนา backend API และ WebSocket communication ระหว่าง frontend กับ backend → สร้างระบบ create room, random join, role-based access และ room type restrictions → ปรับปรุง room status, user count, room transitions และหน้าเว็บให้สมบูรณ์ขึ้น",
+    phases: [
+      {
+        title: "Phase 1: UI/UX Flow Design",
+        description: "ออกแบบ flow ใน Figma ครอบคลุมหน้าหลัก, การตั้ง username, เลือก role, join/create room และ chat room interface"
+      },
+      {
+        title: "Phase 2: FastAPI Backend & WebSocket",
+        description: "พัฒนา backend API ด้วย FastAPI และระบบ real-time communication ผ่าน WebSocket เชื่อมระหว่าง Next.js frontend กับ Python backend"
+      },
+      {
+        title: "Phase 3: Room System & Role Logic",
+        description: "สร้างระบบ create room, random join, role-based access (Driver/Passenger) และ room type restrictions พร้อม capacity control ตามประเภทพาหนะ"
+      },
+      {
+        title: "Phase 4: Room Status, Transitions & Polish",
+        description: "เพิ่ม live room status, user count tracking, countdown timer, auto remove empty rooms และ location-based video backgrounds"
+      }
+    ],
+    result: "The Solution: แพลตฟอร์ม random chat ที่ผสมแนวคิด journey experience เข้ากับ real-time web app ทำให้การคุยกับคนแปลกหน้ามีทั้งบริบทและความแปลกใหม่\nImpact: ได้ฝึก full-stack collaboration, real-time system design, และการแก้ปัญหา WebSocket / CORS / room transition ในโปรเจกต์จริง\nLimitations: เกมย่อยในแต่ละห้องยังไม่สมบูรณ์ และจำนวนห้อง/การย้อนกลับห้องเก่ายังมีข้อจำกัดจากระบบย้ายห้อง\nChallenges: ทำระบบ real-time communication ให้เปลี่ยนห้องอัตโนมัติได้โดยไม่หลุด connection, เชื่อม Backend กับ Frontend ให้เสถียร, และจัดการ room lifecycle เมื่อมีผู้ใช้เข้าออกหลายบทบาท",
     gallery: [
-      "/images/Project/drive-kmitl/1.png",
-      "/images/Project/drive-kmitl/2.png",
-      "/images/Project/drive-kmitl/3.png",
-      "/images/Project/drive-kmitl/4.png"
+      "/images/Project/drive-home.png",
+      "/images/Project/drive-passenger.png",
+      "/images/Project/drive-passenger-complete.png",
+      "/images/Project/drive-no-room.png",
+      "/images/Project/drive-driver.png",
+      "/images/Project/drive-driver-complete.png",
+      "/images/Project/drive-chat-room.png",
+      "/images/Project/drive-countdown.png",
     ],
   },
   {
     slug: "synchro",
     title: "Synchro",
     category: "programming",
-    thumbnail: "/synchrobox.jpg",
+    thumbnail: "/SYNCHROPoster.png",
     heroImage: "/SYNCHROPoster.png",
     date: "2025",
-    tags: ["ESP32", "Arduino", "JavaScript", "Physical Computing"],
-    techStack: ["ESP32", "Arduino IDE", "JavaScript", "HTML/CSS", "WiFi.h", "WebServer", "TFT_eSPI", "SD.h"],
-    summary: "ระบบเกมจังหวะที่ทำงานบนบอร์ด ESP32 เชื่อมต่อกับเว็บไซต์ เพื่อใช้เป็นสื่อฝึกสมาธิ ลดอาการหลุดโฟกัส และช่วยดึงผู้ใช้งานให้กลับมาจดจ่อกับกิจกรรมตรงหน้า (Deep Work) ผ่านเสียงดนตรีและการตอบสนองที่แม่นยำ",
-    problem: "ปัญหาการขาดสมาธิและหลุดโฟกัสจากการเรียนหรือกิจกรรมหลักเนื่องจากการเสพสื่อสังคมออนไลน์มากเกินไป ซึ่งส่งผลต่อสุขภาพจิตและประสิทธิภาพการทำงานในระยะยาว",
-    process: "วางแผนอุปกรณ์ -> ออกแบบ UI/CI ด้วย Figma -> พัฒนา Frontend -> ต่อวงจร Hardware (LCD, ESP32, Buttons) -> เขียนโปรแกรมควบคุมเกม -> สร้างเครื่องมือ Mapping เพลงแบบ JSON -> เชื่อมต่อ Web Server เพื่อสรุปผลคะแนน",
-    result: "The Solution: พัฒนาอุปกรณ์ฝึกสมาธิในรูปแบบเกมจังหวะที่ผู้ใช้สามารถอัปโหลดเพลงผ่านหน้าเว็บ สร้างแมปโน้ตได้เอง และดูประวัติการเล่น (History) เพื่อติดตามพัฒนาการการจดจ่อของตนเองได้\nImpact: ช่วยให้นักเรียนนักศึกษามีเครื่องมือในการฝึกฝนการจดจ่อที่สนุกสนาน และสามารถถ่ายทอดทักษะการโฟกัสไปใช้กับการเรียนหรือการทำงานจริงได้ดีขึ้น",
+    tags: ["ESP32", "Arduino", "JavaScript", "Physical Computing", "Rhythm Game", "Web Integration"],
+    techStack: ["ESP32", "Arduino IDE", "JavaScript", "HTML/CSS", "WiFi.h", "WebServer", "TFT_eSPI", "SD.h", "Figma"],
+    summary: "โปรเจกต์ที่ผสม hardware และ software เข้าด้วยกัน โดยมีคอนโทรลเลอร์ที่ประกอบด้วยจอ TFT LCD และปุ่มกด เชื่อมต่อกับเว็บแอปพลิเคชันสำหรับเลือกเพลง สรุปสถิติการเล่น และฝึกสมาธิผ่าน rhythm game ที่สนุกพอให้กลับมาใช้งานต่อเนื่อง",
+    problem: "ผู้ใช้หลายคนมีอาการหลุดโฟกัสจาก social media จนส่งผลต่อการเรียนและการทำงาน แต่เครื่องมือฝึกสมาธิมักไม่น่าสนใจพอให้ใช้งานต่อเนื่อง",
+    process: "วางแผนอุปกรณ์ → ออกแบบ UI/CI ด้วย Figma → พัฒนา Frontend → ต่อวงจร Hardware (LCD, ESP32, Buttons) → เขียนโปรแกรมควบคุมเกม → สร้างเครื่องมือ Mapping เพลงแบบ JSON → เชื่อมต่อ Web Server เพื่อสรุปผลคะแนน",
+    phases: [
+      {
+        title: "Step 1: Planning & UI/CI Design",
+        description: "วางแผนอุปกรณ์และออกแบบ UI/CI ด้วย Figma ครอบคลุมหน้าเลือกเพลง, สรุปผล และ history"
+      },
+      {
+        title: "Step 2: Frontend Development",
+        description: "พัฒนาเว็บแอปด้วย JavaScript/HTML/CSS รองรับการเลือกเพลง, ดูสถิติ และ upload song mapping"
+      },
+      {
+        title: "Step 3: Hardware Wiring",
+        description: "ต่อวงจร ESP32 เชื่อมกับ TFT LCD display และปุ่มกดบน breadboard พร้อมแก้ปัญหาการจ่ายไฟ"
+      },
+      {
+        title: "Step 4: Game Control Programming",
+        description: "เขียนโปรแกรม Arduino ควบคุม rhythm game logic, การแสดงผลบน LCD และการรับ input จากปุ่ม"
+      },
+      {
+        title: "Step 5: Song Mapping Tool",
+        description: "สร้าง tool สำหรับ map note เพลงเป็น JSON ให้ผู้ใช้เพิ่มเพลงใหม่ได้เอง"
+      },
+      {
+        title: "Step 6: Web Server Integration",
+        description: "เชื่อมต่อ ESP32 Web Server กับหน้าเว็บเพื่อส่งผลคะแนนกลับมาสรุปและดู history"
+      }
+    ],
+    result: "The Solution: อุปกรณ์ฝึกสมาธิในรูปแบบ rhythm game ที่สนุกพอให้ผู้ใช้กลับมาฝึกต่อเนื่องและเห็นพัฒนาการได้จากสถิติการเล่น\nImpact: ได้ฝึกทั้ง embedded, web integration และ product thinking ในโปรเจกต์เดียว สร้างประสบการณ์ทำงานกับ hardware จริงและการ sync ข้อมูลระหว่าง physical device กับ web app\nChallenges: การเปลี่ยนบอร์ดจาก Arduino UNO R4 เป็น ESP32 เนื่องจากข้อจำกัดด้าน library, ปัญหาการจ่ายไฟของ breadboard, การปรับ SD card adapter และการทำ handshaking ให้เว็บสื่อสารกับบอร์ดได้เสถียร\nIdeation: ใช้กลไก rhythm game เพื่อฝึก focused attention และช่วยลดผลกระทบจากการเสพโซเชียลมีเดียมากเกินไป",
     gallery: [
       "/synchrobox.jpg",
       "/SYNCHROPoster.png",
-      "/SynchroController/Teacher.png"
+      "/SynchroController/Teacher.png",
+      "/images/Project/synchro-figma.png",
     ],
   },
   {

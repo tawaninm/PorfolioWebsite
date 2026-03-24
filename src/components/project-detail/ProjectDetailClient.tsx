@@ -141,6 +141,8 @@ export default function ProjectDetailClient({ project }: { project: Project }) {
   const isChaodom = project.slug === "chao-dom";
   const isPolygonMesh = project.slug === "polygon-mesh";
   const isVpsTycoon = project.slug === "vps-tycoon";
+  const isDriveKmitl = project.slug === "drive-kmitl";
+  const isSynchro = project.slug === "synchro";
 
   function openLightbox(images: string[], index: number) {
     setLightboxImages(images);
@@ -262,7 +264,7 @@ export default function ProjectDetailClient({ project }: { project: Project }) {
         <FadeSection delay={0} className="py-14">
           <SectionNumber n="01" />
           <h2 className="font-display text-3xl md:text-4xl text-soft-white mb-6 -mt-2">
-            {isPolygonMesh ? "Learning Goal" : isVpsTycoon ? "Project Pitch" : "Overview"}
+            {isPolygonMesh ? "Learning Goal" : isVpsTycoon ? "Project Pitch" : isDriveKmitl ? "Product Summary" : isSynchro ? "Product Goal" : "Overview"}
           </h2>
           <p className="font-body text-base md:text-lg text-soft-white/75 leading-relaxed">{project.summary}</p>
 
@@ -1057,6 +1059,475 @@ export default function ProjectDetailClient({ project }: { project: Project }) {
             <div className="h-px bg-gradient-to-r from-transparent via-soft-white/10 to-transparent" />
           </>
         )}
+
+        {/* ════════════════════════════════════════
+            DRIVE@KMITL — 01-07
+        ════════════════════════════════════════ */}
+        {isDriveKmitl && (
+          <>
+            {/* Drive hero images already in section 01 summary above — add banner image */}
+            <div className="mt-8 relative w-full overflow-hidden rounded-2xl" style={{ clipPath: "polygon(0 0, 100% 0, 100% 92%, 97% 100%, 0 100%)" }}>
+              <div className="aspect-[21/9] relative">
+                <Image src="/images/Project/preview-drivechat.png" alt="Drive@KMITL Preview" fill className="object-cover" sizes="(max-width: 768px) 100vw, 80vw" />
+                <div className="absolute inset-0 bg-gradient-to-t from-dark-navy/60 to-transparent" />
+              </div>
+            </div>
+
+            <div className="h-px bg-gradient-to-r from-transparent via-soft-white/10 to-transparent mt-14" />
+
+            {/* ── 02 THE PROBLEM ── */}
+            <FadeSection delay={0.05} className="py-14">
+              <SectionNumber n="02" />
+              <h2 className="font-display text-3xl md:text-4xl text-soft-white mb-6 -mt-2">The Challenge</h2>
+              <div className="flex items-start gap-4 bg-soft-white/5 border border-neon-magenta/25 rounded-2xl p-6">
+                <ImpactBubble />
+                <p className="font-body text-base md:text-lg text-soft-white/80 leading-relaxed">{project.problem}</p>
+              </div>
+            </FadeSection>
+
+            <div className="h-px bg-gradient-to-r from-transparent via-soft-white/10 to-transparent" />
+
+            {/* ── 03 CORE FEATURES ── */}
+            <FadeSection delay={0.05} className="py-14">
+              <SectionNumber n="03" />
+              <h2 className="font-display text-3xl md:text-4xl text-soft-white mb-6 -mt-2">Core Features</h2>
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-10">
+                {[
+                  { icon: "👤", name: "Username Setup",          desc: "ตั้งชื่อก่อนเข้าห้อง" },
+                  { icon: "🚗", name: "Driver / Passenger",      desc: "เลือก role ก่อน join" },
+                  { icon: "🎲", name: "Random Join",              desc: "สุ่มเข้าห้องที่มีอยู่" },
+                  { icon: "🏠", name: "Create Room",              desc: "สร้างห้องพร้อมเลือกประเภท" },
+                  { icon: "🎛️", name: "Room Capacity Control",   desc: "จำกัดคนตาม room type" },
+                  { icon: "⏱️", name: "Countdown to Next Room", desc: "นับเวลาก่อนย้ายห้อง" },
+                  { icon: "📡", name: "Live Room Status",         desc: "แสดงจำนวนคนแบบ real-time" },
+                  { icon: "🎥", name: "Video Backgrounds",        desc: "พื้นหลังตามสถานที่ใน KMITL" },
+                ].map((f, i) => (
+                  <div key={i} className="bg-soft-white/5 border border-sky-cyan/20 rounded-2xl p-4 hover:border-sky-cyan/40 transition-colors duration-200">
+                    <span className="text-2xl block mb-2">{f.icon}</span>
+                    <p className="font-display text-sm text-soft-white leading-snug mb-1">{f.name}</p>
+                    <p className="font-body text-xs text-soft-white/55 leading-relaxed">{f.desc}</p>
+                  </div>
+                ))}
+              </div>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                {[
+                  { src: "/images/Project/drive-home.png",      label: "Home" },
+                  { src: "/images/Project/drive-passenger.png", label: "Passenger View" },
+                  { src: "/images/Project/drive-driver.png",    label: "Driver View" },
+                ].map(({ src, label }, i) => (
+                  <motion.button
+                    key={i}
+                    className="group relative aspect-video rounded-2xl overflow-hidden bg-deep-purple/30 border border-soft-white/5 cursor-pointer focus:outline-none focus:ring-2 focus:ring-sky-cyan/50"
+                    onClick={() => openLightbox(["/images/Project/drive-home.png", "/images/Project/drive-passenger.png", "/images/Project/drive-driver.png"], i)}
+                    whileHover={{ scale: 1.02 }}
+                    transition={{ duration: 0.3 }}
+                  >
+                    <Image src={src} alt={label} fill className="object-cover" sizes="(max-width: 768px) 100vw, 33vw" />
+                    <div className="absolute inset-0 bg-sky-cyan/0 group-hover:bg-sky-cyan/10 transition-colors duration-300 flex items-center justify-center">
+                      <span className="font-body text-sm text-soft-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-dark-navy/60 px-4 py-2 rounded-full backdrop-blur-sm">{label}</span>
+                    </div>
+                  </motion.button>
+                ))}
+              </div>
+            </FadeSection>
+
+            <div className="h-px bg-gradient-to-r from-transparent via-soft-white/10 to-transparent" />
+
+            {/* ── 04 ROOM TYPES ── */}
+            <FadeSection delay={0.05} className="py-14">
+              <SectionNumber n="04" />
+              <h2 className="font-display text-3xl md:text-4xl text-soft-white mb-8 -mt-2">Room Types</h2>
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                {[
+                  { vehicle: "🚲", name: "Bicycle",    capacity: "2",  vibe: "Intimate",   color: "from-mint/30 to-sky-cyan/20",      border: "border-mint/30" },
+                  { vehicle: "🚕", name: "Taxi",       capacity: "4",  vibe: "Small Group", color: "from-retro-yellow/25 to-peach/20", border: "border-retro-yellow/30" },
+                  { vehicle: "🚌", name: "Songthaew",  capacity: "10", vibe: "Medium",      color: "from-sakura-pink/25 to-lavender/20", border: "border-sakura-pink/30" },
+                  { vehicle: "🚐", name: "EV / Minibus", capacity: "15", vibe: "Large",    color: "from-electric-blue/25 to-deep-purple/20", border: "border-electric-blue/30" },
+                ].map((r, i) => (
+                  <div key={i} className={`relative bg-gradient-to-br ${r.color} border ${r.border} rounded-2xl p-5 flex flex-col items-center text-center`}>
+                    <span className="text-4xl mb-3">{r.vehicle}</span>
+                    <p className="font-display text-lg text-soft-white mb-1">{r.name}</p>
+                    <span className="font-body text-xs text-soft-white/50 mb-3">{r.vibe}</span>
+                    <span className="font-display text-2xl text-soft-white/90">{r.capacity}</span>
+                    <span className="font-body text-[10px] text-soft-white/40 uppercase tracking-widest mt-0.5">คน</span>
+                  </div>
+                ))}
+              </div>
+            </FadeSection>
+
+            <div className="h-px bg-gradient-to-r from-transparent via-soft-white/10 to-transparent" />
+
+            {/* ── 05 ARCHITECTURE & DEVELOPMENT ── */}
+            <FadeSection delay={0.05} className="py-14">
+              <SectionNumber n="05" />
+              <h2 className="font-display text-3xl md:text-4xl text-soft-white mb-6 -mt-2">Architecture &amp; Development</h2>
+
+              {/* Tech architecture callout */}
+              <div className="mb-8 flex items-center justify-center gap-3 bg-sky-cyan/5 border border-sky-cyan/20 rounded-2xl px-6 py-5">
+                {["Next.js", "↔", "WebSocket", "↔", "FastAPI"].map((item, i) => (
+                  <span key={i} className={item === "↔"
+                    ? "font-body text-sky-cyan/50 text-lg"
+                    : "font-display text-sm md:text-base text-sky-cyan px-3 py-1.5 rounded-lg bg-sky-cyan/10 border border-sky-cyan/20"
+                  }>{item}</span>
+                ))}
+              </div>
+
+              {/* Phases */}
+              <div className="space-y-4 mb-10">
+                {(project.phases ?? []).map((phase, i) => (
+                  <div key={i} className="flex items-start gap-5 bg-soft-white/5 border border-soft-white/10 rounded-2xl p-5 hover:border-sky-cyan/30 transition-all duration-300">
+                    <span className="font-display text-4xl leading-none shrink-0 mt-0.5" style={{ background: "linear-gradient(135deg, #00C2FF 0%, #B026FF 100%)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", opacity: 0.7 }}>
+                      {String(i + 1).padStart(2, "0")}
+                    </span>
+                    <div>
+                      <p className="font-display text-base text-soft-white mb-1">{phase.title}</p>
+                      <p className="font-body text-sm text-soft-white/60 leading-relaxed">{phase.description}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                {[
+                  { src: "/images/Project/drive-chat-room.png", label: "Chat Room" },
+                  { src: "/images/Project/drive-countdown.png", label: "Countdown Timer" },
+                ].map(({ src, label }, i) => (
+                  <motion.button
+                    key={i}
+                    className="group relative aspect-video rounded-2xl overflow-hidden bg-deep-purple/30 border border-soft-white/5 cursor-pointer focus:outline-none focus:ring-2 focus:ring-sky-cyan/50"
+                    onClick={() => openLightbox(["/images/Project/drive-chat-room.png", "/images/Project/drive-countdown.png"], i)}
+                    whileHover={{ scale: 1.02 }}
+                    transition={{ duration: 0.3 }}
+                  >
+                    <Image src={src} alt={label} fill className="object-cover" sizes="(max-width: 768px) 100vw, 50vw" />
+                    <div className="absolute inset-0 bg-sky-cyan/0 group-hover:bg-sky-cyan/10 transition-colors duration-300 flex items-center justify-center">
+                      <span className="font-body text-sm text-soft-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-dark-navy/60 px-4 py-2 rounded-full backdrop-blur-sm">{label}</span>
+                    </div>
+                  </motion.button>
+                ))}
+              </div>
+            </FadeSection>
+
+            <div className="h-px bg-gradient-to-r from-transparent via-soft-white/10 to-transparent" />
+
+            {/* ── 06 CHALLENGES & LIMITATIONS ── */}
+            <FadeSection delay={0.05} className="py-14">
+              <SectionNumber n="06" />
+              <h2 className="font-display text-3xl md:text-4xl text-soft-white mb-8 -mt-2">Challenges &amp; Limitations</h2>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                {/* What Worked */}
+                <div className="bg-mint/5 border border-mint/25 rounded-2xl p-6">
+                  <p className="font-display text-base text-mint mb-4">✓ What Worked</p>
+                  <ul className="space-y-3">
+                    {[
+                      "Real-time WebSocket room join/leave ทำงานได้เสถียร",
+                      "Role-based access (Driver/Passenger) แยกชัดเจน",
+                      "Auto remove empty rooms ทำงานถูกต้อง",
+                      "Video backgrounds และ UI ธีมสมบูรณ์",
+                      "Room type capacity control ทำงานได้จริง",
+                    ].map((item, i) => (
+                      <li key={i} className="flex items-start gap-2 font-body text-sm text-soft-white/70 leading-relaxed">
+                        <span className="text-mint shrink-0 mt-0.5">→</span>{item}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+                {/* What Didn't */}
+                <div className="bg-neon-magenta/5 border border-neon-magenta/25 rounded-2xl p-6">
+                  <p className="font-display text-base text-neon-magenta mb-4">✗ What Didn't / Limitations</p>
+                  <ul className="space-y-3">
+                    {[
+                      "Room transition อัตโนมัติโดยไม่หลุด connection ยังเป็นความท้าทาย",
+                      "เกมย่อยในแต่ละห้องยังไม่สมบูรณ์",
+                      "การย้อนกลับห้องเก่ายังมีข้อจำกัด",
+                      "Room history ยังจำกัด ไม่บันทึกประวัติการสนทนา",
+                      "CORS และ WebSocket reconnection ต้องแก้เพิ่มเติม",
+                    ].map((item, i) => (
+                      <li key={i} className="flex items-start gap-2 font-body text-sm text-soft-white/70 leading-relaxed">
+                        <span className="text-neon-magenta shrink-0 mt-0.5">→</span>{item}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            </FadeSection>
+
+            <div className="h-px bg-gradient-to-r from-transparent via-soft-white/10 to-transparent" />
+
+            {/* ── 07 FINAL OUTCOME ── */}
+            <FadeSection delay={0.05} className="py-14">
+              <SectionNumber n="07" />
+              <h2 className="font-display text-3xl md:text-4xl text-soft-white mb-6 -mt-2">Final Outcome</h2>
+              <p className="font-body text-base md:text-lg text-soft-white/75 leading-relaxed whitespace-pre-line">{project.result}</p>
+
+              {/* Project info sidebar */}
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-10 mb-8">
+                <div>
+                  <p className="font-body text-xs text-soft-white/40 uppercase tracking-widest mb-2">Role</p>
+                  <p className="font-body text-sm text-soft-white/80">Backend 50% · Frontend 5% · Document 40%</p>
+                </div>
+                <div>
+                  <p className="font-body text-xs text-soft-white/40 uppercase tracking-widest mb-2">Tech Stack</p>
+                  <div className="flex flex-col gap-1">
+                    {project.techStack.map((t) => (
+                      <span key={t} className="font-body text-xs text-soft-white/70">{t}</span>
+                    ))}
+                  </div>
+                </div>
+                <div>
+                  <p className="font-body text-xs text-soft-white/40 uppercase tracking-widest mb-2">Timeline</p>
+                  <p className="font-body text-sm text-soft-white/80">1 ภาคเรียน (ปีการศึกษา 2567)</p>
+                </div>
+                <div>
+                  <p className="font-body text-xs text-soft-white/40 uppercase tracking-widest mb-2">Team</p>
+                  <p className="font-body text-sm text-soft-white/80">5 members</p>
+                </div>
+              </div>
+
+              {/* Link buttons */}
+              <div className="flex flex-wrap gap-3">
+                <a href="https://drivechat.it22.dev/" target="_blank" rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-sky-cyan/10 border border-sky-cyan/30 font-body text-sm text-sky-cyan hover:bg-sky-cyan/20 transition-colors duration-200">
+                  🌐 Website →
+                </a>
+                <a href="https://github.com/ProJect3K/DriveChat-kmitl" target="_blank" rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-soft-white/5 border border-soft-white/20 font-body text-sm text-soft-white/70 hover:bg-soft-white/10 hover:text-soft-white transition-colors duration-200">
+                  GitHub →
+                </a>
+                <a href="https://youtu.be/XpPGb5M36IY?si=TwihcZynCgNfg2sf" target="_blank" rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-neon-magenta/10 border border-neon-magenta/30 font-body text-sm text-neon-magenta hover:bg-neon-magenta/20 transition-colors duration-200">
+                  ▶ Video Demo →
+                </a>
+              </div>
+            </FadeSection>
+
+            <div className="h-px bg-gradient-to-r from-transparent via-soft-white/10 to-transparent" />
+          </>
+        )}
+
+        {/* ════════════════════════════════════════
+            SYNCHRO — 01-06
+        ════════════════════════════════════════ */}
+        {isSynchro && (
+          <>
+            {/* Synchro section 01 hero images */}
+            <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-4">
+              {[
+                { src: "/SYNCHROPoster.png",  label: "Poster" },
+                { src: "/synchrobox.jpg",      label: "Hardware Controller" },
+              ].map(({ src, label }, i) => (
+                <motion.button
+                  key={i}
+                  className="group relative aspect-video rounded-2xl overflow-hidden bg-deep-purple/30 border border-soft-white/5 cursor-pointer focus:outline-none focus:ring-2 focus:ring-retro-yellow/50"
+                  onClick={() => openLightbox(["/SYNCHROPoster.png", "/synchrobox.jpg"], i)}
+                  whileHover={{ scale: 1.02 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  <Image src={src} alt={label} fill className="object-cover" sizes="(max-width: 768px) 100vw, 50vw" />
+                  <div className="absolute inset-0 bg-retro-yellow/0 group-hover:bg-retro-yellow/10 transition-colors duration-300 flex items-center justify-center">
+                    <span className="font-body text-sm text-soft-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-dark-navy/60 px-4 py-2 rounded-full backdrop-blur-sm">{label}</span>
+                  </div>
+                </motion.button>
+              ))}
+            </div>
+
+            <div className="h-px bg-gradient-to-r from-transparent via-soft-white/10 to-transparent mt-14" />
+
+            {/* ── 02 THE PROBLEM ── */}
+            <FadeSection delay={0.05} className="py-14">
+              <SectionNumber n="02" />
+              <h2 className="font-display text-3xl md:text-4xl text-soft-white mb-6 -mt-2">The Problem</h2>
+              <div className="flex items-start gap-4 bg-soft-white/5 border border-neon-magenta/25 rounded-2xl p-6">
+                <ImpactBubble />
+                <p className="font-body text-base md:text-lg text-soft-white/80 leading-relaxed">{project.problem}</p>
+              </div>
+            </FadeSection>
+
+            <div className="h-px bg-gradient-to-r from-transparent via-soft-white/10 to-transparent" />
+
+            {/* ── 03 HARDWARE + SOFTWARE ── */}
+            <FadeSection delay={0.05} className="py-14">
+              <SectionNumber n="03" />
+              <h2 className="font-display text-3xl md:text-4xl text-soft-white mb-8 -mt-2">Hardware + Software</h2>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                {/* Hardware */}
+                <div className="bg-retro-yellow/5 border border-retro-yellow/25 rounded-2xl p-6">
+                  <p className="font-display text-base text-retro-yellow mb-5">⚙ Hardware</p>
+                  <ul className="space-y-3 mb-6">
+                    {[
+                      { icon: "🔲", item: "ESP32 microcontroller board" },
+                      { icon: "🖥️", item: "TFT LCD display — แสดงโน้ตและคะแนน" },
+                      { icon: "🔘", item: "Physical buttons — รับ input จากผู้เล่น" },
+                      { icon: "📦", item: "Breadboard + wiring setup" },
+                      { icon: "💾", item: "SD Card Adapter สำหรับโหลด song data" },
+                    ].map(({ icon, item }, i) => (
+                      <li key={i} className="flex items-start gap-3 font-body text-sm text-soft-white/75 leading-relaxed">
+                        <span className="shrink-0">{icon}</span>{item}
+                      </li>
+                    ))}
+                  </ul>
+                  <motion.button
+                    className="group relative w-full aspect-video rounded-xl overflow-hidden bg-deep-purple/30 border border-soft-white/5 cursor-pointer focus:outline-none focus:ring-2 focus:ring-retro-yellow/50"
+                    onClick={() => openLightbox(["/synchrobox.jpg"], 0)}
+                    whileHover={{ scale: 1.01 }}
+                    transition={{ duration: 0.3 }}
+                  >
+                    <Image src="/synchrobox.jpg" alt="Synchro Controller" fill className="object-cover" sizes="(max-width: 768px) 100vw, 40vw" />
+                    <div className="absolute inset-0 bg-retro-yellow/0 group-hover:bg-retro-yellow/10 transition-colors duration-300 flex items-center justify-center">
+                      <span className="font-body text-sm text-soft-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-dark-navy/60 px-4 py-2 rounded-full backdrop-blur-sm">Hardware Controller</span>
+                    </div>
+                  </motion.button>
+                </div>
+                {/* Software */}
+                <div className="bg-sky-cyan/5 border border-sky-cyan/25 rounded-2xl p-6">
+                  <p className="font-display text-base text-sky-cyan mb-5">💻 Software</p>
+                  <ul className="space-y-3 mb-6">
+                    {[
+                      { icon: "🎵", item: "Web app — เลือกเพลงและดู history" },
+                      { icon: "📊", item: "Score summary หลังเล่นแต่ละรอบ" },
+                      { icon: "🗺️", item: "Song mapping tool (JSON format)" },
+                      { icon: "📤", item: "Web upload flow สำหรับเพิ่มเพลงใหม่" },
+                      { icon: "🔗", item: "Web Server integration กับ ESP32" },
+                    ].map(({ icon, item }, i) => (
+                      <li key={i} className="flex items-start gap-3 font-body text-sm text-soft-white/75 leading-relaxed">
+                        <span className="shrink-0">{icon}</span>{item}
+                      </li>
+                    ))}
+                  </ul>
+                  <motion.button
+                    className="group relative w-full aspect-video rounded-xl overflow-hidden bg-deep-purple/30 border border-soft-white/5 cursor-pointer focus:outline-none focus:ring-2 focus:ring-sky-cyan/50"
+                    onClick={() => openLightbox(["/images/Project/synchro-figma.png"], 0)}
+                    whileHover={{ scale: 1.01 }}
+                    transition={{ duration: 0.3 }}
+                  >
+                    <Image src="/images/Project/synchro-figma.png" alt="Synchro Web App" fill className="object-cover" sizes="(max-width: 768px) 100vw, 40vw" />
+                    <div className="absolute inset-0 bg-sky-cyan/0 group-hover:bg-sky-cyan/10 transition-colors duration-300 flex items-center justify-center">
+                      <span className="font-body text-sm text-soft-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-dark-navy/60 px-4 py-2 rounded-full backdrop-blur-sm">Web App Design</span>
+                    </div>
+                  </motion.button>
+                </div>
+              </div>
+            </FadeSection>
+
+            <div className="h-px bg-gradient-to-r from-transparent via-soft-white/10 to-transparent" />
+
+            {/* ── 04 DEVELOPMENT PROCESS ── */}
+            <FadeSection delay={0.05} className="py-14">
+              <SectionNumber n="04" />
+              <h2 className="font-display text-3xl md:text-4xl text-soft-white mb-6 -mt-2">Development Process</h2>
+              <div className="space-y-4 mb-10">
+                {(project.phases ?? []).map((phase, i) => (
+                  <div key={i} className="flex items-start gap-5 bg-soft-white/5 border border-soft-white/10 rounded-2xl p-5 hover:border-retro-yellow/30 transition-all duration-300">
+                    <span className="font-display text-4xl leading-none shrink-0 mt-0.5" style={{ background: "linear-gradient(135deg, #FFD700 0%, #FF6B35 100%)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", opacity: 0.7 }}>
+                      {String(i + 1).padStart(2, "0")}
+                    </span>
+                    <div>
+                      <p className="font-display text-base text-soft-white mb-1">{phase.title}</p>
+                      <p className="font-body text-sm text-soft-white/60 leading-relaxed">{phase.description}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+              <motion.button
+                className="group relative w-full md:w-1/2 aspect-video rounded-2xl overflow-hidden bg-deep-purple/30 border border-soft-white/5 cursor-pointer focus:outline-none focus:ring-2 focus:ring-retro-yellow/50"
+                onClick={() => openLightbox(["/SynchroController/Teacher.png"], 0)}
+                whileHover={{ scale: 1.02 }}
+                transition={{ duration: 0.3 }}
+              >
+                <Image src="/SynchroController/Teacher.png" alt="Synchro in Action" fill className="object-cover" sizes="(max-width: 768px) 100vw, 50vw" />
+                <div className="absolute inset-0 bg-retro-yellow/0 group-hover:bg-retro-yellow/10 transition-colors duration-300 flex items-center justify-center">
+                  <span className="font-body text-sm text-soft-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-dark-navy/60 px-4 py-2 rounded-full backdrop-blur-sm">Synchro in Action</span>
+                </div>
+              </motion.button>
+            </FadeSection>
+
+            <div className="h-px bg-gradient-to-r from-transparent via-soft-white/10 to-transparent" />
+
+            {/* ── 05 CHALLENGES & PROBLEM SOLVING ── */}
+            <FadeSection delay={0.05} className="py-14">
+              <SectionNumber n="05" />
+              <h2 className="font-display text-3xl md:text-4xl text-soft-white mb-8 -mt-2">Challenges &amp; Problem Solving</h2>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                {[
+                  {
+                    problem: "Arduino UNO R4 ข้อจำกัดด้าน library",
+                    solution: "ย้ายมาใช้ ESP32 ที่รองรับ WiFi.h, TFT_eSPI และ WebServer ได้เต็มที่",
+                  },
+                  {
+                    problem: "Breadboard จ่ายไฟไม่เสถียร",
+                    solution: "ปรับการต่อวงจรและ power rail ให้เสถียรก่อนทดสอบ component ต่อ ๆ ไป",
+                  },
+                  {
+                    problem: "SD Card Adapter ใช้ระดับ 3V ไม่ตรงกับ 5V",
+                    solution: "ปรับ voltage level ด้วย logic level shifter และทดสอบ read/write ซ้ำ",
+                  },
+                  {
+                    problem: "Web ↔ Board handshaking ไม่เสถียร",
+                    solution: "ออกแบบ request/response flow ใหม่ และ test ทีละ endpoint จนเสถียร",
+                  },
+                ].map(({ problem, solution }, i) => (
+                  <div key={i} className="bg-soft-white/5 border border-soft-white/10 rounded-2xl p-5 hover:border-retro-yellow/20 transition-colors duration-200">
+                    <div className="flex items-start gap-2 mb-3">
+                      <span className="text-neon-magenta font-display text-sm shrink-0 mt-0.5">Problem</span>
+                    </div>
+                    <p className="font-body text-sm text-soft-white/80 leading-relaxed mb-3">{problem}</p>
+                    <div className="flex items-start gap-2 mb-2">
+                      <span className="text-mint font-display text-sm shrink-0">Solution</span>
+                    </div>
+                    <p className="font-body text-sm text-soft-white/60 leading-relaxed">{solution}</p>
+                  </div>
+                ))}
+              </div>
+            </FadeSection>
+
+            <div className="h-px bg-gradient-to-r from-transparent via-soft-white/10 to-transparent" />
+
+            {/* ── 06 SOLUTION & IMPACT ── */}
+            <FadeSection delay={0.05} className="py-14">
+              <SectionNumber n="06" />
+              <h2 className="font-display text-3xl md:text-4xl text-soft-white mb-6 -mt-2">Solution &amp; Impact</h2>
+              <p className="font-body text-base md:text-lg text-soft-white/75 leading-relaxed whitespace-pre-line">{project.result}</p>
+
+              {/* Project info sidebar */}
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-10 mb-8">
+                <div>
+                  <p className="font-body text-xs text-soft-white/40 uppercase tracking-widest mb-2">Role</p>
+                  <p className="font-body text-sm text-soft-white/80">Web Backend · Arduino Developer</p>
+                </div>
+                <div>
+                  <p className="font-body text-xs text-soft-white/40 uppercase tracking-widest mb-2">Tech Stack</p>
+                  <div className="flex flex-col gap-1">
+                    {project.techStack.map((t) => (
+                      <span key={t} className="font-body text-xs text-soft-white/70">{t}</span>
+                    ))}
+                  </div>
+                </div>
+                <div>
+                  <p className="font-body text-xs text-soft-white/40 uppercase tracking-widest mb-2">Timeline</p>
+                  <p className="font-body text-sm text-soft-white/80">Physical Computing Project 2025</p>
+                </div>
+                <div>
+                  <p className="font-body text-xs text-soft-white/40 uppercase tracking-widest mb-2">Team</p>
+                  <p className="font-body text-sm text-soft-white/80">4 members</p>
+                </div>
+              </div>
+
+              {/* Link buttons */}
+              <div className="flex flex-wrap gap-3">
+                <a href="https://ganksterphy.github.io/Synchro/" target="_blank" rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-retro-yellow/10 border border-retro-yellow/30 font-body text-sm text-retro-yellow hover:bg-retro-yellow/20 transition-colors duration-200">
+                  🌐 Website →
+                </a>
+                <a href="https://youtu.be/TF4fjew09xc" target="_blank" rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-neon-magenta/10 border border-neon-magenta/30 font-body text-sm text-neon-magenta hover:bg-neon-magenta/20 transition-colors duration-200">
+                  ▶ Video Demo →
+                </a>
+              </div>
+            </FadeSection>
+
+            <div className="h-px bg-gradient-to-r from-transparent via-soft-white/10 to-transparent" />
+          </>
+        )}
       </div>
 
       {/* ════════════════════════════════════════
@@ -1079,7 +1550,7 @@ export default function ProjectDetailClient({ project }: { project: Project }) {
               </span>
             </div>
             <h2 className="font-display text-3xl md:text-4xl text-soft-white -mt-2">
-              {isPolygonMesh ? "Full Gallery" : isVpsTycoon ? "Full Gallery" : "Visual principles detail"}
+              {isDriveKmitl || isPolygonMesh || isVpsTycoon || isSynchro ? "Full Gallery" : "Visual principles detail"}
             </h2>
             {isChaodom && (
               <p className="font-body text-sm text-soft-white/50 mt-2">UI Design Principles &amp; Visual Design Analysis</p>
@@ -1089,6 +1560,12 @@ export default function ProjectDetailClient({ project }: { project: Project }) {
             )}
             {isVpsTycoon && (
               <p className="font-body text-sm text-soft-white/50 mt-2">All 10 images — Cover, Game Loop, Systems, Cyberpunk UI &amp; more</p>
+            )}
+            {isDriveKmitl && (
+              <p className="font-body text-sm text-soft-white/50 mt-2">All 8 screens — Home, Roles, Chat Room, Countdown &amp; more</p>
+            )}
+            {isSynchro && (
+              <p className="font-body text-sm text-soft-white/50 mt-2">Hardware controller, poster, gameplay &amp; web app design</p>
             )}
           </div>
           <div className="mx-auto max-w-6xl px-4 md:px-6">
