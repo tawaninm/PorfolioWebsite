@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { motion } from "framer-motion";
 
 /* ── Types & data ── */
@@ -12,36 +13,37 @@ export interface MiniWork {
   type: MiniWorkType;
   date: string;
   gradient: string;
+  image?: string;
+  figmaLink?: string;
 }
 
 export const miniWorks: MiniWork[] = [
   {
-    id: "mw1",
-    name: "Sticker Pack Design",
-    type: "graphic",
-    date: "2026",
-    gradient: "from-hot-pink/40 to-peach/30",
-  },
-  {
-    id: "mw2",
-    name: "Music Player UI",
+    id: "dc01",
+    name: "Design challenge01 Sign up",
     type: "ui",
-    date: "2023",
+    date: "2025",
     gradient: "from-neon-magenta/40 to-lavender/30",
+    image: "/images/miniwork/Challenge1 SignUp.png",
+    figmaLink: "https://www.figma.com/design/ygyd83HIavVHj9Id7i0tIz/Design-challenge01?node-id=0-1&t=ryqfAr87ZSCztAPL-1",
   },
   {
-    id: "mw3",
-    name: "Discord Bot Scripts",
-    type: "code",
-    date: "2023",
-    gradient: "from-electric-blue/25 to-sky-cyan/30",
+    id: "dc02",
+    name: "Design challenge02 Onboarding (spotlight)",
+    type: "ui",
+    date: "2025",
+    gradient: "from-sky-cyan/40 to-mint/30",
+    image: "/images/miniwork/Challenge2 Onboarding spotlight.png",
+    figmaLink: "https://www.figma.com/design/EhXJEMz5R40cT9YnEGa5Ki/Design-challenge02-Onboarding--spotlight-?node-id=0-1&t=bIXNKvHTyEmsWYgM-1",
   },
   {
-    id: "mw4",
-    name: "3D Room Render",
-    type: "other",
-    date: "2022",
-    gradient: "from-mint/25 to-soft-white/30",
+    id: "dc03",
+    name: "Design challenge03 Entering data",
+    type: "ui",
+    date: "2025",
+    gradient: "from-retro-yellow/40 to-peach/30",
+    image: "/images/miniwork/Design challenge03 Entering data.png",
+    figmaLink: "https://www.figma.com/design/12kUTYNxw1FN7LTPdjKrnB/Design-challenge03-Entering-data?node-id=0-1&t=w6FsVXh2iIUP7Ic6-1",
   },
 ];
 
@@ -74,11 +76,21 @@ export function MiniWorkCard({ work, index }: { work: MiniWork; index: number })
     >
       <div className="bg-soft-white dark:bg-vinyl-dark/90 p-3 rounded-lg shadow-lg hover:shadow-[0_12px_32px_rgba(255,45,120,0.3)] transition-shadow duration-300">
         <div className={`relative aspect-video rounded-md overflow-hidden bg-gradient-to-br ${work.gradient}`}>
-          <div className="absolute inset-0 flex items-center justify-center">
-            <span className="font-display text-5xl text-dark-navy/20 select-none">
-              {work.name[0]}
-            </span>
-          </div>
+          {work.image ? (
+            <Image
+              src={work.image}
+              alt={work.name}
+              fill
+              className="object-cover"
+              sizes="(max-width: 640px) 224px, (max-width: 1024px) 50vw, 25vw"
+            />
+          ) : (
+            <div className="absolute inset-0 flex items-center justify-center">
+              <span className="font-display text-5xl text-dark-navy/20 select-none">
+                {work.name[0]}
+              </span>
+            </div>
+          )}
           <div className="halftone-bg absolute inset-0 opacity-0 group-hover:opacity-[0.2] transition-opacity duration-500 pointer-events-none" />
         </div>
 
@@ -92,6 +104,21 @@ export function MiniWorkCard({ work, index }: { work: MiniWork; index: number })
             </span>
           </div>
           <p className="font-mono text-xs text-muted-lilac">{work.date}</p>
+
+          {work.figmaLink && (
+            <a
+              href={work.figmaLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-1 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-neon-magenta/10 border border-neon-magenta/40 text-neon-magenta font-body text-[11px] font-bold hover:bg-neon-magenta hover:text-white transition-all duration-200 w-fit"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path d="M5 5.5A3.5 3.5 0 018.5 2H12v7H8.5A3.5 3.5 0 015 5.5zM12 2h3.5a3.5 3.5 0 110 7H12V2zM12 10.5H8.5a3.5 3.5 0 100 7H12v-7zM12 10.5h3.5a3.5 3.5 0 010 7H12v-7zM8.5 19H12v2.5A2.5 2.5 0 018.5 19z"/>
+              </svg>
+              View in Figma
+            </a>
+          )}
         </div>
       </div>
     </motion.div>
@@ -164,7 +191,7 @@ export default function MiniWorkPreview() {
           <p className="font-zen text-base text-muted-lilac mt-1 tracking-widest">ミニワーク</p>
         </motion.div>
 
-        <div className="flex md:grid md:grid-cols-4 gap-6 overflow-x-auto md:overflow-visible pb-4 md:pb-0 snap-x snap-mandatory md:snap-none -mx-6 px-6 md:mx-0 md:px-0">
+        <div className="flex md:grid md:grid-cols-3 gap-6 overflow-x-auto md:overflow-visible pb-4 md:pb-0 snap-x snap-mandatory md:snap-none -mx-6 px-6 md:mx-0 md:px-0">
           {miniWorks.map((work, idx) => (
             <div key={work.id} className="snap-start">
               <MiniWorkCard work={work} index={idx} />

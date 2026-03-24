@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { activities, typeBadge, typeLabel } from "@/data/activities";
 import type { Activity, ActivityType } from "@/data/activities";
@@ -24,9 +25,9 @@ type FilterKey = (typeof filters)[number]["key"];
    STATS
 ───────────────────────────────────────── */
 const stats = [
-  { number: "10+",  label: "Activities",    from: "#FF2D78", to: "#F06848" },
+  { number: "16",   label: "Activities",    from: "#FF2D78", to: "#F06848" },
   { number: "300+", label: "Hours",         from: "#5080F0", to: "#40C8A0" },
-  { number: "15+",  label: "Skills Gained", from: "#F0D040", to: "#F8A078" },
+  { number: "15+",  label: "Tools & Skills", from: "#F0D040", to: "#F8A078" },
   { number: "2",    label: "Certificates",  from: "#F0B0D0", to: "#FF2D78" },
 ];
 
@@ -88,11 +89,21 @@ function ActivityCard({ activity, index }: { activity: Activity; index: number }
 
         {/* Photo area */}
         <div className={`relative aspect-video rounded-md overflow-hidden bg-gradient-to-br ${activity.gradient}`}>
-          <div className="absolute inset-0 flex items-center justify-center">
-            <span className="font-display text-5xl text-dark-navy/20 select-none">
-              {activity.name[0]}
-            </span>
-          </div>
+          {activity.image ? (
+            <Image
+              src={activity.image}
+              alt={activity.name}
+              fill
+              className="object-cover"
+              sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+            />
+          ) : (
+            <div className="absolute inset-0 flex items-center justify-center">
+              <span className="font-display text-5xl text-dark-navy/20 select-none">
+                {activity.name[0]}
+              </span>
+            </div>
+          )}
           <div className="halftone-bg absolute inset-0 opacity-0 group-hover:opacity-[0.2] transition-opacity duration-500 pointer-events-none" />
         </div>
 

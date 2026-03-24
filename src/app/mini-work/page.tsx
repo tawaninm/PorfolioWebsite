@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { miniWorks, MiniWorkType, MiniWorkCard } from "@/components/MiniWorkPreview";
+import { miniWorks, MiniWorkCard } from "@/components/MiniWorkPreview";
 
 const filters = [
   { key: "all",     label: "All" },
@@ -15,10 +15,10 @@ const filters = [
 type FilterKey = (typeof filters)[number]["key"];
 
 const stats = [
-  { number: "20+",  label: "Mini Works",    from: "#FF2D78", to: "#F06848" },
-  { number: "150+", label: "Hours Created", from: "#5080F0", to: "#40C8A0" },
-  { number: "10+",  label: "Tools Used",    from: "#F0D040", to: "#F8A078" },
-  { number: "1m",   label: "Pixels Pushed", from: "#F0B0D0", to: "#FF2D78" },
+  { number: "3",    label: "Mini Works",      from: "#FF2D78", to: "#F06848" },
+  { number: "3",    label: "Design Challenges", from: "#5080F0", to: "#40C8A0" },
+  { number: "1",    label: "Tool: Figma",     from: "#F0D040", to: "#F8A078" },
+  { number: "UI",   label: "Focus Area",      from: "#F0B0D0", to: "#FF2D78" },
 ];
 
 function Starburst({ size, className }: { size: number; className?: string }) {

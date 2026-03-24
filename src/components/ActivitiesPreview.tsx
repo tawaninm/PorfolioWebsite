@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { motion } from "framer-motion";
 import { featuredActivities, typeBadge, typeLabel } from "@/data/activities";
 import type { Activity } from "@/data/activities";
@@ -22,11 +23,21 @@ function PolaroidCard({ activity, index }: { activity: Activity; index: number }
       <div className="bg-soft-white dark:bg-vinyl-dark/90 p-3 rounded-lg shadow-lg hover:shadow-[0_12px_32px_rgba(80,128,240,0.3)] transition-shadow duration-300">
         {/* Photo area */}
         <div className={`relative aspect-video rounded-md overflow-hidden bg-gradient-to-br ${activity.gradient}`}>
-          <div className="absolute inset-0 flex items-center justify-center">
-            <span className="font-display text-5xl text-dark-navy/20 select-none">
-              {activity.name[0]}
-            </span>
-          </div>
+          {activity.image ? (
+            <Image
+              src={activity.image}
+              alt={activity.name}
+              fill
+              className="object-cover"
+              sizes="(max-width: 640px) 224px, 25vw"
+            />
+          ) : (
+            <div className="absolute inset-0 flex items-center justify-center">
+              <span className="font-display text-5xl text-dark-navy/20 select-none">
+                {activity.name[0]}
+              </span>
+            </div>
+          )}
           {/* Halftone on hover */}
           <div className="halftone-bg absolute inset-0 opacity-0 group-hover:opacity-[0.2] transition-opacity duration-500 pointer-events-none" />
         </div>
