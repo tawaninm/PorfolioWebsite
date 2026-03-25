@@ -10,10 +10,9 @@ import { FiMapPin, FiMail, FiPhone, FiGlobe, FiDownload, FiLinkedin } from "reac
 const RESUME_DRIVE_URL = "https://drive.google.com/file/d/18nSkCZXM5fqqbfZys5cT3O3ArMji6Vg3/view?usp=sharing"; // TODO: แทนที่ YOUR_FILE_ID ด้วย ID ไฟล์จาก Google Drive
 
 const stats = [
-  { label: "UX/UI", pct: 80, from: "#FF2D78", to: "#F06848" },
+  { label: "UX/UI", pct: 50, from: "#FF2D78", to: "#F06848" },
   { label: "Frontend", pct: 65, from: "#5080F0", to: "#40C8A0" },
   { label: "Game Dev", pct: 70, from: "#F0D040", to: "#F8A078" },
-  { label: "CI Art", pct: 75, from: "#F0B0D0", to: "#FF2D78" },
 ];
 
 const education = [
@@ -21,88 +20,69 @@ const education = [
     school: "King Mongkut's Institute of Technology Ladkrabang (KMITL)",
     degree: "Bachelor of Science Program in Information Technology",
     module: "Module: Multimedia & Game Development",
-    year: "Aug 2026 – Now",
+    year: "Aug 2024 – Now",
     notes: [
-      "Freshman project on Python Web Next.js: Chat website \"Drive@Kmitl\"",
-      "Freshman project on Java Game project \"VPSTycoon\"",
-      "Freshman project on Arduino Rhythm Controller Game project \"Synchro\"",
-    ],
-  },
-  {
-    school: "Rayongwittayakom School",
-    degree: "Computer Math and Science Program (Wit-com)",
-    module: "",
-    year: "2017 – 2023",
-    notes: [
-      "Participated in national software contests",
-      "Developed a passion for programming and game development",
+      "Freshman project on Python Web Next.js project Chat website \"Drive@Kmitl\"",
+      "Java Game project \"VPSTycoon\"",
+      "Arduino Rhythm Controller Game project \"Synchro\"",
+      "UX/UI Prototype Easy Dom \"Chao-dom\"",
     ],
   },
 ];
 
 const workExperience = [
   {
-    company: "Code Genius Emquartier",
-    role: "Part-time Tutor — Coding",
-    dates: "2026 – Present",
+    company: "Login-Engineering Academy",
+    role: "Part-time Tutor — Information Technology",
+    dates: "Sep 2024 – Now",
     achievements: [
-      "Instructed group classes of primary school students in basic computer skills, delivering lessons in both Thai and English.",
+      "The tutor manages projects for students to submit to competitions, such as national software contests and portfolio projects for university applications.",
+      "The tutor teaches the Godot game engine and mathematics to junior high school and senior high school students.",
     ],
-    tech: "Scratch, Python, Microbit",
+    tech: "Godot Engine, Math",
   },
   {
-    company: "School of Information Technology, KMITL",
-    role: "Part-time TA — Java OOP",
-    dates: "Nov 28, 2025 – Present",
+    company: "School of Information Technology — KMITL",
+    role: "Part-time TA Java OOP",
+    dates: "Nov 28, 2025 – Now",
     achievements: [
       "Assisting the course instructor for Object-Oriented Programming (OOP) by evaluating weekly laboratory assignments and posing conceptual questions to students to reinforce their understanding and facilitate further learning.",
     ],
     tech: "OOP Java",
   },
   {
-    company: "School of Information Technology, KMITL — IT Openhouse 2025",
+    company: "School of Information Technology — KMITL IT Openhouse 2025",
     role: "Head Workshop — Multimedia Roblox Journey",
     dates: "Nov 28 – 29, 2025",
     achievements: [
-      "Acting as the Project Head for the Roblox Training Program, responsible for curriculum development and proposing training modules to faculty members.",
-      "Sourcing Teaching Assistants (TAs) and Technical Directors (TDs) for workshops, and overseeing classroom operations, including the management of lab equipment and software environments.",
+      "Acting as the Project Head for the Roblox Training Program, responsible for curriculum development and proposing training modules to faculty members. Key duties include designing instructional plans, sourcing Teaching Assistants (TAs) and Technical Directors (TDs) for workshops, and overseeing classroom operations, including the management of lab equipment and software environments.",
     ],
     tech: "Roblox Studio",
   },
   {
     company: "School of Information Technology, KMITL — ITCAMP21",
-    role: "TD — Unreal Engine",
-    dates: "Apr 28 – May 1, 2025",
+    role: "TD Unreal Engine",
+    dates: "28 April 2025 – 1 May 2025",
     achievements: [
-      "Managed student projects for competitions such as national software contests and portfolio pieces required for university applications.",
-      "Taught the Godot game engine and mathematics to junior-high and senior-high students.",
+      "Manage student projects for competitions such as national software contests and portfolio pieces required for university applications.",
+      "Teach the Godot game engine and mathematics to junior-high and senior-high students.",
     ],
     tech: "Unreal Engine",
-  },
-  {
-    company: "Login-Engineering Academy",
-    role: "Part-time Tutor — Information Technology & Math",
-    dates: "Sep 2024 – 2026",
-    achievements: [
-      "Managed student projects for competitions, such as national software contests and portfolio projects for university applications.",
-      "Taught the Godot game engine and mathematics to junior high school and senior high school students.",
-    ],
-    tech: "Godot Engine, Math, Physics",
   },
 ];
 
 const skillGroups = [
   { label: "UX / UI Tool", items: ["Adobe Illustrator", "Figma", "Canva"] },
-  { label: "AI Tools", items: ["NotebookLM", "ChatGPT", "Gemini", "Claude"] },
-  { label: "Game Development", items: ["Godot Engine (Intermediate)", "Unity (Intermediate)", "Unreal Engine (Intermediate)", "Roblox Studio (Beginner)", "Git"] },
-  { label: "Coding Languages", items: ["C#", "GDScript", "Java", "HTML", "CSS", "JavaScript", "Lua", "SQL", "Python"] },
-  { label: "Coding Knowledge", items: ["OOP Java", "Python Data Structure", "Algorithm"] },
+  { label: "UX / UI Knowledge", items: ["Design principle", "Visual principle", "Usability testing", "Dialog design"] },
+  { label: "Dev Tool", items: ["Godot engine (Intermediate)", "Unity engine (Intermediate)", "Unreal engine (Intermediate)", "Roblox Studio (Beginner)", "Git", "Visual studio code"] },
+  { label: "Coding Languages", items: ["C#", "GDscript", "Java", "HTML", "CSS", "JavaScript", "Lua", "SQL"] },
+  { label: "AI skill", items: ["Gemini", "NotebookLM", "Chat GPT", "Claude", "Antigravity"] },
 ];
 
 const languages = [
-  { lang: "Thai", pct: 100, native: true },
-  { lang: "English", pct: 70, native: false },
-  { lang: "Japanese", pct: 20, native: false },
+  { lang: "Thai", pct: 100, level: "Native" },
+  { lang: "English", pct: 60, level: "Medium" },
+  { lang: "Japanese", pct: 20, level: "Beginner" },
 ];
 
 const awards = [
@@ -148,7 +128,7 @@ function StatBar({ label, pct, from, to }: { label: string; pct: number; from: s
   );
 }
 
-function LangBar({ lang, pct, native }: { lang: string; pct: number; native: boolean }) {
+function LangBar({ lang, pct, level }: { lang: string; pct: number; level: string }) {
   const ref = useRef<HTMLDivElement>(null);
   const inView = useInView(ref, { once: true, margin: "-40px" });
   return (
@@ -162,11 +142,9 @@ function LangBar({ lang, pct, native }: { lang: string; pct: number; native: boo
           transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
         />
       </div>
-      {native && (
-        <span className="font-mono text-[10px] text-retro-yellow border border-retro-yellow/40 rounded px-1.5 py-0.5 shrink-0">
-          Native
-        </span>
-      )}
+      <span className="font-mono text-[10px] text-retro-yellow border border-retro-yellow/40 rounded px-1.5 py-0.5 shrink-0 w-16 text-center">
+        {level}
+      </span>
     </div>
   );
 }

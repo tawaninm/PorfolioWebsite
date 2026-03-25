@@ -249,7 +249,7 @@ export const projects: Project[] = [
   {
     slug: "detect-cheat",
     title: "สืบ-ล่า-โกง (DETEC-CHEAT)",
-    category: "programming",
+    category: "game",
     thumbnail: "/images/Project/preview-detect-cheat.png",
     heroImage: "/images/Project/preview-detect-cheat.png",
     date: "2022",
@@ -270,9 +270,9 @@ export const projects: Project[] = [
   {
     slug: "criminal-mind",
     title: "ห้วงลึกภายในจิตใจ (Criminal Minds)",
-    category: "programming",
-    thumbnail: "",
-    heroImage: "",
+    category: "game",
+    thumbnail: "/images/Project/preview-criminal-minds.png",
+    heroImage: "/images/Project/preview-criminal-minds.png",
     date: "2023",
     tags: ["Unity", "Procreate", "NSC 25"],
     techStack: ["Unity", "Procreate"],
@@ -280,6 +280,12 @@ export const projects: Project[] = [
     problem: "ปัญหามิจฉาทิฐิหรือการปฏิบัติที่ไม่เหมาะสมของเจ้าหน้าที่ต่อผู้ต้องหาในชีวิตจริง",
     process: "เขียนบทคดีธุรกิจ -> ออกแบบตัวละคร 2D -> พัฒนามินิเกม (ตรวจรอยนิ้วมือ, ตรวจเลือด) -> สรุปคดี",
     result: "The Solution: สร้างเกมที่จำลองสถานการณ์ความกดดันในการทำคดี แต่เน้นให้ผู้เล่นยึดหลักจริยธรรม\nImpact: สร้างแรงบันดาลใจและให้ความรู้เกี่ยวกับการทำงานที่ถูกต้องในสายงานตำรวจแก่เยาวชน",
-    gallery: [],
+    gallery: [
+      "/images/Project/criminal-cover.png",
+      "/images/Project/criminal-scene.png",
+      "/images/Project/criminal-evidence.png",
+      "/images/Project/criminal-interview.png",
+      "/images/Project/criminal-summary.png",
+    ],
   }
 ];
