@@ -338,7 +338,7 @@ export default function SynchroDetailClient({ project }: { project: Project }) {
           >
             <Image src="/SynchroController/Teacher.png" alt="Development Documentation" fill className="object-cover" />
             <div className="absolute inset-0 bg-dark-navy/0 hover:bg-dark-navy/30 transition-all flex justify-center items-center pointer-events-none">
-                <span className="opacity-0 font-body text-sm rounded-full bg-dark-navy/80 px-4 py-2 text-soft-white border border-soft-white/20">Expand Image</span>
+              <span className="opacity-0 font-body text-sm rounded-full bg-dark-navy/80 px-4 py-2 text-soft-white border border-soft-white/20">Expand Image</span>
             </div>
           </motion.div>
         </FadeSection>
@@ -353,7 +353,7 @@ export default function SynchroDetailClient({ project }: { project: Project }) {
           <h2 className="font-display text-3xl md:text-4xl text-soft-white mb-8 -mt-2">
             Challenges &amp; Problem Solving
           </h2>
-          
+
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {[
               {
@@ -418,17 +418,12 @@ export default function SynchroDetailClient({ project }: { project: Project }) {
               Visit Website ↗
             </a>
             <a
-              href="#"
+              href="https://www.youtube.com/watch?v=TF4fjew09xc"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full bg-transparent border border-sky-cyan font-body text-sky-cyan font-bold hover:bg-sky-cyan/10 hover:shadow-[0_0_20px_rgba(136,216,232,0.3)] hover:-translate-y-1 transition-all"
-              onClick={(e) => {
-                // If there's an actual video link, it can be updated later. User requested a button but didn't provide a URL.
-                e.preventDefault();
-                alert("Video link pending!"); 
-              }}
             >
-              Watch Video (External) ↗
+              Watch Video ↗
             </a>
           </div>
         </FadeSection>
