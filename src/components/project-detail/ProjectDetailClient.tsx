@@ -72,15 +72,6 @@ function ImpactBubble() {
   );
 }
 
-/* ---- Image placeholder (for missing images) ---- */
-function ImgPlaceholder({ filename, className = "" }: { filename: string; className?: string }) {
-  return (
-    <div className={`flex flex-col items-center justify-center bg-deep-purple/30 border border-dashed border-soft-white/20 rounded-xl ${className}`}>
-      <span className="font-display text-3xl text-soft-white/10 mb-2">?</span>
-      <span className="font-body text-xs text-soft-white/30 text-center px-2 break-all">{filename}</span>
-    </div>
-  );
-}
 
 /* ---- Gallery grid with lightbox ---- */
 function GalleryGrid({
@@ -152,10 +143,6 @@ export default function ProjectDetailClient({ project }: { project: Project }) {
 
   /* ---- Chaodom-specific image sets ---- */
   const galleryImages = project.gallery;
-
-  // Placeholder helper — renders placeholder if no real images defined
-  const placeholderSet = (prefix: string, count: number) =>
-    Array.from({ length: count }, (_, i) => `${prefix}-${i + 1}.png`);
 
   return (
     <main className="relative min-h-screen bg-dark-navy overflow-hidden">
@@ -294,7 +281,7 @@ export default function ProjectDetailClient({ project }: { project: Project }) {
             <div className="mt-8 relative w-full overflow-hidden rounded-2xl" style={{ clipPath: "polygon(0 0, 100% 0, 100% 92%, 97% 100%, 0 100%)" }}>
               <div className="aspect-[21/9] relative">
                 <Image
-                  src="/images/Project/preview-polygon-mesh.png"
+                  src="/images/Project/Multimedia Learning Polygon Mesh/FUll galary/3.png"
                   alt="Multimedia Learning Polygon Mesh Preview"
                   fill
                   className="object-cover"
@@ -305,16 +292,9 @@ export default function ProjectDetailClient({ project }: { project: Project }) {
             </div>
           )}
 
-          {isChaodom && (
-            <>
-              <SubHeading>App Screens Overview</SubHeading>
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-                {placeholderSet("/images/Project/Chaodom/preview-overview", 4).map((src, i) => (
-                  <ImgPlaceholder key={i} filename={src} className="aspect-[9/16] min-h-[160px]" />
-                ))}
-              </div>
-            </>
-          )}
+
+
+
         </FadeSection>
 
         <div className="h-px bg-gradient-to-r from-transparent via-soft-white/10 to-transparent" />
@@ -389,12 +369,7 @@ export default function ProjectDetailClient({ project }: { project: Project }) {
                 </p>
               </div>
 
-              <SubHeading>Observation Photos</SubHeading>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
-                {placeholderSet("/images/Project/Chaodom/problem", 3).map((src, i) => (
-                  <ImgPlaceholder key={i} filename={src} className="aspect-video" />
-                ))}
-              </div>
+
             </>
           )}
         </FadeSection>
@@ -498,20 +473,15 @@ export default function ProjectDetailClient({ project }: { project: Project }) {
               </div>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 {[
-                  "/images/Project/polygon-2d.png",
-                  "/images/Project/polygon-3d.png",
-                  "/images/Project/polygon-study.png",
-                  "/images/Project/polygon-creating-mesh.png",
-                ].map((img, i) => (
+                  "/images/Project/Multimedia Learning Polygon Mesh/46.png",
+                  "/images/Project/Multimedia Learning Polygon Mesh/47.png",
+                  "/images/Project/Multimedia Learning Polygon Mesh/49.png",
+                  "/images/Project/Multimedia Learning Polygon Mesh/50.png",
+                ].map((img, i, arr) => (
                   <motion.button
                     key={i}
                     className="group relative aspect-video rounded-2xl overflow-hidden bg-deep-purple/30 border border-soft-white/5 cursor-pointer focus:outline-none focus:ring-2 focus:ring-hot-pink/50"
-                    onClick={() => openLightbox([
-                      "/images/Project/polygon-2d.png",
-                      "/images/Project/polygon-3d.png",
-                      "/images/Project/polygon-study.png",
-                      "/images/Project/polygon-creating-mesh.png",
-                    ], i)}
+                    onClick={() => openLightbox(arr, i)}
                     whileHover={{ scale: 1.02 }}
                     transition={{ duration: 0.3 }}
                   >
@@ -535,16 +505,7 @@ export default function ProjectDetailClient({ project }: { project: Project }) {
                   <div className="relative z-10">
                     <h3 className="font-display text-2xl md:text-3xl text-sakura-pink mb-3 group-hover:text-neon-magenta transition-colors duration-300">{project.phases[0].title}</h3>
                     <p className="font-body text-base md:text-lg text-soft-white/80 leading-relaxed">{project.phases[0].description}</p>
-                    {isChaodom && (
-                      <>
-                        <p className="font-body text-sm text-soft-white/50 mt-6 mb-3">Preliminary Interview &amp; Observation</p>
-                        <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
-                          {placeholderSet("/images/Project/Chaodom/phase1", 3).map((src, i) => (
-                            <ImgPlaceholder key={i} filename={src} className="aspect-video" />
-                          ))}
-                        </div>
-                      </>
-                    )}
+
                   </div>
                 </FadeSection>
               )}
@@ -572,18 +533,6 @@ export default function ProjectDetailClient({ project }: { project: Project }) {
                             </div>
                           ))}
                         </div>
-                        <p className="font-body text-sm text-soft-white/50 mb-3">Interview Highlights</p>
-                        <div className="grid grid-cols-1 md:grid-cols-3 gap-3 mb-4">
-                          {placeholderSet("/images/Project/Chaodom/phase2-interview", 3).map((src, i) => (
-                            <ImgPlaceholder key={i} filename={src} className="aspect-video" />
-                          ))}
-                        </div>
-                        <p className="font-body text-sm text-soft-white/50 mb-3">Observation Photos</p>
-                        <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-                          {placeholderSet("/images/Project/Chaodom/phase2-observation", 4).map((src, i) => (
-                            <ImgPlaceholder key={i} filename={src} className="aspect-video" />
-                          ))}
-                        </div>
                       </>
                     )}
                   </div>
@@ -600,14 +549,54 @@ export default function ProjectDetailClient({ project }: { project: Project }) {
                     {isChaodom && (
                       <>
                         <p className="font-display text-soft-white/80 text-lg mt-8 mb-2">Persona: น้องเฟรช (The Dorm Seeker)</p>
-                        <ImgPlaceholder filename="/images/Project/Chaodom/persona.png" className="w-full aspect-[4/3] mb-4" />
+                        <motion.button
+                          className="group relative w-full rounded-2xl overflow-hidden bg-deep-purple/30 border border-soft-white/5 cursor-pointer focus:outline-none focus:ring-2 focus:ring-sakura-pink/50 mb-4"
+                          style={{ aspectRatio: "4/3" }}
+                          onClick={() => openLightbox([
+                            "/images/Project/Chaodom/Phase%203%20Analysis%20%26%20Conceptual%20Design/Persona.png",
+                            "/images/Project/Chaodom/Phase%203%20Analysis%20%26%20Conceptual%20Design/Experience%20Map.png",
+                          ], 0)}
+                          whileHover={{ scale: 1.01 }}
+                          transition={{ duration: 0.3 }}
+                        >
+                          <Image
+                            src="/images/Project/Chaodom/Phase%203%20Analysis%20%26%20Conceptual%20Design/Persona.png"
+                            alt="Persona น้องเฟรช"
+                            fill
+                            className="object-contain"
+                            sizes="(max-width: 768px) 100vw, 70vw"
+                          />
+                          <div className="absolute inset-0 bg-sakura-pink/0 group-hover:bg-sakura-pink/10 transition-colors duration-300 flex items-center justify-center">
+                            <span className="font-body text-sm text-soft-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-dark-navy/60 px-4 py-2 rounded-full backdrop-blur-sm">View Full Size</span>
+                          </div>
+                        </motion.button>
                         <div className="bg-soft-white/5 rounded-xl p-4 mb-6 font-body text-sm text-soft-white/70 leading-relaxed">
                           <strong className="text-soft-white">น้องเฟรช</strong> — นักศึกษาใหม่ สจล. อายุ 18 ปี มาจากต่างจังหวัด<br />
                           <em>&ldquo;อยากได้ข้อมูลหอที่ถูกต้อง ไม่ต้องเสียเวลาลงพื้นที่เองทุกครั้ง&rdquo;</em><br />
                           Goals: หาหอที่ปลอดภัย ราคาสมเหตุสมผล ใกล้สถาบัน | Pain: ข้อมูลไม่อัปเดต ติดต่อยาก
                         </div>
                         <p className="font-display text-soft-white/80 text-lg mb-2">Experience Map</p>
-                        <ImgPlaceholder filename="/images/Project/Chaodom/experience-map.png" className="w-full aspect-[3/1] mb-3" />
+                        <motion.button
+                          className="group relative w-full rounded-2xl overflow-hidden bg-deep-purple/30 border border-soft-white/5 cursor-pointer focus:outline-none focus:ring-2 focus:ring-sakura-pink/50 mb-3"
+                          style={{ aspectRatio: "3/1" }}
+                          onClick={() => openLightbox([
+                            "/images/Project/Chaodom/Phase%203%20Analysis%20%26%20Conceptual%20Design/Persona.png",
+                            "/images/Project/Chaodom/Phase%203%20Analysis%20%26%20Conceptual%20Design/Experience%20Map.png",
+                          ], 1)}
+                          whileHover={{ scale: 1.01 }}
+                          transition={{ duration: 0.3 }}
+                        >
+                          <Image
+                            src="/images/Project/Chaodom/Phase%203%20Analysis%20%26%20Conceptual%20Design/Experience%20Map.png"
+                            alt="Experience Map"
+                            fill
+                            className="object-contain"
+                            sizes="(max-width: 768px) 100vw, 70vw"
+                          />
+                          <div className="absolute inset-0 bg-sakura-pink/0 group-hover:bg-sakura-pink/10 transition-colors duration-300 flex items-center justify-center">
+                            <span className="font-body text-sm text-soft-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-dark-navy/60 px-4 py-2 rounded-full backdrop-blur-sm">View Full Size</span>
+                          </div>
+                        </motion.button>
                         <a
                           href="https://www.figma.com/board/JuVCLNLk0p9hTIH800cNDg/Experience-Map"
                           target="_blank"
@@ -616,9 +605,6 @@ export default function ProjectDetailClient({ project }: { project: Project }) {
                         >
                           View Full Experience Map →
                         </a>
-                        <p className="font-display text-soft-white/80 text-lg mb-2">Pain &amp; Gain Analysis</p>
-                        <p className="font-body text-sm text-soft-white/60 mb-3">กำหนด Pain and Gain Statements จากข้อมูลสัมภาษณ์ โหวต Priority เพื่อกำหนด Functional และ Usability Requirements</p>
-                        <ImgPlaceholder filename="/images/Project/Chaodom/pain-gain.png" className="w-full aspect-video" />
                       </>
                     )}
                   </div>
@@ -635,15 +621,20 @@ export default function ProjectDetailClient({ project }: { project: Project }) {
                     {isChaodom && (
                       <>
                         <p className="font-display text-soft-white/80 text-lg mt-8 mb-2">UI Component Map</p>
-                        <div className="grid grid-cols-2 gap-3 mb-6">
-                          {placeholderSet("/images/Project/Chaodom/ui-components", 4).map((src, i) => (
-                            <ImgPlaceholder key={i} filename={src} className="aspect-video" />
-                          ))}
-                        </div>
-                        <p className="font-display text-soft-white/80 text-lg mb-2">iOS Prototype Screens</p>
-                        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-4">
-                          {placeholderSet("/images/Project/Chaodom/prototype", 8).map((src, i) => (
-                            <ImgPlaceholder key={i} filename={src} className="aspect-[9/16]" />
+                        <div className="grid grid-cols-2 md:grid-cols-3 gap-3 mb-6">
+                          {Array.from({ length: 9 }, (_, i) => `/images/Project/Chaodom/UI%20Component%20Map/${i + 1}.png`).map((src, i, arr) => (
+                            <motion.button
+                              key={i}
+                              className="group relative aspect-[4/3] rounded-2xl overflow-hidden bg-deep-purple/30 border border-soft-white/5 cursor-pointer focus:outline-none focus:ring-2 focus:ring-sakura-pink/50"
+                              onClick={() => openLightbox(arr, i)}
+                              whileHover={{ scale: 1.02 }}
+                              transition={{ duration: 0.3 }}
+                            >
+                              <Image src={src} alt={`UI Component ${i + 1}`} fill className="object-contain" sizes="(max-width: 768px) 50vw, 33vw" />
+                              <div className="absolute inset-0 bg-sakura-pink/0 group-hover:bg-sakura-pink/10 transition-colors duration-300 flex items-center justify-center">
+                                <span className="font-body text-sm text-soft-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-dark-navy/60 px-4 py-2 rounded-full backdrop-blur-sm">View Full Size</span>
+                              </div>
+                            </motion.button>
                           ))}
                         </div>
                         <a
@@ -715,7 +706,46 @@ export default function ProjectDetailClient({ project }: { project: Project }) {
         <div className="h-px bg-gradient-to-r from-transparent via-soft-white/10 to-transparent" />
 
         {/* ════════════════════════════════════════
-            04 CONTENT FLOW & BUILD PROCESS (polygon-mesh only)
+            04 FINAL PROTOTYPE SHOWCASE (chao-dom only)
+        ════════════════════════════════════════ */}
+        {isChaodom && (
+          <FadeSection delay={0.05} className="py-14">
+            <SectionNumber n="04" />
+            <h2 className="font-display text-3xl md:text-4xl text-soft-white mb-3 -mt-2">Final Prototype Showcase</h2>
+            <p className="font-body text-base text-soft-white/60 mb-8">ภาพรวม prototype iOS ทั้งหมดของ EasyDom — ครอบคลุมทุก flow ตั้งแต่ค้นหาหอ กรอง เปรียบเทียบ ติดต่อเจ้าของหอ และรีวิว</p>
+            <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+              {[
+                "/images/Project/Chaodom/App Screens Overview/3.png",
+                "/images/Project/Chaodom/App Screens Overview/4.png",
+                "/images/Project/Chaodom/App Screens Overview/5.png",
+                "/images/Project/Chaodom/App Screens Overview/6.png",
+                "/images/Project/Chaodom/App Screens Overview/7.png",
+                "/images/Project/Chaodom/App Screens Overview/8.png",
+                "/images/Project/Chaodom/App Screens Overview/9.png",
+                "/images/Project/Chaodom/App Screens Overview/10.png",
+                "/images/Project/Chaodom/App Screens Overview/11.png",
+              ].map((src, i, arr) => (
+                <motion.button
+                  key={i}
+                  className="group relative aspect-[4/3] rounded-2xl overflow-hidden bg-deep-purple/30 border border-soft-white/5 cursor-pointer focus:outline-none focus:ring-2 focus:ring-sakura-pink/50"
+                  onClick={() => openLightbox(arr, i)}
+                  whileHover={{ scale: 1.02 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  <Image src={src} alt={`Final Prototype ${i + 1}`} fill className="object-contain" sizes="(max-width: 768px) 50vw, 33vw" />
+                  <div className="absolute inset-0 bg-sakura-pink/0 group-hover:bg-sakura-pink/10 transition-colors duration-300 flex items-center justify-center">
+                    <span className="font-body text-sm text-soft-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-dark-navy/60 px-4 py-2 rounded-full backdrop-blur-sm">View Full Size</span>
+                  </div>
+                </motion.button>
+              ))}
+            </div>
+          </FadeSection>
+        )}
+
+        <div className="h-px bg-gradient-to-r from-transparent via-soft-white/10 to-transparent" />
+
+        {/* ════════════════════════════════════════
+            05 CONTENT FLOW & BUILD PROCESS (polygon-mesh only)
         ════════════════════════════════════════ */}
         {isPolygonMesh && (
           <>
@@ -750,18 +780,14 @@ export default function ProjectDetailClient({ project }: { project: Project }) {
               </div>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                 {[
-                  "/images/Project/polygon-home.png",
-                  "/images/Project/polygon-2d-process.png",
-                  "/images/Project/polygon-3d-process.png",
-                ].map((img, i) => (
+                  "/images/Project/Multimedia Learning Polygon Mesh/44.png",
+                  "/images/Project/Multimedia Learning Polygon Mesh/45.png",
+                  "/images/Project/Multimedia Learning Polygon Mesh/48.png",
+                ].map((img, i, arr) => (
                   <motion.button
                     key={i}
                     className="group relative aspect-video rounded-2xl overflow-hidden bg-deep-purple/30 border border-soft-white/5 cursor-pointer focus:outline-none focus:ring-2 focus:ring-sky-cyan/50"
-                    onClick={() => openLightbox([
-                      "/images/Project/polygon-home.png",
-                      "/images/Project/polygon-2d-process.png",
-                      "/images/Project/polygon-3d-process.png",
-                    ], i)}
+                    onClick={() => openLightbox(arr, i)}
                     whileHover={{ scale: 1.02 }}
                     transition={{ duration: 0.3 }}
                   >
@@ -809,23 +835,21 @@ export default function ProjectDetailClient({ project }: { project: Project }) {
                   </div>
                 </div>
               </div>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                 {[
-                  "/images/Project/polygon-jigsaw-menu.png",
-                  "/images/Project/polygon-jigsaw-game.png",
-                ].map((img, i) => (
+                  "/images/Project/Multimedia Learning Polygon Mesh/53.png",
+                  "/images/Project/Multimedia Learning Polygon Mesh/54.png",
+                  "/images/Project/Multimedia Learning Polygon Mesh/55.png",
+                ].map((img, i, arr) => (
                   <motion.button
                     key={i}
                     className="group relative aspect-video rounded-2xl overflow-hidden bg-deep-purple/30 cursor-pointer focus:outline-none"
                     style={{ border: "1px solid rgba(176,38,255,0.3)", boxShadow: "0 0 24px rgba(176,38,255,0.1)" }}
-                    onClick={() => openLightbox([
-                      "/images/Project/polygon-jigsaw-menu.png",
-                      "/images/Project/polygon-jigsaw-game.png",
-                    ], i)}
+                    onClick={() => openLightbox(arr, i)}
                     whileHover={{ scale: 1.02 }}
                     transition={{ duration: 0.3 }}
                   >
-                    <Image src={img} alt={`Jigsaw ${i + 1}`} fill className="object-cover" sizes="(max-width: 768px) 100vw, 50vw" />
+                    <Image src={img} alt={`Jigsaw ${i + 1}`} fill className="object-cover" sizes="(max-width: 768px) 100vw, 33vw" />
                     <div className="absolute inset-0 bg-neon-magenta/0 group-hover:bg-neon-magenta/10 transition-colors duration-300 flex items-center justify-center">
                       <span className="font-body text-sm text-soft-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-dark-navy/60 px-4 py-2 rounded-full backdrop-blur-sm">View Full Size</span>
                     </div>
@@ -1556,7 +1580,7 @@ export default function ProjectDetailClient({ project }: { project: Project }) {
               <p className="font-body text-sm text-soft-white/50 mt-2">UI Design Principles &amp; Visual Design Analysis</p>
             )}
             {isPolygonMesh && (
-              <p className="font-body text-sm text-soft-white/50 mt-2">All 13 screens — 2D, 3D, Polygon Study, Jigsaw &amp; more</p>
+              <p className="font-body text-sm text-soft-white/50 mt-2">All 17 screens — 2D, 3D, Polygon Study, Jigsaw &amp; more</p>
             )}
             {isVpsTycoon && (
               <p className="font-body text-sm text-soft-white/50 mt-2">All 10 images — Cover, Game Loop, Systems, Cyberpunk UI &amp; more</p>
@@ -1610,8 +1634,29 @@ export default function ProjectDetailClient({ project }: { project: Project }) {
               </div>
               <SubHeading>Final Prototype Showcase</SubHeading>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
-                {placeholderSet("/images/Project/Chaodom/solution", 5).map((src, i) => (
-                  <ImgPlaceholder key={i} filename={src} className="aspect-[9/16]" />
+                {[
+                  "/images/Project/Chaodom/App Screens Overview/3.png",
+                  "/images/Project/Chaodom/App Screens Overview/4.png",
+                  "/images/Project/Chaodom/App Screens Overview/5.png",
+                  "/images/Project/Chaodom/App Screens Overview/6.png",
+                  "/images/Project/Chaodom/App Screens Overview/7.png",
+                  "/images/Project/Chaodom/App Screens Overview/8.png",
+                  "/images/Project/Chaodom/App Screens Overview/9.png",
+                  "/images/Project/Chaodom/App Screens Overview/10.png",
+                  "/images/Project/Chaodom/App Screens Overview/11.png",
+                ].map((src, i, arr) => (
+                  <motion.button
+                    key={i}
+                    className="group relative aspect-[16/9] rounded-2xl overflow-hidden bg-deep-purple/30 border border-soft-white/5 cursor-pointer focus:outline-none focus:ring-2 focus:ring-sakura-pink/50"
+                    onClick={() => openLightbox(arr, i)}
+                    whileHover={{ scale: 1.02 }}
+                    transition={{ duration: 0.3 }}
+                  >
+                    <Image src={src} alt={`Final Prototype ${i + 1}`} fill className="object-contain" sizes="(max-width: 768px) 100vw, 33vw" />
+                    <div className="absolute inset-0 bg-sakura-pink/0 group-hover:bg-sakura-pink/10 transition-colors duration-300 flex items-center justify-center">
+                      <span className="font-body text-sm text-soft-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-dark-navy/60 px-4 py-2 rounded-full backdrop-blur-sm">View Full Size</span>
+                    </div>
+                  </motion.button>
                 ))}
               </div>
             </>
