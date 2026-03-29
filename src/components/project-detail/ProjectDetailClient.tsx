@@ -1337,13 +1337,13 @@ export default function ProjectDetailClient({ project }: { project: Project }) {
             {/* Synchro section 01 hero images */}
             <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-4">
               {[
-                { src: "/SYNCHROPoster.png",  label: "Poster" },
-                { src: "/synchrobox.jpg",      label: "Hardware Controller" },
+                { src: "/images/Project/Synchro/SYNCHROPoster.png",  label: "Poster" },
+                { src: "/images/Project/Synchro/synchrobox.jpg",      label: "Hardware Controller" },
               ].map(({ src, label }, i) => (
                 <motion.button
                   key={i}
                   className="group relative aspect-video rounded-2xl overflow-hidden bg-deep-purple/30 border border-soft-white/5 cursor-pointer focus:outline-none focus:ring-2 focus:ring-retro-yellow/50"
-                  onClick={() => openLightbox(["/SYNCHROPoster.png", "/synchrobox.jpg"], i)}
+                  onClick={() => openLightbox(["/images/Project/Synchro/SYNCHROPoster.png", "/images/Project/Synchro/synchrobox.jpg"], i)}
                   whileHover={{ scale: 1.02 }}
                   transition={{ duration: 0.3 }}
                 >
@@ -1392,11 +1392,11 @@ export default function ProjectDetailClient({ project }: { project: Project }) {
                   </ul>
                   <motion.button
                     className="group relative w-full aspect-video rounded-xl overflow-hidden bg-deep-purple/30 border border-soft-white/5 cursor-pointer focus:outline-none focus:ring-2 focus:ring-retro-yellow/50"
-                    onClick={() => openLightbox(["/synchrobox.jpg"], 0)}
+                    onClick={() => openLightbox(["/images/Project/Synchro/synchrobox.jpg"], 0)}
                     whileHover={{ scale: 1.01 }}
                     transition={{ duration: 0.3 }}
                   >
-                    <Image src="/synchrobox.jpg" alt="Synchro Controller" fill className="object-cover" sizes="(max-width: 768px) 100vw, 40vw" />
+                    <Image src="/images/Project/Synchro/synchrobox.jpg" alt="Synchro Controller" fill className="object-cover" sizes="(max-width: 768px) 100vw, 40vw" />
                     <div className="absolute inset-0 bg-retro-yellow/0 group-hover:bg-retro-yellow/10 transition-colors duration-300 flex items-center justify-center">
                       <span className="font-body text-sm text-soft-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-dark-navy/60 px-4 py-2 rounded-full backdrop-blur-sm">Hardware Controller</span>
                     </div>
@@ -1420,11 +1420,11 @@ export default function ProjectDetailClient({ project }: { project: Project }) {
                   </ul>
                   <motion.button
                     className="group relative w-full aspect-video rounded-xl overflow-hidden bg-deep-purple/30 border border-soft-white/5 cursor-pointer focus:outline-none focus:ring-2 focus:ring-sky-cyan/50"
-                    onClick={() => openLightbox(["/images/Project/synchro-figma.png"], 0)}
+                    onClick={() => openLightbox(["/images/Project/Synchro/preview_and_gallery.png"], 0)}
                     whileHover={{ scale: 1.01 }}
                     transition={{ duration: 0.3 }}
                   >
-                    <Image src="/images/Project/synchro-figma.png" alt="Synchro Web App" fill className="object-cover" sizes="(max-width: 768px) 100vw, 40vw" />
+                    <Image src="/images/Project/Synchro/preview_and_gallery.png" alt="Synchro Web App" fill className="object-cover" sizes="(max-width: 768px) 100vw, 40vw" />
                     <div className="absolute inset-0 bg-sky-cyan/0 group-hover:bg-sky-cyan/10 transition-colors duration-300 flex items-center justify-center">
                       <span className="font-body text-sm text-soft-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-dark-navy/60 px-4 py-2 rounded-full backdrop-blur-sm">Web App Design</span>
                     </div>
@@ -1454,11 +1454,11 @@ export default function ProjectDetailClient({ project }: { project: Project }) {
               </div>
               <motion.button
                 className="group relative w-full md:w-1/2 aspect-video rounded-2xl overflow-hidden bg-deep-purple/30 border border-soft-white/5 cursor-pointer focus:outline-none focus:ring-2 focus:ring-retro-yellow/50"
-                onClick={() => openLightbox(["/SynchroController/Teacher.png"], 0)}
+                onClick={() => openLightbox(["/images/Project/Synchro/SYNCHROPoster.png"], 0)}
                 whileHover={{ scale: 1.02 }}
                 transition={{ duration: 0.3 }}
               >
-                <Image src="/SynchroController/Teacher.png" alt="Synchro in Action" fill className="object-cover" sizes="(max-width: 768px) 100vw, 50vw" />
+                <Image src="/images/Project/Synchro/SYNCHROPoster.png" alt="Synchro in Action" fill className="object-cover" sizes="(max-width: 768px) 100vw, 50vw" />
                 <div className="absolute inset-0 bg-retro-yellow/0 group-hover:bg-retro-yellow/10 transition-colors duration-300 flex items-center justify-center">
                   <span className="font-body text-sm text-soft-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-dark-navy/60 px-4 py-2 rounded-full backdrop-blur-sm">Synchro in Action</span>
                 </div>

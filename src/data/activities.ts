@@ -34,7 +34,7 @@ export const activities: Activity[] = [
     date: "28 เม.ย. – 1 พ.ค. 2568",
     description: "เข้าร่วม ITCAMP ครั้งที่ 21 ในธีม The Glacial Horizon ค่าย IT 4 วัน 3 คืน ฝึกทักษะการทำงานเป็นทีม การออกแบบ และพัฒนาโปรเจกต์เทคโนโลยีภายใต้การดูแลของรุ่นพี่",
     organizer: "School of Information Technology, KMITL",
-    image: "/images/ACTIVITIES/ITCAMP 21  The Glacial Horizo.jpg",
+    image: "/images/ACTIVITIES/ITCAMP 21 The Glacial Horizon.jpg",
     gradient: "from-mint/40 to-sky-cyan/30",
     featured: true,
   },
