@@ -68,12 +68,18 @@ function AlertBubble() {
   );
 }
 
+const DC_DIR = "/images/Project/%E0%B8%AA%E0%B8%B7%E0%B8%9A-%E0%B8%A5%E0%B9%88%E0%B8%B2-%E0%B9%82%E0%B8%81%E0%B8%87%20(DETEC-CHEAT)";
+
 const galleryImages = [
-  "/images/Project/detect-cover.png",
-  "/images/Project/detect-home.png",
-  "/images/Project/detect-chat.png",
-  "/images/Project/detect-evidence.png",
-  "/images/Project/detect-summary.png",
+  `${DC_DIR}/previewDetectcheat.png`,
+  `${DC_DIR}/19.png`,
+  `${DC_DIR}/20.png`,
+  `${DC_DIR}/21.png`,
+  `${DC_DIR}/22.png`,
+  `${DC_DIR}/23.png`,
+  `${DC_DIR}/24.png`,
+  `${DC_DIR}/25.png`,
+  `${DC_DIR}/26.png`,
 ];
 
 const cases = [
@@ -198,7 +204,7 @@ export default function DetectCheatClient({ project }: { project: Project }) {
       >
         <div className="aspect-[21/9] md:aspect-[21/7] relative">
           <Image
-            src="/images/Project/preview-detect-cheat.png"
+            src={`${DC_DIR}/previewDetectcheat.png`}
             alt="DETEC-CHEAT Preview"
             fill
             className="object-cover"
@@ -320,7 +326,7 @@ export default function DetectCheatClient({ project }: { project: Project }) {
             transition={{ duration: 0.3 }}
           >
             <Image
-              src="/images/Project/detect-home.png"
+              src={`${DC_DIR}/previewDetectcheat.png`}
               alt="DETEC-CHEAT Home Screen"
               fill
               className="object-cover"
@@ -383,15 +389,15 @@ export default function DetectCheatClient({ project }: { project: Project }) {
           </div>
 
           {/* Chat + Evidence images */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-3xl mx-auto">
             {[
-              { src: "/images/Project/detect-chat.png", label: "Chat Interface" },
-              { src: "/images/Project/detect-evidence.png", label: "Evidence Collection" },
+              { src: `${DC_DIR}/20.png`, label: "Chat Interface" },
+              { src: `${DC_DIR}/25.png`, label: "Evidence Collection" },
             ].map(({ src, label }, i) => (
               <motion.button
                 key={i}
-                className="group relative aspect-video rounded-2xl overflow-hidden bg-deep-purple/30 border border-soft-white/5 cursor-pointer focus:outline-none focus:ring-2 focus:ring-retro-yellow/50"
-                onClick={() => openLightbox(["/images/Project/detect-chat.png", "/images/Project/detect-evidence.png"], i)}
+                className="group relative aspect-[9/16] rounded-2xl overflow-hidden bg-deep-purple/30 border border-soft-white/5 cursor-pointer focus:outline-none focus:ring-2 focus:ring-retro-yellow/50"
+                onClick={() => openLightbox([`${DC_DIR}/20.png`, `${DC_DIR}/25.png`], i)}
                 whileHover={{ scale: 1.02 }}
                 transition={{ duration: 0.3 }}
               >
@@ -430,13 +436,13 @@ export default function DetectCheatClient({ project }: { project: Project }) {
           </div>
 
           <motion.button
-            className="w-full relative aspect-video md:aspect-[21/9] rounded-2xl overflow-hidden cursor-pointer border border-soft-white/10 focus:outline-none"
-            onClick={() => openLightbox(galleryImages, 0)}
+            className="w-full relative aspect-[9/16] max-w-sm mx-auto block rounded-2xl overflow-hidden cursor-pointer border border-soft-white/10 focus:outline-none"
+            onClick={() => openLightbox(galleryImages, 1)}
             whileHover={{ scale: 1.01 }}
             transition={{ duration: 0.3 }}
           >
             <Image
-              src="/images/Project/detect-cover.png"
+              src={`${DC_DIR}/19.png`}
               alt="DETEC-CHEAT Cover"
               fill
               className="object-cover"
@@ -538,11 +544,11 @@ export default function DetectCheatClient({ project }: { project: Project }) {
           <h3 className="font-display text-xl text-soft-white/50 uppercase tracking-widest mb-6 border-b border-soft-white/10 pb-4">
             Gallery
           </h3>
-          <div className="grid grid-cols-2 md:grid-cols-5 gap-3">
+          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-3">
             {galleryImages.map((img, i) => (
               <motion.button
                 key={i}
-                className="group relative aspect-square rounded-2xl overflow-hidden bg-deep-purple/30 border border-soft-white/5 cursor-pointer focus:outline-none focus:ring-2 focus:ring-retro-yellow/50"
+                className={`group relative ${i === 0 ? "aspect-video md:col-span-2 lg:col-span-2" : "aspect-[9/16]"} rounded-2xl overflow-hidden bg-deep-purple/30 border border-soft-white/5 cursor-pointer focus:outline-none focus:ring-2 focus:ring-retro-yellow/50`}
                 onClick={() => openLightbox(galleryImages, i)}
                 whileHover={{ scale: 1.05 }}
                 transition={{ duration: 0.3 }}

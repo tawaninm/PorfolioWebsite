@@ -258,13 +258,13 @@ export default function ProjectDetailClient({ project }: { project: Project }) {
           {isVpsTycoon && (
             <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-4">
               {[
-                { src: "/images/Project/vps-cover.png", label: "Cover Art" },
-                { src: "/images/Project/vps-abstract.png", label: "Abstract" },
+                { src: "/images/Project/Synchro/58.png", label: "Title Screen" },
+                { src: "/images/Project/Synchro/59.png", label: "Main Menu" },
               ].map(({ src, label }, i) => (
                 <motion.button
                   key={i}
                   className="group relative aspect-video rounded-2xl overflow-hidden bg-deep-purple/30 border border-soft-white/5 cursor-pointer focus:outline-none focus:ring-2 focus:ring-sky-cyan/50"
-                  onClick={() => openLightbox(["/images/Project/vps-cover.png", "/images/Project/vps-abstract.png"], i)}
+                  onClick={() => openLightbox(["/images/Project/Synchro/58.png", "/images/Project/Synchro/59.png"], i)}
                   whileHover={{ scale: 1.02 }}
                   transition={{ duration: 0.3 }}
                 >
@@ -429,13 +429,13 @@ export default function ProjectDetailClient({ project }: { project: Project }) {
               {/* Loop images */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 {[
-                  { src: "/images/Project/vps-gameloop-core.png", label: "Core Loop Diagram" },
-                  { src: "/images/Project/vps-gameloop-time.png", label: "Time System" },
+                  { src: "/images/Project/Synchro/62.png", label: "Game World" },
+                  { src: "/images/Project/Synchro/71.png", label: "System Calibration Event" },
                 ].map(({ src, label }, i) => (
                   <motion.button
                     key={i}
                     className="group relative aspect-video rounded-2xl overflow-hidden bg-deep-purple/30 border border-soft-white/5 cursor-pointer focus:outline-none focus:ring-2 focus:ring-sky-cyan/50"
-                    onClick={() => openLightbox(["/images/Project/vps-gameloop-core.png", "/images/Project/vps-gameloop-time.png"], i)}
+                    onClick={() => openLightbox(["/images/Project/Synchro/62.png", "/images/Project/Synchro/71.png"], i)}
                     whileHover={{ scale: 1.02 }}
                     transition={{ duration: 0.3 }}
                   >
@@ -955,12 +955,12 @@ export default function ProjectDetailClient({ project }: { project: Project }) {
               </div>
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                 {[
-                  { src: "/images/Project/vps-messenger.png", label: "Messenger" },
-                  { src: "/images/Project/vps-rack.png", label: "Rack Management" },
-                  { src: "/images/Project/vps-events.png", label: "Event System" },
-                  { src: "/images/Project/vps-save-load.png", label: "Save / Load" },
+                  { src: "/images/Project/Synchro/63.png", label: "Messenger" },
+                  { src: "/images/Project/Synchro/66.png", label: "Rack Management" },
+                  { src: "/images/Project/Synchro/74.png", label: "Event System" },
+                  { src: "/images/Project/Synchro/72.png", label: "Resource Allocation" },
                 ].map(({ src, label }, i) => {
-                  const imgs = ["/images/Project/vps-messenger.png", "/images/Project/vps-rack.png", "/images/Project/vps-events.png", "/images/Project/vps-save-load.png"];
+                  const imgs = ["/images/Project/Synchro/63.png", "/images/Project/Synchro/66.png", "/images/Project/Synchro/74.png", "/images/Project/Synchro/72.png"];
                   return (
                     <motion.button
                       key={i}
@@ -1010,13 +1010,13 @@ export default function ProjectDetailClient({ project }: { project: Project }) {
               </div>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 {[
-                  { src: "/images/Project/vps-tools.png", label: "Tools & Stack" },
-                  { src: "/images/Project/vps-theme.png", label: "Cyberpunk Theme" },
+                  { src: "/images/Project/Synchro/65.png", label: "Game Interface" },
+                  { src: "/images/Project/Synchro/61.png", label: "Settings & Configuration" },
                 ].map(({ src, label }, i) => (
                   <motion.button
                     key={i}
                     className="group relative aspect-video rounded-2xl overflow-hidden bg-deep-purple/30 border border-soft-white/5 cursor-pointer focus:outline-none focus:ring-2 focus:ring-neon-magenta/50"
-                    onClick={() => openLightbox(["/images/Project/vps-tools.png", "/images/Project/vps-theme.png"], i)}
+                    onClick={() => openLightbox(["/images/Project/Synchro/65.png", "/images/Project/Synchro/61.png"], i)}
                     whileHover={{ scale: 1.02 }}
                     transition={{ duration: 0.3 }}
                   >
@@ -1092,7 +1092,7 @@ export default function ProjectDetailClient({ project }: { project: Project }) {
             {/* Drive hero images already in section 01 summary above — add banner image */}
             <div className="mt-8 relative w-full overflow-hidden rounded-2xl" style={{ clipPath: "polygon(0 0, 100% 0, 100% 92%, 97% 100%, 0 100%)" }}>
               <div className="aspect-[21/9] relative">
-                <Image src="/images/Project/preview-drivechat.png" alt="Drive@KMITL Preview" fill className="object-cover" sizes="(max-width: 768px) 100vw, 80vw" />
+                <Image src="/images/Project/Drive@KMITL/Preview and gallery1.png" alt="Drive@KMITL Preview" fill className="object-cover" sizes="(max-width: 768px) 100vw, 80vw" />
                 <div className="absolute inset-0 bg-gradient-to-t from-dark-navy/60 to-transparent" />
               </div>
             </div>
@@ -1135,14 +1135,14 @@ export default function ProjectDetailClient({ project }: { project: Project }) {
               </div>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                 {[
-                  { src: "/images/Project/drive-home.png",      label: "Home" },
-                  { src: "/images/Project/drive-passenger.png", label: "Passenger View" },
-                  { src: "/images/Project/drive-driver.png",    label: "Driver View" },
-                ].map(({ src, label }, i) => (
+                  { src: "/images/Project/Drive@KMITL/Preview and gallery1.png", label: "Home" },
+                  { src: "/images/Project/Drive@KMITL/gallery2.png",              label: "Join Room" },
+                  { src: "/images/Project/Drive@KMITL/gallery3.png",              label: "Create Room" },
+                ].map(({ src, label }, i, arr) => (
                   <motion.button
                     key={i}
                     className="group relative aspect-video rounded-2xl overflow-hidden bg-deep-purple/30 border border-soft-white/5 cursor-pointer focus:outline-none focus:ring-2 focus:ring-sky-cyan/50"
-                    onClick={() => openLightbox(["/images/Project/drive-home.png", "/images/Project/drive-passenger.png", "/images/Project/drive-driver.png"], i)}
+                    onClick={() => openLightbox(arr.map(a => a.src), i)}
                     whileHover={{ scale: 1.02 }}
                     transition={{ duration: 0.3 }}
                   >
@@ -1213,13 +1213,13 @@ export default function ProjectDetailClient({ project }: { project: Project }) {
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 {[
-                  { src: "/images/Project/drive-chat-room.png", label: "Chat Room" },
-                  { src: "/images/Project/drive-countdown.png", label: "Countdown Timer" },
-                ].map(({ src, label }, i) => (
+                  { src: "/images/Project/Drive@KMITL/gallery4.png", label: "Chat Room (Driving)" },
+                  { src: "/images/Project/Drive@KMITL/gallery5.png", label: "Room Transition (Ped Pong)" },
+                ].map(({ src, label }, i, arr) => (
                   <motion.button
                     key={i}
                     className="group relative aspect-video rounded-2xl overflow-hidden bg-deep-purple/30 border border-soft-white/5 cursor-pointer focus:outline-none focus:ring-2 focus:ring-sky-cyan/50"
-                    onClick={() => openLightbox(["/images/Project/drive-chat-room.png", "/images/Project/drive-countdown.png"], i)}
+                    onClick={() => openLightbox(arr.map(a => a.src), i)}
                     whileHover={{ scale: 1.02 }}
                     transition={{ duration: 0.3 }}
                   >
@@ -1555,7 +1555,7 @@ export default function ProjectDetailClient({ project }: { project: Project }) {
       </div>
 
       {/* ════════════════════════════════════════
-          04 VISUAL DESIGN PRINCIPLES (gallery)
+          FULL GALLERY (section number varies by project)
       ════════════════════════════════════════ */}
       {galleryImages.length > 0 && (
         <FadeSection className="relative z-10 py-16">
@@ -1570,7 +1570,7 @@ export default function ProjectDetailClient({ project }: { project: Project }) {
                   opacity: 0.25,
                 }}
               >
-                04
+                {isVpsTycoon ? "07" : isSynchro ? "07" : isDriveKmitl ? "08" : isPolygonMesh ? "07" : "04"}
               </span>
             </div>
             <h2 className="font-display text-3xl md:text-4xl text-soft-white -mt-2">
@@ -1583,10 +1583,10 @@ export default function ProjectDetailClient({ project }: { project: Project }) {
               <p className="font-body text-sm text-soft-white/50 mt-2">All 17 screens — 2D, 3D, Polygon Study, Jigsaw &amp; more</p>
             )}
             {isVpsTycoon && (
-              <p className="font-body text-sm text-soft-white/50 mt-2">All 10 images — Cover, Game Loop, Systems, Cyberpunk UI &amp; more</p>
+              <p className="font-body text-sm text-soft-white/50 mt-2">All 23 screens — Title, Menu, Game World, Messenger, Rack, Events &amp; more</p>
             )}
             {isDriveKmitl && (
-              <p className="font-body text-sm text-soft-white/50 mt-2">All 8 screens — Home, Roles, Chat Room, Countdown &amp; more</p>
+              <p className="font-body text-sm text-soft-white/50 mt-2">All 5 screens — Home, Join Room, Create Room, Chat Room &amp; Transition</p>
             )}
             {isSynchro && (
               <p className="font-body text-sm text-soft-white/50 mt-2">Hardware controller, poster, gameplay &amp; web app design</p>

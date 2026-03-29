@@ -58,12 +58,20 @@ function SectionNumber({ n, extra }: { n: string; extra?: React.ReactNode }) {
   );
 }
 
+const CM_DIR = "/images/Project/%E0%B8%AB%E0%B9%89%E0%B8%A7%E0%B8%87%E0%B8%A5%E0%B8%B6%E0%B8%81%E0%B8%A0%E0%B8%B2%E0%B8%A2%E0%B9%83%E0%B8%99%E0%B8%88%E0%B8%B4%E0%B8%95%E0%B9%83%E0%B8%88%20(Criminal%20Minds)";
+
 const galleryImages = [
-  "/images/Project/criminal-cover.png",
-  "/images/Project/criminal-scene.png",
-  "/images/Project/criminal-evidence.png",
-  "/images/Project/criminal-interview.png",
-  "/images/Project/criminal-summary.png",
+  `${CM_DIR}/preview%20and%20galletry.png`,
+  `${CM_DIR}/27.png`,
+  `${CM_DIR}/29.png`,
+  `${CM_DIR}/30.png`,
+  `${CM_DIR}/31.png`,
+  `${CM_DIR}/32.png`,
+  `${CM_DIR}/33.png`,
+  `${CM_DIR}/34.png`,
+  `${CM_DIR}/35.png`,
+  `${CM_DIR}/36.png`,
+  `${CM_DIR}/37.png`,
 ];
 
 const investigationStages = [
@@ -72,7 +80,7 @@ const investigationStages = [
     label: "Crime Scene",
     title: "เก็บหลักฐาน ณ จุดเกิดเหตุ",
     desc: "ตรวจสอบและเก็บหลักฐานจากสถานที่เกิดเหตุอย่างละเอียด ก่อนจะถูกปนเปื้อนหรือสูญหาย",
-    img: "/images/Project/criminal-scene.png",
+    img: `${CM_DIR}/32.png`,
     color: "border-sky-cyan/40 hover:border-sky-cyan/70",
     accent: "text-sky-cyan",
     bg: "bg-sky-cyan/5",
@@ -83,7 +91,7 @@ const investigationStages = [
     label: "Forensic Lab",
     title: "ตรวจพิสูจน์หลักฐาน",
     desc: "นำหลักฐานเข้าห้องแล็บ ทำ mini-game ตรวจรอยนิ้วมือ ตรวจเลือด และวิเคราะห์ผล",
-    img: "/images/Project/criminal-evidence.png",
+    img: `${CM_DIR}/33.png`,
     color: "border-mint/40 hover:border-mint/70",
     accent: "text-mint",
     bg: "bg-mint/5",
@@ -94,7 +102,7 @@ const investigationStages = [
     label: "Interrogation",
     title: "สอบสวนผู้ต้องสงสัย",
     desc: "ใช้หลักฐานที่รวบรวมมาสอบสวน โดยยึดหลัก empathy และความเป็นธรรม ไม่ใช่การข่มขู่",
-    img: "/images/Project/criminal-interview.png",
+    img: `${CM_DIR}/35.png`,
     color: "border-sakura-pink/40 hover:border-sakura-pink/70",
     accent: "text-sakura-pink",
     bg: "bg-sakura-pink/5",
@@ -197,7 +205,7 @@ export default function CriminalMindClient({ project }: { project: Project }) {
       >
         <div className="aspect-[21/9] md:aspect-[21/7] relative">
           <Image
-            src="/images/Project/preview-criminal-minds.png"
+            src={`${CM_DIR}/preview%20and%20galletry.png`}
             alt="Criminal Minds Preview"
             fill
             className="object-cover"
@@ -446,13 +454,13 @@ export default function CriminalMindClient({ project }: { project: Project }) {
           </div>
 
           <motion.button
-            className="w-full relative aspect-video md:aspect-[21/9] rounded-2xl overflow-hidden cursor-pointer border border-soft-white/10 focus:outline-none"
+            className="w-full relative aspect-video rounded-2xl overflow-hidden cursor-pointer border border-soft-white/10 focus:outline-none"
             onClick={() => openLightbox(galleryImages, 0)}
             whileHover={{ scale: 1.01 }}
             transition={{ duration: 0.3 }}
           >
             <Image
-              src="/images/Project/criminal-cover.png"
+              src={`${CM_DIR}/27.png`}
               alt="Criminal Minds Cover"
               fill
               className="object-cover"
@@ -556,11 +564,11 @@ export default function CriminalMindClient({ project }: { project: Project }) {
           <h3 className="font-display text-xl text-soft-white/50 uppercase tracking-widest mb-6 border-b border-soft-white/10 pb-4">
             Gallery
           </h3>
-          <div className="grid grid-cols-2 md:grid-cols-5 gap-3">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
             {galleryImages.map((img, i) => (
               <motion.button
                 key={i}
-                className="group relative aspect-square rounded-2xl overflow-hidden bg-deep-purple/30 border border-soft-white/5 cursor-pointer focus:outline-none focus:ring-2 focus:ring-sky-cyan/50"
+                className="group relative aspect-video rounded-2xl overflow-hidden bg-deep-purple/30 border border-soft-white/5 cursor-pointer focus:outline-none focus:ring-2 focus:ring-sky-cyan/50"
                 onClick={() => openLightbox(galleryImages, i)}
                 whileHover={{ scale: 1.05 }}
                 transition={{ duration: 0.3 }}
