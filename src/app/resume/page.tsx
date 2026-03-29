@@ -2,12 +2,12 @@
 
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
-import { FiMapPin, FiMail, FiPhone, FiGlobe, FiDownload, FiLinkedin } from "react-icons/fi";
+import { FiMapPin, FiMail, FiPhone, FiGlobe, FiDownload, FiLinkedin, FiGithub } from "react-icons/fi";
 
 /* ─────────────────────────────────────────
    DATA
 ───────────────────────────────────────── */
-const RESUME_DRIVE_URL = "https://drive.google.com/file/d/18nSkCZXM5fqqbfZys5cT3O3ArMji6Vg3/view?usp=sharing"; // TODO: แทนที่ YOUR_FILE_ID ด้วย ID ไฟล์จาก Google Drive
+const RESUME_DRIVE_URL = "https://drive.google.com/file/d/1ePtzO5ga6NPKyPydqEsmZ0iugoXEQRLt/view?usp=sharing";
 
 const stats = [
   { label: "UX/UI", pct: 50, from: "#FF2D78", to: "#F06848" },
@@ -32,23 +32,23 @@ const education = [
 
 const workExperience = [
   {
+    company: "Code genius EmQuartier",
+    role: "Part-time Teacher — Information Technology",
+    dates: "Feb 22, 2026 – Now",
+    achievements: [
+      "The technology teacher for primary school students, specializing in coding education through block-based programming such as Scratch and Micro:bit, as well as introducing simple Python coding for creating educational games. I also provide learning feedback and adjust teaching content for each class to suit students' needs and progress.",
+    ],
+    tech: "Scratch, Micro:bit, Python",
+  },
+  {
     company: "Login-Engineering Academy",
     role: "Part-time Tutor — Information Technology",
-    dates: "Sep 2024 – Now",
+    dates: "Sep 2024 – Mar 2026",
     achievements: [
       "The tutor manages projects for students to submit to competitions, such as national software contests and portfolio projects for university applications.",
       "The tutor teaches the Godot game engine and mathematics to junior high school and senior high school students.",
     ],
     tech: "Godot Engine, Math",
-  },
-  {
-    company: "School of Information Technology — KMITL",
-    role: "Part-time TA Java OOP",
-    dates: "Nov 28, 2025 – Now",
-    achievements: [
-      "Assisting the course instructor for Object-Oriented Programming (OOP) by evaluating weekly laboratory assignments and posing conceptual questions to students to reinforce their understanding and facilitate further learning.",
-    ],
-    tech: "OOP Java",
   },
   {
     company: "School of Information Technology — KMITL IT Openhouse 2025",
@@ -265,6 +265,7 @@ export default function ResumePage() {
                   { icon: <FiMail size={13} />, text: "tawaninm13@gmail.com" },
                   { icon: <FiGlobe size={13} />, text: "porfolio-website-five-inky.vercel.app" },
                   { icon: <FiLinkedin size={13} />, text: "linkedin.com/in/thanatpat-promthong-9084a4212" },
+                  { icon: <FiGithub size={13} />, text: "github.com/tawaninm" },
                 ].map(({ icon, text }) => (
                   <span key={text} className="flex items-center gap-1.5 font-body text-xs text-muted-lilac print:text-gray-600">
                     <span className="text-neon-magenta/70">{icon}</span>
