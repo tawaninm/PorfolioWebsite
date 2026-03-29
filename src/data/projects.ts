@@ -241,10 +241,9 @@ export const projects: Project[] = [
     ],
     result: "The Solution: อุปกรณ์ฝึกสมาธิในรูปแบบ rhythm game ที่สนุกพอให้ผู้ใช้กลับมาฝึกต่อเนื่องและเห็นพัฒนาการได้จากสถิติการเล่น\nImpact: ได้ฝึกทั้ง embedded, web integration และ product thinking ในโปรเจกต์เดียว สร้างประสบการณ์ทำงานกับ hardware จริงและการ sync ข้อมูลระหว่าง physical device กับ web app\nChallenges: การเปลี่ยนบอร์ดจาก Arduino UNO R4 เป็น ESP32 เนื่องจากข้อจำกัดด้าน library, ปัญหาการจ่ายไฟของ breadboard, การปรับ SD card adapter และการทำ handshaking ให้เว็บสื่อสารกับบอร์ดได้เสถียร\nIdeation: ใช้กลไก rhythm game เพื่อฝึก focused attention และช่วยลดผลกระทบจากการเสพโซเชียลมีเดียมากเกินไป",
     gallery: [
-      "/images/Project/Synchro/synchrobox.jpg",
-      "/images/Project/Synchro/SYNCHROPoster.png",
-      "/images/Project/Synchro/Preview and gallery.png",
       "/images/Project/Synchro/preview_and_gallery.png",
+      "/images/Project/Synchro/SYNCHROPoster.png",
+      "/images/Project/Synchro/synchrobox.jpg",
     ],
   },
   {

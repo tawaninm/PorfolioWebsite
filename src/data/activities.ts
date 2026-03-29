@@ -10,6 +10,7 @@ export interface Activity {
   description: string;
   organizer: string;
   image?: string;
+  imagePosition?: string;
   gradient: string;
   featured?: boolean;
 }
@@ -166,6 +167,7 @@ export const activities: Activity[] = [
     description: "ทำงานเป็น staff ประจำบูธ Phoenix Next ในงาน Bangkok International Book Fair 2025 ดูแลการจัดวางหนังสือ รับชำระเงิน และช่วยเก็บบูธหลังจบงาน",
     organizer: "Queen Sirikit National Convention Center",
     image: "/images/ACTIVITIES/Phoenix Next Bangkok International Book Fair 2025  Staff.jpg",
+    imagePosition: "center 15%",
     gradient: "from-sunset-gold/30 to-peach/25",
   },
   {
@@ -176,6 +178,7 @@ export const activities: Activity[] = [
     description: "ทำงานเป็น staff ประจำบูธ Phoenix Next ในงานมหกรรมหนังสือระดับชาติ ครั้งที่ 30 ดูแลการจัดวางสินค้า รับชำระเงิน และให้บริการลูกค้าตลอดระยะเวลาการจัดงาน",
     organizer: "Queen Sirikit National Convention Center",
     image: "/images/ACTIVITIES/Phoenix Next Book งานมหกรรมหนังสือระดับชาติ ครั้งที่ 30 2025.jpg",
+    imagePosition: "center 10%",
     gradient: "from-peach/30 to-retro-yellow/20",
   },
   {

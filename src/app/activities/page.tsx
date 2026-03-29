@@ -95,6 +95,7 @@ function ActivityCard({ activity, index }: { activity: Activity; index: number }
               alt={activity.name}
               fill
               className="object-cover"
+              style={{ objectPosition: activity.imagePosition ?? "center" }}
               sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
             />
           ) : (
