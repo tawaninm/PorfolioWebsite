@@ -258,13 +258,13 @@ export default function ProjectDetailClient({ project }: { project: Project }) {
           {isVpsTycoon && (
             <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-4">
               {[
-                { src: "/images/Project/Synchro/58.png", label: "Title Screen" },
-                { src: "/images/Project/Synchro/59.png", label: "Main Menu" },
+                { src: "/images/Project/VPS-Tycoon/58.png", label: "Title Screen" },
+                { src: "/images/Project/VPS-Tycoon/59.png", label: "Main Menu" },
               ].map(({ src, label }, i) => (
                 <motion.button
                   key={i}
                   className="group relative aspect-video rounded-2xl overflow-hidden bg-deep-purple/30 border border-soft-white/5 cursor-pointer focus:outline-none focus:ring-2 focus:ring-sky-cyan/50"
-                  onClick={() => openLightbox(["/images/Project/Synchro/58.png", "/images/Project/Synchro/59.png"], i)}
+                  onClick={() => openLightbox(["/images/Project/VPS-Tycoon/58.png", "/images/Project/VPS-Tycoon/59.png"], i)}
                   whileHover={{ scale: 1.02 }}
                   transition={{ duration: 0.3 }}
                 >
@@ -429,13 +429,13 @@ export default function ProjectDetailClient({ project }: { project: Project }) {
               {/* Loop images */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 {[
-                  { src: "/images/Project/Synchro/62.png", label: "Game World" },
-                  { src: "/images/Project/Synchro/71.png", label: "System Calibration Event" },
+                  { src: "/images/Project/VPS-Tycoon/62.png", label: "Game World" },
+                  { src: "/images/Project/VPS-Tycoon/71.png", label: "System Calibration Event" },
                 ].map(({ src, label }, i) => (
                   <motion.button
                     key={i}
                     className="group relative aspect-video rounded-2xl overflow-hidden bg-deep-purple/30 border border-soft-white/5 cursor-pointer focus:outline-none focus:ring-2 focus:ring-sky-cyan/50"
-                    onClick={() => openLightbox(["/images/Project/Synchro/62.png", "/images/Project/Synchro/71.png"], i)}
+                    onClick={() => openLightbox(["/images/Project/VPS-Tycoon/62.png", "/images/Project/VPS-Tycoon/71.png"], i)}
                     whileHover={{ scale: 1.02 }}
                     transition={{ duration: 0.3 }}
                   >
@@ -955,12 +955,12 @@ export default function ProjectDetailClient({ project }: { project: Project }) {
               </div>
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                 {[
-                  { src: "/images/Project/Synchro/63.png", label: "Messenger" },
-                  { src: "/images/Project/Synchro/66.png", label: "Rack Management" },
-                  { src: "/images/Project/Synchro/74.png", label: "Event System" },
-                  { src: "/images/Project/Synchro/72.png", label: "Resource Allocation" },
+                  { src: "/images/Project/VPS-Tycoon/63.png", label: "Messenger" },
+                  { src: "/images/Project/VPS-Tycoon/66.png", label: "Rack Management" },
+                  { src: "/images/Project/VPS-Tycoon/74.png", label: "Event System" },
+                  { src: "/images/Project/VPS-Tycoon/72.png", label: "Resource Allocation" },
                 ].map(({ src, label }, i) => {
-                  const imgs = ["/images/Project/Synchro/63.png", "/images/Project/Synchro/66.png", "/images/Project/Synchro/74.png", "/images/Project/Synchro/72.png"];
+                  const imgs = ["/images/Project/VPS-Tycoon/63.png", "/images/Project/VPS-Tycoon/66.png", "/images/Project/VPS-Tycoon/74.png", "/images/Project/VPS-Tycoon/72.png"];
                   return (
                     <motion.button
                       key={i}
@@ -1010,13 +1010,13 @@ export default function ProjectDetailClient({ project }: { project: Project }) {
               </div>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 {[
-                  { src: "/images/Project/Synchro/65.png", label: "Game Interface" },
-                  { src: "/images/Project/Synchro/61.png", label: "Settings & Configuration" },
+                  { src: "/images/Project/VPS-Tycoon/65.png", label: "Game Interface" },
+                  { src: "/images/Project/VPS-Tycoon/61.png", label: "Settings & Configuration" },
                 ].map(({ src, label }, i) => (
                   <motion.button
                     key={i}
                     className="group relative aspect-video rounded-2xl overflow-hidden bg-deep-purple/30 border border-soft-white/5 cursor-pointer focus:outline-none focus:ring-2 focus:ring-neon-magenta/50"
-                    onClick={() => openLightbox(["/images/Project/Synchro/65.png", "/images/Project/Synchro/61.png"], i)}
+                    onClick={() => openLightbox(["/images/Project/VPS-Tycoon/65.png", "/images/Project/VPS-Tycoon/61.png"], i)}
                     whileHover={{ scale: 1.02 }}
                     transition={{ duration: 0.3 }}
                   >
