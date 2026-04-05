@@ -1092,7 +1092,7 @@ export default function ProjectDetailClient({ project }: { project: Project }) {
             {/* Drive hero images already in section 01 summary above — add banner image */}
             <div className="mt-8 relative w-full overflow-hidden rounded-2xl" style={{ clipPath: "polygon(0 0, 100% 0, 100% 92%, 97% 100%, 0 100%)" }}>
               <div className="aspect-[21/9] relative">
-                <Image src="/images/Project/Drive@KMITL/Preview and gallery1.png" alt="Drive@KMITL Preview" fill className="object-cover" sizes="(max-width: 768px) 100vw, 80vw" />
+                <Image src="/images/Project/Drive@KMITL/preview-gallery.png" alt="Drive@KMITL Preview" fill className="object-cover" sizes="(max-width: 768px) 100vw, 80vw" />
                 <div className="absolute inset-0 bg-gradient-to-t from-dark-navy/60 to-transparent" />
               </div>
             </div>
@@ -1135,7 +1135,7 @@ export default function ProjectDetailClient({ project }: { project: Project }) {
               </div>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                 {[
-                  { src: "/images/Project/Drive@KMITL/Preview and gallery1.png", label: "Home" },
+                  { src: "/images/Project/Drive@KMITL/preview-gallery.png", label: "Home" },
                   { src: "/images/Project/Drive@KMITL/gallery2.png",              label: "Join Room" },
                   { src: "/images/Project/Drive@KMITL/gallery3.png",              label: "Create Room" },
                 ].map(({ src, label }, i, arr) => (

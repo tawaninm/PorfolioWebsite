@@ -61,7 +61,7 @@ function SectionNumber({ n, extra }: { n: string; extra?: React.ReactNode }) {
 const CM_DIR = "/images/Project/%E0%B8%AB%E0%B9%89%E0%B8%A7%E0%B8%87%E0%B8%A5%E0%B8%B6%E0%B8%81%E0%B8%A0%E0%B8%B2%E0%B8%A2%E0%B9%83%E0%B8%99%E0%B8%88%E0%B8%B4%E0%B8%95%E0%B9%83%E0%B8%88%20(Criminal%20Minds)";
 
 const galleryImages = [
-  `${CM_DIR}/preview%20and%20galletry.png`,
+  `${CM_DIR}/preview-gallery.png`,
   `${CM_DIR}/27.png`,
   `${CM_DIR}/29.png`,
   `${CM_DIR}/30.png`,
@@ -205,7 +205,7 @@ export default function CriminalMindClient({ project }: { project: Project }) {
       >
         <div className="aspect-[21/9] md:aspect-[21/7] relative">
           <Image
-            src={`${CM_DIR}/preview%20and%20galletry.png`}
+            src={`${CM_DIR}/preview-gallery.png`}
             alt="Criminal Minds Preview"
             fill
             className="object-cover"
