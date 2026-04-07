@@ -82,7 +82,7 @@ export default function SynchroDetailClient({ project }: { project: Project }) {
   }
 
   const galleryImages = [
-    "/images/Project/Synchro/preview_and_gallery.png",
+    "/images/Project/Synchro/preview-gallery.png",
     "/images/Project/Synchro/SYNCHROPoster.png",
     "/images/Project/Synchro/85.png",
     "/images/Project/Synchro/86.png",
@@ -202,11 +202,11 @@ export default function SynchroDetailClient({ project }: { project: Project }) {
             <motion.button
               className="group relative rounded-2xl overflow-hidden bg-deep-purple/30 border border-soft-white/5 cursor-pointer focus:outline-none focus:ring-2 focus:ring-sky-cyan/50"
               style={{ aspectRatio: "16/9" }}
-              onClick={() => openLightbox(["/images/Project/Synchro/preview_and_gallery.png"], 0)}
+              onClick={() => openLightbox(["/images/Project/Synchro/preview-gallery.png"], 0)}
               whileHover={{ scale: 1.01 }}
               transition={{ duration: 0.3 }}
             >
-              <Image src="/images/Project/Synchro/preview_and_gallery.png" alt="Synchro Landing Page" fill className="object-cover" sizes="(max-width: 768px) 100vw, 66vw" />
+              <Image src="/images/Project/Synchro/preview-gallery.png" alt="Synchro Landing Page" fill className="object-cover" sizes="(max-width: 768px) 100vw, 66vw" />
               <div className="absolute inset-0 bg-sky-cyan/0 group-hover:bg-sky-cyan/10 transition-colors duration-300 flex items-end justify-center pb-3">
                 <span className="font-body text-xs text-soft-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-dark-navy/60 px-3 py-1 rounded-full backdrop-blur-sm">Landing Page</span>
               </div>
@@ -514,7 +514,7 @@ export default function SynchroDetailClient({ project }: { project: Project }) {
                 whileHover={{ scale: 1.02 }}
                 transition={{ duration: 0.3 }}
               >
-                <Image src="/images/Project/Synchro/preview_and_gallery.png" alt="Landing Page" fill className="object-cover" sizes="(max-width: 768px) 100vw, 66vw" />
+                <Image src="/images/Project/Synchro/preview-gallery.png" alt="Landing Page" fill className="object-cover" sizes="(max-width: 768px) 100vw, 66vw" />
                 <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-dark-navy/80 to-transparent pt-6 pb-2 flex justify-center pointer-events-none group-hover:opacity-100 opacity-0 transition-opacity duration-300">
                   <span className="font-body text-xs text-soft-white bg-dark-navy/60 px-3 py-1 rounded-full">Landing Page</span>
                 </div>
