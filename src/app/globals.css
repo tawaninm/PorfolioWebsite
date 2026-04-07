@@ -95,7 +95,7 @@
    ======================================== */
 
 html {
-  scroll-behavior: smooth;
+  /* scroll-behavior is handled by Lenis — do NOT add scroll-behavior: smooth here */
   max-width: 100%;
   overflow-x: hidden;
 }

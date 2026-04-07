@@ -1,10 +1,14 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useRef, useCallback } from "react";
 import { MotionConfig } from "framer-motion";
+import { usePathname } from "next/navigation";
 import Lenis from "lenis";
 
 export default function MotionProvider({ children }: { children: React.ReactNode }) {
+  const lenisRef = useRef<Lenis | null>(null);
+  const pathname = usePathname();
+
   /* ── Lenis smooth scroll ── */
   useEffect(() => {
     const lenis = new Lenis({
@@ -12,8 +16,8 @@ export default function MotionProvider({ children }: { children: React.ReactNode
       easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
       smoothWheel: true,
     });
+    lenisRef.current = lenis;
 
-    // Sync Framer Motion scroll with Lenis
     let rafId: number;
     const raf = (time: number) => {
       lenis.raf(time);
@@ -24,8 +28,22 @@ export default function MotionProvider({ children }: { children: React.ReactNode
     return () => {
       cancelAnimationFrame(rafId);
       lenis.destroy();
+      lenisRef.current = null;
     };
   }, []);
+
+  /* ── Reset Lenis scroll position on route change ── */
+  const isFirstRender = useRef(true);
+  useEffect(() => {
+    if (isFirstRender.current) {
+      isFirstRender.current = false;
+      return;
+    }
+    // Give the new page a frame to mount, then reset Lenis
+    requestAnimationFrame(() => {
+      lenisRef.current?.scrollTo(0, { immediate: true });
+    });
+  }, [pathname]);
 
   return (
     <MotionConfig reducedMotion="never">
