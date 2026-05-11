@@ -45,6 +45,15 @@ export const miniWorks: MiniWork[] = [
     image: "/images/miniwork/Design challenge03 Entering data.png",
     figmaLink: "https://www.figma.com/design/12kUTYNxw1FN7LTPdjKrnB/Design-challenge03-Entering-data?node-id=0-1&t=w6FsVXh2iIUP7Ic6-1",
   },
+  {
+    id: "clone01",
+    name: "Clone Duolingo",
+    type: "ui",
+    date: "2025",
+    gradient: "from-mint/40 to-sky-cyan/30",
+    image: "/images/miniwork/Clone Duolingo.png",
+    figmaLink: "https://www.figma.com/design/nQOAaMnfTuXVm8NKG19N0T/Duolingo-%E0%B8%95%E0%B8%B0%E0%B8%A7%E0%B8%B1%E0%B8%99?node-id=1-3&t=up8qdAlitfFNRtHj-1",
+  },
 ];
 
 export const typeBadge: Record<MiniWorkType, string> = {
@@ -71,10 +80,10 @@ export function MiniWorkCard({ work, index }: { work: MiniWork; index: number })
       whileInView={{ opacity: 1, y: 0, scale: 1 }}
       viewport={{ once: true, margin: "-40px" }}
       transition={{ duration: 0.55, delay: index * 0.1, ease: [0.16, 1, 0.3, 1] }}
-      className={`group ${rotations[index % 4]} hover:rotate-0 hover:-translate-y-2 transition-all duration-300 shrink-0 w-56 md:w-auto`}
+      className={`group ${rotations[index % 4]} hover:rotate-0 hover:-translate-y-2 transition-all duration-300 shrink-0 w-[260px] md:w-full h-full flex flex-col`}
       style={{ willChange: "transform" }}
     >
-      <div className="bg-soft-white dark:bg-vinyl-dark/90 p-3 rounded-lg shadow-lg hover:shadow-[0_12px_32px_rgba(255,45,120,0.3)] transition-shadow duration-300">
+      <div className="bg-soft-white dark:bg-vinyl-dark/90 p-3 rounded-lg shadow-lg hover:shadow-[0_12px_32px_rgba(255,45,120,0.3)] transition-shadow duration-300 flex flex-col h-full">
         <div className={`relative aspect-video rounded-md overflow-hidden bg-gradient-to-br ${work.gradient}`}>
           {work.image ? (
             <Image
@@ -82,7 +91,7 @@ export function MiniWorkCard({ work, index }: { work: MiniWork; index: number })
               alt={work.name}
               fill
               className="object-cover"
-              sizes="(max-width: 640px) 224px, (max-width: 1024px) 50vw, 25vw"
+              sizes="(max-width: 640px) 260px, (max-width: 1024px) 50vw, 25vw"
             />
           ) : (
             <div className="absolute inset-0 flex items-center justify-center">
@@ -94,7 +103,7 @@ export function MiniWorkCard({ work, index }: { work: MiniWork; index: number })
           <div className="halftone-bg absolute inset-0 opacity-0 group-hover:opacity-[0.2] transition-opacity duration-500 pointer-events-none" />
         </div>
 
-        <div className="pt-3 pb-1 px-1 flex flex-col gap-1.5">
+        <div className="pt-3 pb-1 px-1 flex flex-col gap-1.5 flex-1">
           <div className="flex items-start justify-between gap-2">
             <p className="font-body font-bold text-sm text-dark-navy dark:text-sakura-white leading-snug">
               {work.name}

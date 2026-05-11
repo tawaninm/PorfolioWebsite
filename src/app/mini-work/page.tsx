@@ -15,7 +15,7 @@ const filters = [
 type FilterKey = (typeof filters)[number]["key"];
 
 const stats = [
-  { number: "3",    label: "Mini Works",      from: "#FF2D78", to: "#F06848" },
+  { number: "4",    label: "Mini Works",      from: "#FF2D78", to: "#F06848" },
   { number: "3",    label: "Design Challenges", from: "#5080F0", to: "#40C8A0" },
   { number: "1",    label: "Tool: Figma",     from: "#F0D040", to: "#F8A078" },
   { number: "UI",   label: "Focus Area",      from: "#F0B0D0", to: "#FF2D78" },
@@ -124,7 +124,7 @@ export default function MiniWorkPage() {
           Showing {filtered.length} of {miniWorks.length} works
         </motion.p>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 justify-items-center">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 justify-items-center md:justify-items-stretch">
           <AnimatePresence mode="popLayout">
             {filtered.map((work, idx) => (
               <motion.div
@@ -134,6 +134,7 @@ export default function MiniWorkPage() {
                 exit={{ opacity: 0, scale: 0.8, transition: { duration: 0.2 } }}
                 transition={{ duration: 0.5 }}
                 key={work.id}
+                className="w-full flex justify-center md:block"
               >
                 <MiniWorkCard work={work} index={idx} />
               </motion.div>
