@@ -87,8 +87,7 @@ export default function Hero() {
   return (
     <section
       id="home"
-      className="relative min-h-screen flex items-center justify-center overflow-hidden"
-      style={{ background: "linear-gradient(135deg, #1A3A5C 0%, #1C1C2E 100%)" }}
+      className="relative min-h-screen flex items-center justify-center overflow-hidden gradient-hero"
     >
       {/* Halftone dot overlay */}
       <div className="absolute inset-0 halftone-bg opacity-[0.05] pointer-events-none z-0" />
@@ -115,7 +114,7 @@ export default function Hero() {
           {/* Greeting */}
           <motion.span
             variants={wordVariants}
-            className="font-body text-xl md:text-2xl font-bold text-soft-white/90 mb-4"
+            className="font-body text-xl md:text-2xl font-bold text-deep-purple mb-4"
           >
             Hello, I'm Tawan 👋
           </motion.span>
@@ -143,7 +142,7 @@ export default function Hero() {
                     {word}
                   </span>
                 ) : (
-                  <span className="text-soft-white">{word}</span>
+                  <span className="text-dark-navy">{word}</span>
                 )}
               </motion.span>
             ))}
@@ -154,8 +153,8 @@ export default function Hero() {
             variants={wordVariants}
             className="flex flex-col items-center lg:items-start gap-1 mb-6"
           >
-            <div className="inline-block px-6 py-2 rounded-full bg-lavender/20 border border-lavender/40 backdrop-blur-sm">
-              <span className="font-body text-sm font-bold tracking-wider text-soft-white uppercase">
+            <div className="inline-block px-6 py-2 rounded-full bg-soft-white/40 border border-soft-white/60 backdrop-blur-md shadow-sm">
+              <span className="font-body text-sm font-bold tracking-wider text-deep-purple uppercase">
                 1+ Years · Coding Tutor · Game Developer · UX/UI Designer
               </span>
             </div>
@@ -168,7 +167,7 @@ export default function Hero() {
           {/* Tagline */}
           <motion.p
             variants={wordVariants}
-            className="font-body text-lg md:text-xl text-soft-white/70 max-w-md mb-10 leading-relaxed"
+            className="font-body text-lg md:text-xl text-dark-navy/80 max-w-md mb-10 leading-relaxed font-medium"
           >
             I am Coding tutor, Game Developer and UX/UI Designer. I am a student at the School of Information Technology, KMITL. I spend time learning new things and developing my skills to make tools that entertain and help life easier.
           </motion.p>
@@ -192,7 +191,7 @@ export default function Hero() {
             </a>
             <a
               href="#contact"
-              className="inline-block px-8 py-3.5 bg-transparent text-soft-white/80 font-body font-bold rounded-full text-base transition-all duration-300 border border-soft-white/30 hover:border-soft-white/60 hover:text-soft-white"
+              className="inline-block px-8 py-3.5 bg-soft-white/40 text-deep-purple font-body font-bold rounded-full text-base transition-all duration-300 border border-soft-white/60 hover:bg-soft-white/60 shadow-sm"
             >
               Let's Talk
             </a>
@@ -218,16 +217,16 @@ export default function Hero() {
         animate={{ opacity: 1 }}
         transition={{ delay: 1.5, duration: 1 }}
       >
-        <span className="font-body text-xs font-bold tracking-widest text-soft-white/60 uppercase">Scroll</span>
+        <span className="font-body text-xs font-bold tracking-widest text-deep-purple uppercase">Scroll</span>
         <motion.div
           animate={{ y: [0, 8, 0] }}
           transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-          className="w-5 h-8 border-2 border-soft-white/50 rounded-full flex justify-center p-1"
+          className="w-5 h-8 border-2 border-deep-purple/60 rounded-full flex justify-center p-1"
         >
           <motion.div
             animate={{ y: [0, 12, 0], opacity: [1, 0, 1] }}
             transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-            className="w-1 h-2 bg-soft-white/60 rounded-full"
+            className="w-1 h-2 bg-deep-purple/80 rounded-full"
           />
         </motion.div>
       </motion.div>
