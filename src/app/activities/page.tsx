@@ -184,7 +184,7 @@ export default function ActivitiesPage() {
               className={`relative px-5 py-2 rounded-full font-body text-sm font-bold transition-all duration-300 ${
                 active === f.key
                   ? "bg-neon-magenta text-white border-2 border-deep-black shadow-[0_0_18px_rgba(255,45,120,0.4)]"
-                  : "bg-transparent text-dark-navy/60 dark:text-muted-lilac border-2 border-vinyl-dark/30 dark:border-muted-lilac/40 hover:border-neon-magenta/60 hover:shadow-[0_0_10px_rgba(255,45,120,0.15)]"
+                  : "bg-transparent text-dark-navy/60 dark:text-muted-lilac border-2 border-vinyl-dark/30 dark:border-muted-lilac/70 hover:border-neon-magenta/60 hover:shadow-[0_0_10px_rgba(255,45,120,0.15)]"
               }`}
             >
               {f.label}

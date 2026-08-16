@@ -133,6 +133,12 @@ body {
   background: linear-gradient(135deg, #C8A8E8 0%, #F0B0D0 40%, #88D8E8 100%);
 }
 
+/* Dark mode: "midnight city pop" hero — deep purple → vinyl → ocean blue,
+   so the hero stops being a bright pastel block against the dark site. */
+.dark .gradient-hero {
+  background: linear-gradient(135deg, #2D1B4E 0%, #1C1C2E 45%, #1A3A5C 100%);
+}
+
 /* Sunset gradient */
 .gradient-sunset {
   background: linear-gradient(135deg, #F8A078 0%, #F0B0D0 50%, #C8A8E8 100%);
@@ -186,19 +192,21 @@ a[class*="bg-neon-magenta"]:hover {
 
 /* ── Accent surfaces use deep-navy text for WCAG AA contrast ──
    (white on hot-pink/magenta/blue/coral = 2.4–3.7:1; deep-navy = 4.6–6.6:1.
-   Keeps the vivid City Pop palette, only the text color changes.) */
-a[class*="bg-hot-pink"],
-a[class*="bg-neon-magenta"],
-a[class*="bg-electric-blue"],
-a[class*="bg-coral-red"],
-button[class*="bg-hot-pink"],
-button[class*="bg-neon-magenta"],
-button[class*="bg-electric-blue"],
-button[class*="bg-coral-red"],
-span[class*="bg-hot-pink"],
-span[class*="bg-neon-magenta"],
-span[class*="bg-electric-blue"],
-span[class*="bg-coral-red"] {
+   Keeps the vivid City Pop palette, only the text color changes.)
+   NOTE: [class~=] matches the exact class token only — bg-hot-pink/10 (translucent
+   tint chips) must NOT get navy text, only solid accent surfaces do. */
+a[class~="bg-hot-pink"],
+a[class~="bg-neon-magenta"],
+a[class~="bg-electric-blue"],
+a[class~="bg-coral-red"],
+button[class~="bg-hot-pink"],
+button[class~="bg-neon-magenta"],
+button[class~="bg-electric-blue"],
+button[class~="bg-coral-red"],
+span[class~="bg-hot-pink"],
+span[class~="bg-neon-magenta"],
+span[class~="bg-electric-blue"],
+span[class~="bg-coral-red"] {
   color: #1A1A2E;
 }
 

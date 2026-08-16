@@ -139,7 +139,7 @@ export default function Navbar() {
               <button
                 onClick={() => setTheme(isDark ? "light" : "dark")}
                 aria-label={isDark ? "Switch to light mode" : "Switch to dark mode"}
-                className="relative w-16 h-8 rounded-full border border-muted-lilac/30 bg-vinyl-dark/80 flex items-center px-1 transition-all duration-300 hover:border-neon-magenta/60 hover:shadow-[0_0_12px_rgba(255,45,120,0.3)] group overflow-hidden"
+                className="relative w-16 h-8 rounded-full border border-lilac-bright/50 bg-vinyl-dark/80 flex items-center px-1 transition-all duration-300 hover:border-neon-magenta/60 hover:shadow-[0_0_12px_rgba(255,45,120,0.3)] group overflow-hidden"
               >
                 {/* Track fill */}
                 <motion.div
@@ -227,7 +227,7 @@ export default function Navbar() {
               <button
                 onClick={() => setMobileOpen(false)}
                 aria-label="Close menu"
-                className="absolute top-6 left-6 w-10 h-10 rounded-full border border-muted-lilac/30 bg-soft-white/5 flex items-center justify-center text-soft-white hover:border-neon-magenta/60 transition-all duration-300 z-20"
+                className="absolute top-6 left-6 w-10 h-10 rounded-full border border-lilac-bright/50 bg-soft-white/5 flex items-center justify-center text-soft-white hover:border-neon-magenta/60 transition-all duration-300 z-20"
               >
                 <span className="text-xl leading-none">×</span>
               </button>
@@ -237,7 +237,7 @@ export default function Navbar() {
                 <button
                   onClick={() => setTheme(isDark ? "light" : "dark")}
                   aria-label="Toggle theme"
-                  className="absolute top-6 right-6 w-10 h-10 rounded-full border border-muted-lilac/30 bg-soft-white/5 flex items-center justify-center text-soft-white hover:border-neon-magenta/60 transition-all duration-300 z-20"
+                  className="absolute top-6 right-6 w-10 h-10 rounded-full border border-lilac-bright/50 bg-soft-white/5 flex items-center justify-center text-soft-white hover:border-neon-magenta/60 transition-all duration-300 z-20"
                 >
                   {isDark ? <FiSun size={18} /> : <FiMoon size={18} />}
                 </button>

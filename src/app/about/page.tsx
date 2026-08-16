@@ -781,7 +781,7 @@ function MangaFace() {
 function SocialLink({ href, icon, label, color }: { href: string; icon: React.ReactNode; label: string; color: string }) {
   return (
     <a href={href} target="_blank" rel="noopener noreferrer" aria-label={label}
-      className={`w-14 h-14 rounded-full bg-vinyl-dark border border-muted-lilac/30 flex items-center justify-center text-soft-white backdrop-blur-sm transition-all duration-300 hover:-translate-y-[4px] hover:bg-neon-magenta/20 hover:border-neon-magenta/60 ${color}`}
+      className={`w-14 h-14 rounded-full bg-vinyl-dark border border-lilac-bright/50 flex items-center justify-center text-soft-white backdrop-blur-sm transition-all duration-300 hover:-translate-y-[4px] hover:bg-neon-magenta/20 hover:border-neon-magenta/60 ${color}`}
       style={{ filter: "drop-shadow(3px 3px 0 rgba(0,0,0,0.35))", transform: "perspective(400px) rotateY(-6deg)" }}
       onMouseEnter={e => { (e.currentTarget as HTMLAnchorElement).style.transform = "perspective(400px) rotateY(0deg) translateY(-4px)"; }}
       onMouseLeave={e => { (e.currentTarget as HTMLAnchorElement).style.transform = "perspective(400px) rotateY(-6deg)"; }}
@@ -865,7 +865,7 @@ function ContactCTA() {
 
         {/* Right — manga panel form */}
         <motion.div {...fadeUp(0.2)} className="w-full max-w-md mx-auto lg:ml-auto">
-          <div className="relative border-2 border-vinyl-dark dark:border-muted-lilac/30 p-8 md:p-10 rounded-[20px] shadow-[0_20px_60px_rgba(0,0,0,0.4)] transform rotate-1 hover:rotate-0 transition-all duration-500 bg-vinyl-dark/90 backdrop-blur-xl">
+          <div className="relative border-2 border-vinyl-dark dark:border-lilac-bright/50 p-8 md:p-10 rounded-[20px] shadow-[0_20px_60px_rgba(0,0,0,0.4)] transform rotate-1 hover:rotate-0 transition-all duration-500 bg-vinyl-dark/90 backdrop-blur-xl">
             {/* Postmark stamp */}
             <div className="absolute top-4 right-4 md:top-6 md:right-6 opacity-40 pointer-events-none select-none flex flex-col items-center">
               <div className="w-12 h-16 border-2 border-dashed border-muted-lilac/50 rounded flex items-center justify-center p-1">
@@ -892,19 +892,19 @@ function ContactCTA() {
               <div>
                 <label htmlFor="about-name" className="sr-only">Name</label>
                 <input type="text" id="about-name" placeholder="Your Name"
-                  className="w-full px-5 py-3 rounded-full bg-soft-white/5 border border-muted-lilac/30 text-soft-white placeholder:text-soft-white/40 font-body outline-none focus:ring-2 focus:ring-neon-magenta/50 focus:border-transparent transition-all duration-300"
+                  className="w-full px-5 py-3 rounded-full bg-soft-white/5 border border-lilac-bright/50 text-soft-white placeholder:text-soft-white/40 font-body outline-none focus:ring-2 focus:ring-neon-magenta/50 focus:border-transparent transition-all duration-300"
                   required />
               </div>
               <div>
                 <label htmlFor="about-email" className="sr-only">Email</label>
                 <input type="email" id="about-email" placeholder="Your Email"
-                  className="w-full px-5 py-3 rounded-full bg-soft-white/5 border border-muted-lilac/30 text-soft-white placeholder:text-soft-white/40 font-body outline-none focus:ring-2 focus:ring-neon-magenta/50 focus:border-transparent transition-all duration-300"
+                  className="w-full px-5 py-3 rounded-full bg-soft-white/5 border border-lilac-bright/50 text-soft-white placeholder:text-soft-white/40 font-body outline-none focus:ring-2 focus:ring-neon-magenta/50 focus:border-transparent transition-all duration-300"
                   required />
               </div>
               <div>
                 <label htmlFor="about-message" className="sr-only">Message</label>
                 <textarea id="about-message" placeholder="What's on your mind?" rows={4}
-                  className="w-full px-5 py-4 rounded-3xl bg-soft-white/5 border border-muted-lilac/30 text-soft-white placeholder:text-soft-white/40 font-body outline-none focus:ring-2 focus:ring-neon-magenta/50 focus:border-transparent transition-all duration-300 resize-none"
+                  className="w-full px-5 py-4 rounded-3xl bg-soft-white/5 border border-lilac-bright/50 text-soft-white placeholder:text-soft-white/40 font-body outline-none focus:ring-2 focus:ring-neon-magenta/50 focus:border-transparent transition-all duration-300 resize-none"
                   required />
               </div>
               <div className="flex items-center gap-3 mt-2">

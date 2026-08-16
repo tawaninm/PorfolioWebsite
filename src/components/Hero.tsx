@@ -114,7 +114,7 @@ export default function Hero() {
           {/* Greeting */}
           <motion.span
             variants={wordVariants}
-            className="font-body text-xl md:text-2xl font-bold text-deep-purple mb-4"
+            className="font-body text-xl md:text-2xl font-bold text-deep-purple dark:text-sakura-white mb-4"
           >
             Hello, I'm Tawan 👋
           </motion.span>
@@ -142,7 +142,7 @@ export default function Hero() {
                     {word}
                   </span>
                 ) : (
-                  <span className="text-dark-navy">{word}</span>
+                  <span className="text-dark-navy dark:text-soft-white">{word}</span>
                 )}
               </motion.span>
             ))}
@@ -153,13 +153,13 @@ export default function Hero() {
             variants={wordVariants}
             className="flex flex-col items-center lg:items-start gap-1 mb-6"
           >
-            <div className="inline-block px-6 py-2 rounded-full bg-soft-white/40 border border-soft-white/60 backdrop-blur-md shadow-sm">
-              <span className="font-body text-sm font-bold tracking-wider text-deep-purple uppercase">
+            <div className="inline-block px-6 py-2 rounded-full bg-soft-white/40 border border-soft-white/60 backdrop-blur-md shadow-sm dark:bg-white/10 dark:border-white/20">
+              <span className="font-body text-sm font-bold tracking-wider text-deep-purple dark:text-sakura-white uppercase">
                 1+ Years · Coding Tutor · Game Developer · UX/UI Designer
               </span>
             </div>
-            {/* Japanese subtitle — hero stays light pastel in both themes, so use deep-purple for AA contrast */}
-            <span className="font-zen text-sm text-deep-purple tracking-widest mt-1">
+            {/* Japanese subtitle — pastel gradient in light / dark navy gradient in dark */}
+            <span className="font-zen text-sm text-deep-purple dark:text-muted-lilac tracking-widest mt-1">
               シティポップ ✦ デザイナー
             </span>
           </motion.div>
@@ -167,7 +167,7 @@ export default function Hero() {
           {/* Tagline */}
           <motion.p
             variants={wordVariants}
-            className="font-body text-lg md:text-xl text-dark-navy/80 max-w-md mb-10 leading-relaxed font-medium"
+            className="font-body text-lg md:text-xl text-dark-navy/80 dark:text-soft-white/80 max-w-md mb-10 leading-relaxed font-medium"
           >
             I am Coding tutor, Game Developer and UX/UI Designer. I am a student at the School of Information Technology, KMITL. I spend time learning new things and developing my skills to make tools that entertain and help life easier.
           </motion.p>
@@ -191,7 +191,7 @@ export default function Hero() {
             </a>
             <a
               href="#contact"
-              className="inline-block px-8 py-3.5 bg-soft-white/40 text-deep-purple font-body font-bold rounded-full text-base transition-all duration-300 border border-soft-white/60 hover:bg-soft-white/60 shadow-sm"
+              className="inline-block px-8 py-3.5 bg-soft-white/40 text-deep-purple font-body font-bold rounded-full text-base transition-all duration-300 border border-soft-white/60 hover:bg-soft-white/60 shadow-sm dark:bg-white/10 dark:text-sakura-white dark:border-white/20 dark:hover:bg-white/20"
             >
               Let's Talk
             </a>
@@ -217,16 +217,16 @@ export default function Hero() {
         animate={{ opacity: 1 }}
         transition={{ delay: 1.5, duration: 1 }}
       >
-        <span className="font-body text-xs font-bold tracking-widest text-deep-purple uppercase">Scroll</span>
+        <span className="font-body text-xs font-bold tracking-widest text-deep-purple dark:text-soft-white uppercase">Scroll</span>
         <motion.div
           animate={{ y: [0, 8, 0] }}
           transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-          className="w-5 h-8 border-2 border-deep-purple/60 rounded-full flex justify-center p-1"
+          className="w-5 h-8 border-2 border-deep-purple/60 dark:border-soft-white/60 rounded-full flex justify-center p-1"
         >
           <motion.div
             animate={{ y: [0, 12, 0], opacity: [1, 0, 1] }}
             transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-            className="w-1 h-2 bg-deep-purple/80 rounded-full"
+            className="w-1 h-2 bg-deep-purple/80 dark:bg-soft-white/80 rounded-full"
           />
         </motion.div>
       </motion.div>
