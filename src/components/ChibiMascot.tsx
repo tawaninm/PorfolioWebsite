@@ -4,14 +4,15 @@ import { useEffect, useRef, useState } from "react";
 import { motion, useMotionValue, useSpring } from "framer-motion";
 
 /**
- * ChibiMascot — a kawaii blob (Doro-style chibi, per workspace avatar rule)
+ * ChibiMascot — a kawaii blob (Doro-style chibi)
  * that floats in the corner, wiggles on scroll, and its eyes track the cursor.
- * Pure DOM/framer-motion — no external assets. Swap for a Rive .riv later.
+ * Pure DOM/framer-motion — no external assets.
  */
 export default function ChibiMascot() {
   const [show, setShow] = useState(false);
   const [wave, setWave] = useState(false);
   const [wiggle, setWiggle] = useState(0);
+  const [reduced, setReduced] = useState(false);
 
   const eyeX = useMotionValue(0);
   const eyeY = useMotionValue(0);
@@ -19,7 +20,14 @@ export default function ChibiMascot() {
   const sEyeY = useSpring(eyeY, { stiffness: 300, damping: 20 });
 
   useEffect(() => {
-    if (!window.matchMedia("(pointer: fine)").matches) return;
+    const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
+    setReduced(mq.matches);
+    const onMqChange = (e: MediaQueryListEvent) => setReduced(e.matches);
+    mq.addEventListener("change", onMqChange);
+
+    if (!window.matchMedia("(pointer: fine)").matches) {
+      return () => mq.removeEventListener("change", onMqChange);
+    }
     setShow(true);
 
     const onMove = (e: MouseEvent) => {
@@ -29,14 +37,24 @@ export default function ChibiMascot() {
       eyeX.set(nx * 3.5);
       eyeY.set(ny * 3.5);
     };
+
+    let scrollTimeout: ReturnType<typeof setTimeout> | null = null;
     const onScroll = () => {
-      setWiggle((w) => w + 1);
+      if (scrollTimeout) return;
+      scrollTimeout = setTimeout(() => {
+        setWiggle((w) => w + 1);
+        scrollTimeout = null;
+      }, 200);
     };
+
     window.addEventListener("mousemove", onMove, { passive: true });
     window.addEventListener("scroll", onScroll, { passive: true });
+
     return () => {
+      mq.removeEventListener("change", onMqChange);
       window.removeEventListener("mousemove", onMove);
       window.removeEventListener("scroll", onScroll);
+      if (scrollTimeout) clearTimeout(scrollTimeout);
     };
   }, [eyeX, eyeY]);
 
@@ -54,12 +72,20 @@ export default function ChibiMascot() {
     >
       <motion.span
         className="absolute inset-0 rounded-[45%] bg-gradient-to-br from-sakura-pink via-hot-pink/70 to-lavender shadow-[0_8px_24px_rgba(255,45,120,0.35)]"
-        animate={{
-          y: [0, -4, 0],
-          rotate: wiggle % 2 === 0 ? [-2, 2, -2] : [2, -2, 2],
-        }}
-        transition={{ y: { duration: 3, repeat: Infinity, ease: "easeInOut" }, rotate: { duration: 0.6, repeat: Infinity } }}
-        whileHover={{ scale: 1.08 }}
+        animate={
+          reduced
+            ? { y: 0, rotate: 0 }
+            : {
+                y: [0, -4, 0],
+                rotate: wiggle % 2 === 0 ? [-2, 2, -2] : [2, -2, 2],
+              }
+        }
+        transition={
+          reduced
+            ? { duration: 0 }
+            : { y: { duration: 3, repeat: Infinity, ease: "easeInOut" }, rotate: { duration: 0.6, repeat: Infinity } }
+        }
+        whileHover={reduced ? {} : { scale: 1.08 }}
       >
         {/* Eyes (track cursor) */}
         <motion.span className="absolute top-[38%] left-[26%] w-2.5 h-3.5 rounded-full bg-deep-navy" style={{ x: sEyeX, y: sEyeY }}>
@@ -79,8 +105,8 @@ export default function ChibiMascot() {
         <motion.span
           className="absolute -top-1 -right-2 text-xl origin-bottom-left"
           initial={{ rotate: 0 }}
-          animate={{ rotate: [-20, 25, -20, 25, 0] }}
-          transition={{ duration: 1.2 }}
+          animate={{ rotate: reduced ? 0 : [-20, 25, -20, 25, 0] }}
+          transition={{ duration: reduced ? 0 : 1.2 }}
         >
           👋
         </motion.span>
@@ -88,3 +114,4 @@ export default function ChibiMascot() {
     </motion.button>
   );
 }
+

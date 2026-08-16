@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { Link } from "next-view-transitions";
 import gsap from "gsap";
@@ -24,14 +24,23 @@ const CATEGORY_STYLE: Record<string, string> = {
 export default function HorizontalProjects() {
   const sectionRef = useRef<HTMLDivElement>(null);
   const trackRef = useRef<HTMLDivElement>(null);
+  const [reduced, setReduced] = useState(false);
 
   useEffect(() => {
+    const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
+    setReduced(mq.matches);
+    const onChange = (e: MediaQueryListEvent) => setReduced(e.matches);
+    mq.addEventListener("change", onChange);
+    return () => mq.removeEventListener("change", onChange);
+  }, []);
+
+  useEffect(() => {
+    if (reduced) return;
     const section = sectionRef.current;
     const track = trackRef.current;
     if (!section || !track) return;
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
-    const distance = () => track.scrollWidth - window.innerWidth;
+    const distance = () => Math.max(0, track.scrollWidth - window.innerWidth);
 
     const tween = gsap.to(track, {
       x: () => -distance(),
@@ -48,10 +57,10 @@ export default function HorizontalProjects() {
     });
 
     return () => {
-      tween.scrollTrigger?.kill();
+      tween.scrollTrigger?.kill(true);
       tween.kill();
     };
-  }, []);
+  }, [reduced]);
 
   return (
     <section
@@ -76,12 +85,23 @@ export default function HorizontalProjects() {
           <p className="font-zen text-base text-lilac-bright mt-1 tracking-widest">作品をスライド ✦ scroll</p>
         </div>
 
-        <div ref={trackRef} className="flex gap-6 px-6 md:px-[max(1.5rem,calc((100vw-80rem)/2+1.5rem))] w-max will-change-transform">
+        <div
+          ref={trackRef}
+          className={
+            reduced
+              ? "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl mx-auto px-6"
+              : "flex gap-6 px-6 md:px-[max(1.5rem,calc((100vw-80rem)/2+1.5rem))] w-max will-change-transform"
+          }
+        >
           {projects.map((p, i) => (
             <Link
               key={p.slug}
               href={`/projects/${p.slug}`}
-              className="group relative w-[72vw] sm:w-[380px] md:w-[440px] h-[240px] md:h-[280px] rounded-2xl overflow-hidden border border-soft-white/10 hover:border-neon-magenta/60 transition-colors shrink-0 block"
+              className={
+                reduced
+                  ? "group relative w-full h-[240px] md:h-[280px] rounded-2xl overflow-hidden border border-soft-white/10 hover:border-neon-magenta/60 transition-colors block"
+                  : "group relative w-[72vw] sm:w-[380px] md:w-[440px] h-[240px] md:h-[280px] rounded-2xl overflow-hidden border border-soft-white/10 hover:border-neon-magenta/60 transition-colors shrink-0 block"
+              }
             >
               <Image
                 src={p.thumbnail}
@@ -125,9 +145,14 @@ export default function HorizontalProjects() {
           ))}
         </div>
       </div>
-      {/* Edge fade masks */}
-      <div className="absolute inset-y-0 left-0 w-24 bg-gradient-to-r from-vinyl-dark to-transparent pointer-events-none z-10" aria-hidden="true" />
-      <div className="absolute inset-y-0 right-0 w-24 bg-gradient-to-l from-vinyl-dark to-transparent pointer-events-none z-10" aria-hidden="true" />
+      {/* Edge fade masks — only shown during horizontal scroll mode */}
+      {!reduced && (
+        <>
+          <div className="absolute inset-y-0 left-0 w-24 bg-gradient-to-r from-vinyl-dark to-transparent pointer-events-none z-10" aria-hidden="true" />
+          <div className="absolute inset-y-0 right-0 w-24 bg-gradient-to-l from-vinyl-dark to-transparent pointer-events-none z-10" aria-hidden="true" />
+        </>
+      )}
     </section>
   );
 }
+

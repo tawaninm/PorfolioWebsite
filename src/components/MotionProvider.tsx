@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useCallback } from "react";
+import { useEffect, useRef } from "react";
 import { MotionConfig } from "framer-motion";
 import { usePathname } from "next/navigation";
 import Lenis from "lenis";
@@ -11,6 +11,7 @@ export default function MotionProvider({ children }: { children: React.ReactNode
 
   /* ── Lenis smooth scroll ── */
   useEffect(() => {
+    let isMounted = true;
     const lenis = new Lenis({
       duration: 1.2,
       easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
@@ -30,21 +31,25 @@ export default function MotionProvider({ children }: { children: React.ReactNode
     let cleanupGsap: (() => void) | undefined;
     import("gsap").then((gsapMod) =>
       import("gsap/ScrollTrigger").then((stMod) => {
+        if (!isMounted || !lenisRef.current) return;
         const gsap = gsapMod.default;
         const ScrollTrigger = stMod.ScrollTrigger;
-        if (!lenisRef.current) return;
         gsap.registerPlugin(ScrollTrigger);
         cancelAnimationFrame(rafId);
         lenis.on("scroll", ScrollTrigger.update);
-        gsap.ticker.add((time) => lenis.raf(time * 1000));
+        const updateLenis = (time: number) => {
+          lenis.raf(time * 1000);
+        };
+        gsap.ticker.add(updateLenis);
         gsap.ticker.lagSmoothing(0);
         cleanupGsap = () => {
-          gsap.ticker.remove((time) => lenis.raf(time * 1000));
+          gsap.ticker.remove(updateLenis);
         };
       })
     );
 
     return () => {
+      isMounted = false;
       cancelAnimationFrame(rafId);
       cleanupGsap?.();
       lenis.destroy();
@@ -66,8 +71,9 @@ export default function MotionProvider({ children }: { children: React.ReactNode
   }, [pathname]);
 
   return (
-    <MotionConfig reducedMotion="never">
+    <MotionConfig reducedMotion="user">
       {children}
     </MotionConfig>
   );
 }
+

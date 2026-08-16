@@ -25,6 +25,13 @@ export default function TiltCard({
   const sry = useSpring(ry, { stiffness: 180, damping: 18 });
 
   const onMouseMove = (e: React.MouseEvent) => {
+    if (
+      typeof window !== "undefined" &&
+      (window.matchMedia("(prefers-reduced-motion: reduce)").matches ||
+        window.matchMedia("(pointer: coarse)").matches)
+    ) {
+      return;
+    }
     const el = ref.current;
     if (!el) return;
     const r = el.getBoundingClientRect();
@@ -53,3 +60,4 @@ export default function TiltCard({
     </motion.div>
   );
 }
+

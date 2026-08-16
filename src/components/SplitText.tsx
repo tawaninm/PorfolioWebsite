@@ -27,7 +27,7 @@ export default function SplitText({
       aria-label={text}
     >
       {words.map((word, i) => (
-        <span key={i} className="inline-block overflow-hidden align-bottom pb-[0.08em] -mb-[0.08em]">
+        <span key={i} className="inline-block overflow-hidden align-bottom pb-[0.08em] -mb-[0.08em]" aria-hidden="true">
           <motion.span
             className="inline-block will-change-transform"
             variants={{
@@ -46,3 +46,4 @@ export default function SplitText({
     </motion.span>
   );
 }
+

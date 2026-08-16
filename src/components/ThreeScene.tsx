@@ -2,7 +2,6 @@
 
 import React, { useMemo, useRef, useState, useEffect, useCallback } from "react";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
-import { EffectComposer, Bloom } from "@react-three/postprocessing";
 import * as THREE from "three";
 
 /* ------------------------------------------------------------------ */
@@ -13,12 +12,11 @@ const PETAL_COLORS = ["#FFB7C5", "#FFF0F5", "#FFE4E1"]; // sakura pink, lavender
 
 
 /* ------------------------------------------------------------------ */
-/*  Custom petal shape (adapted from gist bezier-curve approach)       */
+/*  Custom petal shape (adapted from bezier-curve approach)           */
 /* ------------------------------------------------------------------ */
 
 function createPetalGeometry(): THREE.BufferGeometry {
   const shape = new THREE.Shape();
-  // Bezier petal silhouette inspired by the gist
   shape.moveTo(0, 0);
   shape.bezierCurveTo(0.15, 0.15, 0.15, 0.35, 0, 0.5);
   shape.bezierCurveTo(-0.15, 0.35, -0.15, 0.15, 0, 0);
@@ -76,6 +74,17 @@ const MAX_PETALS = 100;
 const SakuraPetals = React.memo(function SakuraPetals() {
   const meshRef = useRef<THREE.InstancedMesh>(null);
   const [count] = useState(MAX_PETALS);
+  const reduced = useRef(false);
+
+  useEffect(() => {
+    const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
+    reduced.current = mq.matches;
+    const onChange = (e: MediaQueryListEvent) => {
+      reduced.current = e.matches;
+    };
+    mq.addEventListener("change", onChange);
+    return () => mq.removeEventListener("change", onChange);
+  }, []);
 
   const dummy = useMemo(() => new THREE.Object3D(), []);
 
@@ -123,6 +132,7 @@ const SakuraPetals = React.memo(function SakuraPetals() {
   }, [dummy]);
 
   useFrame((state) => {
+    if (reduced.current) return;
     const mesh = meshRef.current;
     if (!mesh) return;
 
@@ -133,9 +143,9 @@ const SakuraPetals = React.memo(function SakuraPetals() {
 
       // Gravity fall
       p.y -= p.speedY;
-      // Wind drift with sine variation (from gist approach)
+      // Wind drift with sine variation
       p.x += p.speedX + Math.sin(t * p.wobbleSpeed + p.wobbleOffset) * 0.004;
-      // Tumble rotation (X and Z, matching gist)
+      // Tumble rotation
       p.rx += p.rSpeedX;
       p.rz += p.rSpeedZ;
 
@@ -179,6 +189,17 @@ const SakuraPetals = React.memo(function SakuraPetals() {
 const MouseParallax = React.memo(function MouseParallax() {
   const { camera } = useThree();
   const mouse = useRef({ x: 0, y: 0 });
+  const reduced = useRef(false);
+
+  useEffect(() => {
+    const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
+    reduced.current = mq.matches;
+    const onChange = (e: MediaQueryListEvent) => {
+      reduced.current = e.matches;
+    };
+    mq.addEventListener("change", onChange);
+    return () => mq.removeEventListener("change", onChange);
+  }, []);
 
   const onMouseMove = useCallback((e: MouseEvent) => {
     mouse.current.x = (e.clientX / window.innerWidth) * 2 - 1;
@@ -191,6 +212,7 @@ const MouseParallax = React.memo(function MouseParallax() {
   }, [onMouseMove]);
 
   useFrame(() => {
+    if (reduced.current) return;
     const tx = mouse.current.x * 0.3;
     const ty = -mouse.current.y * 0.3;
     camera.position.x += (tx - camera.position.x) * 0.05;
@@ -216,13 +238,10 @@ const ThreeScene = () => {
       >
         <SakuraPetals />
         <MouseParallax />
-        {/* Bloom — petals glow like neon sakura, subtle in light / pops in dark */}
-        <EffectComposer>
-          <Bloom intensity={0.7} luminanceThreshold={0.15} luminanceSmoothing={0.9} mipmapBlur radius={0.7} />
-        </EffectComposer>
       </Canvas>
     </div>
   );
 };
 
 export default React.memo(ThreeScene);
+

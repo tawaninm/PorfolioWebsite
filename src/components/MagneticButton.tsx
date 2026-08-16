@@ -23,6 +23,13 @@ export default function MagneticButton({
   const sy = useSpring(y, { stiffness: 160, damping: 14, mass: 0.1 });
 
   const onMouseMove = (e: React.MouseEvent) => {
+    if (
+      typeof window !== "undefined" &&
+      (window.matchMedia("(prefers-reduced-motion: reduce)").matches ||
+        window.matchMedia("(pointer: coarse)").matches)
+    ) {
+      return;
+    }
     const el = ref.current;
     if (!el) return;
     const r = el.getBoundingClientRect();
@@ -47,3 +54,4 @@ export default function MagneticButton({
     </motion.div>
   );
 }
+

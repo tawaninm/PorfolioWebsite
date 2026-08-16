@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 
 const KONAMI = [
@@ -17,23 +17,43 @@ const KONAMI = [
 export default function KonamiEasterEgg() {
   const [active, setActive] = useState(false);
   const [reduced, setReduced] = useState(false);
+  const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   useEffect(() => {
-    setReduced(window.matchMedia("(prefers-reduced-motion: reduce)").matches);
+    const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
+    setReduced(mq.matches);
+    const onChange = (e: MediaQueryListEvent) => setReduced(e.matches);
+    mq.addEventListener("change", onChange);
+    return () => mq.removeEventListener("change", onChange);
   }, []);
 
   useEffect(() => {
     let idx = 0;
-    let timer: ReturnType<typeof setTimeout> | undefined;
 
     const onKey = (e: KeyboardEvent) => {
+      // Ignore key events originating from interactive text inputs
+      const target = e.target as HTMLElement | null;
+      if (
+        target &&
+        (target.tagName === "INPUT" ||
+          target.tagName === "TEXTAREA" ||
+          target.tagName === "SELECT" ||
+          target.isContentEditable)
+      ) {
+        return;
+      }
+
       const key = e.key.length === 1 ? e.key.toLowerCase() : e.key;
       if (key === KONAMI[idx]) {
         idx += 1;
         if (idx === KONAMI.length) {
           idx = 0;
           setActive(true);
-          timer = setTimeout(() => setActive(false), reduced ? 900 : 2600);
+          if (timerRef.current) clearTimeout(timerRef.current);
+          timerRef.current = setTimeout(
+            () => setActive(false),
+            reduced ? 900 : 2600
+          );
         }
       } else {
         idx = key === KONAMI[0] ? 1 : 0;
@@ -43,7 +63,10 @@ export default function KonamiEasterEgg() {
     window.addEventListener("keydown", onKey);
     return () => {
       window.removeEventListener("keydown", onKey);
-      if (timer) clearTimeout(timer);
+      if (timerRef.current) {
+        clearTimeout(timerRef.current);
+        timerRef.current = null;
+      }
     };
   }, [reduced]);
 
@@ -100,3 +123,4 @@ export default function KonamiEasterEgg() {
     </AnimatePresence>
   );
 }
+

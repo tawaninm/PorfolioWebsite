@@ -5,7 +5,7 @@ import { motion, useMotionValue, useSpring } from "framer-motion";
 
 /**
  * CustomCursor — neon dot + trailing ring that follows the cursor.
- * Desktop (fine pointer) only; auto-hidden on touch devices.
+ * Desktop (fine pointer) only; auto-hidden on touch devices and when prefers-reduced-motion is enabled.
  * Uses mix-blend-difference so it stays visible on any background.
  */
 export default function CustomCursor() {
@@ -18,7 +18,14 @@ export default function CustomCursor() {
 
   useEffect(() => {
     const fine = window.matchMedia("(pointer: fine)").matches;
-    if (!fine) return;
+    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    if (!fine || reduced) {
+      setEnabled(false);
+      document.documentElement.classList.remove("custom-cursor-on");
+      return;
+    }
+
     setEnabled(true);
     document.documentElement.classList.add("custom-cursor-on");
 
@@ -52,3 +59,4 @@ export default function CustomCursor() {
     </>
   );
 }
+
