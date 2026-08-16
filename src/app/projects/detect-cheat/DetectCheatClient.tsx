@@ -11,10 +11,10 @@ import ImageLightbox from "@/components/project-detail/ImageLightbox";
 import ProjectNav from "@/components/project-detail/ProjectNav";
 
 const categoryBg: Record<Project["category"], string> = {
-  uxui: "bg-sakura-pink/20 text-sakura-pink border-sakura-pink/30",
-  programming: "bg-sky-cyan/20 text-sky-cyan border-sky-cyan/30",
-  "ci-art": "bg-mint/20 text-mint border-mint/30",
-  game: "bg-retro-yellow/20 text-retro-yellow border-retro-yellow/30",
+  uxui: "bg-sakura-pink/20 text-magenta-deep dark:text-sakura-pink border-sakura-pink/30",
+  programming: "bg-sky-cyan/20 text-cyan-deep dark:text-sky-cyan border-sky-cyan/30",
+  "ci-art": "bg-mint/20 text-mint-deep dark:text-mint border-mint/30",
+  game: "bg-retro-yellow/20 text-yellow-deep dark:text-retro-yellow border-retro-yellow/30",
 };
 
 function FadeSection({
@@ -88,7 +88,7 @@ const cases = [
     title: "การซื้อขายออนไลน์",
     desc: "สินค้าปลอม การโอนเงินแล้วหาย หลักฐานจากการสนทนา",
     color: "border-retro-yellow/40 hover:border-retro-yellow/70",
-    accent: "text-retro-yellow",
+    accent: "text-yellow-deep dark:text-retro-yellow",
     bg: "bg-retro-yellow/5",
   },
   {
@@ -96,7 +96,7 @@ const cases = [
     title: "เว็บหาคู่",
     desc: "มิจฉาชีพแอบอ้างตัวตน สร้างความสัมพันธ์เพื่อหลอกเอาเงิน",
     color: "border-sakura-pink/40 hover:border-sakura-pink/70",
-    accent: "text-sakura-pink",
+    accent: "text-magenta-deep dark:text-sakura-pink",
     bg: "bg-sakura-pink/5",
   },
   {
@@ -104,7 +104,7 @@ const cases = [
     title: "การแอบอ้างรางวัล",
     desc: "อ้างว่าได้รับรางวัลจากกิจกรรม ต้องชำระค่าดำเนินการก่อน",
     color: "border-mint/40 hover:border-mint/70",
-    accent: "text-mint",
+    accent: "text-mint-deep dark:text-mint",
     bg: "bg-mint/5",
   },
 ];
@@ -121,25 +121,25 @@ const processSteps = [
     num: 1,
     title: "Research",
     desc: "ค้นคว้าข้อมูลกฎหมายคอมพิวเตอร์และรูปแบบกลโกงออนไลน์ที่พบบ่อยในชีวิตจริง",
-    color: "border-retro-yellow text-retro-yellow",
+    color: "border-retro-yellow text-yellow-deep dark:text-retro-yellow",
   },
   {
     num: 2,
     title: "Design",
     desc: "ออกแบบตัวละคร 2D และ flow การสนทนาสำหรับแต่ละคดี ให้มีความสมจริงและน่าสนใจ",
-    color: "border-sakura-pink text-sakura-pink",
+    color: "border-sakura-pink text-magenta-deep dark:text-sakura-pink",
   },
   {
     num: 3,
     title: "Development",
     desc: "พัฒนาเกมใน Unity ในรูปแบบ interactive visual novel พร้อมระบบเลือกบทสนทนา",
-    color: "border-sky-cyan text-sky-cyan",
+    color: "border-sky-cyan text-cyan-deep dark:text-sky-cyan",
   },
   {
     num: 4,
     title: "Testing",
     desc: "ทดสอบการใช้งานกับกลุ่มเป้าหมายและประเมินความพึงพอใจ",
-    color: "border-mint text-mint",
+    color: "border-mint text-mint-deep dark:text-mint",
   },
 ];
 
@@ -245,11 +245,11 @@ export default function DetectCheatClient({ project }: { project: Project }) {
       {/* ── Project Info Header ── */}
       <FadeSection delay={0.1} className="relative z-10 mx-auto max-w-5xl px-6 mt-10">
         <div className="flex flex-col md:flex-row md:items-center gap-4 md:gap-6 mb-4">
-          <span className="font-body text-sm text-retro-yellow font-bold">{project.date}</span>
+          <span className="font-body text-sm text-yellow-deep dark:text-retro-yellow font-bold">{project.date}</span>
           <span className={`inline-block w-fit px-4 py-1 rounded-full font-body text-xs font-bold uppercase tracking-widest border ${categoryBg[project.category]}`}>
             {categoryLabels[project.category]}
           </span>
-          <span className="inline-block w-fit px-4 py-1 rounded-full font-body text-xs font-bold uppercase tracking-widest border border-retro-yellow/40 bg-retro-yellow/10 text-retro-yellow">
+          <span className="inline-block w-fit px-4 py-1 rounded-full font-body text-xs font-bold uppercase tracking-widest border border-retro-yellow/40 bg-retro-yellow/10 text-yellow-deep dark:text-retro-yellow">
             Educational Game
           </span>
         </div>
@@ -291,11 +291,11 @@ export default function DetectCheatClient({ project }: { project: Project }) {
               </p>
             </div>
             <div className="relative bg-vinyl-dark/5 dark:bg-soft-white/5 border border-retro-yellow/30 rounded-2xl p-6 overflow-hidden">
-              <div className="absolute -top-4 -right-4 font-display text-9xl text-retro-yellow/5 pointer-events-none select-none">!</div>
+              <div className="absolute -top-4 -right-4 font-display text-9xl text-yellow-deep dark:text-retro-yellow/5 pointer-events-none select-none">!</div>
               <div className="flex items-start gap-4">
                 <AlertBubble />
                 <div>
-                  <p className="font-display text-base text-retro-yellow mb-2">ปัญหาที่แท้จริง</p>
+                  <p className="font-display text-base text-yellow-deep dark:text-retro-yellow mb-2">ปัญหาที่แท้จริง</p>
                   <p className="font-body text-sm text-deep-navy/75 dark:text-soft-white/75 leading-relaxed">
                     เปลี่ยนเรื่องกฎหมายคอมพิวเตอร์และการฉ้อโกงออนไลน์ให้กลายเป็นสถานการณ์จำลองที่ผู้เล่นต้องตั้งสติ เก็บหลักฐาน และเลือกตอบอย่างมีวิจารณญาณ
                   </p>
@@ -369,7 +369,7 @@ export default function DetectCheatClient({ project }: { project: Project }) {
           <div className="bg-vinyl-dark/5 dark:bg-soft-white/5 border border-sky-cyan/20 rounded-2xl p-5 mb-8 flex items-start gap-4">
             <span className="text-2xl">💬</span>
             <div>
-              <p className="font-display text-sky-cyan mb-1">Core Mechanic: Chat-based Evidence Collection</p>
+              <p className="font-display text-cyan-deep dark:text-sky-cyan mb-1">Core Mechanic: Chat-based Evidence Collection</p>
               <p className="font-body text-sm text-deep-navy/70 dark:text-soft-white/70">ผู้เล่นต้องโต้ตอบกับมิจฉาชีพในบทสนทนา แล้วเลือกเก็บหลักฐานที่สำคัญเพื่อนำไปดำเนินคดีในขั้นตอนถัดไป</p>
             </div>
           </div>
@@ -381,7 +381,7 @@ export default function DetectCheatClient({ project }: { project: Project }) {
               <div key={i} className="flex items-start gap-3 bg-vinyl-dark/5 dark:bg-soft-white/5 border border-vinyl-dark/15 dark:border-soft-white/10 rounded-xl p-4 hover:border-retro-yellow/30 transition-colors">
                 <span className="text-xl">{f.icon}</span>
                 <div>
-                  <p className="font-display text-sm text-retro-yellow mb-0.5">{f.label}</p>
+                  <p className="font-display text-sm text-yellow-deep dark:text-retro-yellow mb-0.5">{f.label}</p>
                   <p className="font-body text-xs text-deep-navy/65 dark:text-soft-white/65">{f.desc}</p>
                 </div>
               </div>
@@ -469,22 +469,22 @@ export default function DetectCheatClient({ project }: { project: Project }) {
 
           <div className="bg-vinyl-dark/5 dark:bg-soft-white/5 border border-retro-yellow/20 rounded-3xl p-6 md:p-8 mb-8" style={{ boxShadow: "0 0 40px rgba(255,209,102,0.05)" }}>
             <p className="font-body text-base md:text-lg text-deep-navy/80 dark:text-soft-white/80 leading-relaxed mb-6">
-              <strong className="text-retro-yellow">The Solution:</strong> เกมการเรียนรู้ที่เปลี่ยนผู้เล่นจากคนอ่านข้อมูลเฉย ๆ ให้กลายเป็นคนที่ต้องตัดสินใจ ตอบโต้ และฝึกเก็บหลักฐานด้วยตนเอง — ผ่านสถานการณ์ที่สมจริงจาก 3 คดีออนไลน์ที่ใกล้ตัว
+              <strong className="text-yellow-deep dark:text-retro-yellow">The Solution:</strong> เกมการเรียนรู้ที่เปลี่ยนผู้เล่นจากคนอ่านข้อมูลเฉย ๆ ให้กลายเป็นคนที่ต้องตัดสินใจ ตอบโต้ และฝึกเก็บหลักฐานด้วยตนเอง — ผ่านสถานการณ์ที่สมจริงจาก 3 คดีออนไลน์ที่ใกล้ตัว
             </p>
             <p className="font-body text-base md:text-lg text-deep-navy/80 dark:text-soft-white/80 leading-relaxed">
-              <strong className="text-sakura-pink">Impact:</strong> ผู้ใช้งานสามารถเรียนรู้เนื้อหาและนำไปประยุกต์ใช้ป้องกันตนเองจากมิจฉาชีพออนไลน์ได้ โดยผลทดสอบสะท้อนความพึงพอใจในระดับมาก
+              <strong className="text-magenta-deep dark:text-sakura-pink">Impact:</strong> ผู้ใช้งานสามารถเรียนรู้เนื้อหาและนำไปประยุกต์ใช้ป้องกันตนเองจากมิจฉาชีพออนไลน์ได้ โดยผลทดสอบสะท้อนความพึงพอใจในระดับมาก
             </p>
           </div>
 
           {/* Target Users callout */}
           <div className="flex flex-col sm:flex-row gap-4 mb-6">
             <div className="flex-1 bg-vinyl-dark/5 dark:bg-soft-white/5 border border-mint/30 rounded-2xl p-5">
-              <p className="font-body text-xs text-mint uppercase tracking-widest mb-2">Target Users</p>
+              <p className="font-body text-xs text-mint-deep dark:text-mint uppercase tracking-widest mb-2">Target Users</p>
               <p className="font-display text-lg text-deep-navy dark:text-soft-white">มัธยมต้น + ผู้สนใจ</p>
               <p className="font-body text-xs text-deep-navy/60 dark:text-soft-white/60 mt-1">นักเรียนระดับมัธยมศึกษาตอนต้นและผู้ที่สนใจเรื่องการโกงบนโลกออนไลน์</p>
             </div>
             <div className="flex-1 bg-vinyl-dark/5 dark:bg-soft-white/5 border border-retro-yellow/30 rounded-2xl p-5">
-              <p className="font-body text-xs text-retro-yellow uppercase tracking-widest mb-2">Competition</p>
+              <p className="font-body text-xs text-yellow-deep dark:text-retro-yellow uppercase tracking-widest mb-2">Competition</p>
               <p className="font-display text-lg text-deep-navy dark:text-soft-white">NSC ครั้งที่ 24</p>
               <p className="font-body text-xs text-deep-navy/60 dark:text-soft-white/60 mt-1 font-mono">24p21e0061</p>
             </div>
@@ -506,9 +506,9 @@ export default function DetectCheatClient({ project }: { project: Project }) {
             {challenges.map((c, i) => (
               <div key={i} className="bg-vinyl-dark/5 dark:bg-soft-white/5 border border-vinyl-dark/15 dark:border-soft-white/10 hover:border-sakura-pink/30 rounded-2xl p-5 transition-colors">
                 <span className="text-3xl block mb-4">{c.icon}</span>
-                <p className="font-display text-base text-sakura-pink mb-3">{c.title}</p>
+                <p className="font-display text-base text-magenta-deep dark:text-sakura-pink mb-3">{c.title}</p>
                 <div className="border-t border-vinyl-dark/15 dark:border-soft-white/10 pt-3 mt-2">
-                  <p className="font-body text-xs text-mint uppercase tracking-widest mb-1">Reflection</p>
+                  <p className="font-body text-xs text-mint-deep dark:text-mint uppercase tracking-widest mb-1">Reflection</p>
                   <p className="font-body text-sm text-deep-navy/75 dark:text-soft-white/75 leading-relaxed">{c.lesson}</p>
                 </div>
               </div>

@@ -11,10 +11,10 @@ import ImageLightbox from "@/components/project-detail/ImageLightbox";
 import ProjectNav from "@/components/project-detail/ProjectNav";
 
 const categoryBg: Record<Project["category"], string> = {
-  uxui: "bg-sakura-pink/20 text-sakura-pink border-sakura-pink/30",
-  programming: "bg-sky-cyan/20 text-sky-cyan border-sky-cyan/30",
-  "ci-art": "bg-mint/20 text-mint border-mint/30",
-  game: "bg-retro-yellow/20 text-retro-yellow border-retro-yellow/30",
+  uxui: "bg-sakura-pink/20 text-magenta-deep dark:text-sakura-pink border-sakura-pink/30",
+  programming: "bg-sky-cyan/20 text-cyan-deep dark:text-sky-cyan border-sky-cyan/30",
+  "ci-art": "bg-mint/20 text-mint-deep dark:text-mint border-mint/30",
+  game: "bg-retro-yellow/20 text-yellow-deep dark:text-retro-yellow border-retro-yellow/30",
 };
 
 function FadeSection({
@@ -109,7 +109,7 @@ export default function SynchroDetailClient({ project }: { project: Project }) {
         </Link>
         <Link
           href="/#works"
-          className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-vinyl-dark/5 dark:bg-vinyl-dark/5 dark:bg-soft-white/5 border border-vinyl-dark/15 dark:border-vinyl-dark/15 dark:border-soft-white/10 font-body text-sm text-deep-navy/70 dark:text-deep-navy/70 dark:text-soft-white/70 hover:text-deep-navy dark:hover:text-soft-white hover:bg-vinyl-dark/10 dark:hover:bg-vinyl-dark/10 dark:hover:bg-soft-white/10 hover:border-vinyl-dark/25 dark:hover:border-soft-white/20 transition-all duration-300"
+          className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-vinyl-dark/5 dark:bg-vinyl-dark/5 dark:bg-soft-white/5 border border-vinyl-dark/15 dark:border-soft-white/10 font-body text-sm text-deep-navy/70 dark:text-deep-navy/70 dark:text-soft-white/70 hover:text-deep-navy dark:hover:text-soft-white hover:bg-vinyl-dark/10 dark:hover:bg-vinyl-dark/10 dark:hover:bg-soft-white/10 hover:border-vinyl-dark/25 dark:hover:border-soft-white/20 transition-all duration-300"
         >
           <span>Home</span>
         </Link>
@@ -162,7 +162,7 @@ export default function SynchroDetailClient({ project }: { project: Project }) {
       {/* ── Project Info Header ── */}
       <FadeSection delay={0.1} className="relative z-10 mx-auto max-w-5xl px-6 mt-10">
         <div className="flex flex-col md:flex-row md:items-center gap-4 md:gap-6 mb-4">
-          <span className="font-body text-sm text-sky-cyan font-bold">{project.date}</span>
+          <span className="font-body text-sm text-cyan-deep dark:text-sky-cyan font-bold">{project.date}</span>
           <span className={`inline-block w-fit px-4 py-1 rounded-full font-body text-xs font-bold uppercase tracking-widest border ${categoryBg[project.category]}`}>
             {categoryLabels[project.category]}
           </span>
@@ -273,14 +273,14 @@ export default function SynchroDetailClient({ project }: { project: Project }) {
             {/* Left Column: Hardware */}
             <div className="bg-vinyl-dark/5 dark:bg-soft-white/5 border border-retro-yellow/30 rounded-3xl p-6 hover:bg-vinyl-dark/10 dark:hover:bg-soft-white/10 transition-colors">
               <div className="flex items-center gap-3 mb-4">
-                <span className="font-display text-3xl text-retro-yellow">HW</span>
+                <span className="font-display text-3xl text-yellow-deep dark:text-retro-yellow">HW</span>
                 <h3 className="font-display text-2xl text-deep-navy dark:text-soft-white">Hardware</h3>
               </div>
               <ul className="space-y-3 font-body text-sm text-deep-navy/80 dark:text-soft-white/80 mb-6">
-                <li className="flex items-start gap-2"><span className="text-retro-yellow">✦</span> ESP32 Development Board</li>
-                <li className="flex items-start gap-2"><span className="text-retro-yellow">✦</span> TFT LCD Display</li>
-                <li className="flex items-start gap-2"><span className="text-retro-yellow">✦</span> Physical Buttons for tactile feedback</li>
-                <li className="flex items-start gap-2"><span className="text-retro-yellow">✦</span> SD Card Module for song storage</li>
+                <li className="flex items-start gap-2"><span className="text-yellow-deep dark:text-retro-yellow">✦</span> ESP32 Development Board</li>
+                <li className="flex items-start gap-2"><span className="text-yellow-deep dark:text-retro-yellow">✦</span> TFT LCD Display</li>
+                <li className="flex items-start gap-2"><span className="text-yellow-deep dark:text-retro-yellow">✦</span> Physical Buttons for tactile feedback</li>
+                <li className="flex items-start gap-2"><span className="text-yellow-deep dark:text-retro-yellow">✦</span> SD Card Module for song storage</li>
               </ul>
               <motion.button
                 className="w-full relative rounded-xl overflow-hidden cursor-pointer border border-vinyl-dark/15 dark:border-soft-white/10 hover:border-retro-yellow/30 transition-colors"
@@ -299,14 +299,14 @@ export default function SynchroDetailClient({ project }: { project: Project }) {
             {/* Right Column: Software */}
             <div className="bg-vinyl-dark/5 dark:bg-soft-white/5 border border-sky-cyan/30 rounded-3xl p-6 hover:bg-vinyl-dark/10 dark:hover:bg-soft-white/10 transition-colors">
               <div className="flex items-center gap-3 mb-4">
-                <span className="font-display text-3xl text-sky-cyan">SW</span>
+                <span className="font-display text-3xl text-cyan-deep dark:text-sky-cyan">SW</span>
                 <h3 className="font-display text-2xl text-deep-navy dark:text-soft-white">Software</h3>
               </div>
               <ul className="space-y-3 font-body text-sm text-deep-navy/80 dark:text-soft-white/80 mb-6">
-                <li className="flex items-start gap-2"><span className="text-sky-cyan">✦</span> Web app: Song selection & Score summary</li>
-                <li className="flex items-start gap-2"><span className="text-sky-cyan">✦</span> Song mapping tool (JSON generator)</li>
-                <li className="flex items-start gap-2"><span className="text-sky-cyan">✦</span> Upload flow ↔ Web Server</li>
-                <li className="flex items-start gap-2"><span className="text-sky-cyan">✦</span> Play history to track performance</li>
+                <li className="flex items-start gap-2"><span className="text-cyan-deep dark:text-sky-cyan">✦</span> Web app: Song selection & Score summary</li>
+                <li className="flex items-start gap-2"><span className="text-cyan-deep dark:text-sky-cyan">✦</span> Song mapping tool (JSON generator)</li>
+                <li className="flex items-start gap-2"><span className="text-cyan-deep dark:text-sky-cyan">✦</span> Upload flow ↔ Web Server</li>
+                <li className="flex items-start gap-2"><span className="text-cyan-deep dark:text-sky-cyan">✦</span> Play history to track performance</li>
               </ul>
               <div className="grid grid-cols-2 gap-2">
                 {[
@@ -361,7 +361,7 @@ export default function SynchroDetailClient({ project }: { project: Project }) {
                 <span className="absolute -left-[17px] top-1 flex h-8 w-8 items-center justify-center rounded-full bg-dark-navy border-2 border-sakura-pink text-sakura-pink font-display text-sm">
                   {i + 1}
                 </span>
-                <h3 className="font-display text-xl text-sakura-pink mb-2">{step.title}</h3>
+                <h3 className="font-display text-xl text-magenta-deep dark:text-sakura-pink mb-2">{step.title}</h3>
                 <p className="font-body text-sm text-deep-navy/70 dark:text-soft-white/70">{step.desc}</p>
               </div>
             ))}
@@ -432,7 +432,7 @@ export default function SynchroDetailClient({ project }: { project: Project }) {
                   <p className="font-display text-coral-red">{card.prob}</p>
                 </div>
                 <div className="pl-6 border-l border-vinyl-dark/15 dark:border-soft-white/10 ml-2">
-                  <p className="font-display text-mint text-xs mb-1 bg-mint/10 w-fit px-2 py-0.5 rounded-full mt-2">SOLUTION</p>
+                  <p className="font-display text-mint-deep dark:text-mint text-xs mb-1 bg-mint/10 w-fit px-2 py-0.5 rounded-full mt-2">SOLUTION</p>
                   <p className="font-body text-sm text-deep-navy/80 dark:text-soft-white/80 leading-relaxed italic">
                     {card.sol}
                   </p>
@@ -454,10 +454,10 @@ export default function SynchroDetailClient({ project }: { project: Project }) {
           </h2>
           <div className="bg-vinyl-dark/5 dark:bg-soft-white/5 border border-sky-cyan/20 rounded-3xl p-6 md:p-8 mb-8" style={{ boxShadow: "0 0 40px rgba(136,216,232,0.05)" }}>
             <p className="font-body text-base md:text-lg text-deep-navy/80 dark:text-soft-white/80 leading-relaxed mb-6">
-              <strong className="text-sky-cyan">The Solution:</strong> พัฒนาอุปกรณ์ฝึกสมาธิในรูปแบบเกมจังหวะที่ผู้ใช้สามารถอัปโหลดเพลงผ่านหน้าเว็บ สร้างแมปโน้ตได้เอง และดูประวัติการเล่น (History) เพื่อติดตามพัฒนาการการจดจ่อของตนเองได้แบบจับต้องได้
+              <strong className="text-cyan-deep dark:text-sky-cyan">The Solution:</strong> พัฒนาอุปกรณ์ฝึกสมาธิในรูปแบบเกมจังหวะที่ผู้ใช้สามารถอัปโหลดเพลงผ่านหน้าเว็บ สร้างแมปโน้ตได้เอง และดูประวัติการเล่น (History) เพื่อติดตามพัฒนาการการจดจ่อของตนเองได้แบบจับต้องได้
             </p>
             <p className="font-body text-base md:text-lg text-deep-navy/80 dark:text-soft-white/80 leading-relaxed">
-              <strong className="text-sakura-pink">Impact:</strong> ช่วยให้นักเรียนนักศึกษามีเครื่องมือในการฝึกฝนการจดจ่อที่สนุกสนาน และสามารถถ่ายทอดทักษะการโฟกัสไปใช้กับการเรียนหรือการทำงานจริงได้ดีขึ้น (Deep Work)
+              <strong className="text-magenta-deep dark:text-sakura-pink">Impact:</strong> ช่วยให้นักเรียนนักศึกษามีเครื่องมือในการฝึกฝนการจดจ่อที่สนุกสนาน และสามารถถ่ายทอดทักษะการโฟกัสไปใช้กับการเรียนหรือการทำงานจริงได้ดีขึ้น (Deep Work)
             </p>
           </div>
 
@@ -474,7 +474,7 @@ export default function SynchroDetailClient({ project }: { project: Project }) {
               href="https://www.youtube.com/watch?v=TF4fjew09xc"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full bg-transparent border border-sky-cyan font-body text-sky-cyan font-bold hover:bg-sky-cyan/10 hover:shadow-[0_0_20px_rgba(136,216,232,0.3)] hover:-translate-y-1 transition-all"
+              className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full bg-transparent border border-sky-cyan font-body text-cyan-deep dark:text-sky-cyan font-bold hover:bg-sky-cyan/10 hover:shadow-[0_0_20px_rgba(136,216,232,0.3)] hover:-translate-y-1 transition-all"
             >
               Watch Video ↗
             </a>

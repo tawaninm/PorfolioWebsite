@@ -13,9 +13,9 @@ import ProjectNav from "./ProjectNav";
 /* ---- Category tag color map ---- */
 const categoryBg: Record<Project["category"], string> = {
   uxui: "bg-sakura-pink/20 text-magenta-deep dark:text-sakura-pink border-sakura-pink/30",
-  programming: "bg-sky-cyan/20 text-sky-cyan border-sky-cyan/30",
-  "ci-art": "bg-mint/20 text-mint border-mint/30",
-  game: "bg-retro-yellow/20 text-retro-yellow border-retro-yellow/30",
+  programming: "bg-sky-cyan/20 text-cyan-deep dark:text-sky-cyan border-sky-cyan/30",
+  "ci-art": "bg-mint/20 text-mint-deep dark:text-mint border-mint/30",
+  game: "bg-retro-yellow/20 text-yellow-deep dark:text-retro-yellow border-retro-yellow/30",
 };
 
 /* ---- Fade-in wrapper ---- */
@@ -311,11 +311,11 @@ export default function ProjectDetailClient({ project }: { project: Project }) {
 
           {isVpsTycoon && (
             <div className="mt-8 relative bg-vinyl-dark/5 dark:bg-soft-white/5 border border-sky-cyan/30 rounded-2xl p-6 md:p-8 overflow-hidden">
-              <div className="absolute -top-4 -right-4 font-display text-9xl text-sky-cyan/5 pointer-events-none select-none">!?</div>
+              <div className="absolute -top-4 -right-4 font-display text-9xl text-cyan-deep dark:text-sky-cyan/5 pointer-events-none select-none">!?</div>
               <div className="flex items-start gap-4">
                 <ImpactBubble />
                 <div>
-                  <p className="font-display text-lg text-sky-cyan mb-2">Technical Depth vs. Playability</p>
+                  <p className="font-display text-lg text-cyan-deep dark:text-sky-cyan mb-2">Technical Depth vs. Playability</p>
                   <p className="font-body text-sm text-deep-navy/75 dark:text-soft-white/75 leading-relaxed">
                     VPS hosting, rack management, และ VM allocation เป็นแนวคิดที่ technical มาก — ความท้าทายคือออกแบบให้ผู้เล่นทั่วไปเข้าใจ mechanic เหล่านี้ได้ทันที โดยยังคงความลึกของระบบที่ทำให้เกมน่าสนใจในระยะยาว
                   </p>
@@ -409,7 +409,7 @@ export default function ProjectDetailClient({ project }: { project: Project }) {
                     </div>
                     {i < arr.length - 1 && (
                       <span
-                        className="font-display text-sky-cyan/40 text-2xl mx-2 rotate-90 md:rotate-0 my-1 md:my-0"
+                        className="font-display text-cyan-deep dark:text-sky-cyan/40 text-2xl mx-2 rotate-90 md:rotate-0 my-1 md:my-0"
                         aria-hidden="true"
                       >→</span>
                     )}
@@ -418,9 +418,9 @@ export default function ProjectDetailClient({ project }: { project: Project }) {
               </div>
               {/* Time system callout */}
               <div className="flex items-start gap-4 bg-vinyl-dark/5 dark:bg-soft-white/5 border border-retro-yellow/30 rounded-2xl p-5 mb-8">
-                <span className="font-display text-3xl text-retro-yellow/70 shrink-0">⏱</span>
+                <span className="font-display text-3xl text-yellow-deep dark:text-retro-yellow/70 shrink-0">⏱</span>
                 <div>
-                  <p className="font-display text-sm text-retro-yellow font-bold mb-1">Time System</p>
+                  <p className="font-display text-sm text-yellow-deep dark:text-retro-yellow font-bold mb-1">Time System</p>
                   <p className="font-body text-sm text-deep-navy/70 dark:text-soft-white/70 leading-relaxed">
                     30 วินาทีจริง = 1 วันในเกม — สร้างแรงกดดันให้ผู้เล่นตัดสินใจเร็ว จัดลำดับ request และบริหาร resource ก่อนสัญญาเช่าหมดอายุ
                   </p>
@@ -501,7 +501,7 @@ export default function ProjectDetailClient({ project }: { project: Project }) {
               {/* Phase 1 */}
               {project.phases[0] && (
                 <FadeSection delay={0.1} className="bg-vinyl-dark/5 dark:bg-soft-white/5 border border-vinyl-dark/15 dark:border-soft-white/10 rounded-3xl p-6 md:p-8 relative overflow-hidden group hover:border-sakura-pink/30 hover:bg-vinyl-dark/10 dark:hover:bg-vinyl-dark/10 dark:hover:bg-soft-white/10 transition-all duration-300">
-                  <div className="absolute top-0 right-0 p-6 opacity-5 font-display text-8xl pointer-events-none group-hover:opacity-10 transition-all text-sakura-pink">1</div>
+                  <div className="absolute top-0 right-0 p-6 opacity-5 font-display text-8xl pointer-events-none group-hover:opacity-10 transition-all text-magenta-deep dark:text-sakura-pink">1</div>
                   <div className="relative z-10">
                     <h3 className="font-display text-2xl md:text-3xl text-magenta-deep dark:text-sakura-pink mb-3 group-hover:text-neon-magenta transition-colors duration-300">{project.phases[0].title}</h3>
                     <p className="font-body text-base md:text-lg text-deep-navy/80 dark:text-soft-white/80 leading-relaxed">{project.phases[0].description}</p>
@@ -513,7 +513,7 @@ export default function ProjectDetailClient({ project }: { project: Project }) {
               {/* Phase 2 */}
               {project.phases[1] && (
                 <FadeSection delay={0.15} className="bg-vinyl-dark/5 dark:bg-soft-white/5 border border-vinyl-dark/15 dark:border-soft-white/10 rounded-3xl p-6 md:p-8 relative overflow-hidden group hover:border-sakura-pink/30 hover:bg-vinyl-dark/10 dark:hover:bg-vinyl-dark/10 dark:hover:bg-soft-white/10 transition-all duration-300">
-                  <div className="absolute top-0 right-0 p-6 opacity-5 font-display text-8xl pointer-events-none group-hover:opacity-10 transition-all text-sakura-pink">2</div>
+                  <div className="absolute top-0 right-0 p-6 opacity-5 font-display text-8xl pointer-events-none group-hover:opacity-10 transition-all text-magenta-deep dark:text-sakura-pink">2</div>
                   <div className="relative z-10">
                     <h3 className="font-display text-2xl md:text-3xl text-magenta-deep dark:text-sakura-pink mb-3 group-hover:text-neon-magenta transition-colors duration-300">{project.phases[1].title}</h3>
                     <p className="font-body text-base md:text-lg text-deep-navy/80 dark:text-soft-white/80 leading-relaxed">{project.phases[1].description}</p>
@@ -542,7 +542,7 @@ export default function ProjectDetailClient({ project }: { project: Project }) {
               {/* Phase 3 */}
               {project.phases[2] && (
                 <FadeSection delay={0.2} className="bg-vinyl-dark/5 dark:bg-soft-white/5 border border-vinyl-dark/15 dark:border-soft-white/10 rounded-3xl p-6 md:p-8 relative overflow-hidden group hover:border-sakura-pink/30 hover:bg-vinyl-dark/10 dark:hover:bg-vinyl-dark/10 dark:hover:bg-soft-white/10 transition-all duration-300">
-                  <div className="absolute top-0 right-0 p-6 opacity-5 font-display text-8xl pointer-events-none group-hover:opacity-10 transition-all text-sakura-pink">3</div>
+                  <div className="absolute top-0 right-0 p-6 opacity-5 font-display text-8xl pointer-events-none group-hover:opacity-10 transition-all text-magenta-deep dark:text-sakura-pink">3</div>
                   <div className="relative z-10">
                     <h3 className="font-display text-2xl md:text-3xl text-magenta-deep dark:text-sakura-pink mb-3 group-hover:text-neon-magenta transition-colors duration-300">Phase 3: Analysis &amp; Conceptual Design</h3>
                     <p className="font-body text-base md:text-lg text-deep-navy/80 dark:text-soft-white/80 leading-relaxed">{project.phases[2].description}</p>
@@ -614,7 +614,7 @@ export default function ProjectDetailClient({ project }: { project: Project }) {
               {/* Phase 4 */}
               {project.phases[3] && (
                 <FadeSection delay={0.25} className="bg-vinyl-dark/5 dark:bg-soft-white/5 border border-vinyl-dark/15 dark:border-soft-white/10 rounded-3xl p-6 md:p-8 relative overflow-hidden group hover:border-sakura-pink/30 hover:bg-vinyl-dark/10 dark:hover:bg-vinyl-dark/10 dark:hover:bg-soft-white/10 transition-all duration-300">
-                  <div className="absolute top-0 right-0 p-6 opacity-5 font-display text-8xl pointer-events-none group-hover:opacity-10 transition-all text-sakura-pink">4</div>
+                  <div className="absolute top-0 right-0 p-6 opacity-5 font-display text-8xl pointer-events-none group-hover:opacity-10 transition-all text-magenta-deep dark:text-sakura-pink">4</div>
                   <div className="relative z-10">
                     <h3 className="font-display text-2xl md:text-3xl text-magenta-deep dark:text-sakura-pink mb-3 group-hover:text-neon-magenta transition-colors duration-300">Phase 4: Detailed Design &amp; Prototype</h3>
                     <p className="font-body text-base md:text-lg text-deep-navy/80 dark:text-soft-white/80 leading-relaxed">{project.phases[3].description}</p>
@@ -654,7 +654,7 @@ export default function ProjectDetailClient({ project }: { project: Project }) {
               {/* Phase 5 */}
               {project.phases[4] && (
                 <FadeSection delay={0.3} className="bg-vinyl-dark/5 dark:bg-soft-white/5 border border-vinyl-dark/15 dark:border-soft-white/10 rounded-3xl p-6 md:p-8 relative overflow-hidden group hover:border-sakura-pink/30 hover:bg-vinyl-dark/10 dark:hover:bg-vinyl-dark/10 dark:hover:bg-soft-white/10 transition-all duration-300">
-                  <div className="absolute top-0 right-0 p-6 opacity-5 font-display text-8xl pointer-events-none group-hover:opacity-10 transition-all text-sakura-pink">5</div>
+                  <div className="absolute top-0 right-0 p-6 opacity-5 font-display text-8xl pointer-events-none group-hover:opacity-10 transition-all text-magenta-deep dark:text-sakura-pink">5</div>
                   <div className="relative z-10">
                     <h3 className="font-display text-2xl md:text-3xl text-magenta-deep dark:text-sakura-pink mb-3 group-hover:text-neon-magenta transition-colors duration-300">{project.phases[4].title}</h3>
                     <p className="font-body text-base md:text-lg text-deep-navy/80 dark:text-soft-white/80 leading-relaxed">{project.phases[4].description}</p>
@@ -689,7 +689,7 @@ export default function ProjectDetailClient({ project }: { project: Project }) {
                             "ข้อมูลขนส่งสาธารณะไม่ชัดในแผนที่",
                           ].map((finding, i) => (
                             <div key={i} className="flex items-start gap-2 bg-retro-yellow/5 border border-retro-yellow/20 rounded-lg p-3">
-                              <span className="text-retro-yellow text-sm shrink-0">⚠</span>
+                              <span className="text-yellow-deep dark:text-retro-yellow text-sm shrink-0">⚠</span>
                               <p className="font-body text-sm text-deep-navy/80 dark:text-soft-white/80">{finding}</p>
                             </div>
                           ))}
@@ -1190,8 +1190,8 @@ export default function ProjectDetailClient({ project }: { project: Project }) {
               <div className="mb-8 flex items-center justify-center gap-3 bg-sky-cyan/5 border border-sky-cyan/20 rounded-2xl px-6 py-5">
                 {["Next.js", "↔", "WebSocket", "↔", "FastAPI"].map((item, i) => (
                   <span key={i} className={item === "↔"
-                    ? "font-body text-sky-cyan/50 text-lg"
-                    : "font-display text-sm md:text-base text-sky-cyan px-3 py-1.5 rounded-lg bg-sky-cyan/10 border border-sky-cyan/20"
+                    ? "font-body text-cyan-deep dark:text-sky-cyan/50 text-lg"
+                    : "font-display text-sm md:text-base text-cyan-deep dark:text-sky-cyan px-3 py-1.5 rounded-lg bg-sky-cyan/10 border border-sky-cyan/20"
                   }>{item}</span>
                 ))}
               </div>
@@ -1241,7 +1241,7 @@ export default function ProjectDetailClient({ project }: { project: Project }) {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {/* What Worked */}
                 <div className="bg-mint/5 border border-mint/25 rounded-2xl p-6">
-                  <p className="font-display text-base text-mint mb-4">✓ What Worked</p>
+                  <p className="font-display text-base text-mint-deep dark:text-mint mb-4">✓ What Worked</p>
                   <ul className="space-y-3">
                     {[
                       "Real-time WebSocket room join/leave ทำงานได้เสถียร",
@@ -1251,7 +1251,7 @@ export default function ProjectDetailClient({ project }: { project: Project }) {
                       "Room type capacity control ทำงานได้จริง",
                     ].map((item, i) => (
                       <li key={i} className="flex items-start gap-2 font-body text-sm text-deep-navy/70 dark:text-soft-white/70 leading-relaxed">
-                        <span className="text-mint shrink-0 mt-0.5">→</span>{item}
+                        <span className="text-mint-deep dark:text-mint shrink-0 mt-0.5">→</span>{item}
                       </li>
                     ))}
                   </ul>
@@ -1311,7 +1311,7 @@ export default function ProjectDetailClient({ project }: { project: Project }) {
               {/* Link buttons */}
               <div className="flex flex-wrap gap-3">
                 <a href="https://drivechat.it22.dev/" target="_blank" rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-sky-cyan/10 border border-sky-cyan/30 font-body text-sm text-sky-cyan hover:bg-sky-cyan/20 transition-colors duration-200">
+                  className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-sky-cyan/10 border border-sky-cyan/30 font-body text-sm text-cyan-deep dark:text-sky-cyan hover:bg-sky-cyan/20 transition-colors duration-200">
                   🌐 Website →
                 </a>
                 <a href="https://github.com/ProJect3K/DriveChat-kmitl" target="_blank" rel="noopener noreferrer"
@@ -1376,7 +1376,7 @@ export default function ProjectDetailClient({ project }: { project: Project }) {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {/* Hardware */}
                 <div className="bg-retro-yellow/5 border border-retro-yellow/25 rounded-2xl p-6">
-                  <p className="font-display text-base text-retro-yellow mb-5">⚙ Hardware</p>
+                  <p className="font-display text-base text-yellow-deep dark:text-retro-yellow mb-5">⚙ Hardware</p>
                   <ul className="space-y-3 mb-6">
                     {[
                       { icon: "🔲", item: "ESP32 microcontroller board" },
@@ -1404,7 +1404,7 @@ export default function ProjectDetailClient({ project }: { project: Project }) {
                 </div>
                 {/* Software */}
                 <div className="bg-sky-cyan/5 border border-sky-cyan/25 rounded-2xl p-6">
-                  <p className="font-display text-base text-sky-cyan mb-5">💻 Software</p>
+                  <p className="font-display text-base text-cyan-deep dark:text-sky-cyan mb-5">💻 Software</p>
                   <ul className="space-y-3 mb-6">
                     {[
                       { icon: "🎵", item: "Web app — เลือกเพลงและดู history" },
@@ -1496,7 +1496,7 @@ export default function ProjectDetailClient({ project }: { project: Project }) {
                     </div>
                     <p className="font-body text-sm text-deep-navy/80 dark:text-soft-white/80 leading-relaxed mb-3">{problem}</p>
                     <div className="flex items-start gap-2 mb-2">
-                      <span className="text-mint font-display text-sm shrink-0">Solution</span>
+                      <span className="text-mint-deep dark:text-mint font-display text-sm shrink-0">Solution</span>
                     </div>
                     <p className="font-body text-sm text-deep-navy/60 dark:text-soft-white/60 leading-relaxed">{solution}</p>
                   </div>
@@ -1539,7 +1539,7 @@ export default function ProjectDetailClient({ project }: { project: Project }) {
               {/* Link buttons */}
               <div className="flex flex-wrap gap-3">
                 <a href="https://ganksterphy.github.io/Synchro/" target="_blank" rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-retro-yellow/10 border border-retro-yellow/30 font-body text-sm text-retro-yellow hover:bg-retro-yellow/20 transition-colors duration-200">
+                  className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-retro-yellow/10 border border-retro-yellow/30 font-body text-sm text-yellow-deep dark:text-retro-yellow hover:bg-retro-yellow/20 transition-colors duration-200">
                   🌐 Website →
                 </a>
                 <a href="https://youtu.be/TF4fjew09xc" target="_blank" rel="noopener noreferrer"

@@ -11,10 +11,10 @@ import ImageLightbox from "@/components/project-detail/ImageLightbox";
 import ProjectNav from "@/components/project-detail/ProjectNav";
 
 const categoryBg: Record<Project["category"], string> = {
-  uxui: "bg-sakura-pink/20 text-sakura-pink border-sakura-pink/30",
-  programming: "bg-sky-cyan/20 text-sky-cyan border-sky-cyan/30",
-  "ci-art": "bg-mint/20 text-mint border-mint/30",
-  game: "bg-retro-yellow/20 text-retro-yellow border-retro-yellow/30",
+  uxui: "bg-sakura-pink/20 text-magenta-deep dark:text-sakura-pink border-sakura-pink/30",
+  programming: "bg-sky-cyan/20 text-cyan-deep dark:text-sky-cyan border-sky-cyan/30",
+  "ci-art": "bg-mint/20 text-mint-deep dark:text-mint border-mint/30",
+  game: "bg-retro-yellow/20 text-yellow-deep dark:text-retro-yellow border-retro-yellow/30",
 };
 
 function FadeSection({
@@ -82,7 +82,7 @@ const investigationStages = [
     desc: "ตรวจสอบและเก็บหลักฐานจากสถานที่เกิดเหตุอย่างละเอียด ก่อนจะถูกปนเปื้อนหรือสูญหาย",
     img: `${CM_DIR}/32.png`,
     color: "border-sky-cyan/40 hover:border-sky-cyan/70",
-    accent: "text-sky-cyan",
+    accent: "text-cyan-deep dark:text-sky-cyan",
     bg: "bg-sky-cyan/5",
     icon: "🔦",
   },
@@ -93,7 +93,7 @@ const investigationStages = [
     desc: "นำหลักฐานเข้าห้องแล็บ ทำ mini-game ตรวจรอยนิ้วมือ ตรวจเลือด และวิเคราะห์ผล",
     img: `${CM_DIR}/33.png`,
     color: "border-mint/40 hover:border-mint/70",
-    accent: "text-mint",
+    accent: "text-mint-deep dark:text-mint",
     bg: "bg-mint/5",
     icon: "🧪",
   },
@@ -104,7 +104,7 @@ const investigationStages = [
     desc: "ใช้หลักฐานที่รวบรวมมาสอบสวน โดยยึดหลัก empathy และความเป็นธรรม ไม่ใช่การข่มขู่",
     img: `${CM_DIR}/35.png`,
     color: "border-sakura-pink/40 hover:border-sakura-pink/70",
-    accent: "text-sakura-pink",
+    accent: "text-magenta-deep dark:text-sakura-pink",
     bg: "bg-sakura-pink/5",
     icon: "🗣️",
   },
@@ -122,25 +122,25 @@ const processSteps = [
     num: 1,
     title: "Script",
     desc: "ศึกษาแนวคิด investigative interview และบทบาทงานตำรวจ เขียนบทคดีธุรกิจที่มีความซับซ้อนและเชื่อมโยงกับชีวิตจริง",
-    color: "border-sky-cyan text-sky-cyan",
+    color: "border-sky-cyan text-cyan-deep dark:text-sky-cyan",
   },
   {
     num: 2,
     title: "Art",
     desc: "ออกแบบตัวละครและงานภาพ 2D สไตล์การ์ตูนทั้งหมดใน Procreate — ปริมาณงานศิลป์จำนวนมากเพื่อให้ครอบคลุมทุกฉากและอารมณ์ของตัวละคร",
-    color: "border-sakura-pink text-sakura-pink",
+    color: "border-sakura-pink text-magenta-deep dark:text-sakura-pink",
   },
   {
     num: 3,
     title: "Development",
     desc: "พัฒนา interactive visual novel ใน Unity พร้อม mini-games: ตรวจรอยนิ้วมือ, ตรวจเลือด, และระบบตรวจจับการโกหก",
-    color: "border-mint text-mint",
+    color: "border-mint text-mint-deep dark:text-mint",
   },
   {
     num: 4,
     title: "Conclusion",
     desc: "ระบบสรุปผลคดีที่คำนวณจากการตัดสินใจของผู้เล่นตลอดเกม — สะท้อนว่าการสืบสวนที่เป็นธรรมส่งผลอย่างไร",
-    color: "border-retro-yellow text-retro-yellow",
+    color: "border-retro-yellow text-yellow-deep dark:text-retro-yellow",
   },
 ];
 
@@ -232,7 +232,7 @@ export default function CriminalMindClient({ project }: { project: Project }) {
             >
               ห้วงลึกภายในจิตใจ
             </h1>
-            <p className="font-display text-xl md:text-2xl text-sky-cyan/80 mt-1">Criminal Minds</p>
+            <p className="font-display text-xl md:text-2xl text-cyan-deep dark:text-sky-cyan/80 mt-1">Criminal Minds</p>
           </motion.div>
         </div>
         <div className="absolute bottom-0 left-0 right-0 pointer-events-none">
@@ -246,11 +246,11 @@ export default function CriminalMindClient({ project }: { project: Project }) {
       {/* ── Project Info Header ── */}
       <FadeSection delay={0.1} className="relative z-10 mx-auto max-w-5xl px-6 mt-10">
         <div className="flex flex-col md:flex-row md:items-center gap-4 md:gap-6 mb-4">
-          <span className="font-body text-sm text-sky-cyan font-bold">{project.date}</span>
+          <span className="font-body text-sm text-cyan-deep dark:text-sky-cyan font-bold">{project.date}</span>
           <span className={`inline-block w-fit px-4 py-1 rounded-full font-body text-xs font-bold uppercase tracking-widest border ${categoryBg[project.category]}`}>
             {categoryLabels[project.category]}
           </span>
-          <span className="inline-block w-fit px-4 py-1 rounded-full font-body text-xs font-bold uppercase tracking-widest border border-sky-cyan/40 bg-sky-cyan/10 text-sky-cyan">
+          <span className="inline-block w-fit px-4 py-1 rounded-full font-body text-xs font-bold uppercase tracking-widest border border-sky-cyan/40 bg-sky-cyan/10 text-cyan-deep dark:text-sky-cyan">
             Narrative Investigation
           </span>
         </div>
@@ -344,14 +344,14 @@ export default function CriminalMindClient({ project }: { project: Project }) {
               {/* Ethical principle card */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="bg-sky-cyan/5 border border-sky-cyan/25 rounded-2xl p-5">
-                  <p className="font-mono text-xs text-sky-cyan uppercase tracking-widest mb-2">Core Principle</p>
+                  <p className="font-mono text-xs text-cyan-deep dark:text-sky-cyan uppercase tracking-widest mb-2">Core Principle</p>
                   <p className="font-display text-lg text-soft-white mb-1">Presumed Innocent</p>
                   <p className="font-body text-sm text-soft-white/65">
                     "สันนิษฐานไว้ก่อนว่าผู้ถูกกล่าวหาเป็นผู้บริสุทธิ์" — หลักการที่ขับเคลื่อนการออกแบบทุกฉากในเกม
                   </p>
                 </div>
                 <div className="bg-sakura-pink/5 border border-sakura-pink/25 rounded-2xl p-5">
-                  <p className="font-mono text-xs text-sakura-pink uppercase tracking-widest mb-2">Design Goal</p>
+                  <p className="font-mono text-xs text-magenta-deep dark:text-sakura-pink uppercase tracking-widest mb-2">Design Goal</p>
                   <p className="font-display text-lg text-soft-white mb-1">Empathy-driven Investigation</p>
                   <p className="font-body text-sm text-soft-white/65">
                     ผู้เล่นต้องเข้าใจมุมมองของทุกฝ่าย ก่อนจะตัดสินใจว่าใครคือผู้กระทำผิดจริง
@@ -422,7 +422,7 @@ export default function CriminalMindClient({ project }: { project: Project }) {
               <div key={i} className="flex items-start gap-3 bg-soft-white/5 border border-soft-white/10 rounded-xl p-4 hover:border-sky-cyan/30 transition-colors">
                 <span className="text-xl">{f.icon}</span>
                 <div>
-                  <p className="font-display text-sm text-sky-cyan mb-0.5">{f.label}</p>
+                  <p className="font-display text-sm text-cyan-deep dark:text-sky-cyan mb-0.5">{f.label}</p>
                   <p className="font-body text-xs text-soft-white/65">{f.desc}</p>
                 </div>
               </div>
@@ -487,24 +487,24 @@ export default function CriminalMindClient({ project }: { project: Project }) {
 
           <div className="bg-soft-white/5 border border-sky-cyan/20 rounded-3xl p-6 md:p-8 mb-8" style={{ boxShadow: "0 0 40px rgba(136,216,232,0.05)" }}>
             <p className="font-body text-base md:text-lg text-soft-white/80 leading-relaxed mb-6">
-              <strong className="text-sky-cyan">The Solution:</strong> เกมเล่าเรื่องที่ทำให้ผู้เล่นได้ฝึกคิดแบบนักสืบ ฝึกจัดการหลักฐาน และเข้าใจความสำคัญของจริยธรรมในการสอบสวนมากขึ้น ผ่านสถานการณ์จำลองที่มีแรงกดดันจริง
+              <strong className="text-cyan-deep dark:text-sky-cyan">The Solution:</strong> เกมเล่าเรื่องที่ทำให้ผู้เล่นได้ฝึกคิดแบบนักสืบ ฝึกจัดการหลักฐาน และเข้าใจความสำคัญของจริยธรรมในการสอบสวนมากขึ้น ผ่านสถานการณ์จำลองที่มีแรงกดดันจริง
             </p>
             <p className="font-body text-base md:text-lg text-soft-white/80 leading-relaxed">
-              <strong className="text-sakura-pink">Impact:</strong> ผู้ใช้งานเพลิดเพลินกับเรื่องราว เข้าใจบทบาทงานสายตำรวจและแนวคิดการสอบสวนที่เป็นธรรมมากขึ้น โดยผลทดสอบสะท้อนความพึงพอใจในระดับมาก
+              <strong className="text-magenta-deep dark:text-sakura-pink">Impact:</strong> ผู้ใช้งานเพลิดเพลินกับเรื่องราว เข้าใจบทบาทงานสายตำรวจและแนวคิดการสอบสวนที่เป็นธรรมมากขึ้น โดยผลทดสอบสะท้อนความพึงพอใจในระดับมาก
             </p>
           </div>
 
           {/* Target Users + Competition */}
           <div className="flex flex-col sm:flex-row gap-4 mb-6">
             <div className="flex-1 bg-soft-white/5 border border-sakura-pink/30 rounded-2xl p-5">
-              <p className="font-body text-xs text-sakura-pink uppercase tracking-widest mb-2">Target Users</p>
+              <p className="font-body text-xs text-magenta-deep dark:text-sakura-pink uppercase tracking-widest mb-2">Target Users</p>
               <p className="font-display text-lg text-soft-white">มัธยมปลาย · 15+</p>
               <p className="font-body text-xs text-soft-white/60 mt-1">
                 เนื้อหาเชิงจิตวิทยาและคดีอาจมีความรุนแรง — เหมาะสำหรับผู้สนใจอายุ 15 ปีขึ้นไป
               </p>
             </div>
             <div className="flex-1 bg-soft-white/5 border border-sky-cyan/30 rounded-2xl p-5">
-              <p className="font-body text-xs text-sky-cyan uppercase tracking-widest mb-2">Competition</p>
+              <p className="font-body text-xs text-cyan-deep dark:text-sky-cyan uppercase tracking-widest mb-2">Competition</p>
               <p className="font-display text-lg text-deep-navy dark:text-soft-white">NSC ครั้งที่ 25</p>
               <p className="font-body text-xs text-soft-white/60 mt-1 font-mono">25p21e0082</p>
             </div>
@@ -526,9 +526,9 @@ export default function CriminalMindClient({ project }: { project: Project }) {
             {challenges.map((c, i) => (
               <div key={i} className="bg-soft-white/5 border border-soft-white/10 hover:border-sky-cyan/30 rounded-2xl p-5 transition-colors">
                 <span className="text-3xl block mb-4">{c.icon}</span>
-                <p className="font-display text-base text-sky-cyan mb-3">{c.title}</p>
+                <p className="font-display text-base text-cyan-deep dark:text-sky-cyan mb-3">{c.title}</p>
                 <div className="border-t border-soft-white/10 pt-3 mt-2">
-                  <p className="font-body text-xs text-mint uppercase tracking-widest mb-1">Reflection</p>
+                  <p className="font-body text-xs text-mint-deep dark:text-mint uppercase tracking-widest mb-1">Reflection</p>
                   <p className="font-body text-sm text-soft-white/75 leading-relaxed">{c.lesson}</p>
                 </div>
               </div>

@@ -37,7 +37,10 @@
   --color-soft-white: #F4ECE4;
   --color-muted-lilac: var(--cl-muted-lilac);
   --color-lilac-bright: #B0A0C8;
-  --color-magenta-deep: #C2185B; /* neon-magenta darkened for light backgrounds (4.9:1) */
+  --color-magenta-deep: #C2185B;
+  --color-mint-deep: #0D8A5F;
+  --color-yellow-deep: #8A6D00;
+  --color-cyan-deep: #0E7FA8; /* accent colors darkened for light backgrounds (≈4.6-4.9:1 on white) */
 
   /* ---- Anime City Pop ---- */
   --color-neon-magenta: #FF2D78;
@@ -47,8 +50,8 @@
   --color-deep-black: #0A0A0A;
 
   /* ---- Font families ---- */
-  --font-display: var(--font-righteous), cursive;
-  --font-body: var(--font-dm-sans), sans-serif;
+  --font-display: var(--font-mitr), cursive;
+  --font-body: var(--font-prompt), sans-serif;
   --font-mono: var(--font-jetbrains-mono), monospace;
   --font-zen: var(--font-zen), sans-serif;
 

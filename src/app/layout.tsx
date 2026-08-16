@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Righteous, DM_Sans, JetBrains_Mono, Zen_Maru_Gothic } from "next/font/google";
+import { Mitr, Prompt, JetBrains_Mono, Zen_Maru_Gothic } from "next/font/google";
 import { ViewTransitions } from "next-view-transitions";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
@@ -13,18 +13,20 @@ import KonamiEasterEgg from "@/components/KonamiEasterEgg";
 import CustomCursor from "@/components/CustomCursor";
 import ChibiMascot from "@/components/ChibiMascot";
 
-/* ---- Google Fonts via next/font ---- */
-const righteous = Righteous({
-  weight: "400",
-  subsets: ["latin"],
-  variable: "--font-righteous",
+/* ---- Google Fonts via next/font ----
+   Thai + Latin support: Mitr (display, rounded retro) + Prompt (body).
+   Zen Maru Gothic stays for Japanese labels; JetBrains Mono for code. */
+const mitr = Mitr({
+  subsets: ["thai", "latin"],
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-mitr",
   display: "swap",
 });
 
-const dmSans = DM_Sans({
-  subsets: ["latin"],
-  weight: ["400", "500", "700"],
-  variable: "--font-dm-sans",
+const prompt = Prompt({
+  subsets: ["thai", "latin"],
+  weight: ["300", "400", "500"],
+  variable: "--font-prompt",
   display: "swap",
 });
 
@@ -67,7 +69,7 @@ export default function RootLayout({
       <html
         lang="en"
         suppressHydrationWarning
-        className={`${righteous.variable} ${dmSans.variable} ${jetbrainsMono.variable} ${zenMaruGothic.variable}`}
+        className={`${mitr.variable} ${prompt.variable} ${jetbrainsMono.variable} ${zenMaruGothic.variable}`}
       >
         {/* Inline theme bootstrap — prevents light-mode flash (FOUC) for dark users.
             Mirrors next-themes resolution: stored theme, else system preference. */}
