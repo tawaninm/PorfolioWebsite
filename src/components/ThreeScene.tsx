@@ -2,6 +2,7 @@
 
 import React, { useMemo, useRef, useState, useEffect, useCallback } from "react";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
+import { EffectComposer, Bloom } from "@react-three/postprocessing";
 import * as THREE from "three";
 
 /* ------------------------------------------------------------------ */
@@ -215,6 +216,10 @@ const ThreeScene = () => {
       >
         <SakuraPetals />
         <MouseParallax />
+        {/* Bloom — petals glow like neon sakura, subtle in light / pops in dark */}
+        <EffectComposer>
+          <Bloom intensity={0.7} luminanceThreshold={0.15} luminanceSmoothing={0.9} mipmapBlur radius={0.7} />
+        </EffectComposer>
       </Canvas>
     </div>
   );

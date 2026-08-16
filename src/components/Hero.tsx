@@ -2,9 +2,10 @@
 
 import dynamic from "next/dynamic";
 import { motion } from "framer-motion";
+import MagneticButton from "./MagneticButton";
 
 const Sparkles = dynamic(() => import("./Sparkles"), { ssr: false });
-const CardFlipGallery = dynamic(() => import("./CardFlipGallery"), { ssr: false });
+const HeroDiorama = dynamic(() => import("./HeroDiorama"), { ssr: false });
 
 /* ---- Comic decorative components ---- */
 
@@ -89,8 +90,8 @@ export default function Hero() {
       id="home"
       className="relative min-h-screen flex items-center justify-center overflow-hidden gradient-hero"
     >
-      {/* Halftone dot overlay */}
-      <div className="absolute inset-0 halftone-bg opacity-[0.05] pointer-events-none z-0" />
+      {/* Halftone dot overlay — CSS scroll-driven parallax */}
+      <div className="parallax-halftone absolute -inset-y-[6%] inset-x-0 halftone-bg opacity-[0.05] pointer-events-none z-0" />
 
       {/* Background Particles */}
       <Sparkles />
@@ -177,24 +178,30 @@ export default function Hero() {
             variants={wordVariants}
             className="flex flex-wrap gap-4 justify-center lg:justify-start"
           >
+            <MagneticButton>
             <a
               href="#works"
               className="inline-block px-8 py-3.5 bg-hot-pink text-soft-white font-body font-bold rounded-full text-base transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_0_30px_rgba(255,96,144,0.5)] hover:[animation:comic-shake_0.3s_ease_3]"
             >
               View My Work
             </a>
+            </MagneticButton>
+            <MagneticButton>
             <a
               href="/resume"
               className="inline-block px-8 py-3.5 bg-transparent text-electric-blue font-body font-bold rounded-full text-base transition-all duration-300 border-2 border-electric-blue hover:bg-electric-blue/10 hover:shadow-[0_0_20px_rgba(80,128,240,0.3)]"
             >
               Download Resume
             </a>
+            </MagneticButton>
+            <MagneticButton>
             <a
               href="#contact"
               className="inline-block px-8 py-3.5 bg-soft-white/40 text-deep-purple font-body font-bold rounded-full text-base transition-all duration-300 border border-soft-white/60 hover:bg-soft-white/60 shadow-sm dark:bg-white/10 dark:text-sakura-white dark:border-white/20 dark:hover:bg-white/20"
             >
               Let's Talk
             </a>
+            </MagneticButton>
           </motion.div>
         </motion.div>
 
@@ -205,7 +212,7 @@ export default function Hero() {
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.7, delay: 0.8, ease: [0.16, 1, 0.3, 1] }}
         >
-          <CardFlipGallery />
+          <HeroDiorama />
         </motion.div>
 
       </div>

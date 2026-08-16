@@ -1,7 +1,8 @@
 "use client";
 
 import { motion } from "framer-motion";
-import Link from "next/link";
+import SplitText from "./SplitText";
+import { Link } from "next-view-transitions";
 
 const cardBase =
   "bg-soft-white/70 dark:bg-dark-navy/70 backdrop-blur-md rounded-2xl border-2 border-vinyl-dark/30 dark:border-soft-white/10 p-6 transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_8px_30px_rgba(240,176,208,0.35)] relative overflow-hidden";
@@ -89,7 +90,7 @@ export default function About() {
           transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
         >
           <h2 className="font-display text-4xl md:text-5xl text-dark-navy dark:text-soft-white transition-colors duration-300">
-            About Me ✦
+            <SplitText text="About Me ✦" />
           </h2>
           <p className="font-zen text-base text-muted-lilac mt-1 tracking-widest">
             私について

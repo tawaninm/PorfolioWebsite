@@ -237,10 +237,75 @@ span[class~="bg-coral-red"] {
   background: #FF2D78;
 }
 
+/* ── Page transitions (View Transitions API, wired via next-view-transitions) ──
+   Old page slides up + fades like a vinyl sleeve closing; new page rises in.
+   NOTE: !important required — Chrome's UA view-transition rules are important. */
+::view-transition-old(root) {
+  animation: vt-sleeve-out 0.45s cubic-bezier(0.22, 1, 0.36, 1) both !important;
+}
+::view-transition-new(root) {
+  animation: vt-sleeve-in 0.5s cubic-bezier(0.22, 1, 0.36, 1) both !important;
+}
+@keyframes vt-sleeve-out {
+  to {
+    opacity: 0;
+    transform: translateY(-16px) scale(0.97);
+  }
+}
+@keyframes vt-sleeve-in {
+  from {
+    opacity: 0;
+    transform: translateY(28px) scale(0.985);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation: none !important;
+  }
+}
+
+/* ── Scroll progress bar (neon magenta, CSS scroll-driven) ── */
+@keyframes scroll-progress {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
+}
+.scroll-progress-bar {
+  transform-origin: left;
+  animation: scroll-progress linear both;
+  animation-timeline: scroll(root);
+}
+
+/* ── Parallax halftone layer (CSS scroll-driven, slower than page) ── */
+@keyframes parallax-halftone {
+  from { transform: translateY(-4%); }
+  to { transform: translateY(4%); }
+}
+.parallax-halftone {
+  animation: parallax-halftone linear both;
+  animation-timeline: scroll(root);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scroll-progress-bar,
+  .parallax-halftone {
+    animation: none;
+  }
+}
+
 /* ── Keyboard focus ring (visible on both themes) ── */
 :focus-visible {
   outline: 2px solid #FF2D78;
   outline-offset: 2px;
+}
+
+/* ── Custom cursor (desktop only, activated by CustomCursor.tsx) ── */
+@media (pointer: fine) {
+  .custom-cursor-on,
+  .custom-cursor-on * {
+    cursor: none !important;
+  }
 }
 
 /* ── Respect reduced-motion preference ── */

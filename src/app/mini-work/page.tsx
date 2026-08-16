@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { miniWorks, MiniWorkCard } from "@/components/MiniWorkPreview";
+import TiltCard from "@/components/TiltCard";
 
 const filters = [
   { key: "all",     label: "All" },
@@ -136,7 +137,7 @@ export default function MiniWorkPage() {
                 key={work.id}
                 className="w-full flex justify-center md:block"
               >
-                <MiniWorkCard work={work} index={idx} />
+                <TiltCard><MiniWorkCard work={work} index={idx} /></TiltCard>
               </motion.div>
             ))}
           </AnimatePresence>

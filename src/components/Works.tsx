@@ -1,8 +1,10 @@
 "use client";
 
-import Link from "next/link";
+import { Link } from "next-view-transitions";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
+import SplitText from "./SplitText";
+import TiltCard from "./TiltCard";
 import { projects, categoryLabels } from "@/data/projects";
 import type { Project } from "@/data/projects";
 
@@ -71,7 +73,7 @@ export default function Works() {
           <div className="relative inline-block">
             <Starburst />
             <h2 className="font-display text-4xl md:text-5xl text-dark-navy dark:text-soft-white transition-colors duration-300 relative">
-              Projects I&apos;m Proud Of
+              <SplitText text="Projects I'm Proud Of" />
             </h2>
           </div>
           <p className="font-zen text-base text-muted-lilac mt-1 tracking-widest">
@@ -83,13 +85,14 @@ export default function Works() {
         <div className="flex flex-col gap-20">
           <AnimatePresence mode="popLayout">
             {previewProjects.map((project, idx) => (
-              <ProjectCard
-                key={project.slug}
-                project={project}
-                index={idx}
-                reverse={idx % 2 !== 0}
-                isFirst={idx === 0}
-              />
+              <TiltCard key={project.slug} className="[transform-style:preserve-3d]">
+                <ProjectCard
+                  project={project}
+                  index={idx}
+                  reverse={idx % 2 !== 0}
+                  isFirst={idx === 0}
+                />
+              </TiltCard>
             ))}
           </AnimatePresence>
         </div>

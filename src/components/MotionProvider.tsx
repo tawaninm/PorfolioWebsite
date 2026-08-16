@@ -25,8 +25,28 @@ export default function MotionProvider({ children }: { children: React.ReactNode
     };
     rafId = requestAnimationFrame(raf);
 
+    // If GSAP ScrollTrigger is used anywhere on the page (lazy loaded),
+    // drive Lenis from GSAP's ticker so pinned/scrubbed sections stay in sync.
+    let cleanupGsap: (() => void) | undefined;
+    import("gsap").then((gsapMod) =>
+      import("gsap/ScrollTrigger").then((stMod) => {
+        const gsap = gsapMod.default;
+        const ScrollTrigger = stMod.ScrollTrigger;
+        if (!lenisRef.current) return;
+        gsap.registerPlugin(ScrollTrigger);
+        cancelAnimationFrame(rafId);
+        lenis.on("scroll", ScrollTrigger.update);
+        gsap.ticker.add((time) => lenis.raf(time * 1000));
+        gsap.ticker.lagSmoothing(0);
+        cleanupGsap = () => {
+          gsap.ticker.remove((time) => lenis.raf(time * 1000));
+        };
+      })
+    );
+
     return () => {
       cancelAnimationFrame(rafId);
+      cleanupGsap?.();
       lenis.destroy();
       lenisRef.current = null;
     };

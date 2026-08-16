@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Righteous, DM_Sans, JetBrains_Mono, Zen_Maru_Gothic } from "next/font/google";
+import { ViewTransitions } from "next-view-transitions";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -8,6 +9,9 @@ import ThemeProvider from "@/components/ThemeProvider";
 import ThreeProvider from "@/components/ThreeProvider";
 import WelcomeBurst from "@/components/WelcomeBurst";
 import ScrollSpeedLines from "@/components/ScrollSpeedLines";
+import KonamiEasterEgg from "@/components/KonamiEasterEgg";
+import CustomCursor from "@/components/CustomCursor";
+import ChibiMascot from "@/components/ChibiMascot";
 
 /* ---- Google Fonts via next/font ---- */
 const righteous = Righteous({
@@ -59,34 +63,44 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html
-      lang="en"
-      suppressHydrationWarning
-      className={`${righteous.variable} ${dmSans.variable} ${jetbrainsMono.variable} ${zenMaruGothic.variable}`}
-    >
-      {/* Inline theme bootstrap — prevents light-mode flash (FOUC) for dark users.
-          Mirrors next-themes resolution: stored theme, else system preference. */}
-      <head>
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `(function(){try{var e=localStorage.getItem("theme");var d=e==="dark"||(!e&&window.matchMedia("(prefers-color-scheme: dark)").matches);document.documentElement.classList.toggle("dark",d)}catch(x){}})()`,
-          }}
-        />
-      </head>
-      <body className="font-body antialiased bg-soft-white text-dark-navy dark:bg-space-navy dark:text-soft-white flex flex-col min-h-screen transition-colors duration-300">
-        <ThemeProvider>
+    <ViewTransitions>
+      <html
+        lang="en"
+        suppressHydrationWarning
+        className={`${righteous.variable} ${dmSans.variable} ${jetbrainsMono.variable} ${zenMaruGothic.variable}`}
+      >
+        {/* Inline theme bootstrap — prevents light-mode flash (FOUC) for dark users.
+            Mirrors next-themes resolution: stored theme, else system preference. */}
+        <head>
+          <script
+            dangerouslySetInnerHTML={{
+              __html: `(function(){try{var e=localStorage.getItem("theme");var d=e==="dark"||(!e&&window.matchMedia("(prefers-color-scheme: dark)").matches);document.documentElement.classList.toggle("dark",d)}catch(x){}})()`,
+            }}
+          />
+        </head>
+        <body className="font-body antialiased bg-soft-white text-dark-navy dark:bg-space-navy dark:text-soft-white flex flex-col min-h-screen transition-colors duration-300">
+          <ThemeProvider>
           <MotionProvider>
             <ThreeProvider />
             <WelcomeBurst />
             <ScrollSpeedLines />
+            {/* Neon scroll progress bar — CSS scroll-driven, zero JS */}
+            <div
+              aria-hidden="true"
+              className="scroll-progress-bar fixed top-0 left-0 right-0 h-[3px] z-[80] bg-gradient-to-r from-neon-magenta via-electric-blue to-neon-teal"
+            />
             <Navbar />
-            <div className="flex-grow">
-              {children}
-            </div>
-            <Footer />
-          </MotionProvider>
-        </ThemeProvider>
-      </body>
-    </html>
+              <div className="flex-grow">
+                  {children}
+                </div>
+                <Footer />
+                <KonamiEasterEgg />
+                <CustomCursor />
+                <ChibiMascot />
+            </MotionProvider>
+          </ThemeProvider>
+        </body>
+      </html>
+    </ViewTransitions>
   );
 }

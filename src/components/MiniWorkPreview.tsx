@@ -1,8 +1,10 @@
 "use client";
 
-import Link from "next/link";
+import { Link } from "next-view-transitions";
 import Image from "next/image";
 import { motion } from "framer-motion";
+import SplitText from "./SplitText";
+import TiltCard from "./TiltCard";
 
 /* ── Types & data ── */
 export type MiniWorkType = "graphic" | "ui" | "code" | "other";
@@ -195,7 +197,7 @@ export default function MiniWorkPreview() {
           transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
         >
           <h2 className="font-display text-4xl md:text-5xl tracking-widest text-dark-navy dark:text-soft-white transition-colors duration-300">
-            MINI WORK ✦
+            <SplitText text="MINI WORK ✦" />
           </h2>
           <p className="font-zen text-base text-muted-lilac mt-1 tracking-widest">ミニワーク</p>
         </motion.div>
@@ -203,7 +205,7 @@ export default function MiniWorkPreview() {
         <div className="flex md:grid md:grid-cols-3 gap-6 overflow-x-auto md:overflow-visible pb-4 md:pb-0 snap-x snap-mandatory md:snap-none -mx-6 px-6 md:mx-0 md:px-0">
           {miniWorks.map((work, idx) => (
             <div key={work.id} className="snap-start">
-              <MiniWorkCard work={work} index={idx} />
+              <TiltCard key={work.id}><MiniWorkCard work={work} index={idx} /></TiltCard>
             </div>
           ))}
         </div>

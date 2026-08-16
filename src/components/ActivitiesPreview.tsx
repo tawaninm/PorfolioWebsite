@@ -1,8 +1,9 @@
 "use client";
 
-import Link from "next/link";
+import { Link } from "next-view-transitions";
 import Image from "next/image";
 import { motion } from "framer-motion";
+import SplitText from "./SplitText";
 import { featuredActivities, typeBadge, typeLabel } from "@/data/activities";
 import type { Activity } from "@/data/activities";
 
@@ -124,7 +125,7 @@ export default function ActivitiesPreview() {
           transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
         >
           <h2 className="font-display text-4xl md:text-5xl tracking-widest text-dark-navy dark:text-soft-white transition-colors duration-300">
-            ACTIVITIES ✦
+            <SplitText text="ACTIVITIES ✦" />
           </h2>
           <p className="font-zen text-base text-muted-lilac mt-1 tracking-widest">活動</p>
         </motion.div>

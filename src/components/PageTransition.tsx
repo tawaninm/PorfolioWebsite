@@ -1,18 +1,14 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import { motion } from "framer-motion";
 import { usePathname } from "next/navigation";
 
 /**
- * Page transition using Next.js template.tsx (re-mounts on every route).
+ * Page transition shell (template.tsx re-mounts on every route).
  *
- * Because template.tsx unmounts the old page immediately, AnimatePresence
- * mode="wait" can never fire exit animations reliably in App Router.
- *
- * Instead we use a simple **enter-only** wipe: two overlay panels that
- * start fully covering the viewport and then slide away, revealing the new page.
- * This gives a snappy, reliable comic-panel reveal without blocking navigation.
+ * The actual enter/exit animation is handled natively by the View Transitions
+ * API (see ::view-transition-* rules in globals.css + <ViewTransitions> in
+ * layout.tsx). This component only handles scroll-to-top on route change.
  */
 export default function PageTransition({
   children,
@@ -32,27 +28,5 @@ export default function PageTransition({
     window.scrollTo({ top: 0, left: 0, behavior: "instant" });
   }, [pathname]);
 
-  return (
-    <div className="min-h-screen">
-      {children}
-
-      {/* ── Comic Panel Reveal (Enter-only) ──
-          Two panels start scale-Y=1 (covering viewport) and shrink to 0,
-          revealing the new page underneath like a manga panel opening.  */}
-      <motion.div
-        key={`wipe-blue-${pathname}`}
-        initial={{ scaleY: 1 }}
-        animate={{ scaleY: 0 }}
-        transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-        className="fixed inset-0 z-[101] bg-electric-blue origin-top pointer-events-none"
-      />
-      <motion.div
-        key={`wipe-pink-${pathname}`}
-        initial={{ scaleY: 1 }}
-        animate={{ scaleY: 0 }}
-        transition={{ duration: 0.4, delay: 0.08, ease: [0.22, 1, 0.36, 1] }}
-        className="fixed inset-0 z-[100] bg-hot-pink origin-top pointer-events-none"
-      />
-    </div>
-  );
+  return <div className="min-h-screen">{children}</div>;
 }

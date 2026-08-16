@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import { useTheme } from "next-themes";
 import { usePathname } from "next/navigation";
-import Link from "next/link";
+import { Link } from "next-view-transitions";
 import { motion, AnimatePresence, useScroll, useMotionValueEvent } from "framer-motion";
 import { FiSun, FiMoon } from "react-icons/fi";
 import MusicPlayer from "./MusicPlayer";
