@@ -176,7 +176,7 @@ export default function CriminalMindClient({ project }: { project: Project }) {
   }
 
   return (
-    <main className="relative min-h-screen bg-dark-navy overflow-hidden">
+    <main className="relative min-h-screen bg-soft-white dark:bg-dark-navy overflow-hidden">
       <ParallaxShapes />
 
       {/* ── Back navigation ── */}
@@ -190,7 +190,7 @@ export default function CriminalMindClient({ project }: { project: Project }) {
         </Link>
         <Link
           href="/#works"
-          className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-soft-white/5 border border-soft-white/10 font-body text-sm text-soft-white/70 hover:text-soft-white hover:bg-soft-white/10 hover:border-soft-white/20 transition-all duration-300"
+          className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-vinyl-dark/5 dark:bg-soft-white/5 border border-vinyl-dark/15 dark:border-soft-white/10 font-body text-sm text-deep-navy/70 dark:text-soft-white/70 hover:text-deep-navy dark:hover:text-soft-white hover:bg-vinyl-dark/10 dark:hover:bg-vinyl-dark/10 dark:hover:bg-soft-white/10 hover:border-vinyl-dark/25 dark:hover:border-soft-white/20 transition-all duration-300"
         >
           <span>Home</span>
         </Link>
@@ -258,7 +258,7 @@ export default function CriminalMindClient({ project }: { project: Project }) {
           {project.techStack.map((tech) => (
             <span
               key={tech}
-              className="px-4 py-1.5 rounded-full bg-deep-purple/60 text-soft-white/80 border border-soft-white/10 font-body text-xs font-medium transition-all duration-200 hover:bg-sky-cyan/20 hover:text-sky-cyan hover:border-sky-cyan/30"
+              className="px-4 py-1.5 rounded-full bg-deep-purple/60 text-soft-white/80 border border-vinyl-dark/15 dark:border-soft-white/10 font-body text-xs font-medium transition-all duration-200 hover:bg-sky-cyan/20 hover:text-sky-cyan hover:border-sky-cyan/30"
               style={{ filter: "drop-shadow(2px 2px 0 rgba(0,0,0,0.4))" }}
             >
               {tech}
@@ -268,7 +268,7 @@ export default function CriminalMindClient({ project }: { project: Project }) {
       </FadeSection>
 
       <div className="mx-auto max-w-5xl px-6 mt-8">
-        <div className="h-px bg-gradient-to-r from-transparent via-soft-white/10 to-transparent" />
+        <div className="h-px bg-gradient-to-r from-transparent via-vinyl-dark/15 dark:via-soft-white/10 to-transparent" />
       </div>
 
       <div className="relative z-10 mx-auto max-w-5xl px-6">
@@ -278,16 +278,16 @@ export default function CriminalMindClient({ project }: { project: Project }) {
         ════════════════════════════════════════ */}
         <FadeSection delay={0} className="py-14">
           <SectionNumber n="01" />
-          <h2 className="font-display text-3xl md:text-4xl text-soft-white mb-6 -mt-2">
+          <h2 className="font-display text-3xl md:text-4xl text-deep-navy dark:text-soft-white mb-6 -mt-2">
             Narrative Premise
           </h2>
 
-          <p className="font-body text-base md:text-lg text-soft-white/75 leading-relaxed mb-8">
+          <p className="font-body text-base md:text-lg text-deep-navy/75 dark:text-soft-white/75 leading-relaxed mb-8">
             Criminal Minds เป็นเกม 2D visual novel ที่เล่าเส้นทางงานตำรวจตั้งแต่การเก็บหลักฐานในที่เกิดเหตุ การพิสูจน์หลักฐานด้วยหลักวิทยาศาสตร์ ไปจนถึงการสอบสวนผู้ต้องสงสัย โดยสอดแทรกแนวคิดด้านจริยธรรมและ empathy ในทุกขั้นตอน
           </p>
 
           {/* Manga-style story card */}
-          <div className="relative bg-soft-white/5 border border-sky-cyan/20 rounded-3xl p-6 md:p-8 overflow-hidden">
+          <div className="relative bg-vinyl-dark/5 dark:bg-soft-white/5 border border-sky-cyan/20 rounded-3xl p-6 md:p-8 overflow-hidden">
             <div
               className="absolute inset-0 opacity-5 pointer-events-none"
               style={{
@@ -300,7 +300,7 @@ export default function CriminalMindClient({ project }: { project: Project }) {
               </div>
               <div>
                 <p className="font-mono text-xs text-sky-cyan uppercase tracking-widest mb-3">Story Introduction</p>
-                <p className="font-body text-base text-soft-white/80 leading-relaxed italic">
+                <p className="font-body text-base text-deep-navy/80 dark:text-soft-white/80 leading-relaxed italic">
                   "คุณคือนักสืบใหม่ที่เพิ่งได้รับมอบหมายคดีแรก คดีฉ้อโกงทางธุรกิจที่ซับซ้อน ทุกหลักฐานที่คุณเลือกเก็บ ทุกคำถามที่คุณถาม จะบอกว่าคุณเป็นนักสืบแบบไหน"
                 </p>
                 <p className="font-display text-sm text-sky-cyan mt-4">— 3 investigation stages to solve the case</p>
@@ -309,14 +309,14 @@ export default function CriminalMindClient({ project }: { project: Project }) {
           </div>
         </FadeSection>
 
-        <div className="h-px bg-gradient-to-r from-transparent via-soft-white/10 to-transparent" />
+        <div className="h-px bg-gradient-to-r from-transparent via-vinyl-dark/15 dark:via-soft-white/10 to-transparent" />
 
         {/* ════════════════════════════════════════
             02 WHY THIS MATTERS — THE ETHICAL QUESTION
         ════════════════════════════════════════ */}
         <FadeSection delay={0.05} className="py-14">
           <SectionNumber n="02" />
-          <h2 className="font-display text-3xl md:text-4xl text-soft-white mb-6 -mt-2">
+          <h2 className="font-display text-3xl md:text-4xl text-deep-navy dark:text-soft-white mb-6 -mt-2">
             The Ethical Question
           </h2>
 
@@ -369,7 +369,7 @@ export default function CriminalMindClient({ project }: { project: Project }) {
         ════════════════════════════════════════ */}
         <FadeSection delay={0.05} className="py-14">
           <SectionNumber n="03" />
-          <h2 className="font-display text-3xl md:text-4xl text-soft-white mb-8 -mt-2">
+          <h2 className="font-display text-3xl md:text-4xl text-deep-navy dark:text-soft-white mb-8 -mt-2">
             Gameplay Flow
           </h2>
 
@@ -505,7 +505,7 @@ export default function CriminalMindClient({ project }: { project: Project }) {
             </div>
             <div className="flex-1 bg-soft-white/5 border border-sky-cyan/30 rounded-2xl p-5">
               <p className="font-body text-xs text-sky-cyan uppercase tracking-widest mb-2">Competition</p>
-              <p className="font-display text-lg text-soft-white">NSC ครั้งที่ 25</p>
+              <p className="font-display text-lg text-deep-navy dark:text-soft-white">NSC ครั้งที่ 25</p>
               <p className="font-body text-xs text-soft-white/60 mt-1 font-mono">25p21e0082</p>
             </div>
           </div>
@@ -541,16 +541,16 @@ export default function CriminalMindClient({ project }: { project: Project }) {
         <FadeSection delay={0.05} className="py-10">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
             <div>
-              <p className="font-body text-xs text-soft-white/40 uppercase tracking-widest mb-2">Role</p>
+              <p className="font-body text-xs text-deep-navy/40 dark:text-soft-white/40 uppercase tracking-widest mb-2">Role</p>
               <p className="font-body text-sm text-soft-white/80">Developer / Graphic &amp; Game Mechanics Support</p>
             </div>
             <div>
-              <p className="font-body text-xs text-soft-white/40 uppercase tracking-widest mb-2">Team</p>
+              <p className="font-body text-xs text-deep-navy/40 dark:text-soft-white/40 uppercase tracking-widest mb-2">Team</p>
               <p className="font-body text-sm text-soft-white/80">3 members</p>
-              <p className="font-body text-xs text-soft-white/40 mt-1">ธนัทภัทร · ธนัชชา · พิชชาภา</p>
+              <p className="font-body text-xs text-deep-navy/40 dark:text-soft-white/40 mt-1">ธนัทภัทร · ธนัชชา · พิชชาภา</p>
             </div>
             <div>
-              <p className="font-body text-xs text-soft-white/40 uppercase tracking-widest mb-2">Tags</p>
+              <p className="font-body text-xs text-deep-navy/40 dark:text-soft-white/40 uppercase tracking-widest mb-2">Tags</p>
               <div className="flex flex-wrap gap-2">
                 {project.tags.map((tag) => (
                   <span key={tag} className="px-3 py-1 rounded-full bg-soft-white/5 border border-soft-white/10 font-body text-xs text-soft-white/60">
@@ -561,7 +561,7 @@ export default function CriminalMindClient({ project }: { project: Project }) {
             </div>
           </div>
 
-          <h3 className="font-display text-xl text-soft-white/50 uppercase tracking-widest mb-6 border-b border-soft-white/10 pb-4">
+          <h3 className="font-display text-xl text-deep-navy/50 dark:text-soft-white/50 uppercase tracking-widest mb-6 border-b border-soft-white/10 pb-4">
             Gallery
           </h3>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-3">

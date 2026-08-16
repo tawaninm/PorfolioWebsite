@@ -18,7 +18,7 @@ export default function ProjectNav({ projects, currentIndex }: ProjectNavProps) 
 
   return (
     <motion.nav
-      className="border-t border-soft-white/10 mt-8"
+      className="border-t border-vinyl-dark/15 dark:border-soft-white/10 mt-8"
       initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.2 }}
@@ -28,12 +28,12 @@ export default function ProjectNav({ projects, currentIndex }: ProjectNavProps) 
         {/* Previous project */}
         <Link
           href={`/projects/${prev.slug}`}
-          className="group flex flex-col items-start gap-1 py-8 px-4 md:px-8 rounded-xl transition-all duration-300 hover:-translate-y-0.5 hover:bg-soft-white/5"
+          className="group flex flex-col items-start gap-1 py-8 px-4 md:px-8 rounded-xl transition-all duration-300 hover:-translate-y-0.5 hover:bg-vinyl-dark/5 dark:hover:bg-soft-white/5"
         >
           <span className="font-body text-xs font-bold uppercase tracking-widest text-lilac-bright group-hover:text-hot-pink transition-colors">
             ← Previous
           </span>
-          <span className="font-display text-lg md:text-xl text-soft-white group-hover:text-hot-pink transition-colors line-clamp-1">
+          <span className="font-display text-lg md:text-xl text-deep-navy dark:text-soft-white group-hover:text-hot-pink transition-colors line-clamp-1">
             {prev.title}
           </span>
         </Link>
@@ -41,12 +41,12 @@ export default function ProjectNav({ projects, currentIndex }: ProjectNavProps) 
         {/* Next project */}
         <Link
           href={`/projects/${next.slug}`}
-          className="group flex flex-col items-end gap-1 py-8 px-4 md:px-8 rounded-xl text-right transition-all duration-300 hover:-translate-y-0.5 hover:bg-soft-white/5"
+          className="group flex flex-col items-end gap-1 py-8 px-4 md:px-8 rounded-xl text-right transition-all duration-300 hover:-translate-y-0.5 hover:bg-vinyl-dark/5 dark:hover:bg-soft-white/5"
         >
           <span className="font-body text-xs font-bold uppercase tracking-widest text-lilac-bright group-hover:text-hot-pink transition-colors">
             Next →
           </span>
-          <span className="font-display text-lg md:text-xl text-soft-white group-hover:text-hot-pink transition-colors line-clamp-1">
+          <span className="font-display text-lg md:text-xl text-deep-navy dark:text-soft-white group-hover:text-hot-pink transition-colors line-clamp-1">
             {next.title}
           </span>
         </Link>

@@ -175,7 +175,7 @@ export default function DetectCheatClient({ project }: { project: Project }) {
   }
 
   return (
-    <main className="relative min-h-screen bg-dark-navy overflow-hidden">
+    <main className="relative min-h-screen bg-soft-white dark:bg-dark-navy overflow-hidden">
       <ParallaxShapes />
 
       {/* ── Back navigation ── */}
@@ -189,7 +189,7 @@ export default function DetectCheatClient({ project }: { project: Project }) {
         </Link>
         <Link
           href="/#works"
-          className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-soft-white/5 border border-soft-white/10 font-body text-sm text-soft-white/70 hover:text-soft-white hover:bg-soft-white/10 hover:border-soft-white/20 transition-all duration-300"
+          className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-vinyl-dark/5 dark:bg-vinyl-dark/5 dark:bg-soft-white/5 border border-vinyl-dark/15 dark:border-vinyl-dark/15 dark:border-soft-white/10 font-body text-sm text-deep-navy/70 dark:text-deep-navy/70 dark:text-soft-white/70 hover:text-deep-navy dark:hover:text-soft-white hover:bg-vinyl-dark/10 dark:hover:bg-vinyl-dark/10 dark:hover:bg-soft-white/10 hover:border-vinyl-dark/25 dark:hover:border-soft-white/20 transition-all duration-300"
         >
           <span>Home</span>
         </Link>
@@ -257,7 +257,7 @@ export default function DetectCheatClient({ project }: { project: Project }) {
           {project.techStack.map((tech) => (
             <span
               key={tech}
-              className="px-4 py-1.5 rounded-full bg-deep-purple/60 text-soft-white/80 border border-soft-white/10 font-body text-xs font-medium transition-all duration-200 hover:bg-retro-yellow/20 hover:text-retro-yellow hover:border-retro-yellow/30"
+              className="px-4 py-1.5 rounded-full bg-deep-purple/60 text-deep-navy/80 dark:text-soft-white/80 border border-vinyl-dark/15 dark:border-soft-white/10 font-body text-xs font-medium transition-all duration-200 hover:bg-retro-yellow/20 hover:text-retro-yellow hover:border-retro-yellow/30"
               style={{ filter: "drop-shadow(2px 2px 0 rgba(0,0,0,0.4))" }}
             >
               {tech}
@@ -267,7 +267,7 @@ export default function DetectCheatClient({ project }: { project: Project }) {
       </FadeSection>
 
       <div className="mx-auto max-w-5xl px-6 mt-8">
-        <div className="h-px bg-gradient-to-r from-transparent via-soft-white/10 to-transparent" />
+        <div className="h-px bg-gradient-to-r from-transparent via-vinyl-dark/15 dark:via-soft-white/10 to-transparent" />
       </div>
 
       <div className="relative z-10 mx-auto max-w-5xl px-6">
@@ -277,26 +277,26 @@ export default function DetectCheatClient({ project }: { project: Project }) {
         ════════════════════════════════════════ */}
         <FadeSection delay={0} className="py-14">
           <SectionNumber n="01" extra={<AlertBubble />} />
-          <h2 className="font-display text-3xl md:text-4xl text-soft-white mb-6 -mt-2">
+          <h2 className="font-display text-3xl md:text-4xl text-deep-navy dark:text-deep-navy dark:text-soft-white mb-6 -mt-2">
             Why This Topic Matters
           </h2>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
             <div>
-              <p className="font-body text-base md:text-lg text-soft-white/75 leading-relaxed mb-4">
+              <p className="font-body text-base md:text-lg text-deep-navy/75 dark:text-soft-white/75 leading-relaxed mb-4">
                 การโกงออนไลน์ไม่ใช่เรื่องไกลตัว ตั้งแต่การซื้อสินค้าแล้วไม่ได้รับของ ไปจนถึงการถูกหลอกจากเว็บหาคู่ — เหตุการณ์เหล่านี้เกิดขึ้นจริงในชีวิตประจำวัน
               </p>
-              <p className="font-body text-base text-soft-white/70 leading-relaxed">
+              <p className="font-body text-base text-deep-navy/70 dark:text-soft-white/70 leading-relaxed">
                 แต่สื่อการเรียนรู้ด้านกฎหมายมักแห้งและน่าเบื่อ ทำให้ผู้เรียนไม่เข้าถึงเนื้อหา ทั้งที่การรู้เท่าทันกลโกงออนไลน์เป็นเรื่องใกล้ตัวมากสำหรับเยาวชนในยุคดิจิทัล
               </p>
             </div>
-            <div className="relative bg-soft-white/5 border border-retro-yellow/30 rounded-2xl p-6 overflow-hidden">
+            <div className="relative bg-vinyl-dark/5 dark:bg-soft-white/5 border border-retro-yellow/30 rounded-2xl p-6 overflow-hidden">
               <div className="absolute -top-4 -right-4 font-display text-9xl text-retro-yellow/5 pointer-events-none select-none">!</div>
               <div className="flex items-start gap-4">
                 <AlertBubble />
                 <div>
                   <p className="font-display text-base text-retro-yellow mb-2">ปัญหาที่แท้จริง</p>
-                  <p className="font-body text-sm text-soft-white/75 leading-relaxed">
+                  <p className="font-body text-sm text-deep-navy/75 dark:text-soft-white/75 leading-relaxed">
                     เปลี่ยนเรื่องกฎหมายคอมพิวเตอร์และการฉ้อโกงออนไลน์ให้กลายเป็นสถานการณ์จำลองที่ผู้เล่นต้องตั้งสติ เก็บหลักฐาน และเลือกตอบอย่างมีวิจารณญาณ
                   </p>
                 </div>
@@ -305,22 +305,22 @@ export default function DetectCheatClient({ project }: { project: Project }) {
           </div>
         </FadeSection>
 
-        <div className="h-px bg-gradient-to-r from-transparent via-soft-white/10 to-transparent" />
+        <div className="h-px bg-gradient-to-r from-transparent via-vinyl-dark/15 dark:via-soft-white/10 to-transparent" />
 
         {/* ════════════════════════════════════════
             02 THE GAME CONCEPT
         ════════════════════════════════════════ */}
         <FadeSection delay={0.05} className="py-14">
           <SectionNumber n="02" />
-          <h2 className="font-display text-3xl md:text-4xl text-soft-white mb-6 -mt-2">
+          <h2 className="font-display text-3xl md:text-4xl text-deep-navy dark:text-deep-navy dark:text-soft-white mb-6 -mt-2">
             Game Concept: DETEC-CHEAT
           </h2>
-          <p className="font-body text-base md:text-lg text-soft-white/75 leading-relaxed mb-8">
+          <p className="font-body text-base md:text-lg text-deep-navy/75 dark:text-deep-navy/75 dark:text-soft-white/75 leading-relaxed mb-8">
             DETEC-CHEAT เป็นโปรแกรมเพื่อการศึกษาในรูปแบบ 2D chat visual novel ที่พาผู้เล่นเรียนรู้เรื่องการโกงออนไลน์ การเก็บหลักฐาน และการดำเนินการทางกฎหมายผ่านสถานการณ์โต้ตอบกับมิจฉาชีพ ใน 3 คดีที่แตกต่างกัน
           </p>
 
           <motion.button
-            className="group w-full relative aspect-video md:aspect-[21/9] rounded-2xl overflow-hidden border border-soft-white/10 cursor-pointer focus:outline-none focus:ring-2 focus:ring-retro-yellow/50"
+            className="group w-full relative aspect-video md:aspect-[21/9] rounded-2xl overflow-hidden border border-vinyl-dark/15 dark:border-soft-white/10 cursor-pointer focus:outline-none focus:ring-2 focus:ring-retro-yellow/50"
             onClick={() => openLightbox(galleryImages, 1)}
             whileHover={{ scale: 1.01 }}
             transition={{ duration: 0.3 }}
@@ -340,14 +340,14 @@ export default function DetectCheatClient({ project }: { project: Project }) {
           </motion.button>
         </FadeSection>
 
-        <div className="h-px bg-gradient-to-r from-transparent via-soft-white/10 to-transparent" />
+        <div className="h-px bg-gradient-to-r from-transparent via-vinyl-dark/15 dark:via-soft-white/10 to-transparent" />
 
         {/* ════════════════════════════════════════
             03 CASES & LEARNING MECHANICS
         ════════════════════════════════════════ */}
         <FadeSection delay={0.05} className="py-14">
           <SectionNumber n="03" />
-          <h2 className="font-display text-3xl md:text-4xl text-soft-white mb-8 -mt-2">
+          <h2 className="font-display text-3xl md:text-4xl text-deep-navy dark:text-soft-white mb-8 -mt-2">
             Cases &amp; Learning Mechanics
           </h2>
 
@@ -360,29 +360,29 @@ export default function DetectCheatClient({ project }: { project: Project }) {
               >
                 <span className={`font-display text-2xl ${c.accent} opacity-50 block mb-3`}>{c.num}</span>
                 <h3 className={`font-display text-lg ${c.accent} mb-2`}>{c.title}</h3>
-                <p className="font-body text-sm text-soft-white/70 leading-relaxed">{c.desc}</p>
+                <p className="font-body text-sm text-deep-navy/70 dark:text-soft-white/70 leading-relaxed">{c.desc}</p>
               </div>
             ))}
           </div>
 
           {/* Mechanic highlight */}
-          <div className="bg-soft-white/5 border border-sky-cyan/20 rounded-2xl p-5 mb-8 flex items-start gap-4">
+          <div className="bg-vinyl-dark/5 dark:bg-soft-white/5 border border-sky-cyan/20 rounded-2xl p-5 mb-8 flex items-start gap-4">
             <span className="text-2xl">💬</span>
             <div>
               <p className="font-display text-sky-cyan mb-1">Core Mechanic: Chat-based Evidence Collection</p>
-              <p className="font-body text-sm text-soft-white/70">ผู้เล่นต้องโต้ตอบกับมิจฉาชีพในบทสนทนา แล้วเลือกเก็บหลักฐานที่สำคัญเพื่อนำไปดำเนินคดีในขั้นตอนถัดไป</p>
+              <p className="font-body text-sm text-deep-navy/70 dark:text-soft-white/70">ผู้เล่นต้องโต้ตอบกับมิจฉาชีพในบทสนทนา แล้วเลือกเก็บหลักฐานที่สำคัญเพื่อนำไปดำเนินคดีในขั้นตอนถัดไป</p>
             </div>
           </div>
 
           {/* Key Features */}
-          <h3 className="font-display text-xl text-soft-white/60 uppercase tracking-widest mb-4">Key Features</h3>
+          <h3 className="font-display text-xl text-deep-navy/60 dark:text-soft-white/60 uppercase tracking-widest mb-4">Key Features</h3>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mb-10">
             {keyFeatures.map((f, i) => (
-              <div key={i} className="flex items-start gap-3 bg-soft-white/5 border border-soft-white/10 rounded-xl p-4 hover:border-retro-yellow/30 transition-colors">
+              <div key={i} className="flex items-start gap-3 bg-vinyl-dark/5 dark:bg-soft-white/5 border border-vinyl-dark/15 dark:border-soft-white/10 rounded-xl p-4 hover:border-retro-yellow/30 transition-colors">
                 <span className="text-xl">{f.icon}</span>
                 <div>
                   <p className="font-display text-sm text-retro-yellow mb-0.5">{f.label}</p>
-                  <p className="font-body text-xs text-soft-white/65">{f.desc}</p>
+                  <p className="font-body text-xs text-deep-navy/65 dark:text-soft-white/65">{f.desc}</p>
                 </div>
               </div>
             ))}
@@ -412,14 +412,14 @@ export default function DetectCheatClient({ project }: { project: Project }) {
           </div>
         </FadeSection>
 
-        <div className="h-px bg-gradient-to-r from-transparent via-soft-white/10 to-transparent" />
+        <div className="h-px bg-gradient-to-r from-transparent via-vinyl-dark/15 dark:via-soft-white/10 to-transparent" />
 
         {/* ════════════════════════════════════════
             04 DEVELOPMENT PROCESS
         ════════════════════════════════════════ */}
         <FadeSection delay={0.05} className="py-14">
           <SectionNumber n="04" />
-          <h2 className="font-display text-3xl md:text-4xl text-soft-white mb-10 -mt-2">
+          <h2 className="font-display text-3xl md:text-4xl text-deep-navy dark:text-soft-white mb-10 -mt-2">
             Development Process
           </h2>
 
@@ -430,13 +430,13 @@ export default function DetectCheatClient({ project }: { project: Project }) {
                   {step.num}
                 </span>
                 <h3 className={`font-display text-xl mb-2 ${step.color.split(" ")[1]}`}>{step.title}</h3>
-                <p className="font-body text-sm text-soft-white/70">{step.desc}</p>
+                <p className="font-body text-sm text-deep-navy/70 dark:text-soft-white/70">{step.desc}</p>
               </div>
             ))}
           </div>
 
           <motion.button
-            className="w-full relative aspect-[9/16] max-w-sm mx-auto block rounded-2xl overflow-hidden cursor-pointer border border-soft-white/10 focus:outline-none"
+            className="w-full relative aspect-[9/16] max-w-sm mx-auto block rounded-2xl overflow-hidden cursor-pointer border border-vinyl-dark/15 dark:border-soft-white/10 focus:outline-none"
             onClick={() => openLightbox(galleryImages, 1)}
             whileHover={{ scale: 1.01 }}
             transition={{ duration: 0.3 }}
@@ -456,60 +456,60 @@ export default function DetectCheatClient({ project }: { project: Project }) {
           </motion.button>
         </FadeSection>
 
-        <div className="h-px bg-gradient-to-r from-transparent via-soft-white/10 to-transparent" />
+        <div className="h-px bg-gradient-to-r from-transparent via-vinyl-dark/15 dark:via-soft-white/10 to-transparent" />
 
         {/* ════════════════════════════════════════
             05 SOLUTION & IMPACT
         ════════════════════════════════════════ */}
         <FadeSection delay={0.05} className="py-14">
           <SectionNumber n="05" />
-          <h2 className="font-display text-3xl md:text-4xl text-soft-white mb-6 -mt-2">
+          <h2 className="font-display text-3xl md:text-4xl text-deep-navy dark:text-deep-navy dark:text-soft-white mb-6 -mt-2">
             Solution &amp; Impact
           </h2>
 
-          <div className="bg-soft-white/5 border border-retro-yellow/20 rounded-3xl p-6 md:p-8 mb-8" style={{ boxShadow: "0 0 40px rgba(255,209,102,0.05)" }}>
-            <p className="font-body text-base md:text-lg text-soft-white/80 leading-relaxed mb-6">
+          <div className="bg-vinyl-dark/5 dark:bg-soft-white/5 border border-retro-yellow/20 rounded-3xl p-6 md:p-8 mb-8" style={{ boxShadow: "0 0 40px rgba(255,209,102,0.05)" }}>
+            <p className="font-body text-base md:text-lg text-deep-navy/80 dark:text-soft-white/80 leading-relaxed mb-6">
               <strong className="text-retro-yellow">The Solution:</strong> เกมการเรียนรู้ที่เปลี่ยนผู้เล่นจากคนอ่านข้อมูลเฉย ๆ ให้กลายเป็นคนที่ต้องตัดสินใจ ตอบโต้ และฝึกเก็บหลักฐานด้วยตนเอง — ผ่านสถานการณ์ที่สมจริงจาก 3 คดีออนไลน์ที่ใกล้ตัว
             </p>
-            <p className="font-body text-base md:text-lg text-soft-white/80 leading-relaxed">
+            <p className="font-body text-base md:text-lg text-deep-navy/80 dark:text-soft-white/80 leading-relaxed">
               <strong className="text-sakura-pink">Impact:</strong> ผู้ใช้งานสามารถเรียนรู้เนื้อหาและนำไปประยุกต์ใช้ป้องกันตนเองจากมิจฉาชีพออนไลน์ได้ โดยผลทดสอบสะท้อนความพึงพอใจในระดับมาก
             </p>
           </div>
 
           {/* Target Users callout */}
           <div className="flex flex-col sm:flex-row gap-4 mb-6">
-            <div className="flex-1 bg-soft-white/5 border border-mint/30 rounded-2xl p-5">
+            <div className="flex-1 bg-vinyl-dark/5 dark:bg-soft-white/5 border border-mint/30 rounded-2xl p-5">
               <p className="font-body text-xs text-mint uppercase tracking-widest mb-2">Target Users</p>
-              <p className="font-display text-lg text-soft-white">มัธยมต้น + ผู้สนใจ</p>
-              <p className="font-body text-xs text-soft-white/60 mt-1">นักเรียนระดับมัธยมศึกษาตอนต้นและผู้ที่สนใจเรื่องการโกงบนโลกออนไลน์</p>
+              <p className="font-display text-lg text-deep-navy dark:text-soft-white">มัธยมต้น + ผู้สนใจ</p>
+              <p className="font-body text-xs text-deep-navy/60 dark:text-soft-white/60 mt-1">นักเรียนระดับมัธยมศึกษาตอนต้นและผู้ที่สนใจเรื่องการโกงบนโลกออนไลน์</p>
             </div>
-            <div className="flex-1 bg-soft-white/5 border border-retro-yellow/30 rounded-2xl p-5">
+            <div className="flex-1 bg-vinyl-dark/5 dark:bg-soft-white/5 border border-retro-yellow/30 rounded-2xl p-5">
               <p className="font-body text-xs text-retro-yellow uppercase tracking-widest mb-2">Competition</p>
-              <p className="font-display text-lg text-soft-white">NSC ครั้งที่ 24</p>
-              <p className="font-body text-xs text-soft-white/60 mt-1 font-mono">24p21e0061</p>
+              <p className="font-display text-lg text-deep-navy dark:text-soft-white">NSC ครั้งที่ 24</p>
+              <p className="font-body text-xs text-deep-navy/60 dark:text-soft-white/60 mt-1 font-mono">24p21e0061</p>
             </div>
           </div>
         </FadeSection>
 
-        <div className="h-px bg-gradient-to-r from-transparent via-soft-white/10 to-transparent" />
+        <div className="h-px bg-gradient-to-r from-transparent via-vinyl-dark/15 dark:via-soft-white/10 to-transparent" />
 
         {/* ════════════════════════════════════════
             06 CHALLENGES
         ════════════════════════════════════════ */}
         <FadeSection delay={0.05} className="py-14">
           <SectionNumber n="06" />
-          <h2 className="font-display text-3xl md:text-4xl text-soft-white mb-8 -mt-2">
+          <h2 className="font-display text-3xl md:text-4xl text-deep-navy dark:text-soft-white mb-8 -mt-2">
             Lessons Learned
           </h2>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             {challenges.map((c, i) => (
-              <div key={i} className="bg-soft-white/5 border border-soft-white/10 hover:border-sakura-pink/30 rounded-2xl p-5 transition-colors">
+              <div key={i} className="bg-vinyl-dark/5 dark:bg-soft-white/5 border border-vinyl-dark/15 dark:border-soft-white/10 hover:border-sakura-pink/30 rounded-2xl p-5 transition-colors">
                 <span className="text-3xl block mb-4">{c.icon}</span>
                 <p className="font-display text-base text-sakura-pink mb-3">{c.title}</p>
-                <div className="border-t border-soft-white/10 pt-3 mt-2">
+                <div className="border-t border-vinyl-dark/15 dark:border-soft-white/10 pt-3 mt-2">
                   <p className="font-body text-xs text-mint uppercase tracking-widest mb-1">Reflection</p>
-                  <p className="font-body text-sm text-soft-white/75 leading-relaxed">{c.lesson}</p>
+                  <p className="font-body text-sm text-deep-navy/75 dark:text-soft-white/75 leading-relaxed">{c.lesson}</p>
                 </div>
               </div>
             ))}
@@ -517,23 +517,23 @@ export default function DetectCheatClient({ project }: { project: Project }) {
         </FadeSection>
 
         {/* ── Project Info Footer ── */}
-        <div className="h-px bg-gradient-to-r from-transparent via-soft-white/10 to-transparent" />
+        <div className="h-px bg-gradient-to-r from-transparent via-vinyl-dark/15 dark:via-soft-white/10 to-transparent" />
         <FadeSection delay={0.05} className="py-10">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
             <div>
-              <p className="font-body text-xs text-soft-white/40 uppercase tracking-widest mb-2">Role</p>
-              <p className="font-body text-sm text-soft-white/80">Developer / Interactive Flow Support</p>
+              <p className="font-body text-xs text-deep-navy/40 dark:text-soft-white/40 uppercase tracking-widest mb-2">Role</p>
+              <p className="font-body text-sm text-deep-navy/80 dark:text-soft-white/80">Developer / Interactive Flow Support</p>
             </div>
             <div>
-              <p className="font-body text-xs text-soft-white/40 uppercase tracking-widest mb-2">Team</p>
-              <p className="font-body text-sm text-soft-white/80">3 members</p>
-              <p className="font-body text-xs text-soft-white/40 mt-1">ธนัทภัทร · กุลปรียา · พิชชาภา</p>
+              <p className="font-body text-xs text-deep-navy/40 dark:text-soft-white/40 uppercase tracking-widest mb-2">Team</p>
+              <p className="font-body text-sm text-deep-navy/80 dark:text-soft-white/80">3 members</p>
+              <p className="font-body text-xs text-deep-navy/40 dark:text-soft-white/40 mt-1">ธนัทภัทร · กุลปรียา · พิชชาภา</p>
             </div>
             <div>
-              <p className="font-body text-xs text-soft-white/40 uppercase tracking-widest mb-2">Tags</p>
+              <p className="font-body text-xs text-deep-navy/40 dark:text-soft-white/40 uppercase tracking-widest mb-2">Tags</p>
               <div className="flex flex-wrap gap-2">
                 {project.tags.map((tag) => (
-                  <span key={tag} className="px-3 py-1 rounded-full bg-soft-white/5 border border-soft-white/10 font-body text-xs text-soft-white/60">
+                  <span key={tag} className="px-3 py-1 rounded-full bg-vinyl-dark/5 dark:bg-soft-white/5 border border-vinyl-dark/15 dark:border-soft-white/10 font-body text-xs text-deep-navy/60 dark:text-soft-white/60">
                     {tag}
                   </span>
                 ))}
@@ -541,7 +541,7 @@ export default function DetectCheatClient({ project }: { project: Project }) {
             </div>
           </div>
 
-          <h3 className="font-display text-xl text-soft-white/50 uppercase tracking-widest mb-6 border-b border-soft-white/10 pb-4">
+          <h3 className="font-display text-xl text-deep-navy/50 dark:text-soft-white/50 uppercase tracking-widest mb-6 border-b border-vinyl-dark/15 dark:border-soft-white/10 pb-4">
             Gallery
           </h3>
           <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-3">
