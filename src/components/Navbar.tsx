@@ -94,7 +94,7 @@ export default function Navbar() {
             <span className="font-display text-2xl text-soft-white tracking-widest leading-none">
               TW<span className="text-hot-pink transition-colors duration-300 group-hover:text-sky-cyan">.</span>
             </span>
-            <span className="font-zen text-[10px] text-muted-lilac tracking-wider leading-none mt-0.5">
+            <span className="font-zen text-[10px] text-lilac-bright tracking-wider leading-none mt-0.5">
               ポートフォリオ
             </span>
           </Link>

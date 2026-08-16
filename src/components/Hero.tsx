@@ -158,8 +158,8 @@ export default function Hero() {
                 1+ Years · Coding Tutor · Game Developer · UX/UI Designer
               </span>
             </div>
-            {/* Japanese subtitle */}
-            <span className="font-zen text-sm text-muted-lilac tracking-widest mt-1">
+            {/* Japanese subtitle — hero stays light pastel in both themes, so use deep-purple for AA contrast */}
+            <span className="font-zen text-sm text-deep-purple tracking-widest mt-1">
               シティポップ ✦ デザイナー
             </span>
           </motion.div>

@@ -110,7 +110,7 @@ function StatBar({ label, pct, from, to }: { label: string; pct: number; from: s
   return (
     <div ref={ref} className="flex items-center gap-3 print:gap-2">
       <span className="font-mono text-xs text-muted-lilac w-20 shrink-0">{label}</span>
-      <span className="font-mono text-xs text-muted-lilac/60 tracking-tight w-24 shrink-0">
+      <span className="font-mono text-xs text-muted-lilac/90 tracking-tight w-24 shrink-0">
         {"█".repeat(filled)}
         <span className="opacity-20">{"█".repeat(blocks - filled)}</span>
       </span>
@@ -315,7 +315,7 @@ export default function ResumePage() {
                         ))}
                       </ul>
                       {w.tech && (
-                        <p className="font-mono text-[10px] text-muted-lilac/60 mt-1">Tech: {w.tech}</p>
+                        <p className="font-mono text-[10px] text-muted-lilac/90 mt-1">Tech: {w.tech}</p>
                       )}
                     </div>
                   </div>
@@ -368,7 +368,7 @@ export default function ResumePage() {
               <div className="flex flex-col gap-5">
                 {skillGroups.map((g) => (
                   <div key={g.label}>
-                    <p className="font-mono text-[10px] text-muted-lilac/70 uppercase tracking-widest mb-2">
+                    <p className="font-mono text-[10px] text-muted-lilac/90 uppercase tracking-widest mb-2">
                       {g.label}
                     </p>
                     <div className="flex flex-wrap gap-2">

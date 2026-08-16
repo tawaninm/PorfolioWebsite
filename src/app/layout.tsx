@@ -45,11 +45,11 @@ export const metadata: Metadata = {
     "City pop retro portfolio — UX/UI design, programming, and corporate identity art. Built with Next.js, Tailwind CSS, and Framer Motion.",
 };
 
-// Ensure proper mobile viewport so the site doesn't render as a tiny desktop page
+// Ensure proper mobile viewport so the site doesn't render as a tiny desktop page.
+// NOTE: maximumScale intentionally omitted — blocking pinch-zoom breaks WCAG 1.4.4.
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
-  maximumScale: 1,
 };
 
 /* ---- Root Layout ---- */
@@ -61,8 +61,18 @@ export default function RootLayout({
   return (
     <html
       lang="en"
+      suppressHydrationWarning
       className={`${righteous.variable} ${dmSans.variable} ${jetbrainsMono.variable} ${zenMaruGothic.variable}`}
     >
+      {/* Inline theme bootstrap — prevents light-mode flash (FOUC) for dark users.
+          Mirrors next-themes resolution: stored theme, else system preference. */}
+      <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `(function(){try{var e=localStorage.getItem("theme");var d=e==="dark"||(!e&&window.matchMedia("(prefers-color-scheme: dark)").matches);document.documentElement.classList.toggle("dark",d)}catch(x){}})()`,
+          }}
+        />
+      </head>
       <body className="font-body antialiased bg-soft-white text-dark-navy dark:bg-space-navy dark:text-soft-white flex flex-col min-h-screen transition-colors duration-300">
         <ThemeProvider>
           <MotionProvider>

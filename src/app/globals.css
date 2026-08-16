@@ -5,6 +5,15 @@
    CITY POP RETRO — Design Tokens (Tailwind v4)
    ======================================== */
 
+/* Theme-aware tokens: --cl-* flips with .dark so utilities stay readable in both modes.
+   muted-lilac: #65557F on light (5.5:1) / #B0A0C8 on dark (6.2:1) — WCAG AA both ways. */
+:root {
+  --cl-muted-lilac: #65557F;
+}
+.dark {
+  --cl-muted-lilac: #B0A0C8;
+}
+
 @theme inline {
   /* ---- Primary Backgrounds (pastel, dreamy) ---- */
   --color-lavender: #C8A8E8;
@@ -26,7 +35,9 @@
   --color-space-navy: #0D0D1A;
   --color-deep-purple: #2D1B4E;
   --color-soft-white: #F4ECE4;
-  --color-muted-lilac: #B0A0C8;
+  --color-muted-lilac: var(--cl-muted-lilac);
+  --color-lilac-bright: #B0A0C8;
+  --color-magenta-deep: #C2185B; /* neon-magenta darkened for light backgrounds (4.9:1) */
 
   /* ---- Anime City Pop ---- */
   --color-neon-magenta: #FF2D78;
@@ -173,6 +184,24 @@ a[class*="bg-neon-magenta"]:hover {
   animation: comic-shake 0.3s ease infinite;
 }
 
+/* ── Accent surfaces use deep-navy text for WCAG AA contrast ──
+   (white on hot-pink/magenta/blue/coral = 2.4–3.7:1; deep-navy = 4.6–6.6:1.
+   Keeps the vivid City Pop palette, only the text color changes.) */
+a[class*="bg-hot-pink"],
+a[class*="bg-neon-magenta"],
+a[class*="bg-electric-blue"],
+a[class*="bg-coral-red"],
+button[class*="bg-hot-pink"],
+button[class*="bg-neon-magenta"],
+button[class*="bg-electric-blue"],
+button[class*="bg-coral-red"],
+span[class*="bg-hot-pink"],
+span[class*="bg-neon-magenta"],
+span[class*="bg-electric-blue"],
+span[class*="bg-coral-red"] {
+  color: #1A1A2E;
+}
+
 /* ── Global card consistent lift + glow ── */
 .card-hover {
   transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -200,4 +229,20 @@ a[class*="bg-neon-magenta"]:hover {
   background: #FF2D78;
 }
 
-/* (No global reduced-motion override — animations always run) */
+/* ── Keyboard focus ring (visible on both themes) ── */
+:focus-visible {
+  outline: 2px solid #FF2D78;
+  outline-offset: 2px;
+}
+
+/* ── Respect reduced-motion preference ── */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

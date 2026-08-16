@@ -122,7 +122,7 @@ function ActivityCard({ activity, index }: { activity: Activity; index: number }
           <p className="font-body text-xs text-dark-navy/70 dark:text-soft-white/65 leading-relaxed line-clamp-3">
             {activity.description}
           </p>
-          <p className="font-body text-[10px] text-muted-lilac/70 italic mt-0.5">{activity.organizer}</p>
+          <p className="font-body text-[10px] text-muted-lilac/90 italic mt-0.5">{activity.organizer}</p>
         </div>
       </div>
     </motion.div>
@@ -165,7 +165,7 @@ export default function ActivitiesPage() {
             ALL ACTIVITIES
           </h1>
           <p className="font-zen text-base text-muted-lilac mt-1 tracking-widest">すべての活動</p>
-          <p className="font-body text-sm text-muted-lilac/70 mt-2">
+          <p className="font-body text-sm text-muted-lilac/90 mt-2">
             Camps, Workshops &amp; Adventures
           </p>
         </motion.div>
@@ -264,7 +264,7 @@ export default function ActivitiesPage() {
                 >
                   {s.number}
                 </span>
-                <span className="font-body text-xs text-muted-lilac mt-2 block uppercase tracking-wider">
+                <span className="font-body text-xs text-lilac-bright mt-2 block uppercase tracking-wider">
                   {s.label}
                 </span>
               </motion.div>

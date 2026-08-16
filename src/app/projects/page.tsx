@@ -183,7 +183,7 @@ export default function ProjectsPage() {
           transition={{ duration: 0.6, delay: 0.1, ease }}>
           <SpeedLines />
           <div className="text-center shrink-0">
-            <span className="font-mono text-xs text-neon-magenta uppercase tracking-[0.2em]">Portfolio</span>
+            <span className="font-mono text-xs text-magenta-deep dark:text-neon-magenta uppercase tracking-[0.2em]">Portfolio</span>
             <p className="font-display text-xl text-dark-navy dark:text-soft-white leading-tight">Full Collection</p>
           </div>
           <SpeedLines flip />

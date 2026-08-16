@@ -130,8 +130,8 @@ export default function Contact() {
                 <span className="text-sakura-white drop-shadow-md"> Amazing Together!</span>
               </h2>
 
-              {/* Japanese subtitle */}
-              <p className="font-zen text-base text-muted-lilac mt-2 tracking-widest">
+              {/* Japanese subtitle — sits on the always-dark vinyl bubble */}
+              <p className="font-zen text-base text-lilac-bright mt-2 tracking-widest">
                 連絡してね！
               </p>
             </div>
@@ -181,14 +181,26 @@ export default function Contact() {
             {/* Postmark / Stamp */}
             <div className="absolute top-4 right-4 md:top-6 md:right-6 opacity-40 pointer-events-none select-none flex flex-col items-center">
               <div className="w-12 h-16 border-2 border-dashed border-muted-lilac/50 rounded flex items-center justify-center p-1">
-                <span className="text-[10px] uppercase font-bold text-center text-muted-lilac/70 leading-tight">Place<br />Stamp<br />Here</span>
+                <span className="text-[10px] uppercase font-bold text-center text-lilac-bright/70 leading-tight">Place<br />Stamp<br />Here</span>
               </div>
               <div className="mt-2 w-16 h-16 border-4 border-double border-neon-magenta/30 rounded-full flex items-center justify-center rotate-[-15deg]">
                 <span className="text-[10px] font-bold text-neon-magenta/40 uppercase whitespace-nowrap">City Pop Mail</span>
               </div>
             </div>
 
-            <form className="flex flex-col gap-5 mt-4 md:mt-0 relative z-10" onSubmit={(e) => e.preventDefault()}>
+            <form
+              className="flex flex-col gap-5 mt-4 md:mt-0 relative z-10"
+              onSubmit={(e) => {
+                e.preventDefault();
+                const f = e.currentTarget;
+                const name = (f.elements.namedItem("name") as HTMLInputElement).value;
+                const email = (f.elements.namedItem("email") as HTMLInputElement).value;
+                const message = (f.elements.namedItem("message") as HTMLTextAreaElement).value;
+                const subject = encodeURIComponent(`Portfolio contact from ${name}`);
+                const body = encodeURIComponent(`${message}\n\n— ${name} (${email})`);
+                window.location.href = `mailto:tawaninm13@gmail.com?subject=${subject}&body=${body}`;
+              }}
+            >
               <div>
                 <label htmlFor="name" className="sr-only">Name</label>
                 <input

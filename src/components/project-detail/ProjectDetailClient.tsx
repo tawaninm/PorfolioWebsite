@@ -220,7 +220,7 @@ export default function ProjectDetailClient({ project }: { project: Project }) {
       {/* ── Project Info Header ── */}
       <FadeSection delay={0.1} className="relative z-10 mx-auto max-w-5xl px-6 mt-10">
         <div className="flex flex-col md:flex-row md:items-center gap-4 md:gap-6 mb-4">
-          <span className="font-body text-sm text-muted-lilac font-bold">{project.date}</span>
+          <span className="font-body text-sm text-lilac-bright font-bold">{project.date}</span>
           <span className={`inline-block w-fit px-4 py-1 rounded-full font-body text-xs font-bold uppercase tracking-widest border ${categoryBg[project.category]}`}>
             {categoryLabels[project.category]}
           </span>

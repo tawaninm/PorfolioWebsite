@@ -30,7 +30,7 @@ export default function ProjectNav({ projects, currentIndex }: ProjectNavProps) 
           href={`/projects/${prev.slug}`}
           className="group flex flex-col items-start gap-1 py-8 px-4 md:px-8 rounded-xl transition-all duration-300 hover:-translate-y-0.5 hover:bg-soft-white/5"
         >
-          <span className="font-body text-xs font-bold uppercase tracking-widest text-muted-lilac group-hover:text-hot-pink transition-colors">
+          <span className="font-body text-xs font-bold uppercase tracking-widest text-lilac-bright group-hover:text-hot-pink transition-colors">
             ← Previous
           </span>
           <span className="font-display text-lg md:text-xl text-soft-white group-hover:text-hot-pink transition-colors line-clamp-1">
@@ -43,7 +43,7 @@ export default function ProjectNav({ projects, currentIndex }: ProjectNavProps) 
           href={`/projects/${next.slug}`}
           className="group flex flex-col items-end gap-1 py-8 px-4 md:px-8 rounded-xl text-right transition-all duration-300 hover:-translate-y-0.5 hover:bg-soft-white/5"
         >
-          <span className="font-body text-xs font-bold uppercase tracking-widest text-muted-lilac group-hover:text-hot-pink transition-colors">
+          <span className="font-body text-xs font-bold uppercase tracking-widest text-lilac-bright group-hover:text-hot-pink transition-colors">
             Next →
           </span>
           <span className="font-display text-lg md:text-xl text-soft-white group-hover:text-hot-pink transition-colors line-clamp-1">

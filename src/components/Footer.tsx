@@ -53,7 +53,7 @@ export default function Footer() {
         {/* ── NOW PLAYING row ── */}
         <div className="flex items-center gap-3 mb-5">
           <VinylRecord />
-          <span className="font-mono text-xs text-muted-lilac tracking-widest uppercase">
+          <span className="font-mono text-xs text-lilac-bright tracking-widest uppercase">
             NOW PLAYING: Your Portfolio
           </span>
         </div>
@@ -74,7 +74,7 @@ export default function Footer() {
         </p>
 
         {/* ── Japanese sign-off ── */}
-        <p className="font-zen text-xs text-muted-lilac/50 tracking-widest">
+        <p className="font-zen text-xs text-lilac-bright/50 tracking-widest">
           ありがとう
         </p>
       </div>

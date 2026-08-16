@@ -81,7 +81,7 @@ export default function MiniWorkPage() {
             MINI WORK EXPLORATION
           </h1>
           <p className="font-zen text-base text-muted-lilac mt-1 tracking-widest">ミニワーク探索</p>
-          <p className="font-body text-sm text-muted-lilac/70 mt-2">
+          <p className="font-body text-sm text-muted-lilac/90 mt-2">
             Experiments, Designs &amp; Code Snippets
           </p>
         </motion.div>
@@ -188,7 +188,7 @@ export default function MiniWorkPage() {
                 >
                   {s.number}
                 </span>
-                <span className="font-body text-xs text-muted-lilac mt-2 block uppercase tracking-wider">
+                <span className="font-body text-xs text-lilac-bright mt-2 block uppercase tracking-wider">
                   {s.label}
                 </span>
               </motion.div>

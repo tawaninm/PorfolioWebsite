@@ -163,7 +163,7 @@ function ChapterHeader({ chapter, title }: { chapter: string; title: string }) {
     <div className="flex items-center justify-center gap-4 mb-16">
       <SpeedLines />
       <div className="text-center shrink-0">
-        <span className="font-mono text-xs text-neon-magenta uppercase tracking-[0.2em]">{chapter}</span>
+        <span className="font-mono text-xs text-magenta-deep dark:text-neon-magenta uppercase tracking-[0.2em]">{chapter}</span>
         <p className="font-display text-xl text-dark-navy dark:text-soft-white leading-tight">{title}</p>
       </div>
       <SpeedLines flip />
@@ -242,7 +242,7 @@ function HeroBanner() {
           <h1 className="font-display text-5xl md:text-7xl lg:text-8xl tracking-widest text-soft-white leading-none mb-2">
             ABOUT ME
           </h1>
-          <p className="font-zen text-lg text-muted-lilac tracking-widest mb-3">私について</p>
+          <p className="font-zen text-lg text-lilac-bright tracking-widest mb-3">私について</p>
           <p className="font-body text-soft-white/50 text-sm tracking-wider">
             {profile.tagline}
           </p>
@@ -842,7 +842,7 @@ function ContactCTA() {
                   Want to Work Together?
                 </span>
               </h2>
-              <p className="font-zen text-base text-muted-lilac mt-2 tracking-widest">一緒に働きましょう</p>
+              <p className="font-zen text-base text-lilac-bright mt-2 tracking-widest">一緒に働きましょう</p>
             </div>
             {/* Bubble tail */}
             <div className="absolute -bottom-[11px] left-10 w-0 h-0"
@@ -869,14 +869,26 @@ function ContactCTA() {
             {/* Postmark stamp */}
             <div className="absolute top-4 right-4 md:top-6 md:right-6 opacity-40 pointer-events-none select-none flex flex-col items-center">
               <div className="w-12 h-16 border-2 border-dashed border-muted-lilac/50 rounded flex items-center justify-center p-1">
-                <span className="text-[10px] uppercase font-bold text-center text-muted-lilac/70 leading-tight">Place<br />Stamp<br />Here</span>
+                <span className="text-[10px] uppercase font-bold text-center text-lilac-bright/70 leading-tight">Place<br />Stamp<br />Here</span>
               </div>
               <div className="mt-2 w-16 h-16 border-4 border-double border-neon-magenta/30 rounded-full flex items-center justify-center rotate-[-15deg]">
                 <span className="text-[10px] font-bold text-neon-magenta/40 uppercase whitespace-nowrap">City Pop Mail</span>
               </div>
             </div>
 
-            <form className="flex flex-col gap-5 mt-4 md:mt-0 relative z-10" onSubmit={(e) => e.preventDefault()}>
+            <form
+              className="flex flex-col gap-5 mt-4 md:mt-0 relative z-10"
+              onSubmit={(e) => {
+                e.preventDefault();
+                const f = e.currentTarget;
+                const name = (f.elements.namedItem("about-name") as HTMLInputElement).value;
+                const email = (f.elements.namedItem("about-email") as HTMLInputElement).value;
+                const message = (f.elements.namedItem("about-message") as HTMLTextAreaElement).value;
+                const subject = encodeURIComponent(`Portfolio contact from ${name}`);
+                const body = encodeURIComponent(`${message}\n\n— ${name} (${email})`);
+                window.location.href = `mailto:${profile.contact.email}?subject=${subject}&body=${body}`;
+              }}
+            >
               <div>
                 <label htmlFor="about-name" className="sr-only">Name</label>
                 <input type="text" id="about-name" placeholder="Your Name"
