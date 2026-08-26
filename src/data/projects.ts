@@ -309,5 +309,156 @@ export const projects: Project[] = [
       "/images/Project/%E0%B8%AB%E0%B9%89%E0%B8%A7%E0%B8%87%E0%B8%A5%E0%B8%B6%E0%B8%81%E0%B8%A0%E0%B8%B2%E0%B8%A2%E0%B9%83%E0%B8%99%E0%B8%88%E0%B8%B4%E0%B8%95%E0%B9%83%E0%B8%88%20(Criminal%20Minds)/32.png",
       "/images/Project/%E0%B8%AB%E0%B9%89%E0%B8%A7%E0%B8%87%E0%B8%A5%E0%B8%B6%E0%B8%81%E0%B8%A0%E0%B8%B2%E0%B8%A2%E0%B9%83%E0%B8%99%E0%B8%88%E0%B8%B4%E0%B8%95%E0%B9%83%E0%B8%88%20(Criminal%20Minds)/34.png",
     ],
+  },
+  {
+    slug: "lorcana-cloud-playlab",
+    title: "Disney Lorcana PlayLab (AWS Cloud & OWASP QA Testing)",
+    category: "programming",
+    thumbnail: "/images/Project/Lorcana/preview-cloudgame.png",
+    heroImage: "/images/Project/Lorcana/preview-cloudgame.png",
+    date: "2026",
+    tags: ["AWS Serverless", "WebSocket", "DynamoDB", "QA Testing", "OWASP Security", "Playwright", "Real-Time"],
+    techStack: ["AWS API Gateway (WebSockets)", "AWS Lambda (Node.js)", "Amazon DynamoDB (Single-Table)", "AWS S3 / CloudFront", "AWS SAM CLI", "Playwright E2E", "Vitest", "Tailwind CSS"],
+    summary: "แพลตฟอร์มการเล่นการ์ดเกมออนไลน์แบบเรียลไทม์บนสถาปัตยกรรม AWS Serverless เชื่อมต่อผู้เล่นผ่าน WebSocket API Gateway (<100ms latency), DynamoDB Single-Table State Sync พร้อมชุดทดสอบ E2E และแผนการทดสอบความปลอดภัยตามกรอบ OWASP Top 10 และระบบ Reconnect อัตโนมัติ",
+    problem: "เกมการ์ด TCG มี State การเล่นที่ซับซ้อนมาก การส่งข้อมูลผ่าน REST API ทั่วไปจะหน่วงและเกิด Race Condition อีกทั้งการจัดการห้องเล่น (Room Lifecycle) มักเสี่ยงต่อปัญหาข้อมูลสูญหายเมื่อเน็ตหลุด และช่องโหว่ด้านความปลอดภัยจากการปลอมแปลง Action",
+    process: "ออกแบบ DynamoDB Single-Table Schema -> พัฒนา Lambda Action Routers ($connect, sendAction, $disconnect) -> สร้าง Frontend React พร้อม Optimistic UI -> ออกแบบ Master QA Test Sheet และรัน Playwright E2E จำลองผู้เล่นคู่ขนาน พร้อมทดสอบความปลอดภัยตามกรอบ OWASP Web/API",
+    phases: [
+      {
+        title: "Phase 1: AWS Serverless & WebSocket Architecture",
+        description: "วางระบบ API Gateway WebSocket เชื่อมต่อ Lambda Routers และจัดเก็บ Connection State ลง DynamoDB แบบ Pay-per-request"
+      },
+      {
+        title: "Phase 2: Game Board Frontend & Optimistic Sync",
+        description: "พัฒนา UI กระดานเกมใน React รองรับการขยับการ์ด, Inkwell, Quest Lore Count พร้อมระบบ Live Broadcast (<100ms)"
+      },
+      {
+        title: "Phase 3: Master QA Testing & Automation Suite",
+        description: "สร้าง Master QA Sheet (backend-aws-runner.cjs / qa-reporter.cjs) และเขียน Playwright E2E Test ครอบคลุมทุก Action การเล่น"
+      },
+      {
+        title: "Phase 4: OWASP Security & Connection Resilience",
+        description: "ทดสอบการป้องกัน Injection/State Tampering ตาม OWASP Guidelines และจำลองกรณี Network Drop เพื่อยืนยันว่าระบบ Reconnect ได้ 100% โดย State ไม่หาย"
+      }
+    ],
+    result: "The Solution: ระบบเล่นการ์ดเกมบน Cloud ที่เสถียร รองรับการเล่นแบบ Real-time พร้อมหลักฐานการทดสอบ QA ครอบคลุมทั้งฟังก์ชันและความปลอดภัย\nImpact: Server Cost เป็น $0 บน AWS Free Tier, ผ่านการทดสอบ Stress/Fault-Tolerance Test และรับประกัน State Integrity ตลอดทั้งเกม",
+    gallery: [
+      "/images/Project/Lorcana/preview-cloudgame.png",
+      "/images/Project/Lorcana/qa-dashboard.png",
+      "/images/Project/Lorcana/cloud-architecture.png",
+      "/images/Project/Lorcana/gameplay-board.png",
+      "/images/Project/Lorcana/dynamodb-schema.png"
+    ],
+  },
+  {
+    slug: "tawan-os-agent-harness",
+    title: "TAWAN-OS (Agentic AI Operating System & CLI Harness)",
+    category: "programming",
+    thumbnail: "/images/Project/TawanOS/preview-tawanos.png",
+    heroImage: "/images/Project/TawanOS/preview-tawanos.png",
+    date: "2026",
+    tags: ["Agentic AI", "MCP (Model Context Protocol)", "Hermes Agent", "Antigravity CLI", "Python", "Automation"],
+    techStack: ["Antigravity CLI (agy)", "Hermes Agent", "Model Context Protocol (MCP)", "Python 3.11", "Next.js", "Obsidian Markdown", "Gemini 3.7 Flash High / 3.1 Pro"],
+    summary: "ระบบปฏิบัติการส่วนบุคคลและ AI Agent Harness แบบ Markdown-first ควบคุมการทำงานของ Multi-Agent Orchestration ผ่าน Terminal, มีระบบเชื่อมต่อ Model Context Protocol (MCP) ควบคุม Figma Canvas, Obsidian, Unity Engine, และ Canva พร้อมสถาปัตยกรรม Proxy:3120 เชื่อมโมเดล High-Tier และคลัง Custom Skills กว่า 500+ ทักษะ",
+    problem: "การใช้งาน AI แชทบอททั่วไปขาด Context ระยะยาว (Stateless), สลับเครื่องมือลำบาก, ไม่สามารถสั่งงานโปรแกรมในเครื่อง (เช่น Figma, Local Files, Git) ได้จริง และมักสร้างโค้ดแบบ Vibe Coding ที่ไม่มีการตรวจสอบความถูกต้อง",
+    process: "วางโครงสร้าง Persistent Memory Vault (AGENTS.md, RULES.md, 07_MEMORY) -> ติดตั้ง Antigravity CLI & Hermes Agent พร้อม Proxy Bridge (proxy:3120) -> พัฒนา Figma MCP Bridge ผ่าน WebSocket ให้ AI วาด Component บน Canvas สด -> สร้าง Custom Skill Engine (500+ Skills) พร้อม Verification Loops (Plan -> Execute -> Doctor Test)",
+    phases: [
+      {
+        title: "Phase 1: Spec-Driven Memory Vault & System Rules",
+        description: "วางมาตรฐาน Obsidian Markdown จัดการความจำระยะยาว, กฎความปลอดภัย Guardrails, และ Context Packets"
+      },
+      {
+        title: "Phase 2: Local Proxy Architecture & Model Routing",
+        description: "สร้าง Proxy Gateway (Port 3120 / _antigravity_proxy.py) สำหรับสลับโมเดล High-Tier อัตโนมัติตามความยากของงานเพื่อประหยัด Token"
+      },
+      {
+        title: "Phase 3: Real-Time MCP Ecosystem (Figma, Obsidian, Unity)",
+        description: "พัฒนา Local WebSocket MCP Bridge ให้ AI ควบคุม Canvas ของ Figma, อ่าน/เขียนโน้ต Obsidian, และสั่งงาน Unity Editor ได้โดยตรง"
+      },
+      {
+        title: "Phase 4: 500+ Custom Skills & Self-Healing Loops",
+        description: "สร้างระบบ Custom Skill Registry (SKILL.md) และ Verification Pipeline (SWE-loop / agy doctor) ให้ AI ตรวจสอบและแก้ Bug โค้ดด้วยตัวเองก่อนส่งมอบ"
+      }
+    ],
+    result: "The Solution: สภาพแวดล้อม AI-Native วิศวกรรมซอฟต์แวร์เต็มรูปแบบ ที่ผสานการเขียนโค้ด การออกแบบ UI และการจัดการความรู้ไว้ในจุดเดียว\nImpact: ลดเวลาจัดการงานประจำวันลงกว่า 60%, ป้องกันการเกิด AI Code Slop ด้วย Spec-First Architecture และสามารถควบคุมเครื่องมือภายนอกผ่าน MCP ได้อย่างไร้รอยต่อ",
+    gallery: [
+      "/images/Project/TawanOS/preview-tawanos.png",
+      "/images/Project/TawanOS/mcp-ecosystem.png",
+      "/images/Project/TawanOS/agent-architecture.png"
+    ],
+  },
+  {
+    slug: "redbull-f1-verstappen",
+    title: "Red Bull Racing F1 — Max Verstappen (3D Interactive Experience)",
+    category: "programming",
+    thumbnail: "/images/Project/RedBull-F1/preview-f1.png",
+    heroImage: "/images/Project/RedBull-F1/preview-f1.png",
+    date: "2026",
+    tags: ["Three.js", "3D Web", "GSAP Animation", "Interactive UI", "F1", "Veo AI Video"],
+    techStack: ["Three.js", "WebGL / GLTF 3D Loader", "GSAP (ScrollTrigger)", "JavaScript (Vanilla)", "HTML5/CSS3", "Google Veo AI Video", "Custom Design Tokens"],
+    summary: "เว็บไซต์ประสบการณ์จำลอง 3D แบบ Interactive สำหรับทีม Red Bull Racing และแชมป์โลก F1 'Max Verstappen' โดดเด่นด้วยโมเดล 3D รถแข่ง RB19 (2023) ที่หมุนสำรวจรอบคันและแสดงมุมมองระเบิดชิ้นส่วน (Exploded View), อนิเมชันเลื่อนหน้าจอ Parallax ความเร็วสูงด้วย GSAP, ระบบเสียงเครื่องยนต์ และวิดีโอ AI Cinematic จาก Google Veo",
+    problem: "เว็บไซต์กีฬาความเร็วและยานยนต์ส่วนใหญ่มักเป็นภาพนิ่ง 2D ขาดความเร้าใจและไม่สามารถถ่ายทอดความล้ำสมัยของเทคโนโลยีแอร์โรไดนามิกส์ในรถแข่ง F1 ยุคใหม่ได้อย่างเต็มอารมณ์",
+    process: "วางแนวคิด Design Token สไตล์ High-Performance Dark (#0a1024, Max Red #e01020, Champion Gold #f1c40f) -> นำเข้าโมเดล 3D RB19 GLB และเขียนสคริปต์ Three.js สำหรับ Exploded View Camera Tracking -> สร้าง GSAP ScrollTrigger ควบคุมจังหวะไทม์ไลน์และ Parallax -> เสริมพลังด้วย Generative Video และ Telemetry HUD",
+    phases: [
+      {
+        title: "Phase 1: Concept & Design Token System",
+        description: "กำหนดสเปค DESIGN.md ธีม Dark High-Performance ตัดเส้นขอบนีออน สะท้อนความดุดันและแม่นยำของ Max Verstappen"
+      },
+      {
+        title: "Phase 2: 3D Asset Optimization & Three.js Canvas",
+        description: "โหลดและเรนเดอร์โมเดล Oracle Red Bull Racing RB19 GLB พร้อมเขียนสคริปต์ three-exploded.js เพื่อแยกชิ้นส่วน Body, Wings, และ Tires"
+      },
+      {
+        title: "Phase 3: Cinematic GSAP Scroll & Parallax",
+        description: "ผูกการหมุนของรถ 3D และการเลื่อนข้อความ Telemetry เข้ากับความเร็วในการ Scroll ของผู้ใช้แบบไร้รอยต่อ"
+      },
+      {
+        title: "Phase 4: Multi-Media & AI Video Integration",
+        description: "สกัดเฟรมและผสมผสานวิดีโอ Cinematic AI (Google Veo) พร้อมเสียงเครื่องยนต์ F1 เพิ่มความสมจริงในระดับมัลติมีเดีย"
+      }
+    ],
+    result: "The Solution: เว็บไซต์ 3D Showpiece ที่ผสมผสานศาสตร์ Visual Design, 3D Graphics และ Web Performance ได้อย่างลงตัว\nImpact: ยกระดับประสบการณ์การรับชมเนื้อหา F1 บนเบราว์เซอร์ให้ตื่นเต้นและมีปฏิสัมพันธ์แบบ Real-time โดยไม่สูญเสียความเร็วในการโหลดหน้าเว็บ",
+    gallery: [
+      "/images/Project/RedBull-F1/preview-f1.png",
+      "/images/Project/RedBull-F1/exploded-view.png",
+      "/images/Project/RedBull-F1/telemetry-hud.png"
+    ],
+  },
+  {
+    slug: "hybricareer-ai",
+    title: "HybriCareer AI (BridgeAI) — Generation Hackathon Proposal",
+    category: "uxui",
+    thumbnail: "/images/Project/HybriCareer/preview-hybricareer.png",
+    heroImage: "/images/Project/HybriCareer/preview-hybricareer.png",
+    date: "2026",
+    tags: ["Hackathon Proposal", "Top 10 Finalist", "AI SaaS Concept", "UX/UI Design", "Product Strategy"],
+    techStack: ["Figma", "React / TypeScript (PoC)", "Tailwind CSS", "Prompt Engineering", "Lovable", "Gemini API"],
+    summary: "ข้อเสนอโครงการและ Interactive PoC สำหรับการแข่งขัน Generation Thailand Hackathon ได้รับการคัดเลือกเป็น 'Top 10 Finalist Proposal' (ทีมสำรองอันดับที่ 5) นำเสนอแพลตฟอร์ม AI เพื่อแก้ปัญหาบัณฑิตต้องการย้ายสายงาน (Non-traditional Graduates) ให้ก้าวข้ามการคัดกรองของระบบ ATS ด้วย AI Skill-Proof Radar และ Narrative Mock Interview",
+    problem: "ผู้ที่ต้องการเปลี่ยนสายงานมักถูกคัดทิ้งโดยระบบ ATS ตั้งแต่ด่านแรกเนื่องจากชื่อปริญญาไม่ตรงสาย แม้จะมีทักษะจริง ขาดเครื่องมือที่ช่วยยืนยัน Transferable Skills และพิสูจน์ความพร้อมเชิงประจักษ์ให้ HR เชื่อมั่น",
+    process: "ทำ User Research & Persona Mapping (Candidate vs. Recruiter) -> ออกแบบ Information Architecture & Visual Identity สไตล์ Modern SaaS (Indigo & Emerald) -> สร้าง Interactive PoC สำหรับคำนวณ Skill Radar และจำลองการสัมภาษณ์งานด้วย AI Narrative Engine -> สรุป Pitch Deck นำเสนอคณะกรรมการ",
+    phases: [
+      {
+        title: "Phase 1: Problem Discovery & Hackathon Ideation",
+        description: "วิเคราะห์ Pain Point ของกลุ่ม Career Switcher ในไทย และออกแบบคุณค่าหลัก (Value Proposition) เพื่อนำเสนอใน Generation Hackathon"
+      },
+      {
+        title: "Phase 2: Dual-Persona UX/UI Design",
+        description: "ออกแบบหน้าจอสำหรับ Candidate (Upload Portfolio / AI Feedback) และ HR Recruiter (1-Click Skill Verification Dashboard)"
+      },
+      {
+        title: "Phase 3: Interactive AI PoC Prototype",
+        description: "พัฒนา Prototype จำลองการคำนวณ Skill Readiness Radar Chart และบทสนทนาสัมภาษณ์งานจำลองแบบ Interactive"
+      },
+      {
+        title: "Phase 4: Pitch Deck & Proposal Submission",
+        description: "จัดทำเอกสารข้อเสนอโครงการและสไลด์ Pitching จนผ่านการคัดเลือกเข้ารอบ Top 10 Finalist Proposal (5th Reserve Team)"
+      }
+    ],
+    result: "The Solution: ข้อเสนอโซลูชันด้าน HR-Tech ที่เปลี่ยนใบปริญญาเป็นหลักฐานทางทักษะที่จับต้องได้จริง (Competency-based Proof)\nImpact: ได้รับการจัดอันดับเป็น Top 10 Shortlisted Proposal ในการแข่งขันระดับประเทศ และได้ฝึกฝน Product Thinking, AI Prompt Workflow, และ UX Design System อย่างเข้มข้น",
+    gallery: [
+      "/images/Project/HybriCareer/preview-hybricareer.png",
+      "/images/Project/HybriCareer/hackathon-slide.png",
+      "/images/Project/HybriCareer/candidate-flow.png",
+      "/images/Project/HybriCareer/skill-radar.png"
+    ],
   }
 ];

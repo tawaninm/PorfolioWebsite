@@ -39,7 +39,12 @@ function Starburst() {
   );
 }
 
-const featuredSlugs = ["chao-dom", "drive-kmitl", "vps-tycoon", "criminal-mind"];
+const featuredSlugs = [
+  "lorcana-cloud-playlab",
+  "tawan-os-agent-harness",
+  "redbull-f1-verstappen",
+  "hybricareer-ai",
+];
 const previewProjects = featuredSlugs
   .map((slug) => projects.find((p) => p.slug === slug))
   .filter(Boolean) as typeof projects;
