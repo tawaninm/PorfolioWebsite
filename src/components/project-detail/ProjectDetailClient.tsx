@@ -134,6 +134,10 @@ export default function ProjectDetailClient({ project }: { project: Project }) {
   const isVpsTycoon = project.slug === "vps-tycoon";
   const isDriveKmitl = project.slug === "drive-kmitl";
   const isSynchro = project.slug === "synchro";
+  const isLorcana = project.slug === "lorcana-cloud-playlab";
+  const isTawanOs = project.slug === "tawan-os-agent-harness";
+  const isRedBullF1 = project.slug === "redbull-f1-verstappen";
+  const isHybriCareer = project.slug === "hybricareer-ai";
 
   function openLightbox(images: string[], index: number) {
     setLightboxImages(images);
@@ -251,9 +255,97 @@ export default function ProjectDetailClient({ project }: { project: Project }) {
         <FadeSection delay={0} className="py-14">
           <SectionNumber n="01" />
           <h2 className="font-display text-3xl md:text-4xl text-deep-navy dark:text-soft-white mb-6 -mt-2">
-            {isPolygonMesh ? "Learning Goal" : isVpsTycoon ? "Project Pitch" : isDriveKmitl ? "Product Summary" : isSynchro ? "Product Goal" : "Overview"}
+            {isPolygonMesh ? "Learning Goal" : isVpsTycoon ? "Project Pitch" : isDriveKmitl ? "Product Summary" : isSynchro ? "Product Goal" : isLorcana ? "Project Architecture Summary" : isTawanOs ? "System Architecture Summary" : isRedBullF1 ? "Concept & 1-Week Sprint Goal" : isHybriCareer ? "Hackathon Project Summary" : "Overview"}
           </h2>
           <p className="font-body text-base md:text-lg text-deep-navy/75 dark:text-soft-white/75 leading-relaxed">{project.summary}</p>
+
+          {isLorcana && (
+            <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-4">
+              {[
+                { src: "/images/Project/Lorcana/01_landing_hero.png", label: "Landing Hero (3D Cover Flow & Sets)" },
+                { src: "/images/Project/Lorcana/07_realtime_room_play.png", label: "Real-Time Battle Arena (AWS WebSockets)" },
+              ].map(({ src, label }, i) => (
+                <motion.button
+                  key={i}
+                  className="group relative aspect-video rounded-2xl overflow-hidden bg-deep-purple/30 border border-soft-white/5 cursor-pointer focus:outline-none focus:ring-2 focus:ring-amber-400/50"
+                  onClick={() => openLightbox(["/images/Project/Lorcana/01_landing_hero.png", "/images/Project/Lorcana/07_realtime_room_play.png"], i)}
+                  whileHover={{ scale: 1.02 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  <Image src={src} alt={label} fill className="object-cover" sizes="(max-width: 768px) 100vw, 50vw" />
+                  <div className="absolute inset-0 bg-amber-400/0 group-hover:bg-amber-400/10 transition-colors duration-300 flex items-center justify-center">
+                    <span className="font-body text-sm text-soft-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-dark-navy/60 px-4 py-2 rounded-full backdrop-blur-sm">{label}</span>
+                  </div>
+                </motion.button>
+              ))}
+            </div>
+          )}
+
+          {isTawanOs && (
+            <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-4">
+              {[
+                { src: "/images/Project/TawanOS/preview-tawanos.png", label: "Antigravity CLI Terminal AI Harness" },
+                { src: "/images/Project/TawanOS/agent-architecture.png", label: "Multi-Agent System Architecture" },
+              ].map(({ src, label }, i) => (
+                <motion.button
+                  key={i}
+                  className="group relative aspect-video rounded-2xl overflow-hidden bg-deep-purple/30 border border-soft-white/5 cursor-pointer focus:outline-none focus:ring-2 focus:ring-sky-cyan/50"
+                  onClick={() => openLightbox(["/images/Project/TawanOS/preview-tawanos.png", "/images/Project/TawanOS/agent-architecture.png"], i)}
+                  whileHover={{ scale: 1.02 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  <Image src={src} alt={label} fill className="object-cover" sizes="(max-width: 768px) 100vw, 50vw" />
+                  <div className="absolute inset-0 bg-sky-cyan/0 group-hover:bg-sky-cyan/10 transition-colors duration-300 flex items-center justify-center">
+                    <span className="font-body text-sm text-soft-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-dark-navy/60 px-4 py-2 rounded-full backdrop-blur-sm">{label}</span>
+                  </div>
+                </motion.button>
+              ))}
+            </div>
+          )}
+
+          {isRedBullF1 && (
+            <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-4">
+              {[
+                { src: "/images/Project/RedBull-F1/hero-bg.jpg", label: "Oracle Red Bull Racing RB19" },
+                { src: "/images/Project/RedBull-F1/max_portrait.jpg", label: "Max Verstappen (World Champion)" },
+              ].map(({ src, label }, i) => (
+                <motion.button
+                  key={i}
+                  className="group relative aspect-video rounded-2xl overflow-hidden bg-deep-purple/30 border border-soft-white/5 cursor-pointer focus:outline-none focus:ring-2 focus:ring-red-500/50"
+                  onClick={() => openLightbox(["/images/Project/RedBull-F1/hero-bg.jpg", "/images/Project/RedBull-F1/max_portrait.jpg"], i)}
+                  whileHover={{ scale: 1.02 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  <Image src={src} alt={label} fill className="object-cover" sizes="(max-width: 768px) 100vw, 50vw" />
+                  <div className="absolute inset-0 bg-red-500/0 group-hover:bg-red-500/10 transition-colors duration-300 flex items-center justify-center">
+                    <span className="font-body text-sm text-soft-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-dark-navy/60 px-4 py-2 rounded-full backdrop-blur-sm">{label}</span>
+                  </div>
+                </motion.button>
+              ))}
+            </div>
+          )}
+
+          {isHybriCareer && (
+            <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-4">
+              {[
+                { src: "/images/Project/HybriCareer/slide1_hackathon_cover.png", label: "Generation Hackathon Pitch Deck" },
+                { src: "/images/Project/HybriCareer/slide2_user_research.png", label: "User Research & Labor Insights" },
+              ].map(({ src, label }, i) => (
+                <motion.button
+                  key={i}
+                  className="group relative aspect-video rounded-2xl overflow-hidden bg-deep-purple/30 border border-soft-white/5 cursor-pointer focus:outline-none focus:ring-2 focus:ring-emerald-500/50"
+                  onClick={() => openLightbox(["/images/Project/HybriCareer/slide1_hackathon_cover.png", "/images/Project/HybriCareer/slide2_user_research.png"], i)}
+                  whileHover={{ scale: 1.02 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  <Image src={src} alt={label} fill className="object-cover" sizes="(max-width: 768px) 100vw, 50vw" />
+                  <div className="absolute inset-0 bg-emerald-500/0 group-hover:bg-emerald-500/10 transition-colors duration-300 flex items-center justify-center">
+                    <span className="font-body text-sm text-soft-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-dark-navy/60 px-4 py-2 rounded-full backdrop-blur-sm">{label}</span>
+                  </div>
+                </motion.button>
+              ))}
+            </div>
+          )}
 
           {isVpsTycoon && (
             <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -305,9 +397,65 @@ export default function ProjectDetailClient({ project }: { project: Project }) {
         <FadeSection delay={0.05} className="py-14">
           <SectionNumber n="02" extra={<ImpactBubble />} />
           <h2 className="font-display text-3xl md:text-4xl text-deep-navy dark:text-soft-white mb-6 -mt-2">
-            {isPolygonMesh ? "Why This Topic Is Hard" : isVpsTycoon ? "The Challenge" : "The Problem"}
+            {isPolygonMesh ? "Why This Topic Is Hard" : isVpsTycoon ? "The Challenge" : isLorcana ? "The Problem & Latency Challenge" : isTawanOs ? "The Challenge: Stateless Drift" : isRedBullF1 ? "The Challenge: High-Performance 3D" : isHybriCareer ? "The Challenge: Youth Unemployment" : "The Problem"}
           </h2>
           <p className="font-body text-base md:text-lg text-deep-navy/75 dark:text-soft-white/75 leading-relaxed">{project.problem}</p>
+
+          {isLorcana && (
+            <div className="mt-8 relative bg-vinyl-dark/5 dark:bg-soft-white/5 border border-amber-400/30 rounded-2xl p-6 md:p-8 overflow-hidden">
+              <div className="flex items-start gap-4">
+                <ImpactBubble />
+                <div>
+                  <p className="font-display text-lg text-amber-500 mb-2">Cloud Latency, High Server Costs &amp; Static Card Simulators</p>
+                  <p className="font-body text-sm text-deep-navy/75 dark:text-soft-white/75 leading-relaxed">
+                    เกมการ์ด TCG มี State การเล่นที่ซับซ้อนมาก การส่งข้อมูลผ่าน REST API ทั่วไปจะหน่วงและเกิด Race Condition อีกทั้งการจัดการห้องเล่น (Room Lifecycle) มักเสี่ยงต่อปัญหาข้อมูลสูญหายเมื่อเน็ตหลุด ความท้าทายคือการสร้างระบบ Real-time State Sync บน Cloud ที่มี Latency ต่ำกว่า 100ms โดยไม่มีค่าใช้จ่ายเซิร์ฟเวอร์ ($0.00 บน AWS Free Tier) พร้อมฟิสิกส์การ์ด 3D ที่ให้ความรู้สึกลื่นไหลสมจริง
+                  </p>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {isTawanOs && (
+            <div className="mt-8 relative bg-vinyl-dark/5 dark:bg-soft-white/5 border border-sky-cyan/30 rounded-2xl p-6 md:p-8 overflow-hidden">
+              <div className="flex items-start gap-4">
+                <ImpactBubble />
+                <div>
+                  <p className="font-display text-lg text-cyan-deep dark:text-sky-cyan mb-2">Stateless Drift &amp; AI Code Slop Without Grounding</p>
+                  <p className="font-body text-sm text-deep-navy/75 dark:text-soft-white/75 leading-relaxed">
+                    การใช้งาน AI แชทบอททั่วไปขาด Context ระยะยาว (Stateless), สลับเครื่องมือลำบาก, ไม่สามารถสั่งงานโปรแกรมในเครื่อง (เช่น Figma, Obsidian Vault, Unity CLI) ได้จริง และมักสร้างโค้ดแบบ Vibe Coding ที่ไม่มีการตรวจสอบความถูกต้อง ระบบนี้จึงถูกสร้างขึ้นเพื่อเป็น Agent Harness ที่มี Memory มาตรฐานและ Verification Loop ในตัว
+                  </p>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {isRedBullF1 && (
+            <div className="mt-8 relative bg-vinyl-dark/5 dark:bg-soft-white/5 border border-red-500/30 rounded-2xl p-6 md:p-8 overflow-hidden">
+              <div className="flex items-start gap-4">
+                <ImpactBubble />
+                <div>
+                  <p className="font-display text-lg text-red-500 mb-2">Crafting 3D High-Performance Web Without Cookie-Cutter AI Templates</p>
+                  <p className="font-body text-sm text-deep-navy/75 dark:text-soft-white/75 leading-relaxed">
+                    การสร้างเว็บ 3D ด้วย AI มักเจอปัญหาโค้ดหลุดติด Template สำเร็จรูป ขาดเอกลักษณ์ และกิน Token มหาศาลจนไม่สามารถปรับแต่งงานคราฟต์ได้ ความท้าทายของสปรินต์ 1 สัปดาห์นี้คือการพิสูจน์ว่า หากใช้ Antigravity CLI ควบคุม Subagents 17 ตัว ร่วมกับ Taste ของคนคุมทิศทาง จะสามารถส่งมอบเว็บ 3D Exploded View และ Parallax ระดับ 60 FPS ได้โดยไม่ติด Token Limit
+                  </p>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {isHybriCareer && (
+            <div className="mt-8 relative bg-vinyl-dark/5 dark:bg-soft-white/5 border border-emerald-500/30 rounded-2xl p-6 md:p-8 overflow-hidden">
+              <div className="flex items-start gap-4">
+                <ImpactBubble />
+                <div>
+                  <p className="font-display text-lg text-emerald-600 dark:text-emerald-400 mb-2">The ATS Degree Barrier in Thailand&apos;s Youth Labor Market</p>
+                  <p className="font-body text-sm text-deep-navy/75 dark:text-soft-white/75 leading-relaxed">
+                    ผู้ที่ต้องการเปลี่ยนสายงานมักถูกคัดทิ้งโดยระบบ ATS ตั้งแต่ด่านแรกเนื่องจากชื่อปริญญาไม่ตรงสาย แม้จะมีทักษะจริงผ่านการเรียนรู้ด้วยตนเอง ขณะที่ HR องค์กรขนาดกลาง-เล็กมีเวลาจำกัด ขาดเครื่องมือคัดกรองความสามารถเชิงประจักษ์ ส่งผลให้อัตราการว่างงานของเยาวชนอายุ 20-24 ปีในไทยพุ่งสูงถึง 34%
+                  </p>
+                </div>
+              </div>
+            </div>
+          )}
 
           {isVpsTycoon && (
             <div className="mt-8 relative bg-vinyl-dark/5 dark:bg-soft-white/5 border border-sky-cyan/30 rounded-2xl p-6 md:p-8 overflow-hidden">
@@ -495,7 +643,7 @@ export default function ProjectDetailClient({ project }: { project: Project }) {
             </FadeSection>
           )}
 
-          {project.phases && project.phases.length > 0 && (
+          {project.phases && project.phases.length > 0 && isChaodom && (
             <div className="mt-12 space-y-8 mx-auto max-w-4xl">
 
               {/* Phase 1 */}
@@ -1552,6 +1700,606 @@ export default function ProjectDetailClient({ project }: { project: Project }) {
             <div className="h-px bg-gradient-to-r from-transparent via-vinyl-dark/15 dark:via-soft-white/10 to-transparent" />
           </>
         )}
+
+        {/* ════════════════════════════════════════
+            DISNEY LORCANA PLAYLAB (isLorcana only)
+        ════════════════════════════════════════ */}
+        {isLorcana && (
+          <>
+            {/* ── 03 CORE SYSTEMS & GAME ENGINE ── */}
+            <FadeSection delay={0.05} className="py-14">
+              <SectionNumber n="03" />
+              <h2 className="font-display text-3xl md:text-4xl text-deep-navy dark:text-soft-white mb-6 -mt-2">Core Systems &amp; Game Engine</h2>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-10">
+                {[
+                  {
+                    icon: "🎴",
+                    title: "Fisher-Yates Booster Pack Gacha Engine",
+                    desc: "สุ่มเปิดซองการ์ดแบบ True Randomization จากฐานข้อมูลทางการ 3,129 ใบ (Set 1 The First Chapter & Set 2 Rise of the Floodborn) ครบทั้ง 9 ระดับ Rarity พร้อมระบบเรต Enchanted Secret Art ที่แม่นยำ",
+                    tag: "3,129 Official Cards"
+                  },
+                  {
+                    icon: "⚡",
+                    title: "AWS API Gateway WebSockets (<100ms)",
+                    desc: "การเชื่อมต่อ Real-time แบบสองทาง รองรับ Action Router ($connect, sendAction, $disconnect), DynamoDB Single-Table State Sync (Turn, Phase, Inks, Lore) พร้อมระบบ Reconnect กู้คืน State อัตโนมัติ",
+                    tag: "Sub-100ms Latency"
+                  },
+                  {
+                    icon: "🛡️",
+                    title: "Hexagonal Architecture & Fallback Database",
+                    desc: "แยก Core Domain Game Logic ออกจาก Infrastructure มี In-memory FALLBACK_DATABASE ฝั่ง Client-side สลับทำงานทันทีเมื่อ AWS ขัดข้อง ทำให้ระบบไม่มีวันเกิด Runtime Crash บนเบราว์เซอร์",
+                    tag: "Zero Runtime Crashes"
+                  },
+                  {
+                    icon: "✨",
+                    title: "3D Physical Card & Booster Tearing Physics",
+                    desc: "จำลองมิติการจับการ์ดจริงด้วย Framer Motion & CSS 3D: เอฟเฟกต์ฉีกซอง Booster แบบ Interactive, การพลิกการ์ด 180° แบบ 2-Step Tap/Swipe พร้อมหมุด Ink Symbol และแสงสะท้อน Foil Shader",
+                    tag: "Tactile Card Physics"
+                  }
+                ].map((sys, i) => (
+                  <div key={i} className="flex items-start gap-4 bg-vinyl-dark/5 dark:bg-soft-white/5 border border-vinyl-dark/15 dark:border-soft-white/10 rounded-2xl p-5 hover:border-amber-400/40 hover:bg-vinyl-dark/8 dark:hover:bg-soft-white/8 transition-all duration-300">
+                    <span className="text-3xl shrink-0 mt-0.5">{sys.icon}</span>
+                    <div>
+                      <div className="flex items-center gap-2 mb-1">
+                        <p className="font-display text-base text-deep-navy dark:text-soft-white font-bold">{sys.title}</p>
+                        <span className="font-body text-[10px] px-2 py-0.5 rounded-full bg-amber-400/10 border border-amber-400/30 text-amber-500 font-semibold">{sys.tag}</span>
+                      </div>
+                      <p className="font-body text-xs text-deep-navy/60 dark:text-soft-white/60 leading-relaxed">{sys.desc}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                {[
+                  { src: "/images/Project/Lorcana/04_deck_builder.png", label: "Interactive Deck Builder with Ink Filters" },
+                  { src: "/images/Project/Lorcana/CardGachaDisney.png", label: "3D Booster Pack Tearing & Reveal Animation" },
+                ].map(({ src, label }, i) => (
+                  <motion.button
+                    key={i}
+                    className="group relative aspect-video rounded-2xl overflow-hidden bg-deep-purple/30 border border-soft-white/5 cursor-pointer focus:outline-none focus:ring-2 focus:ring-amber-400/50"
+                    onClick={() => openLightbox(["/images/Project/Lorcana/04_deck_builder.png", "/images/Project/Lorcana/CardGachaDisney.png"], i)}
+                    whileHover={{ scale: 1.02 }}
+                    transition={{ duration: 0.3 }}
+                  >
+                    <Image src={src} alt={label} fill className="object-cover" sizes="(max-width: 768px) 100vw, 50vw" />
+                    <div className="absolute inset-0 bg-amber-400/0 group-hover:bg-amber-400/10 transition-colors duration-300 flex items-center justify-center">
+                      <span className="font-body text-sm text-soft-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-dark-navy/60 px-4 py-2 rounded-full backdrop-blur-sm">{label}</span>
+                    </div>
+                  </motion.button>
+                ))}
+              </div>
+            </FadeSection>
+
+            <div className="h-px bg-gradient-to-r from-transparent via-vinyl-dark/15 dark:via-soft-white/10 to-transparent" />
+
+            {/* ── 04 AWS CLOUD ARCHITECTURE & QA AUTOMATION ── */}
+            <FadeSection delay={0.05} className="py-14">
+              <SectionNumber n="04" />
+              <h2 className="font-display text-3xl md:text-4xl text-deep-navy dark:text-soft-white mb-6 -mt-2">AWS Cloud Architecture &amp; Master QA Suite</h2>
+              
+              {/* Architecture pipeline */}
+              <div className="mb-8 flex flex-wrap items-center justify-center gap-2 bg-amber-400/5 border border-amber-400/20 rounded-2xl px-6 py-5">
+                {["AWS CloudFront / S3", "↔", "API Gateway (WebSockets)", "↔", "Lambda Action Router", "↔", "DynamoDB Single-Table"].map((item, i) => (
+                  <span key={i} className={item === "↔"
+                    ? "font-body text-amber-500/60 text-lg px-1"
+                    : "font-display text-xs md:text-sm text-amber-600 dark:text-amber-400 px-3 py-1.5 rounded-lg bg-amber-400/10 border border-amber-400/20 font-bold"
+                  }>{item}</span>
+                ))}
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-10">
+                {[
+                  { src: "/images/Project/Lorcana/aws_serverless_architecture.png", label: "Serverless Cloud Architecture" },
+                  { src: "/images/Project/Lorcana/aws_websocket_flow.png", label: "WebSocket Real-Time Protocol" },
+                  { src: "/images/Project/Lorcana/qa_dashboard_full.png", label: "Playwright E2E & QA Reporter" },
+                ].map(({ src, label }, i) => (
+                  <motion.button
+                    key={i}
+                    className="group relative aspect-video rounded-2xl overflow-hidden bg-deep-purple/30 border border-soft-white/5 cursor-pointer focus:outline-none focus:ring-2 focus:ring-amber-400/50"
+                    onClick={() => openLightbox(["/images/Project/Lorcana/aws_serverless_architecture.png", "/images/Project/Lorcana/aws_websocket_flow.png", "/images/Project/Lorcana/qa_dashboard_full.png"], i)}
+                    whileHover={{ scale: 1.02 }}
+                    transition={{ duration: 0.3 }}
+                  >
+                    <Image src={src} alt={label} fill className="object-cover" sizes="(max-width: 768px) 100vw, 33vw" />
+                    <div className="absolute inset-0 bg-amber-400/0 group-hover:bg-amber-400/10 transition-colors duration-300 flex items-center justify-center">
+                      <span className="font-body text-xs text-soft-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-dark-navy/60 px-3 py-1.5 rounded-full backdrop-blur-sm">{label}</span>
+                    </div>
+                  </motion.button>
+                ))}
+              </div>
+
+              {/* Technical Challenge Spotlight */}
+              <h3 className="font-display text-xl text-deep-navy dark:text-soft-white mb-4">Technical Challenge Spotlights &amp; Resilience</h3>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                {[
+                  {
+                    title: "Blank Booster Popup Bug",
+                    issue: "ซองการ์ดเด้งเปิดแต่การ์ดไม่โหลดเนื่องจาก State Race Condition",
+                    fix: "ออกแบบ Async State Hydration + In-memory FALLBACK_DATABASE การันตีการ์ด 3,129 ใบ โหลดได้ 100%"
+                  },
+                  {
+                    title: "Card Backface Math Collision",
+                    issue: "หน้าการ์ดหายเมื่อหมุนการ์ดเกิน 180 องศาบน CSS 3D Transforms",
+                    fix: "แยก State หมุน 2 สเต็ป (Flip 180° + Advance Step) ป้องกัน 180°+180° Euler angle cancel out"
+                  },
+                  {
+                    title: "Ravensburger CDN Hotlink Block",
+                    issue: "รูปภาพการ์ดทางการโดนบล็อก HTTP 403 Forbidden จากต้นทาง",
+                    fix: "เพิ่ม referrerPolicy='no-referrer' และ Fallback Card Generator เมื่อ CDN ภายนอกไม่พร้อมใช้งาน"
+                  }
+                ].map((item, i) => (
+                  <div key={i} className="bg-vinyl-dark/5 dark:bg-soft-white/5 border border-vinyl-dark/15 dark:border-soft-white/10 rounded-2xl p-5">
+                    <p className="font-display text-sm text-amber-500 font-bold mb-2">{item.title}</p>
+                    <p className="font-body text-xs text-deep-navy/70 dark:text-soft-white/70 mb-3"><strong className="text-neon-magenta">Problem:</strong> {item.issue}</p>
+                    <p className="font-body text-xs text-mint-deep dark:text-mint leading-relaxed"><strong>Solution:</strong> {item.fix}</p>
+                  </div>
+                ))}
+              </div>
+            </FadeSection>
+
+            <div className="h-px bg-gradient-to-r from-transparent via-vinyl-dark/15 dark:via-soft-white/10 to-transparent" />
+
+            {/* ── 05 SOLUTION & IMPACT ── */}
+            <FadeSection delay={0.05} className="py-14">
+              <SectionNumber n="05" />
+              <h2 className="font-display text-3xl md:text-4xl text-deep-navy dark:text-soft-white mb-6 -mt-2">Solution &amp; Cloud Impact</h2>
+              <p className="font-body text-base md:text-lg text-deep-navy/75 dark:text-soft-white/75 leading-relaxed whitespace-pre-line">{project.result}</p>
+
+              {/* Metrics */}
+              <div className="grid grid-cols-2 md:grid-cols-5 gap-4 mt-8 mb-10">
+                {[
+                  { stat: "$0.00", label: "AWS Server Cost (Free Tier)" },
+                  { stat: "<100ms", label: "WebSocket Latency" },
+                  { stat: "3,129", label: "Official Cards Database" },
+                  { stat: "100%", label: "Playwright E2E Pass Rate" },
+                  { stat: "9", label: "Rarity Tiers Supported" },
+                ].map((item, i) => (
+                  <div key={i} className="bg-vinyl-dark/5 dark:bg-soft-white/5 border border-amber-400/20 rounded-2xl p-4 text-center">
+                    <p className="font-display text-3xl md:text-4xl mb-1 text-amber-500">{item.stat}</p>
+                    <p className="font-body text-xs text-deep-navy/60 dark:text-soft-white/60 leading-tight">{item.label}</p>
+                  </div>
+                ))}
+              </div>
+
+              {/* Project info sidebar */}
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+                <div>
+                  <p className="font-body text-xs text-deep-navy/40 dark:text-soft-white/40 uppercase tracking-widest mb-2">Role</p>
+                  <p className="font-body text-sm text-deep-navy/80 dark:text-soft-white/80">Lead Full-Stack Cloud Architect &amp; QA Lead</p>
+                </div>
+                <div>
+                  <p className="font-body text-xs text-deep-navy/40 dark:text-soft-white/40 uppercase tracking-widest mb-2">Tech Stack</p>
+                  <div className="flex flex-col gap-1">
+                    {project.techStack.map((t) => (
+                      <span key={t} className="font-body text-xs text-deep-navy/70 dark:text-soft-white/70">{t}</span>
+                    ))}
+                  </div>
+                </div>
+                <div>
+                  <p className="font-body text-xs text-deep-navy/40 dark:text-soft-white/40 uppercase tracking-widest mb-2">Academic Course</p>
+                  <p className="font-body text-sm text-deep-navy/80 dark:text-soft-white/80">Cloud Computing 1/2569 (KMITL IT)</p>
+                </div>
+                <div>
+                  <p className="font-body text-xs text-deep-navy/40 dark:text-soft-white/40 uppercase tracking-widest mb-2">Testing Frameworks</p>
+                  <p className="font-body text-sm text-deep-navy/80 dark:text-soft-white/80">Playwright E2E · Vitest · OWASP QA</p>
+                </div>
+              </div>
+            </FadeSection>
+
+            <div className="h-px bg-gradient-to-r from-transparent via-vinyl-dark/15 dark:via-soft-white/10 to-transparent" />
+          </>
+        )}
+
+        {/* ════════════════════════════════════════
+            TAWAN-OS AGENT HARNESS (isTawanOs only)
+        ════════════════════════════════════════ */}
+        {isTawanOs && (
+          <>
+            {/* ── 03 THE 4 SYSTEM PILLARS ── */}
+            <FadeSection delay={0.05} className="py-14">
+              <SectionNumber n="03" />
+              <h2 className="font-display text-3xl md:text-4xl text-deep-navy dark:text-soft-white mb-6 -mt-2">The 4 Core Architecture Pillars</h2>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-10">
+                {[
+                  {
+                    icon: "🧠",
+                    title: "Markdown-First Memory Vault",
+                    desc: "จัดระเบียบโครงสร้างความจำระยะยาวผ่าน AGENTS.md, RULES.md, และ 07_MEMORY/ (Decisions, Lessons, Mistakes) ทำให้ AI ทุกตัวมี Single Source of Truth ชัดเจน Context ไม่หลุดข้ามเซสชัน",
+                    tag: "Zero Context Loss"
+                  },
+                  {
+                    icon: "🔌",
+                    title: "Bi-Directional Local MCP Ecosystem",
+                    desc: "พัฒนา Python WebSocket Bridge เชื่อมโยงเข้ากับ Figma MCP สำหรับวาด Vector UI Components สดบน Canvas, Obsidian MCP สำหรับจัดทำ Wiki Notes และ Unity CLI สั่งงาน Game Engine",
+                    tag: "Figma · Obsidian · Unity"
+                  },
+                  {
+                    icon: "⚡",
+                    title: "Dynamic Model Proxy (Port 3120)",
+                    desc: "สถาปัตยกรรม Gateway สลับโมเดลอัจฉริยะ เลือกระหว่าง Gemini 3.7 Flash High / 3.1 Pro สำหรับงานสถาปัตยกรรมโค้ดซับซ้อน และโมเดลเร็วสำหรับงาน Review / Logging เพื่อลดต้นทุน Token สูงสุด",
+                    tag: "Dynamic Model Balancing"
+                  },
+                  {
+                    icon: "🛠️",
+                    title: "500+ Skills & SWE Self-Healing Verification",
+                    desc: "คลังทักษะแยกหมวดหมู่พร้อมระบบ Auto-routing อัตโนมัติ ผสาน SWE-Loop วิเคราะห์ Terminal Traceback และคำสั่ง agy doctor ทดสอบระบบก่อนยืนยันความถูกต้อง ป้องกัน AI Code Slop",
+                    tag: "Auto-Verification Loops"
+                  }
+                ].map((col, i) => (
+                  <div key={i} className="flex items-start gap-4 bg-vinyl-dark/5 dark:bg-soft-white/5 border border-vinyl-dark/15 dark:border-soft-white/10 rounded-2xl p-5 hover:border-sky-cyan/40 hover:bg-vinyl-dark/8 dark:hover:bg-soft-white/8 transition-all duration-300">
+                    <span className="text-3xl shrink-0 mt-0.5">{col.icon}</span>
+                    <div>
+                      <div className="flex items-center gap-2 mb-1">
+                        <p className="font-display text-base text-deep-navy dark:text-soft-white font-bold">{col.title}</p>
+                        <span className="font-body text-[10px] px-2 py-0.5 rounded-full bg-sky-cyan/10 border border-sky-cyan/30 text-cyan-deep dark:text-sky-cyan font-semibold">{col.tag}</span>
+                      </div>
+                      <p className="font-body text-xs text-deep-navy/60 dark:text-soft-white/60 leading-relaxed">{col.desc}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                {[
+                  { src: "/images/Project/TawanOS/mcp-ecosystem.png", label: "Local WebSocket MCP Ecosystem Bridge" },
+                  { src: "/images/Project/TawanOS/agent-architecture.png", label: "Agentic Multi-Agent Orchestration Flow" },
+                ].map(({ src, label }, i) => (
+                  <motion.button
+                    key={i}
+                    className="group relative aspect-video rounded-2xl overflow-hidden bg-deep-purple/30 border border-soft-white/5 cursor-pointer focus:outline-none focus:ring-2 focus:ring-sky-cyan/50"
+                    onClick={() => openLightbox(["/images/Project/TawanOS/mcp-ecosystem.png", "/images/Project/TawanOS/agent-architecture.png"], i)}
+                    whileHover={{ scale: 1.02 }}
+                    transition={{ duration: 0.3 }}
+                  >
+                    <Image src={src} alt={label} fill className="object-cover" sizes="(max-width: 768px) 100vw, 50vw" />
+                    <div className="absolute inset-0 bg-sky-cyan/0 group-hover:bg-sky-cyan/10 transition-colors duration-300 flex items-center justify-center">
+                      <span className="font-body text-sm text-soft-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-dark-navy/60 px-4 py-2 rounded-full backdrop-blur-sm">{label}</span>
+                    </div>
+                  </motion.button>
+                ))}
+              </div>
+            </FadeSection>
+
+            <div className="h-px bg-gradient-to-r from-transparent via-vinyl-dark/15 dark:via-soft-white/10 to-transparent" />
+
+            {/* ── 04 AGENT HARNESS PATTERN & IMPACT ── */}
+            <FadeSection delay={0.05} className="py-14">
+              <SectionNumber n="04" />
+              <h2 className="font-display text-3xl md:text-4xl text-deep-navy dark:text-soft-white mb-6 -mt-2">Agent Harness Orchestration Pattern</h2>
+              <div className="space-y-3 mb-10">
+                {[
+                  { step: "01", role: "Orchestrator & Intent Clarification", desc: "รับคำสั่ง ทำ Problem Framing ตั้งคำถามความชัดเจน และคัดเลือก Context Packet ที่เกี่ยวข้องจาก Vault" },
+                  { step: "02", role: "Planner (Shift-Left on Spec)", desc: "สร้าง scratch/plan.md กำหนด Interface และ Edge Cases ให้เห็นภาพชัดเจนก่อนลงมือเขียนโค้ดจริง" },
+                  { step: "03", role: "Executor & Subagent Delegation", desc: "รันโค้ดและสร้าง Asset ผ่าน Subagent แยกบริบท ลดการปนเปื้อนของ Context Window" },
+                  { step: "04", role: "Doctor & SWE Self-Healing Reviewer", desc: "รัน agy doctor, linter และ unit tests หากพบ Error ให้วนลูปซ่อมแซมตัวเองจนกว่าจะผ่านเกณฑ์" },
+                  { step: "05", role: "Memory Librarian & Reflection Journal", desc: "บันทึกสิ่งที่เรียนรู้ (Lessons Learned) และข้อผิดพลาด (Mistakes) ลงใน 07_MEMORY/ เพื่อความฉลาดขึ้นเรื่อยๆ" },
+                ].map((flow, i) => (
+                  <div key={i} className="flex items-start gap-4 bg-vinyl-dark/5 dark:bg-soft-white/5 border border-vinyl-dark/15 dark:border-soft-white/10 rounded-2xl p-4 hover:border-sky-cyan/30 transition-all duration-200">
+                    <span className="font-display text-2xl text-cyan-deep dark:text-sky-cyan font-bold shrink-0 mt-0.5">{flow.step}</span>
+                    <div>
+                      <p className="font-display text-sm text-deep-navy dark:text-soft-white font-bold mb-0.5">{flow.role}</p>
+                      <p className="font-body text-xs text-deep-navy/60 dark:text-soft-white/60 leading-relaxed">{flow.desc}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              {/* Metrics */}
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-10">
+                {[
+                  { stat: ">60%", label: "Context Overhead Reduction" },
+                  { stat: "500+", label: "Auto-Routed Skills" },
+                  { stat: "17", label: "Coordinated Agent Roles" },
+                  { stat: "100%", label: "Spec-First Verification" },
+                ].map((item, i) => (
+                  <div key={i} className="bg-vinyl-dark/5 dark:bg-soft-white/5 border border-sky-cyan/20 rounded-2xl p-4 text-center">
+                    <p className="font-display text-3xl md:text-4xl mb-1 text-cyan-deep dark:text-sky-cyan">{item.stat}</p>
+                    <p className="font-body text-xs text-deep-navy/60 dark:text-soft-white/60 leading-tight">{item.label}</p>
+                  </div>
+                ))}
+              </div>
+
+              {/* Project info sidebar */}
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+                <div>
+                  <p className="font-body text-xs text-deep-navy/40 dark:text-soft-white/40 uppercase tracking-widest mb-2">Role</p>
+                  <p className="font-body text-sm text-deep-navy/80 dark:text-soft-white/80">System Architect &amp; Agentic AI Engineer</p>
+                </div>
+                <div>
+                  <p className="font-body text-xs text-deep-navy/40 dark:text-soft-white/40 uppercase tracking-widest mb-2">Tech Stack</p>
+                  <div className="flex flex-col gap-1">
+                    {project.techStack.map((t) => (
+                      <span key={t} className="font-body text-xs text-deep-navy/70 dark:text-soft-white/70">{t}</span>
+                    ))}
+                  </div>
+                </div>
+                <div>
+                  <p className="font-body text-xs text-deep-navy/40 dark:text-soft-white/40 uppercase tracking-widest mb-2">Ecosystem</p>
+                  <p className="font-body text-sm text-deep-navy/80 dark:text-soft-white/80">Antigravity CLI · Hermes Agent · MCP</p>
+                </div>
+                <div>
+                  <p className="font-body text-xs text-deep-navy/40 dark:text-soft-white/40 uppercase tracking-widest mb-2">Memory Standard</p>
+                  <p className="font-body text-sm text-deep-navy/80 dark:text-soft-white/80">Markdown-First Vault (Obsidian Index)</p>
+                </div>
+              </div>
+            </FadeSection>
+
+            <div className="h-px bg-gradient-to-r from-transparent via-vinyl-dark/15 dark:via-soft-white/10 to-transparent" />
+          </>
+        )}
+
+        {/* ════════════════════════════════════════
+            RED BULL F1 MAX VERSTAPPEN (isRedBullF1 only)
+        ════════════════════════════════════════ */}
+        {isRedBullF1 && (
+          <>
+            {/* ── 03 MULTI-MODAL PIPELINE & THREE.JS ENGINE ── */}
+            <FadeSection delay={0.05} className="py-14">
+              <SectionNumber n="03" />
+              <h2 className="font-display text-3xl md:text-4xl text-deep-navy dark:text-soft-white mb-6 -mt-2">Multi-Modal AI Pipeline &amp; 3D Engine</h2>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-10">
+                {[
+                  {
+                    icon: "🏎️",
+                    title: "Three.js 3D Exploded View Engine",
+                    desc: "โหลดโมเดลรถ Oracle Red Bull Racing RB19 GLB และเขียนสคริปต์ three-exploded.js คำนวณเวกเตอร์แยกชิ้นส่วน Body, Aero Wings, และ Slick Tires ออกจากกันตามความเร็วในการเลื่อนหน้าจอของผู้ใช้",
+                    tag: "WebGL 60 FPS"
+                  },
+                  {
+                    icon: "🎬",
+                    title: "Multi-Modal AI Video & Asset Generation",
+                    desc: "สกัดข้อมูลประวัติการแข่งผ่าน NotebookLM และเจนคลิปวิดีโอ Cinematic F1 ด้วย Google Flow (โมเดล Veo Fast) นำมาทำแอนิเมชันเปิดตัวที่ผสานเข้ากับ Canvas 3D แบบเรียลไทม์",
+                    tag: "NotebookLM + Google Veo"
+                  },
+                  {
+                    icon: "⚡",
+                    title: "1-Week Sprint (17 Agents · 0 Claude)",
+                    desc: "ทดลองสร้างระบบนิเวศ Agent Harness ผ่าน Antigravity CLI รัน 17 Subagents และ 25 Skills พร้อม Dynamic Model Balancing สลับโมเดลตามความยาก ทำให้แก้โค้ดไปกว่า 100 Prompts โดยไม่ติด Token Limit",
+                    tag: "Agentic Engineering"
+                  },
+                  {
+                    icon: "🎵",
+                    title: "Human Taste & Audio-Synced Parallax",
+                    desc: "ปฏิเสธ Template สำเร็จรูปของ AI — ควบคุมไทม์ไลน์และ Parallax ด้วย GSAP ScrollTrigger พร้อมระบบเสียงเครื่องยนต์ F1 Honda RBPT และโทเค็นสี Dark High-Performance (#0a1024, #e01020, #f1c40f)",
+                    tag: "Dark High-Performance"
+                  }
+                ].map((sys, i) => (
+                  <div key={i} className="flex items-start gap-4 bg-vinyl-dark/5 dark:bg-soft-white/5 border border-vinyl-dark/15 dark:border-soft-white/10 rounded-2xl p-5 hover:border-red-500/40 hover:bg-vinyl-dark/8 dark:hover:bg-soft-white/8 transition-all duration-300">
+                    <span className="text-3xl shrink-0 mt-0.5">{sys.icon}</span>
+                    <div>
+                      <div className="flex items-center gap-2 mb-1">
+                        <p className="font-display text-base text-deep-navy dark:text-soft-white font-bold">{sys.title}</p>
+                        <span className="font-body text-[10px] px-2 py-0.5 rounded-full bg-red-500/10 border border-red-500/30 text-red-500 font-semibold">{sys.tag}</span>
+                      </div>
+                      <p className="font-body text-xs text-deep-navy/60 dark:text-soft-white/60 leading-relaxed">{sys.desc}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                {[
+                  { src: "/images/Project/RedBull-F1/Open.png", label: "3D Exploded Body & Aero" },
+                  { src: "/images/Project/RedBull-F1/max_helmet_intro.jpg", label: "Max Helmet Cinematic Intro" },
+                  { src: "/images/Project/RedBull-F1/video_start_frame.jpg", label: "Google Veo Fast AI Video Frame" },
+                  { src: "/images/Project/RedBull-F1/timeline_2021.jpg", label: "4x World Champion Timeline" },
+                ].map(({ src, label }, i) => (
+                  <motion.button
+                    key={i}
+                    className="group relative aspect-video rounded-2xl overflow-hidden bg-deep-purple/30 border border-soft-white/5 cursor-pointer focus:outline-none focus:ring-2 focus:ring-red-500/50"
+                    onClick={() => openLightbox(["/images/Project/RedBull-F1/Open.png", "/images/Project/RedBull-F1/max_helmet_intro.jpg", "/images/Project/RedBull-F1/video_start_frame.jpg", "/images/Project/RedBull-F1/timeline_2021.jpg"], i)}
+                    whileHover={{ scale: 1.02 }}
+                    transition={{ duration: 0.3 }}
+                  >
+                    <Image src={src} alt={label} fill className="object-cover" sizes="(max-width: 768px) 50vw, 25vw" />
+                    <div className="absolute inset-0 bg-red-500/0 group-hover:bg-red-500/10 transition-colors duration-300 flex items-center justify-center">
+                      <span className="font-body text-xs text-soft-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-dark-navy/60 px-3 py-1.5 rounded-full backdrop-blur-sm">{label}</span>
+                    </div>
+                  </motion.button>
+                ))}
+              </div>
+            </FadeSection>
+
+            <div className="h-px bg-gradient-to-r from-transparent via-vinyl-dark/15 dark:via-soft-white/10 to-transparent" />
+
+            {/* ── 04 SOLUTION & SPRINT OUTCOME ── */}
+            <FadeSection delay={0.05} className="py-14">
+              <SectionNumber n="04" />
+              <h2 className="font-display text-3xl md:text-4xl text-deep-navy dark:text-soft-white mb-6 -mt-2">Sprint Outcome &amp; Performance</h2>
+              <p className="font-body text-base md:text-lg text-deep-navy/75 dark:text-soft-white/75 leading-relaxed whitespace-pre-line">{project.result}</p>
+
+              {/* Metrics */}
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-8 mb-10">
+                {[
+                  { stat: "1 Week", label: "Total Sprint Timeline" },
+                  { stat: "17", label: "Coordinated Subagents" },
+                  { stat: "60 FPS", label: "Three.js WebGL Framerate" },
+                  { stat: "0 Claude", label: "100% Antigravity CLI Powered" },
+                ].map((item, i) => (
+                  <div key={i} className="bg-vinyl-dark/5 dark:bg-soft-white/5 border border-red-500/20 rounded-2xl p-4 text-center">
+                    <p className="font-display text-3xl md:text-4xl mb-1 text-red-500">{item.stat}</p>
+                    <p className="font-body text-xs text-deep-navy/60 dark:text-soft-white/60 leading-tight">{item.label}</p>
+                  </div>
+                ))}
+              </div>
+
+              {/* Project info sidebar */}
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+                <div>
+                  <p className="font-body text-xs text-deep-navy/40 dark:text-soft-white/40 uppercase tracking-widest mb-2">Role</p>
+                  <p className="font-body text-sm text-deep-navy/80 dark:text-soft-white/80">3D Creative Developer &amp; Agent Harness Orchestrator</p>
+                </div>
+                <div>
+                  <p className="font-body text-xs text-deep-navy/40 dark:text-soft-white/40 uppercase tracking-widest mb-2">Tech Stack</p>
+                  <div className="flex flex-col gap-1">
+                    {project.techStack.map((t) => (
+                      <span key={t} className="font-body text-xs text-deep-navy/70 dark:text-soft-white/70">{t}</span>
+                    ))}
+                  </div>
+                </div>
+                <div>
+                  <p className="font-body text-xs text-deep-navy/40 dark:text-soft-white/40 uppercase tracking-widest mb-2">Sprint Duration</p>
+                  <p className="font-body text-sm text-deep-navy/80 dark:text-soft-white/80">7 Days (Sprint Experiment 2026)</p>
+                </div>
+                <div>
+                  <p className="font-body text-xs text-deep-navy/40 dark:text-soft-white/40 uppercase tracking-widest mb-2">3D Vehicle Model</p>
+                  <p className="font-body text-sm text-deep-navy/80 dark:text-soft-white/80">Oracle Red Bull Racing RB19 (GLB)</p>
+                </div>
+              </div>
+            </FadeSection>
+
+            <div className="h-px bg-gradient-to-r from-transparent via-vinyl-dark/15 dark:via-soft-white/10 to-transparent" />
+          </>
+        )}
+
+        {/* ════════════════════════════════════════
+            HYBRICAREER AI (isHybriCareer only)
+        ════════════════════════════════════════ */}
+        {isHybriCareer && (
+          <>
+            {/* ── 03 USER RESEARCH & DUAL-PERSONA ARCHITECTURE ── */}
+            <FadeSection delay={0.05} className="py-14">
+              <SectionNumber n="03" />
+              <h2 className="font-display text-3xl md:text-4xl text-deep-navy dark:text-soft-white mb-6 -mt-2">User Research &amp; Dual-Persona Architecture</h2>
+              
+              {/* Research stats highlight */}
+              <div className="mb-8 bg-emerald-500/5 border border-emerald-500/25 rounded-2xl p-6">
+                <div className="flex items-center gap-2 mb-2">
+                  <span className="font-display text-emerald-600 dark:text-emerald-400 font-bold text-base">📊 Labor Data &amp; Field Interview Discovery</span>
+                </div>
+                <p className="font-body text-sm text-deep-navy/80 dark:text-soft-white/80 leading-relaxed mb-4">
+                  ผลสำรวจแรงงานไทย (สสช. Q1/2569) ชี้ชัดว่าอัตราการว่างงานสูงสุดอยู่ในกลุ่มอายุ <strong>20-24 ปี (34% หรือ 134,900 คน)</strong> จากการสัมภาษณ์เชิงลึกกับผู้ย้ายสายงาน 5 คน และ HR 2 คน พบว่า 100% ติดปัญหาถูกระบบ ATS คัดทิ้งทันทีเพราะชื่อวุฒิไม่ตรงสาย แม้จะมีทักษะจริง
+                </p>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-3 font-body text-xs">
+                  <div className="bg-vinyl-dark/5 dark:bg-soft-white/5 border border-emerald-500/20 rounded-xl p-3">
+                    <span className="text-emerald-500 font-bold block mb-1">34% Youth Unemployed</span>
+                    <p className="text-deep-navy/60 dark:text-soft-white/60">กลุ่มอายุ 20-24 ปีว่างงานสูงสุดในประเทศ</p>
+                  </div>
+                  <div className="bg-vinyl-dark/5 dark:bg-soft-white/5 border border-emerald-500/20 rounded-xl p-3">
+                    <span className="text-emerald-500 font-bold block mb-1">4-6 Months Time Loss</span>
+                    <p className="text-deep-navy/60 dark:text-soft-white/60">ระยะเวลาเฉลี่ยที่ผู้ย้ายสายงานต้องเคว้งคว้าง</p>
+                  </div>
+                  <div className="bg-vinyl-dark/5 dark:bg-soft-white/5 border border-emerald-500/20 rounded-xl p-3">
+                    <span className="text-emerald-500 font-bold block mb-1">Zero ATS Visibility</span>
+                    <p className="text-deep-navy/60 dark:text-soft-white/60">พอร์ตผลงานไม่ถูกเปิดอ่านเพราะติดชื่อปริญญา</p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-10">
+                {[
+                  {
+                    icon: "👩‍⚕️",
+                    title: "Candidate View — 'น้องมิว' Persona (B.Pharm → Data Analyst)",
+                    desc: "แสดง Skill Readiness 88% พร้อมเชื่อมโยงจุดเด่นเดิม (Healthcare Knowledge 99%) เข้ากับทักษะเทคนิคใหม่ (SQL 85%, Python 75%) เพื่อสร้างแต้มต่อในการแข่งขัน",
+                    tag: "Transferable Skill Radar"
+                  },
+                  {
+                    icon: "💼",
+                    title: "HR Employer Portal & ATS Bypass Mode",
+                    desc: "เปิดให้ HR ค้นหาผู้สมัครตามทักษะเชิงประจักษ์ (Skill-Proof Score) โดยไม่สนชื่อปริญญา พร้อมปุ่ม 1-Click Invite to Interview ช่วยลดเวลาคัดคนลงกว่า 35%",
+                    tag: "Zero Degree Bias"
+                  },
+                  {
+                    icon: "🎙️",
+                    title: "AI Hybrid Storyteller (Mock Interview)",
+                    desc: "ระบบจำลองคำถามสัมภาษณ์งานที่เจาะลึกเฉพาะทาง ช่วยให้ผู้สมัครฝึกเล่าเรื่องเชื่อมโยงความรู้ข้ามสายงานได้อย่างมืออาชีพ",
+                    tag: "AI Narrative Engine"
+                  },
+                  {
+                    icon: "🏆",
+                    title: "Generation Thailand Hackathon Distinction",
+                    desc: "ผ่านการคัดเลือกเป็น 'Top 10 Finalist Proposal' (ทีมสำรองอันดับที่ 5) จากข้อเสนอโครงการแก้ปัญหาโครงสร้างตลาดแรงงานด้วย AI-First Design",
+                    tag: "Top 10 Finalist Proposal"
+                  }
+                ].map((sys, i) => (
+                  <div key={i} className="flex items-start gap-4 bg-vinyl-dark/5 dark:bg-soft-white/5 border border-vinyl-dark/15 dark:border-soft-white/10 rounded-2xl p-5 hover:border-emerald-500/40 hover:bg-vinyl-dark/8 dark:hover:bg-soft-white/8 transition-all duration-300">
+                    <span className="text-3xl shrink-0 mt-0.5">{sys.icon}</span>
+                    <div>
+                      <div className="flex items-center gap-2 mb-1">
+                        <p className="font-display text-base text-deep-navy dark:text-soft-white font-bold">{sys.title}</p>
+                        <span className="font-body text-[10px] px-2 py-0.5 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-500 font-semibold">{sys.tag}</span>
+                      </div>
+                      <p className="font-body text-xs text-deep-navy/60 dark:text-soft-white/60 leading-relaxed">{sys.desc}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                {[
+                  { src: "/images/Project/HybriCareer/slide3_solution_architecture.png", label: "Solution Architecture" },
+                  { src: "/images/Project/HybriCareer/slide4_candidate_view.png", label: "Candidate View (Mew B.Pharm)" },
+                  { src: "/images/Project/HybriCareer/slide5_recruiter_view.png", label: "Recruiter View (1-Click Interview)" },
+                ].map(({ src, label }, i) => (
+                  <motion.button
+                    key={i}
+                    className="group relative aspect-video rounded-2xl overflow-hidden bg-deep-purple/30 border border-soft-white/5 cursor-pointer focus:outline-none focus:ring-2 focus:ring-emerald-500/50"
+                    onClick={() => openLightbox(["/images/Project/HybriCareer/slide3_solution_architecture.png", "/images/Project/HybriCareer/slide4_candidate_view.png", "/images/Project/HybriCareer/slide5_recruiter_view.png"], i)}
+                    whileHover={{ scale: 1.02 }}
+                    transition={{ duration: 0.3 }}
+                  >
+                    <Image src={src} alt={label} fill className="object-cover" sizes="(max-width: 768px) 100vw, 33vw" />
+                    <div className="absolute inset-0 bg-emerald-500/0 group-hover:bg-emerald-500/10 transition-colors duration-300 flex items-center justify-center">
+                      <span className="font-body text-xs text-soft-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-dark-navy/60 px-3 py-1.5 rounded-full backdrop-blur-sm">{label}</span>
+                    </div>
+                  </motion.button>
+                ))}
+              </div>
+            </FadeSection>
+
+            <div className="h-px bg-gradient-to-r from-transparent via-vinyl-dark/15 dark:via-soft-white/10 to-transparent" />
+
+            {/* ── 04 IMPACT & OUTCOMES ── */}
+            <FadeSection delay={0.05} className="py-14">
+              <SectionNumber n="04" />
+              <h2 className="font-display text-3xl md:text-4xl text-deep-navy dark:text-soft-white mb-6 -mt-2">Hackathon Distinction &amp; Outcomes</h2>
+              <p className="font-body text-base md:text-lg text-deep-navy/75 dark:text-soft-white/75 leading-relaxed whitespace-pre-line">{project.result}</p>
+
+              {/* Metrics */}
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-8 mb-10">
+                {[
+                  { stat: "Top 10", label: "Finalist Proposal (5th Reserve)" },
+                  { stat: "34%", label: "Youth Unemployment Target" },
+                  { stat: "35%", label: "Faster Time-to-Hire for HR" },
+                  { stat: "0", label: "Degree Bias on First Screening" },
+                ].map((item, i) => (
+                  <div key={i} className="bg-vinyl-dark/5 dark:bg-soft-white/5 border border-emerald-500/20 rounded-2xl p-4 text-center">
+                    <p className="font-display text-3xl md:text-4xl mb-1 text-emerald-500">{item.stat}</p>
+                    <p className="font-body text-xs text-deep-navy/60 dark:text-soft-white/60 leading-tight">{item.label}</p>
+                  </div>
+                ))}
+              </div>
+
+              {/* Project info sidebar */}
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+                <div>
+                  <p className="font-body text-xs text-deep-navy/40 dark:text-soft-white/40 uppercase tracking-widest mb-2">Role</p>
+                  <p className="font-body text-sm text-deep-navy/80 dark:text-soft-white/80">Product Designer &amp; AI Prompt Architect</p>
+                </div>
+                <div>
+                  <p className="font-body text-xs text-deep-navy/40 dark:text-soft-white/40 uppercase tracking-widest mb-2">Tech Stack</p>
+                  <div className="flex flex-col gap-1">
+                    {project.techStack.map((t) => (
+                      <span key={t} className="font-body text-xs text-deep-navy/70 dark:text-soft-white/70">{t}</span>
+                    ))}
+                  </div>
+                </div>
+                <div>
+                  <p className="font-body text-xs text-deep-navy/40 dark:text-soft-white/40 uppercase tracking-widest mb-2">Event</p>
+                  <p className="font-body text-sm text-deep-navy/80 dark:text-soft-white/80">Generation Thailand Hackathon 2026</p>
+                </div>
+                <div>
+                  <p className="font-body text-xs text-deep-navy/40 dark:text-soft-white/40 uppercase tracking-widest mb-2">Status</p>
+                  <p className="font-body text-sm text-deep-navy/80 dark:text-soft-white/80">Proposal &amp; Interactive PoC (5th Reserve)</p>
+                </div>
+              </div>
+            </FadeSection>
+
+            <div className="h-px bg-gradient-to-r from-transparent via-vinyl-dark/15 dark:via-soft-white/10 to-transparent" />
+          </>
+        )}
       </div>
 
       {/* ════════════════════════════════════════
@@ -1570,26 +2318,38 @@ export default function ProjectDetailClient({ project }: { project: Project }) {
                   opacity: 0.25,
                 }}
               >
-                {isVpsTycoon ? "07" : isSynchro ? "07" : isDriveKmitl ? "08" : isPolygonMesh ? "07" : "04"}
+                {isVpsTycoon ? "07" : isSynchro ? "07" : isDriveKmitl ? "08" : isPolygonMesh ? "07" : isLorcana ? "06" : isTawanOs ? "05" : isRedBullF1 ? "05" : isHybriCareer ? "05" : "04"}
               </span>
             </div>
             <h2 className="font-display text-3xl md:text-4xl text-deep-navy dark:text-soft-white -mt-2">
-              {isDriveKmitl || isPolygonMesh || isVpsTycoon || isSynchro ? "Full Gallery" : "Visual principles detail"}
+              {isDriveKmitl || isPolygonMesh || isVpsTycoon || isSynchro || isLorcana || isTawanOs || isRedBullF1 || isHybriCareer ? "Full Gallery" : "Visual principles detail"}
             </h2>
             {isChaodom && (
-              <p className="font-body text-sm text-deep-navy/50 dark:text-deep-navy/50 dark:text-soft-white/50 mt-2">UI Design Principles &amp; Visual Design Analysis</p>
+              <p className="font-body text-sm text-deep-navy/50 dark:text-soft-white/50 mt-2">UI Design Principles &amp; Visual Design Analysis</p>
             )}
             {isPolygonMesh && (
-              <p className="font-body text-sm text-deep-navy/50 dark:text-deep-navy/50 dark:text-soft-white/50 mt-2">All 17 screens — 2D, 3D, Polygon Study, Jigsaw &amp; more</p>
+              <p className="font-body text-sm text-deep-navy/50 dark:text-soft-white/50 mt-2">All 17 screens — 2D, 3D, Polygon Study, Jigsaw &amp; more</p>
             )}
             {isVpsTycoon && (
-              <p className="font-body text-sm text-deep-navy/50 dark:text-deep-navy/50 dark:text-soft-white/50 mt-2">All 23 screens — Title, Menu, Game World, Messenger, Rack, Events &amp; more</p>
+              <p className="font-body text-sm text-deep-navy/50 dark:text-soft-white/50 mt-2">All 23 screens — Title, Menu, Game World, Messenger, Rack, Events &amp; more</p>
             )}
             {isDriveKmitl && (
-              <p className="font-body text-sm text-deep-navy/50 dark:text-deep-navy/50 dark:text-soft-white/50 mt-2">All 5 screens — Home, Join Room, Create Room, Chat Room &amp; Transition</p>
+              <p className="font-body text-sm text-deep-navy/50 dark:text-soft-white/50 mt-2">All 5 screens — Home, Join Room, Create Room, Chat Room &amp; Transition</p>
             )}
             {isSynchro && (
-              <p className="font-body text-sm text-deep-navy/50 dark:text-deep-navy/50 dark:text-soft-white/50 mt-2">Hardware controller, poster, gameplay &amp; web app design</p>
+              <p className="font-body text-sm text-deep-navy/50 dark:text-soft-white/50 mt-2">Hardware controller, poster, gameplay &amp; web app design</p>
+            )}
+            {isLorcana && (
+              <p className="font-body text-sm text-deep-navy/50 dark:text-soft-white/50 mt-2">All AWS Serverless Architecture, WebSockets, QA Testing &amp; Gameplay Screens</p>
+            )}
+            {isTawanOs && (
+              <p className="font-body text-sm text-deep-navy/50 dark:text-soft-white/50 mt-2">Terminal AI Harness, WebSocket MCP Ecosystem &amp; System Architecture</p>
+            )}
+            {isRedBullF1 && (
+              <p className="font-body text-sm text-deep-navy/50 dark:text-soft-white/50 mt-2">All 3D Web Assets — RB19 Exploded Parts, Veo Video Frames &amp; Championship Timeline</p>
+            )}
+            {isHybriCareer && (
+              <p className="font-body text-sm text-deep-navy/50 dark:text-soft-white/50 mt-2">Hackathon Pitch Slides &amp; Dual-Persona Interactive Prototype Screens</p>
             )}
           </div>
           <div className="mx-auto max-w-6xl px-4 md:px-6">
@@ -1602,9 +2362,9 @@ export default function ProjectDetailClient({ project }: { project: Project }) {
       )}
 
       {/* ════════════════════════════════════════
-          05 THE SOLUTION (non-polygon-mesh, non-vps-tycoon only)
+          05 THE SOLUTION (generic non-custom projects only)
       ════════════════════════════════════════ */}
-      {!isPolygonMesh && !isVpsTycoon && (
+      {!isPolygonMesh && !isVpsTycoon && !isDriveKmitl && !isSynchro && !isLorcana && !isTawanOs && !isRedBullF1 && !isHybriCareer && (
       <div className="relative z-10 mx-auto max-w-5xl px-6">
         <div className="h-px bg-gradient-to-r from-transparent via-vinyl-dark/15 dark:via-soft-white/10 to-transparent" />
         <FadeSection delay={0.05} className="py-14">
