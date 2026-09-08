@@ -30,10 +30,10 @@ function FadeSection({
 }) {
   return (
     <motion.div
-      initial={{ opacity: 0, y: 40 }}
+      initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.2 }}
-      transition={{ duration: 0.7, delay, ease: [0.16, 1, 0.3, 1] }}
+      transition={{ duration: 0.6, delay, ease: [0.16, 1, 0.3, 1] }}
       className={className}
     >
       {children}
@@ -72,24 +72,21 @@ function ImpactBubble() {
   );
 }
 
-
 /* ---- Gallery grid with lightbox ---- */
 function GalleryGrid({
   images,
   onOpen,
-  indexOffset = 0,
 }: {
   images: string[];
   onOpen: (i: number) => void;
-  indexOffset?: number;
 }) {
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
       {images.map((img, idx) => (
         <motion.button
           key={idx}
-          className="group relative aspect-video rounded-2xl overflow-hidden bg-deep-purple/30 border border-soft-white/5 cursor-pointer focus:outline-none focus:ring-2 focus:ring-hot-pink/50"
-          onClick={() => onOpen(indexOffset + idx)}
+          className="group relative aspect-video rounded-2xl overflow-hidden bg-deep-purple/30 border border-vinyl-dark/15 dark:border-soft-white/10 cursor-pointer focus:outline-none focus:ring-2 focus:ring-hot-pink/50"
+          onClick={() => onOpen(idx)}
           whileHover={{ scale: 1.02 }}
           transition={{ duration: 0.3 }}
         >
@@ -102,8 +99,8 @@ function GalleryGrid({
           />
           <div className="halftone-bg absolute inset-0 opacity-0 group-hover:opacity-[0.2] transition-opacity duration-500 pointer-events-none" />
           <div className="absolute inset-0 bg-hot-pink/0 group-hover:bg-hot-pink/10 transition-colors duration-300 flex items-center justify-center">
-            <span className="font-body text-sm text-soft-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-dark-navy/60 px-4 py-2 rounded-full backdrop-blur-sm">
-              View Full Size
+            <span className="font-body text-sm text-soft-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-dark-navy/70 px-4 py-2 rounded-full backdrop-blur-sm">
+              View Full Size ✦
             </span>
           </div>
         </motion.button>
@@ -112,41 +109,22 @@ function GalleryGrid({
   );
 }
 
-/* ---- Sub-section heading ---- */
-function SubHeading({ children }: { children: React.ReactNode }) {
-  return (
-    <h3 className="font-display text-xl md:text-2xl text-neon-magenta mb-4 mt-10">
-      {children}
-    </h3>
-  );
-}
-
 /* ---- Main Component ---- */
 export default function ProjectDetailClient({ project }: { project: Project }) {
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [lightboxIndex, setLightboxIndex] = useState(0);
-  const [lightboxImages, setLightboxImages] = useState<string[]>([]);
 
   const currentIndex = projects.findIndex((p) => p.slug === project.slug);
+  const galleryImages = project.gallery ?? [];
+  const previewImages = galleryImages.slice(0, 2);
 
-  const isChaodom = project.slug === "chao-dom";
-  const isPolygonMesh = project.slug === "polygon-mesh";
-  const isVpsTycoon = project.slug === "vps-tycoon";
-  const isDriveKmitl = project.slug === "drive-kmitl";
-  const isSynchro = project.slug === "synchro";
-  const isLorcana = project.slug === "lorcana-cloud-playlab";
-  const isTawanOs = project.slug === "tawan-os-agent-harness";
-  const isRedBullF1 = project.slug === "redbull-f1-verstappen";
-  const isHybriCareer = project.slug === "hybricareer-ai";
-
-  function openLightbox(images: string[], index: number) {
-    setLightboxImages(images);
+  function openLightbox(index: number) {
     setLightboxIndex(index);
     setLightboxOpen(true);
   }
 
-  /* ---- Chaodom-specific image sets ---- */
-  const galleryImages = project.gallery;
+  // Parse result into Solution and Impact lines
+  const resultLines = project.result.split("\n").filter(Boolean);
 
   return (
     <main className="relative min-h-screen bg-soft-white dark:bg-dark-navy overflow-hidden">
@@ -163,7 +141,7 @@ export default function ProjectDetailClient({ project }: { project: Project }) {
         </Link>
         <Link
           href="/#works"
-          className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-vinyl-dark/5 dark:bg-soft-white/5 border border-vinyl-dark/15 dark:border-soft-white/10 font-body text-sm text-deep-navy/70 dark:text-soft-white/70 hover:text-deep-navy dark:hover:text-soft-white hover:bg-vinyl-dark/10 dark:hover:bg-vinyl-dark/10 dark:hover:bg-soft-white/10 hover:border-vinyl-dark/25 dark:hover:border-soft-white/20 transition-all duration-300"
+          className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-vinyl-dark/5 dark:bg-soft-white/5 border border-vinyl-dark/15 dark:border-soft-white/10 font-body text-sm text-deep-navy/70 dark:text-soft-white/70 hover:text-deep-navy dark:hover:text-soft-white hover:bg-vinyl-dark/10 dark:hover:bg-soft-white/10 transition-all duration-300"
         >
           <span>Home</span>
         </Link>
@@ -187,7 +165,9 @@ export default function ProjectDetailClient({ project }: { project: Project }) {
           ) : (
             <div className="absolute inset-0 bg-gradient-to-br from-lavender/30 via-sakura-pink/20 to-sky-cyan/10">
               <div className="absolute inset-0 flex items-center justify-center">
-                <span className="font-display text-8xl md:text-9xl text-deep-navy/10 dark:text-soft-white/10 select-none">{project.title[0]}</span>
+                <span className="font-display text-8xl md:text-9xl text-deep-navy/10 dark:text-soft-white/10 select-none">
+                  {project.title[0]}
+                </span>
               </div>
             </div>
           )}
@@ -199,11 +179,11 @@ export default function ProjectDetailClient({ project }: { project: Project }) {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
           >
-            <p className="font-zen text-xs text-neon-magenta/60 tracking-[0.25em] mb-2 uppercase">
-              プロジェクト
+            <p className="font-zen text-xs text-neon-magenta/80 tracking-[0.25em] mb-2 uppercase">
+              プロジェクト ✦ CASE STUDY
             </p>
             <h1
-              className="font-display text-4xl md:text-5xl lg:text-6xl text-soft-white leading-tight drop-shadow-lg"
+              className="font-display text-3xl md:text-5xl lg:text-6xl text-soft-white leading-tight drop-shadow-lg"
               style={{
                 WebkitTextStroke: "0.5px rgba(255,255,255,0.15)",
                 textShadow: "0 2px 20px rgba(0,0,0,0.6)",
@@ -221,22 +201,60 @@ export default function ProjectDetailClient({ project }: { project: Project }) {
         </div>
       </section>
 
-      {/* ── Project Info Header ── */}
+      {/* ── Project Info & Action Links ── */}
       <FadeSection delay={0.1} className="relative z-10 mx-auto max-w-5xl px-6 mt-10">
-        <div className="flex flex-col md:flex-row md:items-center gap-4 md:gap-6 mb-4">
-          <span className="font-body text-sm text-lilac-bright font-bold">{project.date}</span>
-          <span className={`inline-block w-fit px-4 py-1 rounded-full font-body text-xs font-bold uppercase tracking-widest border ${categoryBg[project.category]}`}>
-            {categoryLabels[project.category]}
-          </span>
+        <div className="flex flex-wrap items-center justify-between gap-4 mb-6">
+          <div className="flex items-center gap-4">
+            <span className="font-body text-sm text-lilac-bright font-bold">{project.date}</span>
+            <span className={`inline-block px-4 py-1 rounded-full font-body text-xs font-bold uppercase tracking-widest border ${categoryBg[project.category]}`}>
+              {categoryLabels[project.category]}
+            </span>
+          </div>
+
+          {/* Action Links (Live demo / Video / GitHub) */}
+          <div className="flex flex-wrap items-center gap-3">
+            {project.liveUrl && (
+              <a
+                href={project.liveUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-gradient-to-r from-neon-magenta to-electric-blue text-white font-body text-xs font-bold uppercase tracking-wider hover:opacity-90 hover:scale-105 transition-all duration-300 shadow-[0_0_15px_rgba(255,45,120,0.3)]"
+              >
+                <span>Live Demo</span>
+                <span>↗</span>
+              </a>
+            )}
+            {project.videoUrl && (
+              <a
+                href={project.videoUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-retro-yellow text-dark-navy font-body text-xs font-bold uppercase tracking-wider hover:bg-retro-yellow/90 hover:scale-105 transition-all duration-300 shadow-[0_0_15px_rgba(240,208,64,0.3)]"
+              >
+                <span>Video Demo</span>
+                <span>▶</span>
+              </a>
+            )}
+            {project.githubUrl && (
+              <a
+                href={project.githubUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-vinyl-dark text-soft-white border border-soft-white/20 font-body text-xs font-bold uppercase tracking-wider hover:border-neon-teal hover:scale-105 transition-all duration-300"
+              >
+                <span>GitHub</span>
+                <span>↗</span>
+              </a>
+            )}
+          </div>
         </div>
-        <div className="flex flex-wrap gap-2 mt-4">
+
+        {/* Tech Stack Chips */}
+        <div className="flex flex-wrap gap-2">
           {project.techStack.map((tech) => (
             <span
               key={tech}
-              className="px-4 py-1.5 rounded-full bg-deep-purple/60 text-deep-navy/80 dark:text-soft-white/80 border border-vinyl-dark/15 dark:border-soft-white/10 font-body text-xs font-medium transition-all duration-200 hover:bg-deep-purple/80 hover:text-deep-navy dark:hover:text-soft-white hover:-translate-y-0.5"
-              style={{ filter: "drop-shadow(2px 2px 0 rgba(0,0,0,0.4))", transform: "perspective(300px) rotateX(-4deg)" }}
-              onMouseEnter={e => { (e.currentTarget as HTMLSpanElement).style.transform = "perspective(300px) rotateX(0deg) translateY(-2px)"; }}
-              onMouseLeave={e => { (e.currentTarget as HTMLSpanElement).style.transform = "perspective(300px) rotateX(-4deg)"; }}
+              className="px-4 py-1.5 rounded-full bg-deep-purple/40 dark:bg-deep-purple/60 text-deep-navy/80 dark:text-soft-white/80 border border-vinyl-dark/15 dark:border-soft-white/10 font-body text-xs font-medium transition-all duration-200 hover:-translate-y-0.5 hover:border-hot-pink/40"
             >
               {tech}
             </span>
@@ -248,2282 +266,159 @@ export default function ProjectDetailClient({ project }: { project: Project }) {
         <div className="h-px bg-gradient-to-r from-transparent via-vinyl-dark/15 dark:via-soft-white/10 to-transparent" />
       </div>
 
-      {/* ════════════════════════════════════════
-          01 OVERVIEW / LEARNING GOAL
-      ════════════════════════════════════════ */}
+      {/* ── 01 OVERVIEW ── */}
       <div className="relative z-10 mx-auto max-w-5xl px-6">
         <FadeSection delay={0} className="py-14">
           <SectionNumber n="01" />
           <h2 className="font-display text-3xl md:text-4xl text-deep-navy dark:text-soft-white mb-6 -mt-2">
-            {isPolygonMesh ? "Learning Goal" : isVpsTycoon ? "Project Pitch" : isDriveKmitl ? "Product Summary" : isSynchro ? "Product Goal" : isLorcana ? "Project Architecture Summary" : isTawanOs ? "System Architecture Summary" : isRedBullF1 ? "Concept & 1-Week Sprint Goal" : isHybriCareer ? "Hackathon Project Summary" : "Overview"}
+            Project Overview
           </h2>
-          <p className="font-body text-base md:text-lg text-deep-navy/75 dark:text-soft-white/75 leading-relaxed">{project.summary}</p>
+          <p className="font-body text-base md:text-lg text-deep-navy/80 dark:text-soft-white/80 leading-relaxed">
+            {project.summary}
+          </p>
 
-          {isLorcana && (
+          {/* Featured Preview Visuals */}
+          {previewImages.length > 0 && (
             <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-4">
-              {[
-                { src: "/images/Project/Lorcana/01_landing_hero.png", label: "Landing Hero (3D Cover Flow & Sets)" },
-                { src: "/images/Project/Lorcana/07_realtime_room_play.png", label: "Real-Time Battle Arena (AWS WebSockets)" },
-              ].map(({ src, label }, i) => (
+              {previewImages.map((src, i) => (
                 <motion.button
                   key={i}
-                  className="group relative aspect-video rounded-2xl overflow-hidden bg-deep-purple/30 border border-soft-white/5 cursor-pointer focus:outline-none focus:ring-2 focus:ring-amber-400/50"
-                  onClick={() => openLightbox(["/images/Project/Lorcana/01_landing_hero.png", "/images/Project/Lorcana/07_realtime_room_play.png"], i)}
+                  className="group relative aspect-video rounded-2xl overflow-hidden bg-deep-purple/30 border border-vinyl-dark/10 dark:border-soft-white/10 cursor-pointer focus:outline-none focus:ring-2 focus:ring-hot-pink/50"
+                  onClick={() => openLightbox(i)}
                   whileHover={{ scale: 1.02 }}
                   transition={{ duration: 0.3 }}
                 >
-                  <Image src={src} alt={label} fill className="object-cover" sizes="(max-width: 768px) 100vw, 50vw" />
-                  <div className="absolute inset-0 bg-amber-400/0 group-hover:bg-amber-400/10 transition-colors duration-300 flex items-center justify-center">
-                    <span className="font-body text-sm text-soft-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-dark-navy/60 px-4 py-2 rounded-full backdrop-blur-sm">{label}</span>
+                  <Image
+                    src={src}
+                    alt={`${project.title} preview ${i + 1}`}
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 768px) 100vw, 50vw"
+                  />
+                  <div className="absolute inset-0 bg-dark-navy/0 group-hover:bg-dark-navy/40 transition-colors duration-300 flex items-center justify-center">
+                    <span className="font-body text-xs text-soft-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-dark-navy/80 px-4 py-2 rounded-full backdrop-blur-sm">
+                      Preview Highlight ✦
+                    </span>
                   </div>
                 </motion.button>
               ))}
             </div>
           )}
-
-          {isTawanOs && (
-            <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-4">
-              {[
-                { src: "/images/Project/TawanOS/preview-tawanos.png", label: "Antigravity CLI Terminal AI Harness" },
-                { src: "/images/Project/TawanOS/agent-architecture.png", label: "Multi-Agent System Architecture" },
-              ].map(({ src, label }, i) => (
-                <motion.button
-                  key={i}
-                  className="group relative aspect-video rounded-2xl overflow-hidden bg-deep-purple/30 border border-soft-white/5 cursor-pointer focus:outline-none focus:ring-2 focus:ring-sky-cyan/50"
-                  onClick={() => openLightbox(["/images/Project/TawanOS/preview-tawanos.png", "/images/Project/TawanOS/agent-architecture.png"], i)}
-                  whileHover={{ scale: 1.02 }}
-                  transition={{ duration: 0.3 }}
-                >
-                  <Image src={src} alt={label} fill className="object-cover" sizes="(max-width: 768px) 100vw, 50vw" />
-                  <div className="absolute inset-0 bg-sky-cyan/0 group-hover:bg-sky-cyan/10 transition-colors duration-300 flex items-center justify-center">
-                    <span className="font-body text-sm text-soft-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-dark-navy/60 px-4 py-2 rounded-full backdrop-blur-sm">{label}</span>
-                  </div>
-                </motion.button>
-              ))}
-            </div>
-          )}
-
-          {isRedBullF1 && (
-            <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-4">
-              {[
-                { src: "/images/Project/RedBull-F1/hero-bg.jpg", label: "Oracle Red Bull Racing RB19" },
-                { src: "/images/Project/RedBull-F1/max_portrait.jpg", label: "Max Verstappen (World Champion)" },
-              ].map(({ src, label }, i) => (
-                <motion.button
-                  key={i}
-                  className="group relative aspect-video rounded-2xl overflow-hidden bg-deep-purple/30 border border-soft-white/5 cursor-pointer focus:outline-none focus:ring-2 focus:ring-red-500/50"
-                  onClick={() => openLightbox(["/images/Project/RedBull-F1/hero-bg.jpg", "/images/Project/RedBull-F1/max_portrait.jpg"], i)}
-                  whileHover={{ scale: 1.02 }}
-                  transition={{ duration: 0.3 }}
-                >
-                  <Image src={src} alt={label} fill className="object-cover" sizes="(max-width: 768px) 100vw, 50vw" />
-                  <div className="absolute inset-0 bg-red-500/0 group-hover:bg-red-500/10 transition-colors duration-300 flex items-center justify-center">
-                    <span className="font-body text-sm text-soft-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-dark-navy/60 px-4 py-2 rounded-full backdrop-blur-sm">{label}</span>
-                  </div>
-                </motion.button>
-              ))}
-            </div>
-          )}
-
-          {isHybriCareer && (
-            <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-4">
-              {[
-                { src: "/images/Project/HybriCareer/slide1_hackathon_cover.png", label: "Generation Hackathon Pitch Deck" },
-                { src: "/images/Project/HybriCareer/slide2_user_research.png", label: "User Research & Labor Insights" },
-              ].map(({ src, label }, i) => (
-                <motion.button
-                  key={i}
-                  className="group relative aspect-video rounded-2xl overflow-hidden bg-deep-purple/30 border border-soft-white/5 cursor-pointer focus:outline-none focus:ring-2 focus:ring-emerald-500/50"
-                  onClick={() => openLightbox(["/images/Project/HybriCareer/slide1_hackathon_cover.png", "/images/Project/HybriCareer/slide2_user_research.png"], i)}
-                  whileHover={{ scale: 1.02 }}
-                  transition={{ duration: 0.3 }}
-                >
-                  <Image src={src} alt={label} fill className="object-cover" sizes="(max-width: 768px) 100vw, 50vw" />
-                  <div className="absolute inset-0 bg-emerald-500/0 group-hover:bg-emerald-500/10 transition-colors duration-300 flex items-center justify-center">
-                    <span className="font-body text-sm text-soft-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-dark-navy/60 px-4 py-2 rounded-full backdrop-blur-sm">{label}</span>
-                  </div>
-                </motion.button>
-              ))}
-            </div>
-          )}
-
-          {isVpsTycoon && (
-            <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-4">
-              {[
-                { src: "/images/Project/VPS-Tycoon/58.png", label: "Title Screen" },
-                { src: "/images/Project/VPS-Tycoon/59.png", label: "Main Menu" },
-              ].map(({ src, label }, i) => (
-                <motion.button
-                  key={i}
-                  className="group relative aspect-video rounded-2xl overflow-hidden bg-deep-purple/30 border border-soft-white/5 cursor-pointer focus:outline-none focus:ring-2 focus:ring-sky-cyan/50"
-                  onClick={() => openLightbox(["/images/Project/VPS-Tycoon/58.png", "/images/Project/VPS-Tycoon/59.png"], i)}
-                  whileHover={{ scale: 1.02 }}
-                  transition={{ duration: 0.3 }}
-                >
-                  <Image src={src} alt={label} fill className="object-cover" sizes="(max-width: 768px) 100vw, 50vw" />
-                  <div className="absolute inset-0 bg-sky-cyan/0 group-hover:bg-sky-cyan/10 transition-colors duration-300 flex items-center justify-center">
-                    <span className="font-body text-sm text-soft-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-dark-navy/60 px-4 py-2 rounded-full backdrop-blur-sm">{label}</span>
-                  </div>
-                </motion.button>
-              ))}
-            </div>
-          )}
-
-          {isPolygonMesh && (
-            <div className="mt-8 relative w-full overflow-hidden rounded-2xl" style={{ clipPath: "polygon(0 0, 100% 0, 100% 92%, 97% 100%, 0 100%)" }}>
-              <div className="aspect-[21/9] relative">
-                <Image
-                  src="/images/Project/Multimedia Learning Polygon Mesh/FUll galary/3.png"
-                  alt="Multimedia Learning Polygon Mesh Preview"
-                  fill
-                  className="object-cover"
-                  sizes="(max-width: 768px) 100vw, 80vw"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-dark-navy/60 via-transparent to-transparent" />
-              </div>
-            </div>
-          )}
-
-
-
-
         </FadeSection>
 
         <div className="h-px bg-gradient-to-r from-transparent via-vinyl-dark/15 dark:via-soft-white/10 to-transparent" />
 
-        {/* ════════════════════════════════════════
-            02 THE PROBLEM / WHY THIS TOPIC IS HARD
-        ════════════════════════════════════════ */}
+        {/* ── 02 THE PROBLEM ── */}
         <FadeSection delay={0.05} className="py-14">
           <SectionNumber n="02" extra={<ImpactBubble />} />
           <h2 className="font-display text-3xl md:text-4xl text-deep-navy dark:text-soft-white mb-6 -mt-2">
-            {isPolygonMesh ? "Why This Topic Is Hard" : isVpsTycoon ? "The Challenge" : isLorcana ? "The Problem & Latency Challenge" : isTawanOs ? "The Challenge: Stateless Drift" : isRedBullF1 ? "The Challenge: High-Performance 3D" : isHybriCareer ? "The Challenge: Youth Unemployment" : "The Problem"}
+            The Problem & Challenge
           </h2>
-          <p className="font-body text-base md:text-lg text-deep-navy/75 dark:text-soft-white/75 leading-relaxed">{project.problem}</p>
-
-          {isLorcana && (
-            <div className="mt-8 relative bg-vinyl-dark/5 dark:bg-soft-white/5 border border-amber-400/30 rounded-2xl p-6 md:p-8 overflow-hidden">
-              <div className="flex items-start gap-4">
-                <ImpactBubble />
-                <div>
-                  <p className="font-display text-lg text-amber-500 mb-2">Cloud Latency, High Server Costs &amp; Static Card Simulators</p>
-                  <p className="font-body text-sm text-deep-navy/75 dark:text-soft-white/75 leading-relaxed">
-                    เกมการ์ด TCG มี State การเล่นที่ซับซ้อนมาก การส่งข้อมูลผ่าน REST API ทั่วไปจะหน่วงและเกิด Race Condition อีกทั้งการจัดการห้องเล่น (Room Lifecycle) มักเสี่ยงต่อปัญหาข้อมูลสูญหายเมื่อเน็ตหลุด ความท้าทายคือการสร้างระบบ Real-time State Sync บน Cloud ที่มี Latency ต่ำกว่า 100ms โดยไม่มีค่าใช้จ่ายเซิร์ฟเวอร์ ($0.00 บน AWS Free Tier) พร้อมฟิสิกส์การ์ด 3D ที่ให้ความรู้สึกลื่นไหลสมจริง
-                  </p>
-                </div>
-              </div>
-            </div>
-          )}
-
-          {isTawanOs && (
-            <div className="mt-8 relative bg-vinyl-dark/5 dark:bg-soft-white/5 border border-sky-cyan/30 rounded-2xl p-6 md:p-8 overflow-hidden">
-              <div className="flex items-start gap-4">
-                <ImpactBubble />
-                <div>
-                  <p className="font-display text-lg text-cyan-deep dark:text-sky-cyan mb-2">Stateless Drift &amp; AI Code Slop Without Grounding</p>
-                  <p className="font-body text-sm text-deep-navy/75 dark:text-soft-white/75 leading-relaxed">
-                    การใช้งาน AI แชทบอททั่วไปขาด Context ระยะยาว (Stateless), สลับเครื่องมือลำบาก, ไม่สามารถสั่งงานโปรแกรมในเครื่อง (เช่น Figma, Obsidian Vault, Unity CLI) ได้จริง และมักสร้างโค้ดแบบ Vibe Coding ที่ไม่มีการตรวจสอบความถูกต้อง ระบบนี้จึงถูกสร้างขึ้นเพื่อเป็น Agent Harness ที่มี Memory มาตรฐานและ Verification Loop ในตัว
-                  </p>
-                </div>
-              </div>
-            </div>
-          )}
-
-          {isRedBullF1 && (
-            <div className="mt-8 relative bg-vinyl-dark/5 dark:bg-soft-white/5 border border-red-500/30 rounded-2xl p-6 md:p-8 overflow-hidden">
-              <div className="flex items-start gap-4">
-                <ImpactBubble />
-                <div>
-                  <p className="font-display text-lg text-red-500 mb-2">Crafting 3D High-Performance Web Without Cookie-Cutter AI Templates</p>
-                  <p className="font-body text-sm text-deep-navy/75 dark:text-soft-white/75 leading-relaxed">
-                    การสร้างเว็บ 3D ด้วย AI มักเจอปัญหาโค้ดหลุดติด Template สำเร็จรูป ขาดเอกลักษณ์ และกิน Token มหาศาลจนไม่สามารถปรับแต่งงานคราฟต์ได้ ความท้าทายของสปรินต์ 1 สัปดาห์นี้คือการพิสูจน์ว่า หากใช้ Antigravity CLI ควบคุม Subagents 17 ตัว ร่วมกับ Taste ของคนคุมทิศทาง จะสามารถส่งมอบเว็บ 3D Exploded View และ Parallax ระดับ 60 FPS ได้โดยไม่ติด Token Limit
-                  </p>
-                </div>
-              </div>
-            </div>
-          )}
-
-          {isHybriCareer && (
-            <div className="mt-8 relative bg-vinyl-dark/5 dark:bg-soft-white/5 border border-emerald-500/30 rounded-2xl p-6 md:p-8 overflow-hidden">
-              <div className="flex items-start gap-4">
-                <ImpactBubble />
-                <div>
-                  <p className="font-display text-lg text-emerald-600 dark:text-emerald-400 mb-2">The ATS Degree Barrier in Thailand&apos;s Youth Labor Market</p>
-                  <p className="font-body text-sm text-deep-navy/75 dark:text-soft-white/75 leading-relaxed">
-                    ผู้ที่ต้องการเปลี่ยนสายงานมักถูกคัดทิ้งโดยระบบ ATS ตั้งแต่ด่านแรกเนื่องจากชื่อปริญญาไม่ตรงสาย แม้จะมีทักษะจริงผ่านการเรียนรู้ด้วยตนเอง ขณะที่ HR องค์กรขนาดกลาง-เล็กมีเวลาจำกัด ขาดเครื่องมือคัดกรองความสามารถเชิงประจักษ์ ส่งผลให้อัตราการว่างงานของเยาวชนอายุ 20-24 ปีในไทยพุ่งสูงถึง 34%
-                  </p>
-                </div>
-              </div>
-            </div>
-          )}
-
-          {isVpsTycoon && (
-            <div className="mt-8 relative bg-vinyl-dark/5 dark:bg-soft-white/5 border border-sky-cyan/30 rounded-2xl p-6 md:p-8 overflow-hidden">
-              <div className="absolute -top-4 -right-4 font-display text-9xl text-cyan-deep dark:text-sky-cyan/5 pointer-events-none select-none">!?</div>
-              <div className="flex items-start gap-4">
-                <ImpactBubble />
-                <div>
-                  <p className="font-display text-lg text-cyan-deep dark:text-sky-cyan mb-2">Technical Depth vs. Playability</p>
-                  <p className="font-body text-sm text-deep-navy/75 dark:text-soft-white/75 leading-relaxed">
-                    VPS hosting, rack management, และ VM allocation เป็นแนวคิดที่ technical มาก — ความท้าทายคือออกแบบให้ผู้เล่นทั่วไปเข้าใจ mechanic เหล่านี้ได้ทันที โดยยังคงความลึกของระบบที่ทำให้เกมน่าสนใจในระยะยาว
-                  </p>
-                </div>
-              </div>
-            </div>
-          )}
-
-          {isPolygonMesh && (
-            <div className="mt-8 relative bg-vinyl-dark/5 dark:bg-soft-white/5 border border-hot-pink/30 rounded-2xl p-6 md:p-8 overflow-hidden">
-              <div className="absolute -top-4 -right-4 font-display text-9xl text-hot-pink/5 pointer-events-none select-none">!?</div>
-              <div className="flex items-start gap-4">
-                <ImpactBubble />
-                <div>
-                  <p className="font-display text-lg text-hot-pink mb-2">Abstract by Nature</p>
-                  <p className="font-body text-sm text-deep-navy/75 dark:text-soft-white/75 leading-relaxed">
-                    Polygon mesh เป็นแนวคิดที่ต้องเห็น ไม่ใช่แค่อ่าน — การเข้าใจว่า vertices เชื่อมกันเป็น edges แล้วกลายเป็น faces และ faces รวมกันสร้างวัตถุ 3D นั้นต้องการ interaction และ visual step-by-step ที่ text หรือ slide นิ่ง ๆ ให้ไม่ได้
-                  </p>
-                </div>
-              </div>
-            </div>
-          )}
-
-          {isChaodom && (
-            <>
-              <SubHeading>Pain Points</SubHeading>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                {[
-                  "ข้อมูลออนไลน์ไม่อัปเดต ราคาและสถานะห้องไม่ตรงความจริง",
-                  "ติดต่อเจ้าของหอออนไลน์แล้วถูกปฏิเสธ",
-                  "ต้องลงพื้นที่สำรวจเองเพราะข้อมูลไม่น่าเชื่อถือ",
-                  "ระบบจองหอในสถาบันไม่โปร่งใส",
-                  "รูปภาพประกาศไม่ตรงกับสภาพจริง",
-                  "ข้อมูลการเดินทาง/ขนส่งสาธารณะไม่ครบ",
-                  "ใช้เวลาหาหอนานถึง 1 วัน – 3 เดือน",
-                ].map((point, i) => (
-                  <div key={i} className="flex items-start gap-3 bg-vinyl-dark/5 dark:bg-soft-white/5 border border-vinyl-dark/15 dark:border-soft-white/10 rounded-xl p-4">
-                    <span className="font-display text-neon-magenta text-lg shrink-0">{String(i + 1).padStart(2, "0")}</span>
-                    <p className="font-body text-sm text-deep-navy/80 dark:text-soft-white/80 leading-relaxed">{point}</p>
-                  </div>
-                ))}
-              </div>
-
-              <SubHeading>Real User Story</SubHeading>
-              <div className="relative bg-vinyl-dark/5 dark:bg-soft-white/5 border border-sakura-pink/30 rounded-2xl p-6 md:p-8">
-                <div className="absolute -top-3 left-6 bg-sakura-pink text-dark-navy font-body text-xs font-bold px-3 py-1 rounded-full">
-                  User Story
-                </div>
-                <p className="font-body text-base text-deep-navy/80 dark:text-soft-white/80 leading-relaxed italic">
-                  &ldquo;นางสาวภัชรธนสรณ์ — นักศึกษาใหม่ สจล. ใช้เวลากว่า 3 เดือนหาหอพัก เปิด RentHub, Google Maps, Facebook ทุกวัน แต่ข้อมูลไม่ตรงความจริง โทรหาเจ้าของหอถูกปฏิเสธซ้ำๆ สุดท้ายต้องนั่งรถไปดูพื้นที่จริงด้วยตัวเอง&rdquo;
-                </p>
-              </div>
-
-
-            </>
-          )}
-        </FadeSection>
-
-        <div className="h-px bg-gradient-to-r from-transparent via-vinyl-dark/15 dark:via-soft-white/10 to-transparent" />
-
-        {/* ════════════════════════════════════════
-            03 THE PROCESS / INTERACTION DESIGN HIGHLIGHTS
-        ════════════════════════════════════════ */}
-        <div className="py-14">
-          <FadeSection delay={0.05}>
-            <SectionNumber n="03" />
-            <h2 className="font-display text-3xl md:text-4xl text-deep-navy dark:text-soft-white mb-6 -mt-2">
-              {isPolygonMesh ? "Interaction Design Highlights" : isVpsTycoon ? "Core Game Loop" : "The Process"}
-            </h2>
-            {!isPolygonMesh && !isVpsTycoon && (
-              <p className="font-body text-base md:text-lg text-deep-navy/75 dark:text-soft-white/75 leading-relaxed">{project.process}</p>
-            )}
-          </FadeSection>
-
-          {isVpsTycoon && (
-            <FadeSection delay={0.1}>
-              {/* Loop flow diagram */}
-              <div className="flex flex-col md:flex-row items-center justify-center gap-2 md:gap-0 mb-10">
-                {[
-                  { icon: "📨", step: "Receive Request", sub: "Customer via Messenger" },
-                  { icon: "⚙", step: "Allocate VM", sub: "CPU / RAM / Storage" },
-                  { icon: "🚀", step: "Deploy", sub: "Assign to Rack Slot" },
-                  { icon: "💰", step: "Earn Revenue", sub: "Money + Rating" },
-                  { icon: "⬆", step: "Upgrade Systems", sub: "6 Skill Trees" },
-                ].map((node, i, arr) => (
-                  <div key={i} className="flex flex-col md:flex-row items-center">
-                    <div className="flex flex-col items-center bg-vinyl-dark/5 dark:bg-soft-white/5 border border-sky-cyan/20 rounded-2xl px-5 py-4 min-w-[120px] text-center hover:border-sky-cyan/50 hover:bg-vinyl-dark/8 dark:hover:bg-soft-white/8 transition-all duration-300">
-                      <span className="text-2xl mb-1">{node.icon}</span>
-                      <p className="font-display text-xs text-deep-navy dark:text-soft-white font-bold leading-tight mb-1">{node.step}</p>
-                      <p className="font-body text-xs text-deep-navy/50 dark:text-deep-navy/50 dark:text-soft-white/50 leading-tight">{node.sub}</p>
-                    </div>
-                    {i < arr.length - 1 && (
-                      <span
-                        className="font-display text-cyan-deep dark:text-sky-cyan/40 text-2xl mx-2 rotate-90 md:rotate-0 my-1 md:my-0"
-                        aria-hidden="true"
-                      >→</span>
-                    )}
-                  </div>
-                ))}
-              </div>
-              {/* Time system callout */}
-              <div className="flex items-start gap-4 bg-vinyl-dark/5 dark:bg-soft-white/5 border border-retro-yellow/30 rounded-2xl p-5 mb-8">
-                <span className="font-display text-3xl text-yellow-deep dark:text-retro-yellow/70 shrink-0">⏱</span>
-                <div>
-                  <p className="font-display text-sm text-yellow-deep dark:text-retro-yellow font-bold mb-1">Time System</p>
-                  <p className="font-body text-sm text-deep-navy/70 dark:text-soft-white/70 leading-relaxed">
-                    30 วินาทีจริง = 1 วันในเกม — สร้างแรงกดดันให้ผู้เล่นตัดสินใจเร็ว จัดลำดับ request และบริหาร resource ก่อนสัญญาเช่าหมดอายุ
-                  </p>
-                </div>
-              </div>
-              {/* Loop images */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                {[
-                  { src: "/images/Project/VPS-Tycoon/62.png", label: "Game World" },
-                  { src: "/images/Project/VPS-Tycoon/71.png", label: "System Calibration Event" },
-                ].map(({ src, label }, i) => (
-                  <motion.button
-                    key={i}
-                    className="group relative aspect-video rounded-2xl overflow-hidden bg-deep-purple/30 border border-soft-white/5 cursor-pointer focus:outline-none focus:ring-2 focus:ring-sky-cyan/50"
-                    onClick={() => openLightbox(["/images/Project/VPS-Tycoon/62.png", "/images/Project/VPS-Tycoon/71.png"], i)}
-                    whileHover={{ scale: 1.02 }}
-                    transition={{ duration: 0.3 }}
-                  >
-                    <Image src={src} alt={label} fill className="object-cover" sizes="(max-width: 768px) 100vw, 50vw" />
-                    <div className="absolute inset-0 bg-sky-cyan/0 group-hover:bg-sky-cyan/10 transition-colors duration-300 flex items-center justify-center">
-                      <span className="font-body text-sm text-soft-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-dark-navy/60 px-4 py-2 rounded-full backdrop-blur-sm">{label}</span>
-                    </div>
-                  </motion.button>
-                ))}
-              </div>
-            </FadeSection>
-          )}
-
-          {isPolygonMesh && (
-            <FadeSection delay={0.1}>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-10">
-                {[
-                  { icon: "◻", name: "2D Process Polygon", desc: "เรียนรู้การเกิด polygon ทีละขั้นใน 2D พร้อมควบคุม step ด้วยลูกศร next/back" },
-                  { icon: "⚙", name: "2D Modify / Config", desc: "ปรับแต่ง properties ของ polygon 2D ผ่าน dropdown config แบบ interactive" },
-                  { icon: "◈", name: "3D Process Polygon", desc: "ดูกระบวนการสร้าง polygon mesh ใน 3D พร้อม step-by-step navigation" },
-                  { icon: "✦", name: "3D Config", desc: "ตั้งค่าโครงสร้าง 3D object และสำรวจรูปทรงในมุมมองต่างๆ" },
-                  { icon: "◉", name: "Polygon Study → 3D Object", desc: "เชื่อมโยง polygon study กับ 3D object representation อย่างชัดเจน" },
-                  { icon: "⬡", name: "Creating Polygon Mesh", desc: "แสดง hover explanation ให้เห็นว่า mesh เกิดขึ้นได้อย่างไร ทีละ face" },
-                  { icon: "🧩", name: "Jigsaw Polygonal", desc: "ภาพรวม jigsaw menu และการเลือกโมเดล" },
-                  { icon: "⟳", name: "Jigsaw Polygonal Game", desc: "ลากและประกอบชิ้นส่วน polygon แบบ draggable real-time บน Figma Site" },
-                ].map((f, i) => (
-                  <div key={i} className="flex items-start gap-4 bg-vinyl-dark/5 dark:bg-soft-white/5 border border-vinyl-dark/15 dark:border-soft-white/10 rounded-2xl p-5 hover:border-neon-magenta/30 hover:bg-vinyl-dark/8 dark:hover:bg-soft-white/8 transition-all duration-300">
-                    <span className="font-display text-2xl text-neon-magenta/70 shrink-0 mt-0.5">{f.icon}</span>
-                    <div>
-                      <p className="font-display text-sm text-deep-navy dark:text-soft-white font-bold mb-1">{f.name}</p>
-                      <p className="font-body text-xs text-deep-navy/60 dark:text-soft-white/60 leading-relaxed">{f.desc}</p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                {[
-                  "/images/Project/Multimedia Learning Polygon Mesh/46.png",
-                  "/images/Project/Multimedia Learning Polygon Mesh/47.png",
-                  "/images/Project/Multimedia Learning Polygon Mesh/49.png",
-                  "/images/Project/Multimedia Learning Polygon Mesh/50.png",
-                ].map((img, i, arr) => (
-                  <motion.button
-                    key={i}
-                    className="group relative aspect-video rounded-2xl overflow-hidden bg-deep-purple/30 border border-soft-white/5 cursor-pointer focus:outline-none focus:ring-2 focus:ring-hot-pink/50"
-                    onClick={() => openLightbox(arr, i)}
-                    whileHover={{ scale: 1.02 }}
-                    transition={{ duration: 0.3 }}
-                  >
-                    <Image src={img} alt={`Feature ${i + 1}`} fill className="object-cover" sizes="(max-width: 768px) 100vw, 50vw" />
-                    <div className="absolute inset-0 bg-hot-pink/0 group-hover:bg-hot-pink/10 transition-colors duration-300 flex items-center justify-center">
-                      <span className="font-body text-sm text-soft-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-dark-navy/60 px-4 py-2 rounded-full backdrop-blur-sm">View Full Size</span>
-                    </div>
-                  </motion.button>
-                ))}
-              </div>
-            </FadeSection>
-          )}
-
-          {project.phases && project.phases.length > 0 && isChaodom && (
-            <div className="mt-12 space-y-8 mx-auto max-w-4xl">
-
-              {/* Phase 1 */}
-              {project.phases[0] && (
-                <FadeSection delay={0.1} className="bg-vinyl-dark/5 dark:bg-soft-white/5 border border-vinyl-dark/15 dark:border-soft-white/10 rounded-3xl p-6 md:p-8 relative overflow-hidden group hover:border-sakura-pink/30 hover:bg-vinyl-dark/10 dark:hover:bg-vinyl-dark/10 dark:hover:bg-soft-white/10 transition-all duration-300">
-                  <div className="absolute top-0 right-0 p-6 opacity-5 font-display text-8xl pointer-events-none group-hover:opacity-10 transition-all text-magenta-deep dark:text-sakura-pink">1</div>
-                  <div className="relative z-10">
-                    <h3 className="font-display text-2xl md:text-3xl text-magenta-deep dark:text-sakura-pink mb-3 group-hover:text-neon-magenta transition-colors duration-300">{project.phases[0].title}</h3>
-                    <p className="font-body text-base md:text-lg text-deep-navy/80 dark:text-soft-white/80 leading-relaxed">{project.phases[0].description}</p>
-
-                  </div>
-                </FadeSection>
-              )}
-
-              {/* Phase 2 */}
-              {project.phases[1] && (
-                <FadeSection delay={0.15} className="bg-vinyl-dark/5 dark:bg-soft-white/5 border border-vinyl-dark/15 dark:border-soft-white/10 rounded-3xl p-6 md:p-8 relative overflow-hidden group hover:border-sakura-pink/30 hover:bg-vinyl-dark/10 dark:hover:bg-vinyl-dark/10 dark:hover:bg-soft-white/10 transition-all duration-300">
-                  <div className="absolute top-0 right-0 p-6 opacity-5 font-display text-8xl pointer-events-none group-hover:opacity-10 transition-all text-magenta-deep dark:text-sakura-pink">2</div>
-                  <div className="relative z-10">
-                    <h3 className="font-display text-2xl md:text-3xl text-magenta-deep dark:text-sakura-pink mb-3 group-hover:text-neon-magenta transition-colors duration-300">{project.phases[1].title}</h3>
-                    <p className="font-body text-base md:text-lg text-deep-navy/80 dark:text-soft-white/80 leading-relaxed">{project.phases[1].description}</p>
-                    {isChaodom && (
-                      <>
-                        <p className="font-body text-sm text-deep-navy/50 dark:text-deep-navy/50 dark:text-soft-white/50 mt-6 mb-3">Participant Profiles</p>
-                        <div className="grid grid-cols-1 md:grid-cols-3 gap-3 mb-6">
-                          {[
-                            { name: "โปเต้", age: "18", quote: "โทรหาหอหลายเจ้า แต่ถูกปฏิเสธตลอด" },
-                            { name: "ฟ้าใส", age: "18", quote: "ข้อมูลออนไลน์ไม่ตรงกับสภาพจริง" },
-                            { name: "ทัก", age: "19", quote: "หาหออยู่นาน 3 เดือนกว่าจะได้" },
-                          ].map((u, i) => (
-                            <div key={i} className="bg-vinyl-dark/5 dark:bg-soft-white/5 border border-vinyl-dark/15 dark:border-soft-white/10 rounded-xl p-4 text-center">
-                              <div className="w-12 h-12 rounded-full bg-neon-magenta/20 border border-neon-magenta/30 mx-auto mb-2 flex items-center justify-center font-display text-neon-magenta text-lg">{u.name[0]}</div>
-                              <p className="font-display text-deep-navy dark:text-soft-white text-sm mb-1">{u.name} <span className="text-deep-navy/40 dark:text-deep-navy/40 dark:text-soft-white/40 font-body text-xs">อายุ {u.age}</span></p>
-                              <p className="font-body text-xs text-deep-navy/60 dark:text-soft-white/60 italic">&ldquo;{u.quote}&rdquo;</p>
-                            </div>
-                          ))}
-                        </div>
-                      </>
-                    )}
-                  </div>
-                </FadeSection>
-              )}
-
-              {/* Phase 3 */}
-              {project.phases[2] && (
-                <FadeSection delay={0.2} className="bg-vinyl-dark/5 dark:bg-soft-white/5 border border-vinyl-dark/15 dark:border-soft-white/10 rounded-3xl p-6 md:p-8 relative overflow-hidden group hover:border-sakura-pink/30 hover:bg-vinyl-dark/10 dark:hover:bg-vinyl-dark/10 dark:hover:bg-soft-white/10 transition-all duration-300">
-                  <div className="absolute top-0 right-0 p-6 opacity-5 font-display text-8xl pointer-events-none group-hover:opacity-10 transition-all text-magenta-deep dark:text-sakura-pink">3</div>
-                  <div className="relative z-10">
-                    <h3 className="font-display text-2xl md:text-3xl text-magenta-deep dark:text-sakura-pink mb-3 group-hover:text-neon-magenta transition-colors duration-300">Phase 3: Analysis &amp; Conceptual Design</h3>
-                    <p className="font-body text-base md:text-lg text-deep-navy/80 dark:text-soft-white/80 leading-relaxed">{project.phases[2].description}</p>
-                    {isChaodom && (
-                      <>
-                        <p className="font-display text-deep-navy/80 dark:text-soft-white/80 text-lg mt-8 mb-2">Persona: น้องเฟรช (The Dorm Seeker)</p>
-                        <motion.button
-                          className="group relative w-full rounded-2xl overflow-hidden bg-deep-purple/30 border border-soft-white/5 cursor-pointer focus:outline-none focus:ring-2 focus:ring-sakura-pink/50 mb-4"
-                          style={{ aspectRatio: "4/3" }}
-                          onClick={() => openLightbox([
-                            "/images/Project/Chaodom/Phase%203%20Analysis%20%26%20Conceptual%20Design/Persona.png",
-                            "/images/Project/Chaodom/Phase%203%20Analysis%20%26%20Conceptual%20Design/Experience%20Map.png",
-                          ], 0)}
-                          whileHover={{ scale: 1.01 }}
-                          transition={{ duration: 0.3 }}
-                        >
-                          <Image
-                            src="/images/Project/Chaodom/Phase%203%20Analysis%20%26%20Conceptual%20Design/Persona.png"
-                            alt="Persona น้องเฟรช"
-                            fill
-                            className="object-contain"
-                            sizes="(max-width: 768px) 100vw, 70vw"
-                          />
-                          <div className="absolute inset-0 bg-sakura-pink/0 group-hover:bg-sakura-pink/10 transition-colors duration-300 flex items-center justify-center">
-                            <span className="font-body text-sm text-soft-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-dark-navy/60 px-4 py-2 rounded-full backdrop-blur-sm">View Full Size</span>
-                          </div>
-                        </motion.button>
-                        <div className="bg-vinyl-dark/5 dark:bg-soft-white/5 rounded-xl p-4 mb-6 font-body text-sm text-deep-navy/70 dark:text-soft-white/70 leading-relaxed">
-                          <strong className="text-deep-navy dark:text-soft-white">น้องเฟรช</strong> — นักศึกษาใหม่ สจล. อายุ 18 ปี มาจากต่างจังหวัด<br />
-                          <em>&ldquo;อยากได้ข้อมูลหอที่ถูกต้อง ไม่ต้องเสียเวลาลงพื้นที่เองทุกครั้ง&rdquo;</em><br />
-                          Goals: หาหอที่ปลอดภัย ราคาสมเหตุสมผล ใกล้สถาบัน | Pain: ข้อมูลไม่อัปเดต ติดต่อยาก
-                        </div>
-                        <p className="font-display text-deep-navy/80 dark:text-soft-white/80 text-lg mb-2">Experience Map</p>
-                        <motion.button
-                          className="group relative w-full rounded-2xl overflow-hidden bg-deep-purple/30 border border-soft-white/5 cursor-pointer focus:outline-none focus:ring-2 focus:ring-sakura-pink/50 mb-3"
-                          style={{ aspectRatio: "3/1" }}
-                          onClick={() => openLightbox([
-                            "/images/Project/Chaodom/Phase%203%20Analysis%20%26%20Conceptual%20Design/Persona.png",
-                            "/images/Project/Chaodom/Phase%203%20Analysis%20%26%20Conceptual%20Design/Experience%20Map.png",
-                          ], 1)}
-                          whileHover={{ scale: 1.01 }}
-                          transition={{ duration: 0.3 }}
-                        >
-                          <Image
-                            src="/images/Project/Chaodom/Phase%203%20Analysis%20%26%20Conceptual%20Design/Experience%20Map.png"
-                            alt="Experience Map"
-                            fill
-                            className="object-contain"
-                            sizes="(max-width: 768px) 100vw, 70vw"
-                          />
-                          <div className="absolute inset-0 bg-sakura-pink/0 group-hover:bg-sakura-pink/10 transition-colors duration-300 flex items-center justify-center">
-                            <span className="font-body text-sm text-soft-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-dark-navy/60 px-4 py-2 rounded-full backdrop-blur-sm">View Full Size</span>
-                          </div>
-                        </motion.button>
-                        <a
-                          href="https://www.figma.com/board/JuVCLNLk0p9hTIH800cNDg/Experience-Map"
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-neon-magenta/10 border border-neon-magenta/30 font-body text-sm text-neon-magenta hover:bg-neon-magenta/20 transition-colors duration-200 mb-6"
-                        >
-                          View Full Experience Map →
-                        </a>
-                      </>
-                    )}
-                  </div>
-                </FadeSection>
-              )}
-
-              {/* Phase 4 */}
-              {project.phases[3] && (
-                <FadeSection delay={0.25} className="bg-vinyl-dark/5 dark:bg-soft-white/5 border border-vinyl-dark/15 dark:border-soft-white/10 rounded-3xl p-6 md:p-8 relative overflow-hidden group hover:border-sakura-pink/30 hover:bg-vinyl-dark/10 dark:hover:bg-vinyl-dark/10 dark:hover:bg-soft-white/10 transition-all duration-300">
-                  <div className="absolute top-0 right-0 p-6 opacity-5 font-display text-8xl pointer-events-none group-hover:opacity-10 transition-all text-magenta-deep dark:text-sakura-pink">4</div>
-                  <div className="relative z-10">
-                    <h3 className="font-display text-2xl md:text-3xl text-magenta-deep dark:text-sakura-pink mb-3 group-hover:text-neon-magenta transition-colors duration-300">Phase 4: Detailed Design &amp; Prototype</h3>
-                    <p className="font-body text-base md:text-lg text-deep-navy/80 dark:text-soft-white/80 leading-relaxed">{project.phases[3].description}</p>
-                    {isChaodom && (
-                      <>
-                        <p className="font-display text-deep-navy/80 dark:text-soft-white/80 text-lg mt-8 mb-2">UI Component Map</p>
-                        <div className="grid grid-cols-2 md:grid-cols-3 gap-3 mb-6">
-                          {Array.from({ length: 9 }, (_, i) => `/images/Project/Chaodom/UI%20Component%20Map/${i + 1}.png`).map((src, i, arr) => (
-                            <motion.button
-                              key={i}
-                              className="group relative aspect-[4/3] rounded-2xl overflow-hidden bg-deep-purple/30 border border-soft-white/5 cursor-pointer focus:outline-none focus:ring-2 focus:ring-sakura-pink/50"
-                              onClick={() => openLightbox(arr, i)}
-                              whileHover={{ scale: 1.02 }}
-                              transition={{ duration: 0.3 }}
-                            >
-                              <Image src={src} alt={`UI Component ${i + 1}`} fill className="object-contain" sizes="(max-width: 768px) 50vw, 33vw" />
-                              <div className="absolute inset-0 bg-sakura-pink/0 group-hover:bg-sakura-pink/10 transition-colors duration-300 flex items-center justify-center">
-                                <span className="font-body text-sm text-soft-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-dark-navy/60 px-4 py-2 rounded-full backdrop-blur-sm">View Full Size</span>
-                              </div>
-                            </motion.button>
-                          ))}
-                        </div>
-                        <a
-                          href="https://www.figma.com/proto/2nTtYi87yFHnPVftJ8BNt6/EasyDom"
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-sakura-pink/10 border border-sakura-pink/30 font-body text-sm text-magenta-deep dark:text-sakura-pink hover:bg-sakura-pink/20 transition-colors duration-200"
-                        >
-                          Try Prototype in Figma →
-                        </a>
-                      </>
-                    )}
-                  </div>
-                </FadeSection>
-              )}
-
-              {/* Phase 5 */}
-              {project.phases[4] && (
-                <FadeSection delay={0.3} className="bg-vinyl-dark/5 dark:bg-soft-white/5 border border-vinyl-dark/15 dark:border-soft-white/10 rounded-3xl p-6 md:p-8 relative overflow-hidden group hover:border-sakura-pink/30 hover:bg-vinyl-dark/10 dark:hover:bg-vinyl-dark/10 dark:hover:bg-soft-white/10 transition-all duration-300">
-                  <div className="absolute top-0 right-0 p-6 opacity-5 font-display text-8xl pointer-events-none group-hover:opacity-10 transition-all text-magenta-deep dark:text-sakura-pink">5</div>
-                  <div className="relative z-10">
-                    <h3 className="font-display text-2xl md:text-3xl text-magenta-deep dark:text-sakura-pink mb-3 group-hover:text-neon-magenta transition-colors duration-300">{project.phases[4].title}</h3>
-                    <p className="font-body text-base md:text-lg text-deep-navy/80 dark:text-soft-white/80 leading-relaxed">{project.phases[4].description}</p>
-                    {isChaodom && (
-                      <>
-                        <p className="font-body text-sm text-deep-navy/60 dark:text-soft-white/60 mt-6 mb-4">Guerilla Usability Testing กับ 3 ผู้เข้าร่วม ใช้ 5 Task Cards, Thinking Aloud + Post-session Discussion</p>
-                        <p className="font-display text-deep-navy/80 dark:text-soft-white/80 text-lg mb-3">Task Cards</p>
-                        <div className="grid grid-cols-1 md:grid-cols-5 gap-3 mb-6">
-                          {[
-                            { n: "01", title: "รวบรวมหอพักที่ถูกใจ", sub: "Search + Filter + Wishlist" },
-                            { n: "02", title: "เลือกหอพัก", sub: "Compare + Decision" },
-                            { n: "03", title: "ติดต่อเจ้าของหอ", sub: "Verified Contact" },
-                            { n: "04", title: "แจ้งปัญหาข้อมูลไม่อัปเดต", sub: "Report Issue" },
-                            { n: "05", title: "เขียนรีวิวหอพัก", sub: "Write Review" },
-                          ].map((card) => (
-                            <div key={card.n} className="bg-vinyl-dark/5 dark:bg-soft-white/5 border border-vinyl-dark/15 dark:border-soft-white/10 rounded-xl p-3 text-center">
-                              <span className="font-display text-2xl text-neon-magenta/40">{card.n}</span>
-                              <p className="font-body text-xs text-deep-navy dark:text-soft-white font-bold mt-1 mb-1">{card.title}</p>
-                              <p className="font-body text-xs text-deep-navy/50 dark:text-deep-navy/50 dark:text-soft-white/50">{card.sub}</p>
-                            </div>
-                          ))}
-                        </div>
-                        <p className="font-display text-deep-navy/80 dark:text-soft-white/80 text-lg mb-3">Testing Results — พบ 15+ จุดที่ต้องปรับปรุง</p>
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
-                          {[
-                            "ปุ่มย้อนกลับพากลับหน้าหลักแทนหน้าค้นหา",
-                            "ผลค้นหาบางหอไม่มีรูปภาพ",
-                            "กดถูกใจตอบสนองช้า",
-                            "แผนที่มี Bug",
-                            "หา Tab Wishlist ไม่เจอ",
-                            "ปุ่มติดต่อดูคล้ายไอคอนเมนูทั่วไป",
-                            "ข้อมูลขนส่งสาธารณะไม่ชัดในแผนที่",
-                          ].map((finding, i) => (
-                            <div key={i} className="flex items-start gap-2 bg-retro-yellow/5 border border-retro-yellow/20 rounded-lg p-3">
-                              <span className="text-yellow-deep dark:text-retro-yellow text-sm shrink-0">⚠</span>
-                              <p className="font-body text-sm text-deep-navy/80 dark:text-soft-white/80">{finding}</p>
-                            </div>
-                          ))}
-                        </div>
-                      </>
-                    )}
-                  </div>
-                </FadeSection>
-              )}
-            </div>
-          )}
-        </div>
-
-        <div className="h-px bg-gradient-to-r from-transparent via-vinyl-dark/15 dark:via-soft-white/10 to-transparent" />
-
-        {/* ════════════════════════════════════════
-            04 FINAL PROTOTYPE SHOWCASE (chao-dom only)
-        ════════════════════════════════════════ */}
-        {isChaodom && (
-          <FadeSection delay={0.05} className="py-14">
-            <SectionNumber n="04" />
-            <h2 className="font-display text-3xl md:text-4xl text-deep-navy dark:text-soft-white mb-3 -mt-2">Final Prototype Showcase</h2>
-            <p className="font-body text-base text-deep-navy/60 dark:text-soft-white/60 mb-8">ภาพรวม prototype iOS ทั้งหมดของ EasyDom — ครอบคลุมทุก flow ตั้งแต่ค้นหาหอ กรอง เปรียบเทียบ ติดต่อเจ้าของหอ และรีวิว</p>
-            <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-              {[
-                "/images/Project/Chaodom/App Screens Overview/3.png",
-                "/images/Project/Chaodom/App Screens Overview/4.png",
-                "/images/Project/Chaodom/App Screens Overview/5.png",
-                "/images/Project/Chaodom/App Screens Overview/6.png",
-                "/images/Project/Chaodom/App Screens Overview/7.png",
-                "/images/Project/Chaodom/App Screens Overview/8.png",
-                "/images/Project/Chaodom/App Screens Overview/9.png",
-                "/images/Project/Chaodom/App Screens Overview/10.png",
-                "/images/Project/Chaodom/App Screens Overview/11.png",
-              ].map((src, i, arr) => (
-                <motion.button
-                  key={i}
-                  className="group relative aspect-[4/3] rounded-2xl overflow-hidden bg-deep-purple/30 border border-soft-white/5 cursor-pointer focus:outline-none focus:ring-2 focus:ring-sakura-pink/50"
-                  onClick={() => openLightbox(arr, i)}
-                  whileHover={{ scale: 1.02 }}
-                  transition={{ duration: 0.3 }}
-                >
-                  <Image src={src} alt={`Final Prototype ${i + 1}`} fill className="object-contain" sizes="(max-width: 768px) 50vw, 33vw" />
-                  <div className="absolute inset-0 bg-sakura-pink/0 group-hover:bg-sakura-pink/10 transition-colors duration-300 flex items-center justify-center">
-                    <span className="font-body text-sm text-soft-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-dark-navy/60 px-4 py-2 rounded-full backdrop-blur-sm">View Full Size</span>
-                  </div>
-                </motion.button>
-              ))}
-            </div>
-          </FadeSection>
-        )}
-
-        <div className="h-px bg-gradient-to-r from-transparent via-vinyl-dark/15 dark:via-soft-white/10 to-transparent" />
-
-        {/* ════════════════════════════════════════
-            05 CONTENT FLOW & BUILD PROCESS (polygon-mesh only)
-        ════════════════════════════════════════ */}
-        {isPolygonMesh && (
-          <>
-            <FadeSection delay={0.05} className="py-14">
-              <SectionNumber n="04" />
-              <h2 className="font-display text-3xl md:text-4xl text-deep-navy dark:text-soft-white mb-6 -mt-2">Content Flow &amp; Build Process</h2>
-              <div className="space-y-4 mb-10">
-                {[
-                  { step: "01", title: "Home & Topic Navigation Design", desc: "ออกแบบหน้า home และระบบ topic navigation ให้ผู้เรียนเลือกเส้นทางการเรียนได้ง่าย ไม่สับสน" },
-                  { step: "02", title: "2D/3D Content with Step Controls", desc: "แยกเนื้อหา 2D และ 3D พร้อมลูกศร next/back และ dropdown config เพื่อควบคุมการเรียนแบบ step-by-step ในแต่ละหัวข้อ" },
-                  { step: "03", title: "Hover / Animation / Prototype Linking", desc: "ใช้ hover states, prototype linking และ while-hovering triggers เพื่อทำให้เนื้อหานิ่ง ๆ มีความเคลื่อนไหวและตอบสนองต่อผู้เรียน" },
-                  { step: "04", title: "Jigsaw Game — Pen Tool + Plugins", desc: "สร้าง jigsaw game ด้วย Pen Tool ตัดชิ้นส่วน, Image Cutter สร้าง asset, Property Randomizer สุ่มตำแหน่งชิ้นส่วน — ให้ลากประกอบได้จริงบน Figma Site" },
-                ].map((s, i) => (
-                  <div key={i} className="flex items-start gap-5 bg-vinyl-dark/5 dark:bg-soft-white/5 border border-vinyl-dark/15 dark:border-soft-white/10 rounded-2xl p-5 hover:border-sky-cyan/30 transition-all duration-300">
-                    <span
-                      className="font-display text-4xl leading-none shrink-0 mt-0.5"
-                      style={{
-                        background: "linear-gradient(135deg, #00C2FF 0%, #B026FF 100%)",
-                        WebkitBackgroundClip: "text",
-                        WebkitTextFillColor: "transparent",
-                        opacity: 0.7,
-                      }}
-                    >
-                      {s.step}
-                    </span>
-                    <div>
-                      <p className="font-display text-base text-deep-navy dark:text-soft-white mb-1">{s.title}</p>
-                      <p className="font-body text-sm text-deep-navy/60 dark:text-soft-white/60 leading-relaxed">{s.desc}</p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                {[
-                  "/images/Project/Multimedia Learning Polygon Mesh/44.png",
-                  "/images/Project/Multimedia Learning Polygon Mesh/45.png",
-                  "/images/Project/Multimedia Learning Polygon Mesh/48.png",
-                ].map((img, i, arr) => (
-                  <motion.button
-                    key={i}
-                    className="group relative aspect-video rounded-2xl overflow-hidden bg-deep-purple/30 border border-soft-white/5 cursor-pointer focus:outline-none focus:ring-2 focus:ring-sky-cyan/50"
-                    onClick={() => openLightbox(arr, i)}
-                    whileHover={{ scale: 1.02 }}
-                    transition={{ duration: 0.3 }}
-                  >
-                    <Image src={img} alt={`Process step ${i + 1}`} fill className="object-cover" sizes="(max-width: 768px) 100vw, 33vw" />
-                    <div className="absolute inset-0 bg-sky-cyan/0 group-hover:bg-sky-cyan/10 transition-colors duration-300 flex items-center justify-center">
-                      <span className="font-body text-sm text-soft-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-dark-navy/60 px-4 py-2 rounded-full backdrop-blur-sm">View Full Size</span>
-                    </div>
-                  </motion.button>
-                ))}
-              </div>
-            </FadeSection>
-
-            <div className="h-px bg-gradient-to-r from-transparent via-vinyl-dark/15 dark:via-soft-white/10 to-transparent" />
-
-            {/* ════════════════════════════════════════
-                05 JIGSAW GAME SHOWCASE (polygon-mesh only)
-            ════════════════════════════════════════ */}
-            <FadeSection delay={0.05} className="py-14">
-              <SectionNumber n="05" />
-              <h2 className="font-display text-3xl md:text-4xl text-deep-navy dark:text-soft-white mb-6 -mt-2">Jigsaw Polygonal Game</h2>
-              <div
-                className="relative bg-vinyl-dark/5 dark:bg-soft-white/5 border rounded-3xl p-6 md:p-8 mb-8 overflow-hidden"
-                style={{ borderColor: "rgba(176,38,255,0.4)", boxShadow: "0 0 40px rgba(176,38,255,0.12), inset 0 0 40px rgba(176,38,255,0.04)" }}
-              >
-                <div
-                  className="absolute inset-0 rounded-3xl pointer-events-none"
-                  style={{ boxShadow: "0 0 60px rgba(255,45,120,0.08)" }}
-                />
-                <p className="font-display text-neon-magenta text-sm tracking-widest uppercase mb-4">★ Feature Highlight</p>
-                <p className="font-body text-base text-deep-navy/80 dark:text-soft-white/80 leading-relaxed mb-4">
-                  Jigsaw Polygonal Game คือ highlight ของสื่อชุดนี้ — ผู้เรียนต้องลากและประกอบชิ้นส่วน polygon faces เข้าด้วยกันเพื่อสร้างโมเดล 3D ด้วยตัวเอง บน Figma Site แบบ real-time
-                </p>
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-4 font-body text-sm">
-                  <div className="bg-vinyl-dark/5 dark:bg-soft-white/5 border border-neon-magenta/20 rounded-xl p-4">
-                    <p className="text-neon-magenta font-bold mb-1">Pen Tool Cutting</p>
-                    <p className="text-deep-navy/60 dark:text-soft-white/60 text-xs">ตัดรูปทรง polygon จากโมเดลจริงด้วย Pen Tool เพื่อสร้างชิ้นส่วน jigsaw ที่แม่นยำ</p>
-                  </div>
-                  <div className="bg-vinyl-dark/5 dark:bg-soft-white/5 border border-neon-magenta/20 rounded-xl p-4">
-                    <p className="text-neon-magenta font-bold mb-1">Property Randomizer</p>
-                    <p className="text-deep-navy/60 dark:text-soft-white/60 text-xs">ใช้ plugin สุ่มตำแหน่งและ rotation ของชิ้นส่วนแต่ละครั้ง ให้การเล่นไม่ซ้ำกัน</p>
-                  </div>
-                  <div className="bg-vinyl-dark/5 dark:bg-soft-white/5 border border-neon-magenta/20 rounded-xl p-4">
-                    <p className="text-neon-magenta font-bold mb-1">Draggable Assembly</p>
-                    <p className="text-deep-navy/60 dark:text-soft-white/60 text-xs">ผู้เรียนลากชิ้นส่วนประกอบกลับเป็นโมเดล 3D ผ่าน Figma Site interaction โดยตรง</p>
-                  </div>
-                </div>
-              </div>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                {[
-                  "/images/Project/Multimedia Learning Polygon Mesh/53.png",
-                  "/images/Project/Multimedia Learning Polygon Mesh/54.png",
-                  "/images/Project/Multimedia Learning Polygon Mesh/55.png",
-                ].map((img, i, arr) => (
-                  <motion.button
-                    key={i}
-                    className="group relative aspect-video rounded-2xl overflow-hidden bg-deep-purple/30 cursor-pointer focus:outline-none"
-                    style={{ border: "1px solid rgba(176,38,255,0.3)", boxShadow: "0 0 24px rgba(176,38,255,0.1)" }}
-                    onClick={() => openLightbox(arr, i)}
-                    whileHover={{ scale: 1.02 }}
-                    transition={{ duration: 0.3 }}
-                  >
-                    <Image src={img} alt={`Jigsaw ${i + 1}`} fill className="object-cover" sizes="(max-width: 768px) 100vw, 33vw" />
-                    <div className="absolute inset-0 bg-neon-magenta/0 group-hover:bg-neon-magenta/10 transition-colors duration-300 flex items-center justify-center">
-                      <span className="font-body text-sm text-soft-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-dark-navy/60 px-4 py-2 rounded-full backdrop-blur-sm">View Full Size</span>
-                    </div>
-                  </motion.button>
-                ))}
-              </div>
-            </FadeSection>
-
-            <div className="h-px bg-gradient-to-r from-transparent via-vinyl-dark/15 dark:via-soft-white/10 to-transparent" />
-
-            {/* ════════════════════════════════════════
-                06 SOLUTION & IMPACT (polygon-mesh only)
-            ════════════════════════════════════════ */}
-            <FadeSection delay={0.05} className="py-14">
-              <SectionNumber n="06" />
-              <h2 className="font-display text-3xl md:text-4xl text-deep-navy dark:text-soft-white mb-6 -mt-2">Solution &amp; Impact</h2>
-              <p className="font-body text-base md:text-lg text-deep-navy/75 dark:text-soft-white/75 leading-relaxed whitespace-pre-line">{project.result}</p>
-
-              {/* Challenges aside */}
-              <div className="mt-10 relative bg-vinyl-dark/5 dark:bg-soft-white/5 border border-retro-yellow/30 rounded-2xl px-6 pb-6 pt-7">
-                <div className="absolute -top-3 left-6 bg-retro-yellow text-dark-navy font-body text-xs font-bold px-3 py-1 rounded-full">Challenges</div>
-                <p className="font-body text-sm text-deep-navy/75 dark:text-soft-white/75 leading-relaxed">
-                  ทำให้เรื่อง polygon mesh และ 3D object representation ซึ่งค่อนข้าง abstract เข้าใจง่ายขึ้นผ่าน interaction, animation, hover states, draggable pieces และ content flow ที่ผู้เรียนกดสำรวจได้เอง
-                </p>
-              </div>
-
-              {/* Project info sidebar */}
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-10 mb-8">
-                <div>
-                  <p className="font-body text-xs text-deep-navy/40 dark:text-deep-navy/40 dark:text-soft-white/40 uppercase tracking-widest mb-2">Role</p>
-                  <p className="font-body text-sm text-deep-navy/80 dark:text-soft-white/80">Head Figma Design / Interactive Flow Design</p>
-                </div>
-                <div>
-                  <p className="font-body text-xs text-deep-navy/40 dark:text-deep-navy/40 dark:text-soft-white/40 uppercase tracking-widest mb-2">Tech Stack</p>
-                  <div className="flex flex-col gap-1">
-                    {project.techStack.map((t) => (
-                      <span key={t} className="font-body text-xs text-deep-navy/70 dark:text-soft-white/70">{t}</span>
-                    ))}
-                  </div>
-                </div>
-                <div>
-                  <p className="font-body text-xs text-deep-navy/40 dark:text-deep-navy/40 dark:text-soft-white/40 uppercase tracking-widest mb-2">Timeline</p>
-                  <p className="font-body text-sm text-deep-navy/80 dark:text-soft-white/80">1 Month</p>
-                </div>
-                <div>
-                  <p className="font-body text-xs text-deep-navy/40 dark:text-deep-navy/40 dark:text-soft-white/40 uppercase tracking-widest mb-2">Team</p>
-                  <p className="font-body text-sm text-deep-navy/80 dark:text-soft-white/80">3 Members</p>
-                  <p className="font-body text-xs text-deep-navy/40 dark:text-deep-navy/40 dark:text-soft-white/40 mt-1">จตุรภัทร กิติมาโภคิน, ณัฐวุฒิ ทิพย์รัตน์, ธนัทภัทร พรหมทอง</p>
-                </div>
-              </div>
-
-              {/* Link buttons */}
-              <div className="flex flex-wrap gap-3">
-                <a
-                  href="https://www.figma.com/design/Vm96Pu8bVEtEyFFNmL69Di/Creating-polygon-mesh?node-id=0-1&p=f&t=ukoom1RoA8INKIcZ-0"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-neon-magenta/10 border border-neon-magenta/30 font-body text-sm text-neon-magenta hover:bg-neon-magenta/20 transition-colors duration-200"
-                >
-                  Figma Editor →
-                </a>
-                <a
-                  href="https://www.figma.com/proto/Vm96Pu8bVEtEyFFNmL69Di/Creating-polygon-mesh?node-id=0-1&t=mIUyTzYXFmO7Nbu3-1"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-sakura-pink/10 border border-sakura-pink/30 font-body text-sm text-magenta-deep dark:text-sakura-pink hover:bg-sakura-pink/20 transition-colors duration-200"
-                >
-                  Figma Prototype →
-                </a>
-              </div>
-            </FadeSection>
-
-            <div className="h-px bg-gradient-to-r from-transparent via-vinyl-dark/15 dark:via-soft-white/10 to-transparent" />
-          </>
-        )}
-
-        {/* ════════════════════════════════════════
-            04 KEY SYSTEMS (vps-tycoon only)
-        ════════════════════════════════════════ */}
-        {isVpsTycoon && (
-          <>
-            <FadeSection delay={0.05} className="py-14">
-              <SectionNumber n="04" />
-              <h2 className="font-display text-3xl md:text-4xl text-deep-navy dark:text-soft-white mb-6 -mt-2">Key Systems</h2>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-10">
-                {[
-                  { icon: "🖥", name: "Rack Management", desc: "ซื้อ server และติดตั้งบน rack slot เพื่อขยาย capacity ของบริษัท" },
-                  { icon: "⚙", name: "VM Specification Matching", desc: "จัดสรร CPU, RAM, Storage ให้ตรงกับ request spec ของลูกค้าแต่ละราย" },
-                  { icon: "💬", name: "Messenger Request System", desc: "รับ customer requests ผ่านระบบ messenger แบบ real-time" },
-                  { icon: "📈", name: "6 Skill Trees", desc: "Deploy · Networks · Security · Marketing · Management · Rack Slot — อัปเกรดได้อิสระ" },
-                  { icon: "⚡", name: "Event System", desc: "random events ระหว่างช่วง rental สร้างแรงกดดันและ decision points" },
-                  { icon: "💾", name: "Save / Load System", desc: "บันทึกและโหลดสถานะเกมเพื่อเล่นต่อได้ทุกเวลา" },
-                  { icon: "⭐", name: "Rating Progression", desc: "rating บริษัทเพิ่ม/ลดตามคุณภาพ service — ส่งผลต่อ request tier" },
-                ].map((sys, i) => (
-                  <div key={i} className="flex items-start gap-4 bg-vinyl-dark/5 dark:bg-soft-white/5 border border-vinyl-dark/15 dark:border-soft-white/10 rounded-2xl p-5 hover:border-sky-cyan/30 hover:bg-vinyl-dark/8 dark:hover:bg-soft-white/8 transition-all duration-300">
-                    <span className="text-2xl shrink-0 mt-0.5">{sys.icon}</span>
-                    <div>
-                      <p className="font-display text-sm text-deep-navy dark:text-soft-white font-bold mb-1">{sys.name}</p>
-                      <p className="font-body text-xs text-deep-navy/60 dark:text-soft-white/60 leading-relaxed">{sys.desc}</p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                {[
-                  { src: "/images/Project/VPS-Tycoon/63.png", label: "Messenger" },
-                  { src: "/images/Project/VPS-Tycoon/66.png", label: "Rack Management" },
-                  { src: "/images/Project/VPS-Tycoon/74.png", label: "Event System" },
-                  { src: "/images/Project/VPS-Tycoon/72.png", label: "Resource Allocation" },
-                ].map(({ src, label }, i) => {
-                  const imgs = ["/images/Project/VPS-Tycoon/63.png", "/images/Project/VPS-Tycoon/66.png", "/images/Project/VPS-Tycoon/74.png", "/images/Project/VPS-Tycoon/72.png"];
-                  return (
-                    <motion.button
-                      key={i}
-                      className="group relative aspect-video rounded-2xl overflow-hidden bg-deep-purple/30 border border-soft-white/5 cursor-pointer focus:outline-none focus:ring-2 focus:ring-sky-cyan/50"
-                      onClick={() => openLightbox(imgs, i)}
-                      whileHover={{ scale: 1.02 }}
-                      transition={{ duration: 0.3 }}
-                    >
-                      <Image src={src} alt={label} fill className="object-cover" sizes="(max-width: 768px) 50vw, 25vw" />
-                      <div className="absolute inset-0 bg-sky-cyan/0 group-hover:bg-sky-cyan/10 transition-colors duration-300 flex items-center justify-center">
-                        <span className="font-body text-xs text-soft-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-dark-navy/60 px-3 py-1.5 rounded-full backdrop-blur-sm">{label}</span>
-                      </div>
-                    </motion.button>
-                  );
-                })}
-              </div>
-            </FadeSection>
-
-            <div className="h-px bg-gradient-to-r from-transparent via-vinyl-dark/15 dark:via-soft-white/10 to-transparent" />
-
-            {/* ════════════════════════════════════════
-                05 DEVELOPMENT PROCESS (vps-tycoon only)
-            ════════════════════════════════════════ */}
-            <FadeSection delay={0.05} className="py-14">
-              <SectionNumber n="05" />
-              <h2 className="font-display text-3xl md:text-4xl text-deep-navy dark:text-soft-white mb-6 -mt-2">Development Process</h2>
-              <div className="space-y-4 mb-10">
-                {(project.phases ?? []).map((phase, i) => (
-                  <div key={i} className="flex items-start gap-5 bg-vinyl-dark/5 dark:bg-soft-white/5 border border-vinyl-dark/15 dark:border-soft-white/10 rounded-2xl p-5 hover:border-sky-cyan/30 transition-all duration-300">
-                    <span
-                      className="font-display text-4xl leading-none shrink-0 mt-0.5"
-                      style={{
-                        background: "linear-gradient(135deg, #00C2FF 0%, #B026FF 100%)",
-                        WebkitBackgroundClip: "text",
-                        WebkitTextFillColor: "transparent",
-                        opacity: 0.7,
-                      }}
-                    >
-                      {String(i + 1).padStart(2, "0")}
-                    </span>
-                    <div>
-                      <p className="font-display text-base text-deep-navy dark:text-soft-white mb-1">{phase.title}</p>
-                      <p className="font-body text-sm text-deep-navy/60 dark:text-soft-white/60 leading-relaxed">{phase.description}</p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                {[
-                  { src: "/images/Project/VPS-Tycoon/65.png", label: "Game Interface" },
-                  { src: "/images/Project/VPS-Tycoon/61.png", label: "Settings & Configuration" },
-                ].map(({ src, label }, i) => (
-                  <motion.button
-                    key={i}
-                    className="group relative aspect-video rounded-2xl overflow-hidden bg-deep-purple/30 border border-soft-white/5 cursor-pointer focus:outline-none focus:ring-2 focus:ring-neon-magenta/50"
-                    onClick={() => openLightbox(["/images/Project/VPS-Tycoon/65.png", "/images/Project/VPS-Tycoon/61.png"], i)}
-                    whileHover={{ scale: 1.02 }}
-                    transition={{ duration: 0.3 }}
-                  >
-                    <Image src={src} alt={label} fill className="object-cover" sizes="(max-width: 768px) 100vw, 50vw" />
-                    <div className="absolute inset-0 bg-neon-magenta/0 group-hover:bg-neon-magenta/10 transition-colors duration-300 flex items-center justify-center">
-                      <span className="font-body text-sm text-soft-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-dark-navy/60 px-4 py-2 rounded-full backdrop-blur-sm">{label}</span>
-                    </div>
-                  </motion.button>
-                ))}
-              </div>
-            </FadeSection>
-
-            <div className="h-px bg-gradient-to-r from-transparent via-vinyl-dark/15 dark:via-soft-white/10 to-transparent" />
-
-            {/* ════════════════════════════════════════
-                06 SOLUTION & IMPACT (vps-tycoon only)
-            ════════════════════════════════════════ */}
-            <FadeSection delay={0.05} className="py-14">
-              <SectionNumber n="06" />
-              <h2 className="font-display text-3xl md:text-4xl text-deep-navy dark:text-soft-white mb-6 -mt-2">Solution &amp; Impact</h2>
-              <p className="font-body text-base md:text-lg text-deep-navy/75 dark:text-soft-white/75 leading-relaxed whitespace-pre-line">{project.result}</p>
-
-              {/* Challenges aside */}
-              <div className="mt-10 relative bg-vinyl-dark/5 dark:bg-soft-white/5 border border-retro-yellow/30 rounded-2xl px-6 pb-6 pt-7">
-                <div className="absolute -top-3 left-6 bg-retro-yellow text-dark-navy font-body text-xs font-bold px-3 py-1 rounded-full">Challenges</div>
-                <p className="font-body text-sm text-deep-navy/75 dark:text-soft-white/75 leading-relaxed">
-                  จำลองระบบธุรกิจ VPS ที่มีทรัพยากรหลายชั้นให้เล่นสนุกและเข้าใจง่าย — ออกแบบความสัมพันธ์ระหว่าง rack / VM / requests / skill / events ในสถาปัตยกรรม OOP ที่ยืดหยุ่น และทำ UI ธีม cyberpunk ให้เข้ากับเนื้อหาเชิงเทคนิค
-                </p>
-              </div>
-
-              {/* Ideation callout */}
-              <div className="mt-8 relative bg-vinyl-dark/5 dark:bg-soft-white/5 border border-neon-magenta/20 rounded-2xl px-6 pb-6 pt-7">
-                <div className="absolute -top-3 left-6 bg-neon-magenta/80 text-dark-navy font-body text-xs font-bold px-3 py-1 rounded-full">Ideation</div>
-                <p className="font-body text-sm text-deep-navy/70 dark:text-soft-white/70 leading-relaxed">
-                  เปลี่ยนแนวคิดเรื่อง server management ซึ่งดู technical มาก ให้กลายเป็นเกมบริหารธุรกิจที่มีความก้าวหน้า มีการตัดสินใจชัดเจน และมีระบบอัปเกรดที่ผู้เล่นรู้สึกเติบโตได้จริง
-                </p>
-              </div>
-
-              {/* Project info sidebar */}
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-10 mb-8">
-                <div>
-                  <p className="font-body text-xs text-deep-navy/40 dark:text-deep-navy/40 dark:text-soft-white/40 uppercase tracking-widest mb-2">Role</p>
-                  <p className="font-body text-sm text-deep-navy/80 dark:text-soft-white/80">Developer / Programmer</p>
-                </div>
-                <div>
-                  <p className="font-body text-xs text-deep-navy/40 dark:text-deep-navy/40 dark:text-soft-white/40 uppercase tracking-widest mb-2">Tech Stack</p>
-                  <div className="flex flex-col gap-1">
-                    {project.techStack.map((t) => (
-                      <span key={t} className="font-body text-xs text-deep-navy/70 dark:text-soft-white/70">{t}</span>
-                    ))}
-                  </div>
-                </div>
-                <div>
-                  <p className="font-body text-xs text-deep-navy/40 dark:text-deep-navy/40 dark:text-soft-white/40 uppercase tracking-widest mb-2">Timeline</p>
-                  <p className="font-body text-sm text-deep-navy/80 dark:text-soft-white/80">1 ภาคเรียน</p>
-                </div>
-                <div>
-                  <p className="font-body text-xs text-deep-navy/40 dark:text-deep-navy/40 dark:text-soft-white/40 uppercase tracking-widest mb-2">Team</p>
-                  <p className="font-body text-sm text-deep-navy/80 dark:text-soft-white/80">LoveJarnBank Group</p>
-                </div>
-              </div>
-            </FadeSection>
-
-            <div className="h-px bg-gradient-to-r from-transparent via-vinyl-dark/15 dark:via-soft-white/10 to-transparent" />
-          </>
-        )}
-
-        {/* ════════════════════════════════════════
-            DRIVE@KMITL — 01-07
-        ════════════════════════════════════════ */}
-        {isDriveKmitl && (
-          <>
-            {/* Drive hero images already in section 01 summary above — add banner image */}
-            <div className="mt-8 relative w-full overflow-hidden rounded-2xl" style={{ clipPath: "polygon(0 0, 100% 0, 100% 92%, 97% 100%, 0 100%)" }}>
-              <div className="aspect-[21/9] relative">
-                <Image src="/images/Project/Drive@KMITL/preview-gallery.png" alt="Drive@KMITL Preview" fill className="object-cover" sizes="(max-width: 768px) 100vw, 80vw" />
-                <div className="absolute inset-0 bg-gradient-to-t from-dark-navy/60 to-transparent" />
-              </div>
-            </div>
-
-            <div className="h-px bg-gradient-to-r from-transparent via-vinyl-dark/15 dark:via-soft-white/10 to-transparent mt-14" />
-
-            {/* ── 02 THE PROBLEM ── */}
-            <FadeSection delay={0.05} className="py-14">
-              <SectionNumber n="02" />
-              <h2 className="font-display text-3xl md:text-4xl text-deep-navy dark:text-soft-white mb-6 -mt-2">The Challenge</h2>
-              <div className="flex items-start gap-4 bg-vinyl-dark/5 dark:bg-soft-white/5 border border-neon-magenta/25 rounded-2xl p-6">
-                <ImpactBubble />
-                <p className="font-body text-base md:text-lg text-deep-navy/80 dark:text-soft-white/80 leading-relaxed">{project.problem}</p>
-              </div>
-            </FadeSection>
-
-            <div className="h-px bg-gradient-to-r from-transparent via-vinyl-dark/15 dark:via-soft-white/10 to-transparent" />
-
-            {/* ── 03 CORE FEATURES ── */}
-            <FadeSection delay={0.05} className="py-14">
-              <SectionNumber n="03" />
-              <h2 className="font-display text-3xl md:text-4xl text-deep-navy dark:text-soft-white mb-6 -mt-2">Core Features</h2>
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-10">
-                {[
-                  { icon: "👤", name: "Username Setup",          desc: "ตั้งชื่อก่อนเข้าห้อง" },
-                  { icon: "🚗", name: "Driver / Passenger",      desc: "เลือก role ก่อน join" },
-                  { icon: "🎲", name: "Random Join",              desc: "สุ่มเข้าห้องที่มีอยู่" },
-                  { icon: "🏠", name: "Create Room",              desc: "สร้างห้องพร้อมเลือกประเภท" },
-                  { icon: "🎛️", name: "Room Capacity Control",   desc: "จำกัดคนตาม room type" },
-                  { icon: "⏱️", name: "Countdown to Next Room", desc: "นับเวลาก่อนย้ายห้อง" },
-                  { icon: "📡", name: "Live Room Status",         desc: "แสดงจำนวนคนแบบ real-time" },
-                  { icon: "🎥", name: "Video Backgrounds",        desc: "พื้นหลังตามสถานที่ใน KMITL" },
-                ].map((f, i) => (
-                  <div key={i} className="bg-vinyl-dark/5 dark:bg-soft-white/5 border border-sky-cyan/20 rounded-2xl p-4 hover:border-sky-cyan/40 transition-colors duration-200">
-                    <span className="text-2xl block mb-2">{f.icon}</span>
-                    <p className="font-display text-sm text-deep-navy dark:text-soft-white leading-snug mb-1">{f.name}</p>
-                    <p className="font-body text-xs text-deep-navy/55 dark:text-soft-white/55 leading-relaxed">{f.desc}</p>
-                  </div>
-                ))}
-              </div>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                {[
-                  { src: "/images/Project/Drive@KMITL/preview-gallery.png", label: "Home" },
-                  { src: "/images/Project/Drive@KMITL/gallery2.png",              label: "Join Room" },
-                  { src: "/images/Project/Drive@KMITL/gallery3.png",              label: "Create Room" },
-                ].map(({ src, label }, i, arr) => (
-                  <motion.button
-                    key={i}
-                    className="group relative aspect-video rounded-2xl overflow-hidden bg-deep-purple/30 border border-soft-white/5 cursor-pointer focus:outline-none focus:ring-2 focus:ring-sky-cyan/50"
-                    onClick={() => openLightbox(arr.map(a => a.src), i)}
-                    whileHover={{ scale: 1.02 }}
-                    transition={{ duration: 0.3 }}
-                  >
-                    <Image src={src} alt={label} fill className="object-cover" sizes="(max-width: 768px) 100vw, 33vw" />
-                    <div className="absolute inset-0 bg-sky-cyan/0 group-hover:bg-sky-cyan/10 transition-colors duration-300 flex items-center justify-center">
-                      <span className="font-body text-sm text-soft-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-dark-navy/60 px-4 py-2 rounded-full backdrop-blur-sm">{label}</span>
-                    </div>
-                  </motion.button>
-                ))}
-              </div>
-            </FadeSection>
-
-            <div className="h-px bg-gradient-to-r from-transparent via-vinyl-dark/15 dark:via-soft-white/10 to-transparent" />
-
-            {/* ── 04 ROOM TYPES ── */}
-            <FadeSection delay={0.05} className="py-14">
-              <SectionNumber n="04" />
-              <h2 className="font-display text-3xl md:text-4xl text-deep-navy dark:text-soft-white mb-8 -mt-2">Room Types</h2>
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                {[
-                  { vehicle: "🚲", name: "Bicycle",    capacity: "2",  vibe: "Intimate",   color: "from-mint/30 to-sky-cyan/20",      border: "border-mint/30" },
-                  { vehicle: "🚕", name: "Taxi",       capacity: "4",  vibe: "Small Group", color: "from-retro-yellow/25 to-peach/20", border: "border-retro-yellow/30" },
-                  { vehicle: "🚌", name: "Songthaew",  capacity: "10", vibe: "Medium",      color: "from-sakura-pink/25 to-lavender/20", border: "border-sakura-pink/30" },
-                  { vehicle: "🚐", name: "EV / Minibus", capacity: "15", vibe: "Large",    color: "from-electric-blue/25 to-deep-purple/20", border: "border-electric-blue/30" },
-                ].map((r, i) => (
-                  <div key={i} className={`relative bg-gradient-to-br ${r.color} border ${r.border} rounded-2xl p-5 flex flex-col items-center text-center`}>
-                    <span className="text-4xl mb-3">{r.vehicle}</span>
-                    <p className="font-display text-lg text-deep-navy dark:text-soft-white mb-1">{r.name}</p>
-                    <span className="font-body text-xs text-deep-navy/50 dark:text-deep-navy/50 dark:text-soft-white/50 mb-3">{r.vibe}</span>
-                    <span className="font-display text-2xl text-deep-navy/90 dark:text-soft-white/90">{r.capacity}</span>
-                    <span className="font-body text-[10px] text-deep-navy/40 dark:text-deep-navy/40 dark:text-soft-white/40 uppercase tracking-widest mt-0.5">คน</span>
-                  </div>
-                ))}
-              </div>
-            </FadeSection>
-
-            <div className="h-px bg-gradient-to-r from-transparent via-vinyl-dark/15 dark:via-soft-white/10 to-transparent" />
-
-            {/* ── 05 ARCHITECTURE & DEVELOPMENT ── */}
-            <FadeSection delay={0.05} className="py-14">
-              <SectionNumber n="05" />
-              <h2 className="font-display text-3xl md:text-4xl text-deep-navy dark:text-soft-white mb-6 -mt-2">Architecture &amp; Development</h2>
-
-              {/* Tech architecture callout */}
-              <div className="mb-8 flex items-center justify-center gap-3 bg-sky-cyan/5 border border-sky-cyan/20 rounded-2xl px-6 py-5">
-                {["Next.js", "↔", "WebSocket", "↔", "FastAPI"].map((item, i) => (
-                  <span key={i} className={item === "↔"
-                    ? "font-body text-cyan-deep dark:text-sky-cyan/50 text-lg"
-                    : "font-display text-sm md:text-base text-cyan-deep dark:text-sky-cyan px-3 py-1.5 rounded-lg bg-sky-cyan/10 border border-sky-cyan/20"
-                  }>{item}</span>
-                ))}
-              </div>
-
-              {/* Phases */}
-              <div className="space-y-4 mb-10">
-                {(project.phases ?? []).map((phase, i) => (
-                  <div key={i} className="flex items-start gap-5 bg-vinyl-dark/5 dark:bg-soft-white/5 border border-vinyl-dark/15 dark:border-soft-white/10 rounded-2xl p-5 hover:border-sky-cyan/30 transition-all duration-300">
-                    <span className="font-display text-4xl leading-none shrink-0 mt-0.5" style={{ background: "linear-gradient(135deg, #00C2FF 0%, #B026FF 100%)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", opacity: 0.7 }}>
-                      {String(i + 1).padStart(2, "0")}
-                    </span>
-                    <div>
-                      <p className="font-display text-base text-deep-navy dark:text-soft-white mb-1">{phase.title}</p>
-                      <p className="font-body text-sm text-deep-navy/60 dark:text-soft-white/60 leading-relaxed">{phase.description}</p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                {[
-                  { src: "/images/Project/Drive@KMITL/gallery4.png", label: "Chat Room (Driving)" },
-                  { src: "/images/Project/Drive@KMITL/gallery5.png", label: "Room Transition (Ped Pong)" },
-                ].map(({ src, label }, i, arr) => (
-                  <motion.button
-                    key={i}
-                    className="group relative aspect-video rounded-2xl overflow-hidden bg-deep-purple/30 border border-soft-white/5 cursor-pointer focus:outline-none focus:ring-2 focus:ring-sky-cyan/50"
-                    onClick={() => openLightbox(arr.map(a => a.src), i)}
-                    whileHover={{ scale: 1.02 }}
-                    transition={{ duration: 0.3 }}
-                  >
-                    <Image src={src} alt={label} fill className="object-cover" sizes="(max-width: 768px) 100vw, 50vw" />
-                    <div className="absolute inset-0 bg-sky-cyan/0 group-hover:bg-sky-cyan/10 transition-colors duration-300 flex items-center justify-center">
-                      <span className="font-body text-sm text-soft-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-dark-navy/60 px-4 py-2 rounded-full backdrop-blur-sm">{label}</span>
-                    </div>
-                  </motion.button>
-                ))}
-              </div>
-            </FadeSection>
-
-            <div className="h-px bg-gradient-to-r from-transparent via-vinyl-dark/15 dark:via-soft-white/10 to-transparent" />
-
-            {/* ── 06 CHALLENGES & LIMITATIONS ── */}
-            <FadeSection delay={0.05} className="py-14">
-              <SectionNumber n="06" />
-              <h2 className="font-display text-3xl md:text-4xl text-deep-navy dark:text-soft-white mb-8 -mt-2">Challenges &amp; Limitations</h2>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                {/* What Worked */}
-                <div className="bg-mint/5 border border-mint/25 rounded-2xl p-6">
-                  <p className="font-display text-base text-mint-deep dark:text-mint mb-4">✓ What Worked</p>
-                  <ul className="space-y-3">
-                    {[
-                      "Real-time WebSocket room join/leave ทำงานได้เสถียร",
-                      "Role-based access (Driver/Passenger) แยกชัดเจน",
-                      "Auto remove empty rooms ทำงานถูกต้อง",
-                      "Video backgrounds และ UI ธีมสมบูรณ์",
-                      "Room type capacity control ทำงานได้จริง",
-                    ].map((item, i) => (
-                      <li key={i} className="flex items-start gap-2 font-body text-sm text-deep-navy/70 dark:text-soft-white/70 leading-relaxed">
-                        <span className="text-mint-deep dark:text-mint shrink-0 mt-0.5">→</span>{item}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-                {/* What Didn't */}
-                <div className="bg-neon-magenta/5 border border-neon-magenta/25 rounded-2xl p-6">
-                  <p className="font-display text-base text-neon-magenta mb-4">✗ What Didn't / Limitations</p>
-                  <ul className="space-y-3">
-                    {[
-                      "Room transition อัตโนมัติโดยไม่หลุด connection ยังเป็นความท้าทาย",
-                      "เกมย่อยในแต่ละห้องยังไม่สมบูรณ์",
-                      "การย้อนกลับห้องเก่ายังมีข้อจำกัด",
-                      "Room history ยังจำกัด ไม่บันทึกประวัติการสนทนา",
-                      "CORS และ WebSocket reconnection ต้องแก้เพิ่มเติม",
-                    ].map((item, i) => (
-                      <li key={i} className="flex items-start gap-2 font-body text-sm text-deep-navy/70 dark:text-soft-white/70 leading-relaxed">
-                        <span className="text-neon-magenta shrink-0 mt-0.5">→</span>{item}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </div>
-            </FadeSection>
-
-            <div className="h-px bg-gradient-to-r from-transparent via-vinyl-dark/15 dark:via-soft-white/10 to-transparent" />
-
-            {/* ── 07 FINAL OUTCOME ── */}
-            <FadeSection delay={0.05} className="py-14">
-              <SectionNumber n="07" />
-              <h2 className="font-display text-3xl md:text-4xl text-deep-navy dark:text-soft-white mb-6 -mt-2">Final Outcome</h2>
-              <p className="font-body text-base md:text-lg text-deep-navy/75 dark:text-soft-white/75 leading-relaxed whitespace-pre-line">{project.result}</p>
-
-              {/* Project info sidebar */}
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-10 mb-8">
-                <div>
-                  <p className="font-body text-xs text-deep-navy/40 dark:text-deep-navy/40 dark:text-soft-white/40 uppercase tracking-widest mb-2">Role</p>
-                  <p className="font-body text-sm text-deep-navy/80 dark:text-soft-white/80">Backend 50% · Frontend 5% · Document 40%</p>
-                </div>
-                <div>
-                  <p className="font-body text-xs text-deep-navy/40 dark:text-deep-navy/40 dark:text-soft-white/40 uppercase tracking-widest mb-2">Tech Stack</p>
-                  <div className="flex flex-col gap-1">
-                    {project.techStack.map((t) => (
-                      <span key={t} className="font-body text-xs text-deep-navy/70 dark:text-soft-white/70">{t}</span>
-                    ))}
-                  </div>
-                </div>
-                <div>
-                  <p className="font-body text-xs text-deep-navy/40 dark:text-deep-navy/40 dark:text-soft-white/40 uppercase tracking-widest mb-2">Timeline</p>
-                  <p className="font-body text-sm text-deep-navy/80 dark:text-soft-white/80">1 ภาคเรียน (ปีการศึกษา 2567)</p>
-                </div>
-                <div>
-                  <p className="font-body text-xs text-deep-navy/40 dark:text-deep-navy/40 dark:text-soft-white/40 uppercase tracking-widest mb-2">Team</p>
-                  <p className="font-body text-sm text-deep-navy/80 dark:text-soft-white/80">5 members</p>
-                </div>
-              </div>
-
-              {/* Link buttons */}
-              <div className="flex flex-wrap gap-3">
-                <a href="https://drivechat.it22.dev/" target="_blank" rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-sky-cyan/10 border border-sky-cyan/30 font-body text-sm text-cyan-deep dark:text-sky-cyan hover:bg-sky-cyan/20 transition-colors duration-200">
-                  🌐 Website →
-                </a>
-                <a href="https://github.com/ProJect3K/DriveChat-kmitl" target="_blank" rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-vinyl-dark/5 dark:bg-soft-white/5 border border-vinyl-dark/25 dark:border-soft-white/20 font-body text-sm text-deep-navy/70 dark:text-soft-white/70 hover:bg-vinyl-dark/10 dark:hover:bg-vinyl-dark/10 dark:hover:bg-soft-white/10 hover:text-deep-navy dark:hover:text-soft-white transition-colors duration-200">
-                  GitHub →
-                </a>
-                <a href="https://youtu.be/XpPGb5M36IY?si=TwihcZynCgNfg2sf" target="_blank" rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-neon-magenta/10 border border-neon-magenta/30 font-body text-sm text-neon-magenta hover:bg-neon-magenta/20 transition-colors duration-200">
-                  ▶ Video Demo →
-                </a>
-              </div>
-            </FadeSection>
-
-            <div className="h-px bg-gradient-to-r from-transparent via-vinyl-dark/15 dark:via-soft-white/10 to-transparent" />
-          </>
-        )}
-
-        {/* ════════════════════════════════════════
-            SYNCHRO — 01-06
-        ════════════════════════════════════════ */}
-        {isSynchro && (
-          <>
-            {/* Synchro section 01 hero images */}
-            <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-4">
-              {[
-                { src: "/images/Project/Synchro/SYNCHROPoster.png",  label: "Poster" },
-                { src: "/images/Project/Synchro/synchrobox.jpg",      label: "Hardware Controller" },
-              ].map(({ src, label }, i) => (
-                <motion.button
-                  key={i}
-                  className="group relative aspect-video rounded-2xl overflow-hidden bg-deep-purple/30 border border-soft-white/5 cursor-pointer focus:outline-none focus:ring-2 focus:ring-retro-yellow/50"
-                  onClick={() => openLightbox(["/images/Project/Synchro/SYNCHROPoster.png", "/images/Project/Synchro/synchrobox.jpg"], i)}
-                  whileHover={{ scale: 1.02 }}
-                  transition={{ duration: 0.3 }}
-                >
-                  <Image src={src} alt={label} fill className="object-cover" sizes="(max-width: 768px) 100vw, 50vw" />
-                  <div className="absolute inset-0 bg-retro-yellow/0 group-hover:bg-retro-yellow/10 transition-colors duration-300 flex items-center justify-center">
-                    <span className="font-body text-sm text-soft-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-dark-navy/60 px-4 py-2 rounded-full backdrop-blur-sm">{label}</span>
-                  </div>
-                </motion.button>
-              ))}
-            </div>
-
-            <div className="h-px bg-gradient-to-r from-transparent via-vinyl-dark/15 dark:via-soft-white/10 to-transparent mt-14" />
-
-            {/* ── 02 THE PROBLEM ── */}
-            <FadeSection delay={0.05} className="py-14">
-              <SectionNumber n="02" />
-              <h2 className="font-display text-3xl md:text-4xl text-deep-navy dark:text-soft-white mb-6 -mt-2">The Problem</h2>
-              <div className="flex items-start gap-4 bg-vinyl-dark/5 dark:bg-soft-white/5 border border-neon-magenta/25 rounded-2xl p-6">
-                <ImpactBubble />
-                <p className="font-body text-base md:text-lg text-deep-navy/80 dark:text-soft-white/80 leading-relaxed">{project.problem}</p>
-              </div>
-            </FadeSection>
-
-            <div className="h-px bg-gradient-to-r from-transparent via-vinyl-dark/15 dark:via-soft-white/10 to-transparent" />
-
-            {/* ── 03 HARDWARE + SOFTWARE ── */}
-            <FadeSection delay={0.05} className="py-14">
-              <SectionNumber n="03" />
-              <h2 className="font-display text-3xl md:text-4xl text-deep-navy dark:text-soft-white mb-8 -mt-2">Hardware + Software</h2>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                {/* Hardware */}
-                <div className="bg-retro-yellow/5 border border-retro-yellow/25 rounded-2xl p-6">
-                  <p className="font-display text-base text-yellow-deep dark:text-retro-yellow mb-5">⚙ Hardware</p>
-                  <ul className="space-y-3 mb-6">
-                    {[
-                      { icon: "🔲", item: "ESP32 microcontroller board" },
-                      { icon: "🖥️", item: "TFT LCD display — แสดงโน้ตและคะแนน" },
-                      { icon: "🔘", item: "Physical buttons — รับ input จากผู้เล่น" },
-                      { icon: "📦", item: "Breadboard + wiring setup" },
-                      { icon: "💾", item: "SD Card Adapter สำหรับโหลด song data" },
-                    ].map(({ icon, item }, i) => (
-                      <li key={i} className="flex items-start gap-3 font-body text-sm text-deep-navy/75 dark:text-soft-white/75 leading-relaxed">
-                        <span className="shrink-0">{icon}</span>{item}
-                      </li>
-                    ))}
-                  </ul>
-                  <motion.button
-                    className="group relative w-full aspect-video rounded-xl overflow-hidden bg-deep-purple/30 border border-soft-white/5 cursor-pointer focus:outline-none focus:ring-2 focus:ring-retro-yellow/50"
-                    onClick={() => openLightbox(["/images/Project/Synchro/synchrobox.jpg"], 0)}
-                    whileHover={{ scale: 1.01 }}
-                    transition={{ duration: 0.3 }}
-                  >
-                    <Image src="/images/Project/Synchro/synchrobox.jpg" alt="Synchro Controller" fill className="object-cover" sizes="(max-width: 768px) 100vw, 40vw" />
-                    <div className="absolute inset-0 bg-retro-yellow/0 group-hover:bg-retro-yellow/10 transition-colors duration-300 flex items-center justify-center">
-                      <span className="font-body text-sm text-soft-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-dark-navy/60 px-4 py-2 rounded-full backdrop-blur-sm">Hardware Controller</span>
-                    </div>
-                  </motion.button>
-                </div>
-                {/* Software */}
-                <div className="bg-sky-cyan/5 border border-sky-cyan/25 rounded-2xl p-6">
-                  <p className="font-display text-base text-cyan-deep dark:text-sky-cyan mb-5">💻 Software</p>
-                  <ul className="space-y-3 mb-6">
-                    {[
-                      { icon: "🎵", item: "Web app — เลือกเพลงและดู history" },
-                      { icon: "📊", item: "Score summary หลังเล่นแต่ละรอบ" },
-                      { icon: "🗺️", item: "Song mapping tool (JSON format)" },
-                      { icon: "📤", item: "Web upload flow สำหรับเพิ่มเพลงใหม่" },
-                      { icon: "🔗", item: "Web Server integration กับ ESP32" },
-                    ].map(({ icon, item }, i) => (
-                      <li key={i} className="flex items-start gap-3 font-body text-sm text-deep-navy/75 dark:text-soft-white/75 leading-relaxed">
-                        <span className="shrink-0">{icon}</span>{item}
-                      </li>
-                    ))}
-                  </ul>
-                  <motion.button
-                    className="group relative w-full aspect-video rounded-xl overflow-hidden bg-deep-purple/30 border border-soft-white/5 cursor-pointer focus:outline-none focus:ring-2 focus:ring-sky-cyan/50"
-                    onClick={() => openLightbox(["/images/Project/Synchro/preview_and_gallery.png"], 0)}
-                    whileHover={{ scale: 1.01 }}
-                    transition={{ duration: 0.3 }}
-                  >
-                    <Image src="/images/Project/Synchro/preview_and_gallery.png" alt="Synchro Web App" fill className="object-cover" sizes="(max-width: 768px) 100vw, 40vw" />
-                    <div className="absolute inset-0 bg-sky-cyan/0 group-hover:bg-sky-cyan/10 transition-colors duration-300 flex items-center justify-center">
-                      <span className="font-body text-sm text-soft-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-dark-navy/60 px-4 py-2 rounded-full backdrop-blur-sm">Web App Design</span>
-                    </div>
-                  </motion.button>
-                </div>
-              </div>
-            </FadeSection>
-
-            <div className="h-px bg-gradient-to-r from-transparent via-vinyl-dark/15 dark:via-soft-white/10 to-transparent" />
-
-            {/* ── 04 DEVELOPMENT PROCESS ── */}
-            <FadeSection delay={0.05} className="py-14">
-              <SectionNumber n="04" />
-              <h2 className="font-display text-3xl md:text-4xl text-deep-navy dark:text-soft-white mb-6 -mt-2">Development Process</h2>
-              <div className="space-y-4 mb-10">
-                {(project.phases ?? []).map((phase, i) => (
-                  <div key={i} className="flex items-start gap-5 bg-vinyl-dark/5 dark:bg-soft-white/5 border border-vinyl-dark/15 dark:border-soft-white/10 rounded-2xl p-5 hover:border-retro-yellow/30 transition-all duration-300">
-                    <span className="font-display text-4xl leading-none shrink-0 mt-0.5" style={{ background: "linear-gradient(135deg, #FFD700 0%, #FF6B35 100%)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", opacity: 0.7 }}>
-                      {String(i + 1).padStart(2, "0")}
-                    </span>
-                    <div>
-                      <p className="font-display text-base text-deep-navy dark:text-soft-white mb-1">{phase.title}</p>
-                      <p className="font-body text-sm text-deep-navy/60 dark:text-soft-white/60 leading-relaxed">{phase.description}</p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-              <motion.button
-                className="group relative w-full md:w-1/2 aspect-video rounded-2xl overflow-hidden bg-deep-purple/30 border border-soft-white/5 cursor-pointer focus:outline-none focus:ring-2 focus:ring-retro-yellow/50"
-                onClick={() => openLightbox(["/images/Project/Synchro/SYNCHROPoster.png"], 0)}
-                whileHover={{ scale: 1.02 }}
-                transition={{ duration: 0.3 }}
-              >
-                <Image src="/images/Project/Synchro/SYNCHROPoster.png" alt="Synchro in Action" fill className="object-cover" sizes="(max-width: 768px) 100vw, 50vw" />
-                <div className="absolute inset-0 bg-retro-yellow/0 group-hover:bg-retro-yellow/10 transition-colors duration-300 flex items-center justify-center">
-                  <span className="font-body text-sm text-soft-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-dark-navy/60 px-4 py-2 rounded-full backdrop-blur-sm">Synchro in Action</span>
-                </div>
-              </motion.button>
-            </FadeSection>
-
-            <div className="h-px bg-gradient-to-r from-transparent via-vinyl-dark/15 dark:via-soft-white/10 to-transparent" />
-
-            {/* ── 05 CHALLENGES & PROBLEM SOLVING ── */}
-            <FadeSection delay={0.05} className="py-14">
-              <SectionNumber n="05" />
-              <h2 className="font-display text-3xl md:text-4xl text-deep-navy dark:text-soft-white mb-8 -mt-2">Challenges &amp; Problem Solving</h2>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                {[
-                  {
-                    problem: "Arduino UNO R4 ข้อจำกัดด้าน library",
-                    solution: "ย้ายมาใช้ ESP32 ที่รองรับ WiFi.h, TFT_eSPI และ WebServer ได้เต็มที่",
-                  },
-                  {
-                    problem: "Breadboard จ่ายไฟไม่เสถียร",
-                    solution: "ปรับการต่อวงจรและ power rail ให้เสถียรก่อนทดสอบ component ต่อ ๆ ไป",
-                  },
-                  {
-                    problem: "SD Card Adapter ใช้ระดับ 3V ไม่ตรงกับ 5V",
-                    solution: "ปรับ voltage level ด้วย logic level shifter และทดสอบ read/write ซ้ำ",
-                  },
-                  {
-                    problem: "Web ↔ Board handshaking ไม่เสถียร",
-                    solution: "ออกแบบ request/response flow ใหม่ และ test ทีละ endpoint จนเสถียร",
-                  },
-                ].map(({ problem, solution }, i) => (
-                  <div key={i} className="bg-vinyl-dark/5 dark:bg-soft-white/5 border border-vinyl-dark/15 dark:border-soft-white/10 rounded-2xl p-5 hover:border-retro-yellow/20 transition-colors duration-200">
-                    <div className="flex items-start gap-2 mb-3">
-                      <span className="text-neon-magenta font-display text-sm shrink-0 mt-0.5">Problem</span>
-                    </div>
-                    <p className="font-body text-sm text-deep-navy/80 dark:text-soft-white/80 leading-relaxed mb-3">{problem}</p>
-                    <div className="flex items-start gap-2 mb-2">
-                      <span className="text-mint-deep dark:text-mint font-display text-sm shrink-0">Solution</span>
-                    </div>
-                    <p className="font-body text-sm text-deep-navy/60 dark:text-soft-white/60 leading-relaxed">{solution}</p>
-                  </div>
-                ))}
-              </div>
-            </FadeSection>
-
-            <div className="h-px bg-gradient-to-r from-transparent via-vinyl-dark/15 dark:via-soft-white/10 to-transparent" />
-
-            {/* ── 06 SOLUTION & IMPACT ── */}
-            <FadeSection delay={0.05} className="py-14">
-              <SectionNumber n="06" />
-              <h2 className="font-display text-3xl md:text-4xl text-deep-navy dark:text-soft-white mb-6 -mt-2">Solution &amp; Impact</h2>
-              <p className="font-body text-base md:text-lg text-deep-navy/75 dark:text-soft-white/75 leading-relaxed whitespace-pre-line">{project.result}</p>
-
-              {/* Project info sidebar */}
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-10 mb-8">
-                <div>
-                  <p className="font-body text-xs text-deep-navy/40 dark:text-deep-navy/40 dark:text-soft-white/40 uppercase tracking-widest mb-2">Role</p>
-                  <p className="font-body text-sm text-deep-navy/80 dark:text-soft-white/80">Web Backend · Arduino Developer</p>
-                </div>
-                <div>
-                  <p className="font-body text-xs text-deep-navy/40 dark:text-deep-navy/40 dark:text-soft-white/40 uppercase tracking-widest mb-2">Tech Stack</p>
-                  <div className="flex flex-col gap-1">
-                    {project.techStack.map((t) => (
-                      <span key={t} className="font-body text-xs text-deep-navy/70 dark:text-soft-white/70">{t}</span>
-                    ))}
-                  </div>
-                </div>
-                <div>
-                  <p className="font-body text-xs text-deep-navy/40 dark:text-deep-navy/40 dark:text-soft-white/40 uppercase tracking-widest mb-2">Timeline</p>
-                  <p className="font-body text-sm text-deep-navy/80 dark:text-soft-white/80">Physical Computing Project 2025</p>
-                </div>
-                <div>
-                  <p className="font-body text-xs text-deep-navy/40 dark:text-deep-navy/40 dark:text-soft-white/40 uppercase tracking-widest mb-2">Team</p>
-                  <p className="font-body text-sm text-deep-navy/80 dark:text-soft-white/80">4 members</p>
-                </div>
-              </div>
-
-              {/* Link buttons */}
-              <div className="flex flex-wrap gap-3">
-                <a href="https://ganksterphy.github.io/Synchro/" target="_blank" rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-retro-yellow/10 border border-retro-yellow/30 font-body text-sm text-yellow-deep dark:text-retro-yellow hover:bg-retro-yellow/20 transition-colors duration-200">
-                  🌐 Website →
-                </a>
-                <a href="https://youtu.be/TF4fjew09xc" target="_blank" rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-neon-magenta/10 border border-neon-magenta/30 font-body text-sm text-neon-magenta hover:bg-neon-magenta/20 transition-colors duration-200">
-                  ▶ Video Demo →
-                </a>
-              </div>
-            </FadeSection>
-
-            <div className="h-px bg-gradient-to-r from-transparent via-vinyl-dark/15 dark:via-soft-white/10 to-transparent" />
-          </>
-        )}
-
-        {/* ════════════════════════════════════════
-            DISNEY LORCANA PLAYLAB (isLorcana only)
-        ════════════════════════════════════════ */}
-        {isLorcana && (
-          <>
-            {/* ── 03 CORE SYSTEMS & GAME ENGINE ── */}
-            <FadeSection delay={0.05} className="py-14">
-              <SectionNumber n="03" />
-              <h2 className="font-display text-3xl md:text-4xl text-deep-navy dark:text-soft-white mb-6 -mt-2">Core Systems &amp; Game Engine</h2>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-10">
-                {[
-                  {
-                    icon: "🎴",
-                    title: "Fisher-Yates Booster Pack Gacha Engine",
-                    desc: "สุ่มเปิดซองการ์ดแบบ True Randomization จากฐานข้อมูลทางการ 3,129 ใบ (Set 1 The First Chapter & Set 2 Rise of the Floodborn) ครบทั้ง 9 ระดับ Rarity พร้อมระบบเรต Enchanted Secret Art ที่แม่นยำ",
-                    tag: "3,129 Official Cards"
-                  },
-                  {
-                    icon: "⚡",
-                    title: "AWS API Gateway WebSockets (<100ms)",
-                    desc: "การเชื่อมต่อ Real-time แบบสองทาง รองรับ Action Router ($connect, sendAction, $disconnect), DynamoDB Single-Table State Sync (Turn, Phase, Inks, Lore) พร้อมระบบ Reconnect กู้คืน State อัตโนมัติ",
-                    tag: "Sub-100ms Latency"
-                  },
-                  {
-                    icon: "🛡️",
-                    title: "Hexagonal Architecture & Fallback Database",
-                    desc: "แยก Core Domain Game Logic ออกจาก Infrastructure มี In-memory FALLBACK_DATABASE ฝั่ง Client-side สลับทำงานทันทีเมื่อ AWS ขัดข้อง ทำให้ระบบไม่มีวันเกิด Runtime Crash บนเบราว์เซอร์",
-                    tag: "Zero Runtime Crashes"
-                  },
-                  {
-                    icon: "✨",
-                    title: "3D Physical Card & Booster Tearing Physics",
-                    desc: "จำลองมิติการจับการ์ดจริงด้วย Framer Motion & CSS 3D: เอฟเฟกต์ฉีกซอง Booster แบบ Interactive, การพลิกการ์ด 180° แบบ 2-Step Tap/Swipe พร้อมหมุด Ink Symbol และแสงสะท้อน Foil Shader",
-                    tag: "Tactile Card Physics"
-                  }
-                ].map((sys, i) => (
-                  <div key={i} className="flex items-start gap-4 bg-vinyl-dark/5 dark:bg-soft-white/5 border border-vinyl-dark/15 dark:border-soft-white/10 rounded-2xl p-5 hover:border-amber-400/40 hover:bg-vinyl-dark/8 dark:hover:bg-soft-white/8 transition-all duration-300">
-                    <span className="text-3xl shrink-0 mt-0.5">{sys.icon}</span>
-                    <div>
-                      <div className="flex items-center gap-2 mb-1">
-                        <p className="font-display text-base text-deep-navy dark:text-soft-white font-bold">{sys.title}</p>
-                        <span className="font-body text-[10px] px-2 py-0.5 rounded-full bg-amber-400/10 border border-amber-400/30 text-amber-500 font-semibold">{sys.tag}</span>
-                      </div>
-                      <p className="font-body text-xs text-deep-navy/60 dark:text-soft-white/60 leading-relaxed">{sys.desc}</p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                {[
-                  { src: "/images/Project/Lorcana/04_deck_builder.png", label: "Interactive Deck Builder with Ink Filters" },
-                  { src: "/images/Project/Lorcana/CardGachaDisney.png", label: "3D Booster Pack Tearing & Reveal Animation" },
-                ].map(({ src, label }, i) => (
-                  <motion.button
-                    key={i}
-                    className="group relative aspect-video rounded-2xl overflow-hidden bg-deep-purple/30 border border-soft-white/5 cursor-pointer focus:outline-none focus:ring-2 focus:ring-amber-400/50"
-                    onClick={() => openLightbox(["/images/Project/Lorcana/04_deck_builder.png", "/images/Project/Lorcana/CardGachaDisney.png"], i)}
-                    whileHover={{ scale: 1.02 }}
-                    transition={{ duration: 0.3 }}
-                  >
-                    <Image src={src} alt={label} fill className="object-cover" sizes="(max-width: 768px) 100vw, 50vw" />
-                    <div className="absolute inset-0 bg-amber-400/0 group-hover:bg-amber-400/10 transition-colors duration-300 flex items-center justify-center">
-                      <span className="font-body text-sm text-soft-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-dark-navy/60 px-4 py-2 rounded-full backdrop-blur-sm">{label}</span>
-                    </div>
-                  </motion.button>
-                ))}
-              </div>
-            </FadeSection>
-
-            <div className="h-px bg-gradient-to-r from-transparent via-vinyl-dark/15 dark:via-soft-white/10 to-transparent" />
-
-            {/* ── 04 AWS CLOUD ARCHITECTURE & QA AUTOMATION ── */}
-            <FadeSection delay={0.05} className="py-14">
-              <SectionNumber n="04" />
-              <h2 className="font-display text-3xl md:text-4xl text-deep-navy dark:text-soft-white mb-6 -mt-2">AWS Cloud Architecture &amp; Master QA Suite</h2>
-              
-              {/* Architecture pipeline */}
-              <div className="mb-8 flex flex-wrap items-center justify-center gap-2 bg-amber-400/5 border border-amber-400/20 rounded-2xl px-6 py-5">
-                {["AWS CloudFront / S3", "↔", "API Gateway (WebSockets)", "↔", "Lambda Action Router", "↔", "DynamoDB Single-Table"].map((item, i) => (
-                  <span key={i} className={item === "↔"
-                    ? "font-body text-amber-500/60 text-lg px-1"
-                    : "font-display text-xs md:text-sm text-amber-600 dark:text-amber-400 px-3 py-1.5 rounded-lg bg-amber-400/10 border border-amber-400/20 font-bold"
-                  }>{item}</span>
-                ))}
-              </div>
-
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-10">
-                {[
-                  { src: "/images/Project/Lorcana/aws_serverless_architecture.png", label: "Serverless Cloud Architecture" },
-                  { src: "/images/Project/Lorcana/aws_websocket_flow.png", label: "WebSocket Real-Time Protocol" },
-                  { src: "/images/Project/Lorcana/qa_dashboard_full.png", label: "Playwright E2E & QA Reporter" },
-                ].map(({ src, label }, i) => (
-                  <motion.button
-                    key={i}
-                    className="group relative aspect-video rounded-2xl overflow-hidden bg-deep-purple/30 border border-soft-white/5 cursor-pointer focus:outline-none focus:ring-2 focus:ring-amber-400/50"
-                    onClick={() => openLightbox(["/images/Project/Lorcana/aws_serverless_architecture.png", "/images/Project/Lorcana/aws_websocket_flow.png", "/images/Project/Lorcana/qa_dashboard_full.png"], i)}
-                    whileHover={{ scale: 1.02 }}
-                    transition={{ duration: 0.3 }}
-                  >
-                    <Image src={src} alt={label} fill className="object-cover" sizes="(max-width: 768px) 100vw, 33vw" />
-                    <div className="absolute inset-0 bg-amber-400/0 group-hover:bg-amber-400/10 transition-colors duration-300 flex items-center justify-center">
-                      <span className="font-body text-xs text-soft-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-dark-navy/60 px-3 py-1.5 rounded-full backdrop-blur-sm">{label}</span>
-                    </div>
-                  </motion.button>
-                ))}
-              </div>
-
-              {/* Technical Challenge Spotlight */}
-              <h3 className="font-display text-xl text-deep-navy dark:text-soft-white mb-4">Technical Challenge Spotlights &amp; Resilience</h3>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                {[
-                  {
-                    title: "Blank Booster Popup Bug",
-                    issue: "ซองการ์ดเด้งเปิดแต่การ์ดไม่โหลดเนื่องจาก State Race Condition",
-                    fix: "ออกแบบ Async State Hydration + In-memory FALLBACK_DATABASE การันตีการ์ด 3,129 ใบ โหลดได้ 100%"
-                  },
-                  {
-                    title: "Card Backface Math Collision",
-                    issue: "หน้าการ์ดหายเมื่อหมุนการ์ดเกิน 180 องศาบน CSS 3D Transforms",
-                    fix: "แยก State หมุน 2 สเต็ป (Flip 180° + Advance Step) ป้องกัน 180°+180° Euler angle cancel out"
-                  },
-                  {
-                    title: "Ravensburger CDN Hotlink Block",
-                    issue: "รูปภาพการ์ดทางการโดนบล็อก HTTP 403 Forbidden จากต้นทาง",
-                    fix: "เพิ่ม referrerPolicy='no-referrer' และ Fallback Card Generator เมื่อ CDN ภายนอกไม่พร้อมใช้งาน"
-                  }
-                ].map((item, i) => (
-                  <div key={i} className="bg-vinyl-dark/5 dark:bg-soft-white/5 border border-vinyl-dark/15 dark:border-soft-white/10 rounded-2xl p-5">
-                    <p className="font-display text-sm text-amber-500 font-bold mb-2">{item.title}</p>
-                    <p className="font-body text-xs text-deep-navy/70 dark:text-soft-white/70 mb-3"><strong className="text-neon-magenta">Problem:</strong> {item.issue}</p>
-                    <p className="font-body text-xs text-mint-deep dark:text-mint leading-relaxed"><strong>Solution:</strong> {item.fix}</p>
-                  </div>
-                ))}
-              </div>
-            </FadeSection>
-
-            <div className="h-px bg-gradient-to-r from-transparent via-vinyl-dark/15 dark:via-soft-white/10 to-transparent" />
-
-            {/* ── 05 SOLUTION & IMPACT ── */}
-            <FadeSection delay={0.05} className="py-14">
-              <SectionNumber n="05" />
-              <h2 className="font-display text-3xl md:text-4xl text-deep-navy dark:text-soft-white mb-6 -mt-2">Solution &amp; Cloud Impact</h2>
-              <p className="font-body text-base md:text-lg text-deep-navy/75 dark:text-soft-white/75 leading-relaxed whitespace-pre-line">{project.result}</p>
-
-              {/* Metrics */}
-              <div className="grid grid-cols-2 md:grid-cols-5 gap-4 mt-8 mb-10">
-                {[
-                  { stat: "$0.00", label: "AWS Server Cost (Free Tier)" },
-                  { stat: "<100ms", label: "WebSocket Latency" },
-                  { stat: "3,129", label: "Official Cards Database" },
-                  { stat: "100%", label: "Playwright E2E Pass Rate" },
-                  { stat: "9", label: "Rarity Tiers Supported" },
-                ].map((item, i) => (
-                  <div key={i} className="bg-vinyl-dark/5 dark:bg-soft-white/5 border border-amber-400/20 rounded-2xl p-4 text-center">
-                    <p className="font-display text-3xl md:text-4xl mb-1 text-amber-500">{item.stat}</p>
-                    <p className="font-body text-xs text-deep-navy/60 dark:text-soft-white/60 leading-tight">{item.label}</p>
-                  </div>
-                ))}
-              </div>
-
-              {/* Project info sidebar */}
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-                <div>
-                  <p className="font-body text-xs text-deep-navy/40 dark:text-soft-white/40 uppercase tracking-widest mb-2">Role</p>
-                  <p className="font-body text-sm text-deep-navy/80 dark:text-soft-white/80">Lead Full-Stack Cloud Architect &amp; QA Lead</p>
-                </div>
-                <div>
-                  <p className="font-body text-xs text-deep-navy/40 dark:text-soft-white/40 uppercase tracking-widest mb-2">Tech Stack</p>
-                  <div className="flex flex-col gap-1">
-                    {project.techStack.map((t) => (
-                      <span key={t} className="font-body text-xs text-deep-navy/70 dark:text-soft-white/70">{t}</span>
-                    ))}
-                  </div>
-                </div>
-                <div>
-                  <p className="font-body text-xs text-deep-navy/40 dark:text-soft-white/40 uppercase tracking-widest mb-2">Academic Course</p>
-                  <p className="font-body text-sm text-deep-navy/80 dark:text-soft-white/80">Cloud Computing 1/2569 (KMITL IT)</p>
-                </div>
-                <div>
-                  <p className="font-body text-xs text-deep-navy/40 dark:text-soft-white/40 uppercase tracking-widest mb-2">Testing Frameworks</p>
-                  <p className="font-body text-sm text-deep-navy/80 dark:text-soft-white/80">Playwright E2E · Vitest · OWASP QA</p>
-                </div>
-              </div>
-            </FadeSection>
-
-            <div className="h-px bg-gradient-to-r from-transparent via-vinyl-dark/15 dark:via-soft-white/10 to-transparent" />
-          </>
-        )}
-
-        {/* ════════════════════════════════════════
-            TAWAN-OS AGENT HARNESS (isTawanOs only)
-        ════════════════════════════════════════ */}
-        {isTawanOs && (
-          <>
-            {/* ── 03 THE 4 SYSTEM PILLARS ── */}
-            <FadeSection delay={0.05} className="py-14">
-              <SectionNumber n="03" />
-              <h2 className="font-display text-3xl md:text-4xl text-deep-navy dark:text-soft-white mb-6 -mt-2">The 4 Core Architecture Pillars</h2>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-10">
-                {[
-                  {
-                    icon: "🧠",
-                    title: "Markdown-First Memory Vault",
-                    desc: "จัดระเบียบโครงสร้างความจำระยะยาวผ่าน AGENTS.md, RULES.md, และ 07_MEMORY/ (Decisions, Lessons, Mistakes) ทำให้ AI ทุกตัวมี Single Source of Truth ชัดเจน Context ไม่หลุดข้ามเซสชัน",
-                    tag: "Zero Context Loss"
-                  },
-                  {
-                    icon: "🔌",
-                    title: "Bi-Directional Local MCP Ecosystem",
-                    desc: "พัฒนา Python WebSocket Bridge เชื่อมโยงเข้ากับ Figma MCP สำหรับวาด Vector UI Components สดบน Canvas, Obsidian MCP สำหรับจัดทำ Wiki Notes และ Unity CLI สั่งงาน Game Engine",
-                    tag: "Figma · Obsidian · Unity"
-                  },
-                  {
-                    icon: "⚡",
-                    title: "Dynamic Model Proxy (Port 3120)",
-                    desc: "สถาปัตยกรรม Gateway สลับโมเดลอัจฉริยะ เลือกระหว่าง Gemini 3.7 Flash High / 3.1 Pro สำหรับงานสถาปัตยกรรมโค้ดซับซ้อน และโมเดลเร็วสำหรับงาน Review / Logging เพื่อลดต้นทุน Token สูงสุด",
-                    tag: "Dynamic Model Balancing"
-                  },
-                  {
-                    icon: "🛠️",
-                    title: "500+ Skills & SWE Self-Healing Verification",
-                    desc: "คลังทักษะแยกหมวดหมู่พร้อมระบบ Auto-routing อัตโนมัติ ผสาน SWE-Loop วิเคราะห์ Terminal Traceback และคำสั่ง agy doctor ทดสอบระบบก่อนยืนยันความถูกต้อง ป้องกัน AI Code Slop",
-                    tag: "Auto-Verification Loops"
-                  }
-                ].map((col, i) => (
-                  <div key={i} className="flex items-start gap-4 bg-vinyl-dark/5 dark:bg-soft-white/5 border border-vinyl-dark/15 dark:border-soft-white/10 rounded-2xl p-5 hover:border-sky-cyan/40 hover:bg-vinyl-dark/8 dark:hover:bg-soft-white/8 transition-all duration-300">
-                    <span className="text-3xl shrink-0 mt-0.5">{col.icon}</span>
-                    <div>
-                      <div className="flex items-center gap-2 mb-1">
-                        <p className="font-display text-base text-deep-navy dark:text-soft-white font-bold">{col.title}</p>
-                        <span className="font-body text-[10px] px-2 py-0.5 rounded-full bg-sky-cyan/10 border border-sky-cyan/30 text-cyan-deep dark:text-sky-cyan font-semibold">{col.tag}</span>
-                      </div>
-                      <p className="font-body text-xs text-deep-navy/60 dark:text-soft-white/60 leading-relaxed">{col.desc}</p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                {[
-                  { src: "/images/Project/TawanOS/mcp-ecosystem.png", label: "Local WebSocket MCP Ecosystem Bridge" },
-                  { src: "/images/Project/TawanOS/agent-architecture.png", label: "Agentic Multi-Agent Orchestration Flow" },
-                ].map(({ src, label }, i) => (
-                  <motion.button
-                    key={i}
-                    className="group relative aspect-video rounded-2xl overflow-hidden bg-deep-purple/30 border border-soft-white/5 cursor-pointer focus:outline-none focus:ring-2 focus:ring-sky-cyan/50"
-                    onClick={() => openLightbox(["/images/Project/TawanOS/mcp-ecosystem.png", "/images/Project/TawanOS/agent-architecture.png"], i)}
-                    whileHover={{ scale: 1.02 }}
-                    transition={{ duration: 0.3 }}
-                  >
-                    <Image src={src} alt={label} fill className="object-cover" sizes="(max-width: 768px) 100vw, 50vw" />
-                    <div className="absolute inset-0 bg-sky-cyan/0 group-hover:bg-sky-cyan/10 transition-colors duration-300 flex items-center justify-center">
-                      <span className="font-body text-sm text-soft-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-dark-navy/60 px-4 py-2 rounded-full backdrop-blur-sm">{label}</span>
-                    </div>
-                  </motion.button>
-                ))}
-              </div>
-            </FadeSection>
-
-            <div className="h-px bg-gradient-to-r from-transparent via-vinyl-dark/15 dark:via-soft-white/10 to-transparent" />
-
-            {/* ── 04 AGENT HARNESS PATTERN & IMPACT ── */}
-            <FadeSection delay={0.05} className="py-14">
-              <SectionNumber n="04" />
-              <h2 className="font-display text-3xl md:text-4xl text-deep-navy dark:text-soft-white mb-6 -mt-2">Agent Harness Orchestration Pattern</h2>
-              <div className="space-y-3 mb-10">
-                {[
-                  { step: "01", role: "Orchestrator & Intent Clarification", desc: "รับคำสั่ง ทำ Problem Framing ตั้งคำถามความชัดเจน และคัดเลือก Context Packet ที่เกี่ยวข้องจาก Vault" },
-                  { step: "02", role: "Planner (Shift-Left on Spec)", desc: "สร้าง scratch/plan.md กำหนด Interface และ Edge Cases ให้เห็นภาพชัดเจนก่อนลงมือเขียนโค้ดจริง" },
-                  { step: "03", role: "Executor & Subagent Delegation", desc: "รันโค้ดและสร้าง Asset ผ่าน Subagent แยกบริบท ลดการปนเปื้อนของ Context Window" },
-                  { step: "04", role: "Doctor & SWE Self-Healing Reviewer", desc: "รัน agy doctor, linter และ unit tests หากพบ Error ให้วนลูปซ่อมแซมตัวเองจนกว่าจะผ่านเกณฑ์" },
-                  { step: "05", role: "Memory Librarian & Reflection Journal", desc: "บันทึกสิ่งที่เรียนรู้ (Lessons Learned) และข้อผิดพลาด (Mistakes) ลงใน 07_MEMORY/ เพื่อความฉลาดขึ้นเรื่อยๆ" },
-                ].map((flow, i) => (
-                  <div key={i} className="flex items-start gap-4 bg-vinyl-dark/5 dark:bg-soft-white/5 border border-vinyl-dark/15 dark:border-soft-white/10 rounded-2xl p-4 hover:border-sky-cyan/30 transition-all duration-200">
-                    <span className="font-display text-2xl text-cyan-deep dark:text-sky-cyan font-bold shrink-0 mt-0.5">{flow.step}</span>
-                    <div>
-                      <p className="font-display text-sm text-deep-navy dark:text-soft-white font-bold mb-0.5">{flow.role}</p>
-                      <p className="font-body text-xs text-deep-navy/60 dark:text-soft-white/60 leading-relaxed">{flow.desc}</p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-
-              {/* Metrics */}
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-10">
-                {[
-                  { stat: ">60%", label: "Context Overhead Reduction" },
-                  { stat: "500+", label: "Auto-Routed Skills" },
-                  { stat: "17", label: "Coordinated Agent Roles" },
-                  { stat: "100%", label: "Spec-First Verification" },
-                ].map((item, i) => (
-                  <div key={i} className="bg-vinyl-dark/5 dark:bg-soft-white/5 border border-sky-cyan/20 rounded-2xl p-4 text-center">
-                    <p className="font-display text-3xl md:text-4xl mb-1 text-cyan-deep dark:text-sky-cyan">{item.stat}</p>
-                    <p className="font-body text-xs text-deep-navy/60 dark:text-soft-white/60 leading-tight">{item.label}</p>
-                  </div>
-                ))}
-              </div>
-
-              {/* Project info sidebar */}
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-                <div>
-                  <p className="font-body text-xs text-deep-navy/40 dark:text-soft-white/40 uppercase tracking-widest mb-2">Role</p>
-                  <p className="font-body text-sm text-deep-navy/80 dark:text-soft-white/80">System Architect &amp; Agentic AI Engineer</p>
-                </div>
-                <div>
-                  <p className="font-body text-xs text-deep-navy/40 dark:text-soft-white/40 uppercase tracking-widest mb-2">Tech Stack</p>
-                  <div className="flex flex-col gap-1">
-                    {project.techStack.map((t) => (
-                      <span key={t} className="font-body text-xs text-deep-navy/70 dark:text-soft-white/70">{t}</span>
-                    ))}
-                  </div>
-                </div>
-                <div>
-                  <p className="font-body text-xs text-deep-navy/40 dark:text-soft-white/40 uppercase tracking-widest mb-2">Ecosystem</p>
-                  <p className="font-body text-sm text-deep-navy/80 dark:text-soft-white/80">Antigravity CLI · Hermes Agent · MCP</p>
-                </div>
-                <div>
-                  <p className="font-body text-xs text-deep-navy/40 dark:text-soft-white/40 uppercase tracking-widest mb-2">Memory Standard</p>
-                  <p className="font-body text-sm text-deep-navy/80 dark:text-soft-white/80">Markdown-First Vault (Obsidian Index)</p>
-                </div>
-              </div>
-            </FadeSection>
-
-            <div className="h-px bg-gradient-to-r from-transparent via-vinyl-dark/15 dark:via-soft-white/10 to-transparent" />
-          </>
-        )}
-
-        {/* ════════════════════════════════════════
-            RED BULL F1 MAX VERSTAPPEN (isRedBullF1 only)
-        ════════════════════════════════════════ */}
-        {isRedBullF1 && (
-          <>
-            {/* ── 03 MULTI-MODAL PIPELINE & THREE.JS ENGINE ── */}
-            <FadeSection delay={0.05} className="py-14">
-              <SectionNumber n="03" />
-              <h2 className="font-display text-3xl md:text-4xl text-deep-navy dark:text-soft-white mb-6 -mt-2">Multi-Modal AI Pipeline &amp; 3D Engine</h2>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-10">
-                {[
-                  {
-                    icon: "🏎️",
-                    title: "Three.js 3D Exploded View Engine",
-                    desc: "โหลดโมเดลรถ Oracle Red Bull Racing RB19 GLB และเขียนสคริปต์ three-exploded.js คำนวณเวกเตอร์แยกชิ้นส่วน Body, Aero Wings, และ Slick Tires ออกจากกันตามความเร็วในการเลื่อนหน้าจอของผู้ใช้",
-                    tag: "WebGL 60 FPS"
-                  },
-                  {
-                    icon: "🎬",
-                    title: "Multi-Modal AI Video & Asset Generation",
-                    desc: "สกัดข้อมูลประวัติการแข่งผ่าน NotebookLM และเจนคลิปวิดีโอ Cinematic F1 ด้วย Google Flow (โมเดล Veo Fast) นำมาทำแอนิเมชันเปิดตัวที่ผสานเข้ากับ Canvas 3D แบบเรียลไทม์",
-                    tag: "NotebookLM + Google Veo"
-                  },
-                  {
-                    icon: "⚡",
-                    title: "1-Week Sprint (17 Agents · 0 Claude)",
-                    desc: "ทดลองสร้างระบบนิเวศ Agent Harness ผ่าน Antigravity CLI รัน 17 Subagents และ 25 Skills พร้อม Dynamic Model Balancing สลับโมเดลตามความยาก ทำให้แก้โค้ดไปกว่า 100 Prompts โดยไม่ติด Token Limit",
-                    tag: "Agentic Engineering"
-                  },
-                  {
-                    icon: "🎵",
-                    title: "Human Taste & Audio-Synced Parallax",
-                    desc: "ปฏิเสธ Template สำเร็จรูปของ AI — ควบคุมไทม์ไลน์และ Parallax ด้วย GSAP ScrollTrigger พร้อมระบบเสียงเครื่องยนต์ F1 Honda RBPT และโทเค็นสี Dark High-Performance (#0a1024, #e01020, #f1c40f)",
-                    tag: "Dark High-Performance"
-                  }
-                ].map((sys, i) => (
-                  <div key={i} className="flex items-start gap-4 bg-vinyl-dark/5 dark:bg-soft-white/5 border border-vinyl-dark/15 dark:border-soft-white/10 rounded-2xl p-5 hover:border-red-500/40 hover:bg-vinyl-dark/8 dark:hover:bg-soft-white/8 transition-all duration-300">
-                    <span className="text-3xl shrink-0 mt-0.5">{sys.icon}</span>
-                    <div>
-                      <div className="flex items-center gap-2 mb-1">
-                        <p className="font-display text-base text-deep-navy dark:text-soft-white font-bold">{sys.title}</p>
-                        <span className="font-body text-[10px] px-2 py-0.5 rounded-full bg-red-500/10 border border-red-500/30 text-red-500 font-semibold">{sys.tag}</span>
-                      </div>
-                      <p className="font-body text-xs text-deep-navy/60 dark:text-soft-white/60 leading-relaxed">{sys.desc}</p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                {[
-                  { src: "/images/Project/RedBull-F1/Open.png", label: "3D Exploded Body & Aero" },
-                  { src: "/images/Project/RedBull-F1/max_helmet_intro.jpg", label: "Max Helmet Cinematic Intro" },
-                  { src: "/images/Project/RedBull-F1/video_start_frame.jpg", label: "Google Veo Fast AI Video Frame" },
-                  { src: "/images/Project/RedBull-F1/timeline_2021.jpg", label: "4x World Champion Timeline" },
-                ].map(({ src, label }, i) => (
-                  <motion.button
-                    key={i}
-                    className="group relative aspect-video rounded-2xl overflow-hidden bg-deep-purple/30 border border-soft-white/5 cursor-pointer focus:outline-none focus:ring-2 focus:ring-red-500/50"
-                    onClick={() => openLightbox(["/images/Project/RedBull-F1/Open.png", "/images/Project/RedBull-F1/max_helmet_intro.jpg", "/images/Project/RedBull-F1/video_start_frame.jpg", "/images/Project/RedBull-F1/timeline_2021.jpg"], i)}
-                    whileHover={{ scale: 1.02 }}
-                    transition={{ duration: 0.3 }}
-                  >
-                    <Image src={src} alt={label} fill className="object-cover" sizes="(max-width: 768px) 50vw, 25vw" />
-                    <div className="absolute inset-0 bg-red-500/0 group-hover:bg-red-500/10 transition-colors duration-300 flex items-center justify-center">
-                      <span className="font-body text-xs text-soft-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-dark-navy/60 px-3 py-1.5 rounded-full backdrop-blur-sm">{label}</span>
-                    </div>
-                  </motion.button>
-                ))}
-              </div>
-            </FadeSection>
-
-            <div className="h-px bg-gradient-to-r from-transparent via-vinyl-dark/15 dark:via-soft-white/10 to-transparent" />
-
-            {/* ── 04 SOLUTION & SPRINT OUTCOME ── */}
-            <FadeSection delay={0.05} className="py-14">
-              <SectionNumber n="04" />
-              <h2 className="font-display text-3xl md:text-4xl text-deep-navy dark:text-soft-white mb-6 -mt-2">Sprint Outcome &amp; Performance</h2>
-              <p className="font-body text-base md:text-lg text-deep-navy/75 dark:text-soft-white/75 leading-relaxed whitespace-pre-line">{project.result}</p>
-
-              {/* Metrics */}
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-8 mb-10">
-                {[
-                  { stat: "1 Week", label: "Total Sprint Timeline" },
-                  { stat: "17", label: "Coordinated Subagents" },
-                  { stat: "60 FPS", label: "Three.js WebGL Framerate" },
-                  { stat: "0 Claude", label: "100% Antigravity CLI Powered" },
-                ].map((item, i) => (
-                  <div key={i} className="bg-vinyl-dark/5 dark:bg-soft-white/5 border border-red-500/20 rounded-2xl p-4 text-center">
-                    <p className="font-display text-3xl md:text-4xl mb-1 text-red-500">{item.stat}</p>
-                    <p className="font-body text-xs text-deep-navy/60 dark:text-soft-white/60 leading-tight">{item.label}</p>
-                  </div>
-                ))}
-              </div>
-
-              {/* Project info sidebar */}
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-                <div>
-                  <p className="font-body text-xs text-deep-navy/40 dark:text-soft-white/40 uppercase tracking-widest mb-2">Role</p>
-                  <p className="font-body text-sm text-deep-navy/80 dark:text-soft-white/80">3D Creative Developer &amp; Agent Harness Orchestrator</p>
-                </div>
-                <div>
-                  <p className="font-body text-xs text-deep-navy/40 dark:text-soft-white/40 uppercase tracking-widest mb-2">Tech Stack</p>
-                  <div className="flex flex-col gap-1">
-                    {project.techStack.map((t) => (
-                      <span key={t} className="font-body text-xs text-deep-navy/70 dark:text-soft-white/70">{t}</span>
-                    ))}
-                  </div>
-                </div>
-                <div>
-                  <p className="font-body text-xs text-deep-navy/40 dark:text-soft-white/40 uppercase tracking-widest mb-2">Sprint Duration</p>
-                  <p className="font-body text-sm text-deep-navy/80 dark:text-soft-white/80">7 Days (Sprint Experiment 2026)</p>
-                </div>
-                <div>
-                  <p className="font-body text-xs text-deep-navy/40 dark:text-soft-white/40 uppercase tracking-widest mb-2">3D Vehicle Model</p>
-                  <p className="font-body text-sm text-deep-navy/80 dark:text-soft-white/80">Oracle Red Bull Racing RB19 (GLB)</p>
-                </div>
-              </div>
-            </FadeSection>
-
-            <div className="h-px bg-gradient-to-r from-transparent via-vinyl-dark/15 dark:via-soft-white/10 to-transparent" />
-          </>
-        )}
-
-        {/* ════════════════════════════════════════
-            HYBRICAREER AI (isHybriCareer only)
-        ════════════════════════════════════════ */}
-        {isHybriCareer && (
-          <>
-            {/* ── 03 USER RESEARCH & DUAL-PERSONA ARCHITECTURE ── */}
-            <FadeSection delay={0.05} className="py-14">
-              <SectionNumber n="03" />
-              <h2 className="font-display text-3xl md:text-4xl text-deep-navy dark:text-soft-white mb-6 -mt-2">User Research &amp; Dual-Persona Architecture</h2>
-              
-              {/* Research stats highlight */}
-              <div className="mb-8 bg-emerald-500/5 border border-emerald-500/25 rounded-2xl p-6">
-                <div className="flex items-center gap-2 mb-2">
-                  <span className="font-display text-emerald-600 dark:text-emerald-400 font-bold text-base">📊 Labor Data &amp; Field Interview Discovery</span>
-                </div>
-                <p className="font-body text-sm text-deep-navy/80 dark:text-soft-white/80 leading-relaxed mb-4">
-                  ผลสำรวจแรงงานไทย (สสช. Q1/2569) ชี้ชัดว่าอัตราการว่างงานสูงสุดอยู่ในกลุ่มอายุ <strong>20-24 ปี (34% หรือ 134,900 คน)</strong> จากการสัมภาษณ์เชิงลึกกับผู้ย้ายสายงาน 5 คน และ HR 2 คน พบว่า 100% ติดปัญหาถูกระบบ ATS คัดทิ้งทันทีเพราะชื่อวุฒิไม่ตรงสาย แม้จะมีทักษะจริง
-                </p>
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-3 font-body text-xs">
-                  <div className="bg-vinyl-dark/5 dark:bg-soft-white/5 border border-emerald-500/20 rounded-xl p-3">
-                    <span className="text-emerald-500 font-bold block mb-1">34% Youth Unemployed</span>
-                    <p className="text-deep-navy/60 dark:text-soft-white/60">กลุ่มอายุ 20-24 ปีว่างงานสูงสุดในประเทศ</p>
-                  </div>
-                  <div className="bg-vinyl-dark/5 dark:bg-soft-white/5 border border-emerald-500/20 rounded-xl p-3">
-                    <span className="text-emerald-500 font-bold block mb-1">4-6 Months Time Loss</span>
-                    <p className="text-deep-navy/60 dark:text-soft-white/60">ระยะเวลาเฉลี่ยที่ผู้ย้ายสายงานต้องเคว้งคว้าง</p>
-                  </div>
-                  <div className="bg-vinyl-dark/5 dark:bg-soft-white/5 border border-emerald-500/20 rounded-xl p-3">
-                    <span className="text-emerald-500 font-bold block mb-1">Zero ATS Visibility</span>
-                    <p className="text-deep-navy/60 dark:text-soft-white/60">พอร์ตผลงานไม่ถูกเปิดอ่านเพราะติดชื่อปริญญา</p>
-                  </div>
-                </div>
-              </div>
-
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-10">
-                {[
-                  {
-                    icon: "👩‍⚕️",
-                    title: "Candidate View — 'น้องมิว' Persona (B.Pharm → Data Analyst)",
-                    desc: "แสดง Skill Readiness 88% พร้อมเชื่อมโยงจุดเด่นเดิม (Healthcare Knowledge 99%) เข้ากับทักษะเทคนิคใหม่ (SQL 85%, Python 75%) เพื่อสร้างแต้มต่อในการแข่งขัน",
-                    tag: "Transferable Skill Radar"
-                  },
-                  {
-                    icon: "💼",
-                    title: "HR Employer Portal & ATS Bypass Mode",
-                    desc: "เปิดให้ HR ค้นหาผู้สมัครตามทักษะเชิงประจักษ์ (Skill-Proof Score) โดยไม่สนชื่อปริญญา พร้อมปุ่ม 1-Click Invite to Interview ช่วยลดเวลาคัดคนลงกว่า 35%",
-                    tag: "Zero Degree Bias"
-                  },
-                  {
-                    icon: "🎙️",
-                    title: "AI Hybrid Storyteller (Mock Interview)",
-                    desc: "ระบบจำลองคำถามสัมภาษณ์งานที่เจาะลึกเฉพาะทาง ช่วยให้ผู้สมัครฝึกเล่าเรื่องเชื่อมโยงความรู้ข้ามสายงานได้อย่างมืออาชีพ",
-                    tag: "AI Narrative Engine"
-                  },
-                  {
-                    icon: "🏆",
-                    title: "Generation Thailand Hackathon Distinction",
-                    desc: "ผ่านการคัดเลือกเป็น 'Top 10 Finalist Proposal' (ทีมสำรองอันดับที่ 5) จากข้อเสนอโครงการแก้ปัญหาโครงสร้างตลาดแรงงานด้วย AI-First Design",
-                    tag: "Top 10 Finalist Proposal"
-                  }
-                ].map((sys, i) => (
-                  <div key={i} className="flex items-start gap-4 bg-vinyl-dark/5 dark:bg-soft-white/5 border border-vinyl-dark/15 dark:border-soft-white/10 rounded-2xl p-5 hover:border-emerald-500/40 hover:bg-vinyl-dark/8 dark:hover:bg-soft-white/8 transition-all duration-300">
-                    <span className="text-3xl shrink-0 mt-0.5">{sys.icon}</span>
-                    <div>
-                      <div className="flex items-center gap-2 mb-1">
-                        <p className="font-display text-base text-deep-navy dark:text-soft-white font-bold">{sys.title}</p>
-                        <span className="font-body text-[10px] px-2 py-0.5 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-500 font-semibold">{sys.tag}</span>
-                      </div>
-                      <p className="font-body text-xs text-deep-navy/60 dark:text-soft-white/60 leading-relaxed">{sys.desc}</p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                {[
-                  { src: "/images/Project/HybriCareer/slide3_solution_architecture.png", label: "Solution Architecture" },
-                  { src: "/images/Project/HybriCareer/slide4_candidate_view.png", label: "Candidate View (Mew B.Pharm)" },
-                  { src: "/images/Project/HybriCareer/slide5_recruiter_view.png", label: "Recruiter View (1-Click Interview)" },
-                ].map(({ src, label }, i) => (
-                  <motion.button
-                    key={i}
-                    className="group relative aspect-video rounded-2xl overflow-hidden bg-deep-purple/30 border border-soft-white/5 cursor-pointer focus:outline-none focus:ring-2 focus:ring-emerald-500/50"
-                    onClick={() => openLightbox(["/images/Project/HybriCareer/slide3_solution_architecture.png", "/images/Project/HybriCareer/slide4_candidate_view.png", "/images/Project/HybriCareer/slide5_recruiter_view.png"], i)}
-                    whileHover={{ scale: 1.02 }}
-                    transition={{ duration: 0.3 }}
-                  >
-                    <Image src={src} alt={label} fill className="object-cover" sizes="(max-width: 768px) 100vw, 33vw" />
-                    <div className="absolute inset-0 bg-emerald-500/0 group-hover:bg-emerald-500/10 transition-colors duration-300 flex items-center justify-center">
-                      <span className="font-body text-xs text-soft-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-dark-navy/60 px-3 py-1.5 rounded-full backdrop-blur-sm">{label}</span>
-                    </div>
-                  </motion.button>
-                ))}
-              </div>
-            </FadeSection>
-
-            <div className="h-px bg-gradient-to-r from-transparent via-vinyl-dark/15 dark:via-soft-white/10 to-transparent" />
-
-            {/* ── 04 IMPACT & OUTCOMES ── */}
-            <FadeSection delay={0.05} className="py-14">
-              <SectionNumber n="04" />
-              <h2 className="font-display text-3xl md:text-4xl text-deep-navy dark:text-soft-white mb-6 -mt-2">Hackathon Distinction &amp; Outcomes</h2>
-              <p className="font-body text-base md:text-lg text-deep-navy/75 dark:text-soft-white/75 leading-relaxed whitespace-pre-line">{project.result}</p>
-
-              {/* Metrics */}
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-8 mb-10">
-                {[
-                  { stat: "Top 10", label: "Finalist Proposal (5th Reserve)" },
-                  { stat: "34%", label: "Youth Unemployment Target" },
-                  { stat: "35%", label: "Faster Time-to-Hire for HR" },
-                  { stat: "0", label: "Degree Bias on First Screening" },
-                ].map((item, i) => (
-                  <div key={i} className="bg-vinyl-dark/5 dark:bg-soft-white/5 border border-emerald-500/20 rounded-2xl p-4 text-center">
-                    <p className="font-display text-3xl md:text-4xl mb-1 text-emerald-500">{item.stat}</p>
-                    <p className="font-body text-xs text-deep-navy/60 dark:text-soft-white/60 leading-tight">{item.label}</p>
-                  </div>
-                ))}
-              </div>
-
-              {/* Project info sidebar */}
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-                <div>
-                  <p className="font-body text-xs text-deep-navy/40 dark:text-soft-white/40 uppercase tracking-widest mb-2">Role</p>
-                  <p className="font-body text-sm text-deep-navy/80 dark:text-soft-white/80">Product Designer &amp; AI Prompt Architect</p>
-                </div>
-                <div>
-                  <p className="font-body text-xs text-deep-navy/40 dark:text-soft-white/40 uppercase tracking-widest mb-2">Tech Stack</p>
-                  <div className="flex flex-col gap-1">
-                    {project.techStack.map((t) => (
-                      <span key={t} className="font-body text-xs text-deep-navy/70 dark:text-soft-white/70">{t}</span>
-                    ))}
-                  </div>
-                </div>
-                <div>
-                  <p className="font-body text-xs text-deep-navy/40 dark:text-soft-white/40 uppercase tracking-widest mb-2">Event</p>
-                  <p className="font-body text-sm text-deep-navy/80 dark:text-soft-white/80">Generation Thailand Hackathon 2026</p>
-                </div>
-                <div>
-                  <p className="font-body text-xs text-deep-navy/40 dark:text-soft-white/40 uppercase tracking-widest mb-2">Status</p>
-                  <p className="font-body text-sm text-deep-navy/80 dark:text-soft-white/80">Proposal &amp; Interactive PoC (5th Reserve)</p>
-                </div>
-              </div>
-            </FadeSection>
-
-            <div className="h-px bg-gradient-to-r from-transparent via-vinyl-dark/15 dark:via-soft-white/10 to-transparent" />
-          </>
-        )}
-      </div>
-
-      {/* ════════════════════════════════════════
-          FULL GALLERY (section number varies by project)
-      ════════════════════════════════════════ */}
-      {galleryImages.length > 0 && (
-        <FadeSection className="relative z-10 py-16">
-          <div className="mx-auto max-w-5xl px-6 mb-8">
-            <div className="flex items-center gap-3 mb-4">
-              <span
-                className="font-display text-6xl md:text-7xl leading-none select-none"
-                style={{
-                  background: "linear-gradient(135deg, #FF2D78 0%, #B026FF 100%)",
-                  WebkitBackgroundClip: "text",
-                  WebkitTextFillColor: "transparent",
-                  opacity: 0.25,
-                }}
-              >
-                {isVpsTycoon ? "07" : isSynchro ? "07" : isDriveKmitl ? "08" : isPolygonMesh ? "07" : isLorcana ? "06" : isTawanOs ? "05" : isRedBullF1 ? "05" : isHybriCareer ? "05" : "04"}
-              </span>
-            </div>
-            <h2 className="font-display text-3xl md:text-4xl text-deep-navy dark:text-soft-white -mt-2">
-              {isDriveKmitl || isPolygonMesh || isVpsTycoon || isSynchro || isLorcana || isTawanOs || isRedBullF1 || isHybriCareer ? "Full Gallery" : "Visual principles detail"}
-            </h2>
-            {isChaodom && (
-              <p className="font-body text-sm text-deep-navy/50 dark:text-soft-white/50 mt-2">UI Design Principles &amp; Visual Design Analysis</p>
-            )}
-            {isPolygonMesh && (
-              <p className="font-body text-sm text-deep-navy/50 dark:text-soft-white/50 mt-2">All 17 screens — 2D, 3D, Polygon Study, Jigsaw &amp; more</p>
-            )}
-            {isVpsTycoon && (
-              <p className="font-body text-sm text-deep-navy/50 dark:text-soft-white/50 mt-2">All 23 screens — Title, Menu, Game World, Messenger, Rack, Events &amp; more</p>
-            )}
-            {isDriveKmitl && (
-              <p className="font-body text-sm text-deep-navy/50 dark:text-soft-white/50 mt-2">All 5 screens — Home, Join Room, Create Room, Chat Room &amp; Transition</p>
-            )}
-            {isSynchro && (
-              <p className="font-body text-sm text-deep-navy/50 dark:text-soft-white/50 mt-2">Hardware controller, poster, gameplay &amp; web app design</p>
-            )}
-            {isLorcana && (
-              <p className="font-body text-sm text-deep-navy/50 dark:text-soft-white/50 mt-2">All AWS Serverless Architecture, WebSockets, QA Testing &amp; Gameplay Screens</p>
-            )}
-            {isTawanOs && (
-              <p className="font-body text-sm text-deep-navy/50 dark:text-soft-white/50 mt-2">Terminal AI Harness, WebSocket MCP Ecosystem &amp; System Architecture</p>
-            )}
-            {isRedBullF1 && (
-              <p className="font-body text-sm text-deep-navy/50 dark:text-soft-white/50 mt-2">All 3D Web Assets — RB19 Exploded Parts, Veo Video Frames &amp; Championship Timeline</p>
-            )}
-            {isHybriCareer && (
-              <p className="font-body text-sm text-deep-navy/50 dark:text-soft-white/50 mt-2">Hackathon Pitch Slides &amp; Dual-Persona Interactive Prototype Screens</p>
-            )}
-          </div>
-          <div className="mx-auto max-w-6xl px-4 md:px-6">
-            <GalleryGrid
-              images={galleryImages}
-              onOpen={(i) => openLightbox(galleryImages, i)}
-            />
+          <div className="p-6 md:p-8 rounded-2xl bg-gradient-to-br from-soft-white/80 to-sakura-pink/10 dark:from-deep-purple/30 dark:to-vinyl-dark/50 border border-sakura-pink/20 dark:border-soft-white/10 shadow-sm">
+            <p className="font-body text-base md:text-lg text-deep-navy/80 dark:text-soft-white/80 leading-relaxed">
+              {project.problem}
+            </p>
           </div>
         </FadeSection>
-      )}
 
-      {/* ════════════════════════════════════════
-          05 THE SOLUTION (generic non-custom projects only)
-      ════════════════════════════════════════ */}
-      {!isPolygonMesh && !isVpsTycoon && !isDriveKmitl && !isSynchro && !isLorcana && !isTawanOs && !isRedBullF1 && !isHybriCareer && (
-      <div className="relative z-10 mx-auto max-w-5xl px-6">
         <div className="h-px bg-gradient-to-r from-transparent via-vinyl-dark/15 dark:via-soft-white/10 to-transparent" />
+
+        {/* ── 03 PROCESS & ARCHITECTURE ── */}
         <FadeSection delay={0.05} className="py-14">
-          <SectionNumber n="05" />
-          <h2 className="font-display text-3xl md:text-4xl text-deep-navy dark:text-soft-white mb-6 -mt-2">The Solution</h2>
-          <p className="font-body text-base md:text-lg text-deep-navy/75 dark:text-soft-white/75 leading-relaxed whitespace-pre-line">{project.result}</p>
+          <SectionNumber n="03" />
+          <h2 className="font-display text-3xl md:text-4xl text-deep-navy dark:text-soft-white mb-6 -mt-2">
+            Process & Architecture
+          </h2>
+          <p className="font-body text-base md:text-lg text-deep-navy/80 dark:text-soft-white/80 leading-relaxed mb-8">
+            {project.process}
+          </p>
 
-          {isChaodom && (
-            <>
-              <SubHeading>Key Features</SubHeading>
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-8">
-                {[
-                  { icon: "🟢", label: "Real-time room availability" },
-                  { icon: "🔍", label: "Advanced search & filters" },
-                  { icon: "🗺", label: "Interactive map with transport" },
-                  { icon: "⚖️", label: "Side-by-side comparison" },
-                  { icon: "❤️", label: "Wishlist with notifications" },
-                  { icon: "✅", label: "Verified owner contact" },
-                  { icon: "⭐", label: "User reviews & ratings" },
-                  { icon: "💬", label: "Customer support chat" },
-                ].map((f, i) => (
-                  <div key={i} className="bg-vinyl-dark/5 dark:bg-soft-white/5 border border-vinyl-dark/15 dark:border-soft-white/10 rounded-xl p-3 text-center">
-                    <span className="text-2xl">{f.icon}</span>
-                    <p className="font-body text-xs text-deep-navy/70 dark:text-soft-white/70 mt-2 leading-relaxed">{f.label}</p>
-                  </div>
-                ))}
-              </div>
-              <SubHeading>Final Prototype Showcase</SubHeading>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
-                {[
-                  "/images/Project/Chaodom/App Screens Overview/3.png",
-                  "/images/Project/Chaodom/App Screens Overview/4.png",
-                  "/images/Project/Chaodom/App Screens Overview/5.png",
-                  "/images/Project/Chaodom/App Screens Overview/6.png",
-                  "/images/Project/Chaodom/App Screens Overview/7.png",
-                  "/images/Project/Chaodom/App Screens Overview/8.png",
-                  "/images/Project/Chaodom/App Screens Overview/9.png",
-                  "/images/Project/Chaodom/App Screens Overview/10.png",
-                  "/images/Project/Chaodom/App Screens Overview/11.png",
-                ].map((src, i, arr) => (
-                  <motion.button
-                    key={i}
-                    className="group relative aspect-[16/9] rounded-2xl overflow-hidden bg-deep-purple/30 border border-soft-white/5 cursor-pointer focus:outline-none focus:ring-2 focus:ring-sakura-pink/50"
-                    onClick={() => openLightbox(arr, i)}
-                    whileHover={{ scale: 1.02 }}
-                    transition={{ duration: 0.3 }}
-                  >
-                    <Image src={src} alt={`Final Prototype ${i + 1}`} fill className="object-contain" sizes="(max-width: 768px) 100vw, 33vw" />
-                    <div className="absolute inset-0 bg-sakura-pink/0 group-hover:bg-sakura-pink/10 transition-colors duration-300 flex items-center justify-center">
-                      <span className="font-body text-sm text-soft-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-dark-navy/60 px-4 py-2 rounded-full backdrop-blur-sm">View Full Size</span>
-                    </div>
-                  </motion.button>
-                ))}
-              </div>
-            </>
+          {/* Detailed Phases */}
+          {project.phases && project.phases.length > 0 && (
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6">
+              {project.phases.map((phase, idx) => (
+                <div
+                  key={idx}
+                  className="p-6 rounded-2xl bg-vinyl-dark/5 dark:bg-soft-white/5 border border-vinyl-dark/10 dark:border-soft-white/10 transition-all duration-300 hover:-translate-y-1 hover:border-hot-pink/30"
+                >
+                  <span className="font-mono text-xs font-bold text-neon-magenta tracking-widest block mb-2">
+                    PHASE {String(idx + 1).padStart(2, "0")}
+                  </span>
+                  <h3 className="font-display text-lg text-deep-navy dark:text-soft-white mb-2">
+                    {phase.title}
+                  </h3>
+                  <p className="font-body text-sm text-deep-navy/70 dark:text-soft-white/70 leading-relaxed">
+                    {phase.description}
+                  </p>
+                </div>
+              ))}
+            </div>
           )}
         </FadeSection>
 
-        {/* ════════════════════════════════════════
-            06 IMPACT & RESULTS
-        ════════════════════════════════════════ */}
-        {isChaodom && (
-          <>
-            <div className="h-px bg-gradient-to-r from-transparent via-vinyl-dark/15 dark:via-soft-white/10 to-transparent" />
-            <FadeSection delay={0.05} className="py-14">
-              <SectionNumber n="06" />
-              <h2 className="font-display text-3xl md:text-4xl text-deep-navy dark:text-soft-white mb-8 -mt-2">Impact &amp; Results</h2>
-              <div className="grid grid-cols-2 md:grid-cols-5 gap-4 mb-8">
-                {[
-                  { stat: "3", label: "In-depth Interviews" },
-                  { stat: "10+", label: "Prototype Screens" },
-                  { stat: "15+", label: "Improvement Points" },
-                  { stat: "5", label: "Weeks Full UX Process" },
-                  { stat: "25+", label: "iOS UI Components" },
-                ].map((item, i) => (
-                  <div
-                    key={i}
-                    className="bg-vinyl-dark/5 dark:bg-soft-white/5 border border-neon-magenta/20 rounded-2xl p-4 text-center"
-                    style={{ boxShadow: "0 0 24px rgba(176,38,255,0.08)" }}
-                  >
-                    <p
-                      className="font-display text-4xl md:text-5xl mb-1"
-                      style={{
-                        background: "linear-gradient(135deg, #FF2D78 0%, #B026FF 100%)",
-                        WebkitBackgroundClip: "text",
-                        WebkitTextFillColor: "transparent",
-                      }}
-                    >
-                      {item.stat}
+        <div className="h-px bg-gradient-to-r from-transparent via-vinyl-dark/15 dark:via-soft-white/10 to-transparent" />
+
+        {/* ── 04 THE SOLUTION & RESULTS ── */}
+        <FadeSection delay={0.05} className="py-14">
+          <SectionNumber n="04" />
+          <h2 className="font-display text-3xl md:text-4xl text-deep-navy dark:text-soft-white mb-6 -mt-2">
+            The Solution & Results
+          </h2>
+          <div className="space-y-4">
+            {resultLines.map((line, idx) => {
+              const colonIndex = line.indexOf(":");
+              const hasColon = colonIndex !== -1;
+              const prefix = hasColon ? line.slice(0, colonIndex).trim() : "";
+              const rest = hasColon ? line.slice(colonIndex + 1).trim() : line.trim();
+              return (
+                <div
+                  key={idx}
+                  className="p-5 md:p-6 rounded-xl bg-vinyl-dark/5 dark:bg-soft-white/5 border-l-4 border-l-neon-magenta border-vinyl-dark/10 dark:border-soft-white/10"
+                >
+                  {hasColon ? (
+                    <>
+                      <span className="font-display text-base text-neon-magenta block mb-1">
+                        {prefix}
+                      </span>
+                      <p className="font-body text-base text-deep-navy/80 dark:text-soft-white/80 leading-relaxed">
+                        {rest}
+                      </p>
+                    </>
+                  ) : (
+                    <p className="font-body text-base text-deep-navy/80 dark:text-soft-white/80 leading-relaxed">
+                      {line}
                     </p>
-                    <p className="font-body text-xs text-deep-navy/60 dark:text-soft-white/60 leading-tight">{item.label}</p>
-                  </div>
-                ))}
-              </div>
-              <p className="font-body text-base text-deep-navy/70 dark:text-soft-white/70 leading-relaxed max-w-2xl">
-                ผ่านกระบวนการ UX ครบวงจรใน 5 สัปดาห์ ตั้งแต่การวิจัยผู้ใช้จริง จนถึง Prototype iOS ที่ผ่าน Usability Testing พร้อมสรุปผลและข้อเสนอแนะการพัฒนาต่อ
-              </p>
-            </FadeSection>
-          </>
+                  )}
+                </div>
+              );
+            })}
+          </div>
+        </FadeSection>
+
+        <div className="h-px bg-gradient-to-r from-transparent via-vinyl-dark/15 dark:via-soft-white/10 to-transparent" />
+
+        {/* ── 05 FULL GALLERY ── */}
+        {galleryImages.length > 0 && (
+          <FadeSection delay={0.05} className="py-14">
+            <SectionNumber n="05" />
+            <h2 className="font-display text-3xl md:text-4xl text-deep-navy dark:text-soft-white mb-6 -mt-2">
+              Visual Showcase & Gallery
+            </h2>
+            <GalleryGrid images={galleryImages} onOpen={openLightbox} />
+          </FadeSection>
         )}
 
-        {/* ── Project Info Footer ── */}
-        {isChaodom && (
-          <>
-            <div className="h-px bg-gradient-to-r from-transparent via-vinyl-dark/15 dark:via-soft-white/10 to-transparent" />
-            <FadeSection delay={0.05} className="py-10">
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div>
-                  <p className="font-body text-xs text-deep-navy/40 dark:text-deep-navy/40 dark:text-soft-white/40 uppercase tracking-widest mb-2">Role</p>
-                  <p className="font-body text-sm text-deep-navy/80 dark:text-soft-white/80">Head Figma Design, Usability Testing, Documentation</p>
-                </div>
-                <div>
-                  <p className="font-body text-xs text-deep-navy/40 dark:text-deep-navy/40 dark:text-soft-white/40 uppercase tracking-widest mb-2">Team</p>
-                  <p className="font-body text-sm text-deep-navy/80 dark:text-soft-white/80">4 members</p>
-                </div>
-                <div>
-                  <p className="font-body text-xs text-deep-navy/40 dark:text-deep-navy/40 dark:text-soft-white/40 uppercase tracking-widest mb-2">Tags</p>
-                  <div className="flex flex-wrap gap-2">
-                    {project.tags.map((tag) => (
-                      <span key={tag} className="px-3 py-1 rounded-full bg-vinyl-dark/5 dark:bg-soft-white/5 border border-vinyl-dark/15 dark:border-soft-white/10 font-body text-xs text-deep-navy/60 dark:text-soft-white/60">{tag}</span>
-                    ))}
-                  </div>
-                </div>
-              </div>
-              <div className="flex flex-wrap gap-3 mt-6">
-                <a
-                  href="https://www.figma.com/proto/2nTtYi87yFHnPVftJ8BNt6/EasyDom"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-sakura-pink/10 border border-sakura-pink/30 font-body text-sm text-magenta-deep dark:text-sakura-pink hover:bg-sakura-pink/20 transition-colors duration-200"
-                >
-                  Figma Prototype →
-                </a>
-                <a
-                  href="https://www.figma.com/board/JuVCLNLk0p9hTIH800cNDg/Experience-Map"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-neon-magenta/10 border border-neon-magenta/30 font-body text-sm text-neon-magenta hover:bg-neon-magenta/20 transition-colors duration-200"
-                >
-                  Experience Map →
-                </a>
-              </div>
-            </FadeSection>
-          </>
-        )}
-      </div>
-      )}
-
-      {/* ── Bottom Navigation ── */}
-      <div className="relative z-10 mx-auto max-w-5xl px-6 pb-16">
-        <ProjectNav projects={projects} currentIndex={currentIndex} />
+        {/* ── Prev / Next Navigation ── */}
+        <ProjectNav projects={projects} currentIndex={currentIndex >= 0 ? currentIndex : 0} />
       </div>
 
+      {/* ── Lightbox Modal ── */}
       <ImageLightbox
-        images={lightboxImages}
+        images={galleryImages}
         currentIndex={lightboxIndex}
         isOpen={lightboxOpen}
         onClose={() => setLightboxOpen(false)}
-        onNavigate={setLightboxIndex}
+        onNavigate={(newIndex) => setLightboxIndex(newIndex)}
       />
     </main>
   );

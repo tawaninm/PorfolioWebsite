@@ -19,6 +19,9 @@ export interface Project {
   phases?: ProjectPhase[];
   result: string;
   gallery: string[];
+  liveUrl?: string;
+  videoUrl?: string;
+  githubUrl?: string;
 }
 
 export const categoryLabels: Record<Project["category"], string> = {
@@ -426,6 +429,8 @@ export const projects: Project[] = [
       "/images/Project/Synchro/91.png",
       "/images/Project/Synchro/92.png",
     ],
+    liveUrl: "https://ganksterphy.github.io/Synchro/",
+    videoUrl: "https://www.youtube.com/watch?v=TF4fjew09xc",
   },
   {
     slug: "detect-cheat",
@@ -439,6 +444,24 @@ export const projects: Project[] = [
     summary: "โปรแกรมส่งเสริมทักษะการเรียนรู้เรื่อง พ.ร.บ. คอมพิวเตอร์ ปี 60 และกฎหมายการฉ้อโกงในรูปแบบเกม Chat Visual Novel 2D ส่งเข้าประกวดการแข่งขันพัฒนาโปรแกรมคอมพิวเตอร์แห่งประเทศไทย (NSC 24)",
     problem: "สื่อการเรียนรู้กฎหมายมักมีความน่าเบื่อ ทำให้เยาวชนไม่สนใจศึกษาจนตกเป็นเหยื่อของมิจฉาชีพทางไซเบอร์",
     process: "ค้นคว้าข้อมูลกฎหมาย พ.ร.บ. คอมพิวเตอร์ -> ออกแบบตัวละครและฉาก 2D -> พัฒนาระบบแชทสืบคดีและระบบเลือกทางแยก (Branching Storyline) -> ทดสอบและประเมินผลการเรียนรู้",
+    phases: [
+      {
+        title: "Research & Legal Framework",
+        description: "ค้นคว้าข้อมูลกฎหมาย พ.ร.บ. คอมพิวเตอร์ ปี 60 และรูปแบบกลโกงออนไลน์ที่พบบ่อยในชีวิตจริง (ซื้อขายออนไลน์, เว็บหาคู่, แอบอ้างรางวัล) เพื่อวางโครงเรื่องคดีความ",
+      },
+      {
+        title: "Character & Dialogue Flow Design",
+        description: "ออกแบบตัวละคร 2D และ flow การสนทนาสำหรับแต่ละคดี ให้มีความสมจริง ชวนติดตาม และสะท้อนกลเม็ดของมิจฉาชีพ",
+      },
+      {
+        title: "Unity Visual Novel Development",
+        description: "พัฒนาเกมใน Unity ในรูปแบบ interactive visual novel พร้อมระบบแชทสืบคดี การเลือกตอบ และการรวบรวมหลักฐานสำคัญ",
+      },
+      {
+        title: "Testing & NSC 24 Evaluation",
+        description: "ทดสอบและประเมินผลการเรียนรู้กับกลุ่มตัวอย่าง และส่งผลงานเข้าประกวดการแข่งขัน NSC 24",
+      },
+    ],
     result: "The Solution: เกม Interactive ที่ผู้เล่นต้องเลือกรวบรวมหลักฐานให้ครบเพื่อจับกุมมิจฉาชีพ\nImpact: กลุ่มตัวอย่างมีความรู้ความเข้าใจด้านกฎหมายเพิ่มขึ้นและมีความพึงพอใจในระดับมากที่สุด",
     gallery: [
       "/images/Project/%E0%B8%AA%E0%B8%B7%E0%B8%9A-%E0%B8%A5%E0%B9%88%E0%B8%B2-%E0%B9%82%E0%B8%81%E0%B8%87%20(DETEC-CHEAT)/previewDetectcheat.png",
@@ -461,6 +484,24 @@ export const projects: Project[] = [
     summary: "โปรแกรมสวมบทบาทการทำงานของตำรวจพิสูจน์หลักฐานและสืบสวน เพื่อสอบสวนหาความจริงโดยยึดหลักนิติธรรมและความเป็นธรรมแก่ผู้ต้องหา ส่งเข้าประกวดการแข่งขัน NSC 25",
     problem: "ปัญหามิจฉาทิฐิหรือการปฏิบัติที่ไม่เหมาะสมของเจ้าหน้าที่ต่อผู้ต้องหาในชีวิตจริง และการขาดความรู้ความเข้าใจเกี่ยวกับกระบวนการพิสูจน์หลักฐานทางนิติวิทยาศาสตร์",
     process: "เขียนบทคดีธุรกิจ -> ออกแบบตัวละคร 2D ใน Procreate -> พัฒนามินิเกม (ตรวจรอยนิ้วมือ, ตรวจกรุ๊ปเลือด) -> สรุปคดีและตัดสินผู้กระทำความผิดตามหลักฐาน",
+    phases: [
+      {
+        title: "Script & Investigative Architecture",
+        description: "ศึกษาแนวคิด investigative interview และบทบาทงานตำรวจ เขียนบทคดีธุรกิจที่มีความซับซ้อนและยึดหลักนิติธรรม",
+      },
+      {
+        title: "2D Character & Scene Art (Procreate)",
+        description: "ออกแบบตัวละครและงานภาพ 2D สไตล์การ์ตูนทั้งหมดใน Procreate ครอบคลุมทุกฉากและอารมณ์ของตัวละคร",
+      },
+      {
+        title: "Unity Mini-games & Forensic Engine",
+        description: "พัฒนา interactive visual novel ใน Unity พร้อม mini-games: ตรวจรอยนิ้วมือ, ตรวจเลือด, และระบบตรวจจับการโกหก",
+      },
+      {
+        title: "Ethics-Driven Conclusion System",
+        description: "ระบบสรุปผลคดีที่คำนวณจากการตัดสินใจของผู้เล่นตลอดเกม สะท้อนว่าการสืบสวนที่เป็นธรรมส่งผลต่อผลลัพธ์ของคดีอย่างไร",
+      },
+    ],
     result: "The Solution: สร้างเกมที่จำลองสถานการณ์ความกดดันในการทำคดี แต่เน้นให้ผู้เล่นยึดหลักจริยธรรมและวิทยาศาสตร์พิสูจน์หลักฐาน\nImpact: สร้างแรงบันดาลใจและให้ความรู้เกี่ยวกับการทำงานที่ถูกต้องในสายงานนิติวิทยาศาสตร์และตำรวจแก่เยาวชน",
     gallery: [
       "/images/Project/%E0%B8%AB%E0%B9%89%E0%B8%A7%E0%B8%87%E0%B8%A5%E0%B8%B6%E0%B8%81%E0%B8%A0%E0%B8%B2%E0%B8%A2%E0%B9%83%E0%B8%99%E0%B8%88%E0%B8%B4%E0%B8%95%E0%B9%83%E0%B8%88%20(Criminal%20Minds)/preview-gallery.png",
