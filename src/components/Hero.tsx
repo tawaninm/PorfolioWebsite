@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 import MagneticButton from "./MagneticButton";
 
 const Sparkles = dynamic(() => import("./Sparkles"), { ssr: false });
-const HeroDiorama = dynamic(() => import("./HeroDiorama"), { ssr: false });
+const CardFlipGallery = dynamic(() => import("./CardFlipGallery"), { ssr: false });
 
 /* ---- Comic decorative components ---- */
 
@@ -212,7 +212,7 @@ export default function Hero() {
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.7, delay: 0.8, ease: [0.16, 1, 0.3, 1] }}
         >
-          <HeroDiorama />
+          <CardFlipGallery />
         </motion.div>
 
       </div>

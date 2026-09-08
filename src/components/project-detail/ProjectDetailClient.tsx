@@ -61,16 +61,6 @@ function SectionNumber({ n, extra }: { n: string; extra?: React.ReactNode }) {
   );
 }
 
-/* ---- "!?" speech bubble ---- */
-function ImpactBubble() {
-  return (
-    <svg viewBox="0 0 52 32" width={52} height={32} aria-hidden="true" className="shrink-0">
-      <rect x="1" y="1" width="50" height="26" rx="6" fill="#FF2D78" opacity="0.18" stroke="#FF2D78" strokeWidth="1.5" strokeOpacity="0.6" />
-      <text x="26" y="19" textAnchor="middle" fontFamily="inherit" fontWeight="700" fontSize="14" fill="#FF2D78" opacity="0.9">!?</text>
-      <polygon points="10,27 18,27 12,32" fill="#FF2D78" opacity="0.6" />
-    </svg>
-  );
-}
 
 /* ---- Gallery grid with lightbox ---- */
 function GalleryGrid({
@@ -116,7 +106,6 @@ export default function ProjectDetailClient({ project }: { project: Project }) {
 
   const currentIndex = projects.findIndex((p) => p.slug === project.slug);
   const galleryImages = project.gallery ?? [];
-  const previewImages = galleryImages.slice(0, 2);
 
   function openLightbox(index: number) {
     setLightboxIndex(index);
@@ -276,41 +265,13 @@ export default function ProjectDetailClient({ project }: { project: Project }) {
           <p className="font-body text-base md:text-lg text-deep-navy/80 dark:text-soft-white/80 leading-relaxed">
             {project.summary}
           </p>
-
-          {/* Featured Preview Visuals */}
-          {previewImages.length > 0 && (
-            <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-4">
-              {previewImages.map((src, i) => (
-                <motion.button
-                  key={i}
-                  className="group relative aspect-video rounded-2xl overflow-hidden bg-deep-purple/30 border border-vinyl-dark/10 dark:border-soft-white/10 cursor-pointer focus:outline-none focus:ring-2 focus:ring-hot-pink/50"
-                  onClick={() => openLightbox(i)}
-                  whileHover={{ scale: 1.02 }}
-                  transition={{ duration: 0.3 }}
-                >
-                  <Image
-                    src={src}
-                    alt={`${project.title} preview ${i + 1}`}
-                    fill
-                    className="object-cover"
-                    sizes="(max-width: 768px) 100vw, 50vw"
-                  />
-                  <div className="absolute inset-0 bg-dark-navy/0 group-hover:bg-dark-navy/40 transition-colors duration-300 flex items-center justify-center">
-                    <span className="font-body text-xs text-soft-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-dark-navy/80 px-4 py-2 rounded-full backdrop-blur-sm">
-                      Preview Highlight ✦
-                    </span>
-                  </div>
-                </motion.button>
-              ))}
-            </div>
-          )}
         </FadeSection>
 
         <div className="h-px bg-gradient-to-r from-transparent via-vinyl-dark/15 dark:via-soft-white/10 to-transparent" />
 
         {/* ── 02 THE PROBLEM ── */}
         <FadeSection delay={0.05} className="py-14">
-          <SectionNumber n="02" extra={<ImpactBubble />} />
+          <SectionNumber n="02" extra={<span className="font-display text-sm text-hot-pink font-bold">!?</span>} />
           <h2 className="font-display text-3xl md:text-4xl text-deep-navy dark:text-soft-white mb-6 -mt-2">
             The Problem & Challenge
           </h2>
@@ -418,7 +379,7 @@ export default function ProjectDetailClient({ project }: { project: Project }) {
         currentIndex={lightboxIndex}
         isOpen={lightboxOpen}
         onClose={() => setLightboxOpen(false)}
-        onNavigate={(newIndex) => setLightboxIndex(newIndex)}
+        onNavigate={setLightboxIndex}
       />
     </main>
   );
