@@ -7,7 +7,7 @@ import { FiMapPin, FiMail, FiPhone, FiGlobe, FiDownload, FiLinkedin, FiGithub } 
 /* ─────────────────────────────────────────
    DATA
 ───────────────────────────────────────── */
-const RESUME_DRIVE_URL = "https://drive.google.com/file/d/1ePtzO5ga6NPKyPydqEsmZ0iugoXEQRLt/view?usp=sharing";
+const RESUME_DRIVE_URL = "https://drive.google.com/file/d/1oht2wjo-ojsd8lqC1lw3AzNgE6sb2uI8/view?usp=sharing";
 
 const stats = [
   { label: "AI & Auto", pct: 85, from: "#FF2D78", to: "#F06848" },
@@ -310,13 +310,12 @@ export default function ResumePage() {
   return (
     <main className="relative min-h-screen pt-28 pb-32 px-4 md:px-6 bg-soft-white dark:bg-dark-navy transition-colors duration-300 print:pt-6 print:pb-6 print:bg-white">
 
-      {/* Download button — downloads latest 2-Page Executive Resume PDF directly */}
+      {/* Download button — links to Google Drive */}
       <a
-        href="/CV_Thanatpat_LINE_Strategy_2Page.pdf"
-        download="CV_Thanatpat_LINE_Strategy_2Page.pdf"
+        href={RESUME_DRIVE_URL}
         target="_blank"
         rel="noopener noreferrer"
-        aria-label="Download Resume PDF"
+        aria-label="Download Resume from Google Drive"
         className="print:hidden fixed bottom-28 md:bottom-32 right-6 md:right-8 z-50 w-14 h-14 rounded-full bg-hot-pink flex items-center justify-center text-soft-white shadow-[0_0_24px_rgba(255,96,144,0.6)] hover:shadow-[0_0_36px_rgba(255,96,144,0.8)] hover:-translate-y-1 transition-all duration-300"
       >
         <FiDownload size={22} />
