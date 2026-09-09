@@ -106,6 +106,8 @@ export default function ProjectDetailClient({ project }: { project: Project }) {
 
   const currentIndex = projects.findIndex((p) => p.slug === project.slug);
   const galleryImages = project.gallery ?? [];
+  const sectionImages = (project.sections || []).map((s) => s.image).filter(Boolean) as string[];
+  const allLightboxImages = Array.from(new Set([...galleryImages, ...sectionImages]));
 
   function openLightbox(index: number) {
     setLightboxIndex(index);
@@ -113,7 +115,7 @@ export default function ProjectDetailClient({ project }: { project: Project }) {
   }
 
   // Parse result into Solution and Impact lines
-  const resultLines = project.result.split("\n").filter(Boolean);
+  const resultLines = (project.result || "").split("\n").filter(Boolean);
 
   return (
     <main className="relative min-h-screen bg-soft-white dark:bg-dark-navy overflow-hidden">
@@ -249,114 +251,256 @@ export default function ProjectDetailClient({ project }: { project: Project }) {
             </span>
           ))}
         </div>
+
+        {/* Bento Metrics Bar */}
+        {project.highlights && project.highlights.length > 0 && (
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mt-6">
+            {project.highlights.map((item, idx) => (
+              <div
+                key={idx}
+                className="p-4 rounded-xl bg-vinyl-dark/5 dark:bg-soft-white/5 border border-vinyl-dark/10 dark:border-soft-white/10 hover:border-hot-pink/30 transition-all duration-300"
+              >
+                <span className="font-mono text-[10px] md:text-xs uppercase tracking-wider text-deep-navy/60 dark:text-soft-white/60 block mb-1">
+                  {item.label}
+                </span>
+                <span className="font-display text-lg md:text-2xl text-neon-magenta font-bold block leading-tight">
+                  {item.value}
+                </span>
+                {item.detail && (
+                  <span className="font-body text-xs text-deep-navy/60 dark:text-soft-white/60 block mt-1">
+                    {item.detail}
+                  </span>
+                )}
+              </div>
+            ))}
+          </div>
+        )}
       </FadeSection>
 
       <div className="mx-auto max-w-5xl px-6 mt-8">
         <div className="h-px bg-gradient-to-r from-transparent via-vinyl-dark/15 dark:via-soft-white/10 to-transparent" />
       </div>
 
-      {/* ── 01 OVERVIEW ── */}
+      {/* ── MAIN CONTENT SECTIONS (DYNAMIC OR FALLBACK) ── */}
       <div className="relative z-10 mx-auto max-w-5xl px-6">
-        <FadeSection delay={0} className="py-14">
-          <SectionNumber n="01" />
-          <h2 className="font-display text-3xl md:text-4xl text-deep-navy dark:text-soft-white mb-6 -mt-2">
-            Project Overview
-          </h2>
-          <p className="font-body text-base md:text-lg text-deep-navy/80 dark:text-soft-white/80 leading-relaxed">
-            {project.summary}
-          </p>
-        </FadeSection>
-
-        <div className="h-px bg-gradient-to-r from-transparent via-vinyl-dark/15 dark:via-soft-white/10 to-transparent" />
-
-        {/* ── 02 THE PROBLEM ── */}
-        <FadeSection delay={0.05} className="py-14">
-          <SectionNumber n="02" extra={<span className="font-display text-sm text-hot-pink font-bold">!?</span>} />
-          <h2 className="font-display text-3xl md:text-4xl text-deep-navy dark:text-soft-white mb-6 -mt-2">
-            The Problem & Challenge
-          </h2>
-          <div className="p-6 md:p-8 rounded-2xl bg-gradient-to-br from-soft-white/80 to-sakura-pink/10 dark:from-deep-purple/30 dark:to-vinyl-dark/50 border border-sakura-pink/20 dark:border-soft-white/10 shadow-sm">
-            <p className="font-body text-base md:text-lg text-deep-navy/80 dark:text-soft-white/80 leading-relaxed">
-              {project.problem}
-            </p>
-          </div>
-        </FadeSection>
-
-        <div className="h-px bg-gradient-to-r from-transparent via-vinyl-dark/15 dark:via-soft-white/10 to-transparent" />
-
-        {/* ── 03 PROCESS & ARCHITECTURE ── */}
-        <FadeSection delay={0.05} className="py-14">
-          <SectionNumber n="03" />
-          <h2 className="font-display text-3xl md:text-4xl text-deep-navy dark:text-soft-white mb-6 -mt-2">
-            Process & Architecture
-          </h2>
-          <p className="font-body text-base md:text-lg text-deep-navy/80 dark:text-soft-white/80 leading-relaxed mb-8">
-            {project.process}
-          </p>
-
-          {/* Detailed Phases */}
-          {project.phases && project.phases.length > 0 && (
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6">
-              {project.phases.map((phase, idx) => (
-                <div
-                  key={idx}
-                  className="p-6 rounded-2xl bg-vinyl-dark/5 dark:bg-soft-white/5 border border-vinyl-dark/10 dark:border-soft-white/10 transition-all duration-300 hover:-translate-y-1 hover:border-hot-pink/30"
-                >
-                  <span className="font-mono text-xs font-bold text-neon-magenta tracking-widest block mb-2">
-                    PHASE {String(idx + 1).padStart(2, "0")}
-                  </span>
-                  <h3 className="font-display text-lg text-deep-navy dark:text-soft-white mb-2">
-                    {phase.title}
-                  </h3>
-                  <p className="font-body text-sm text-deep-navy/70 dark:text-soft-white/70 leading-relaxed">
-                    {phase.description}
-                  </p>
-                </div>
-              ))}
-            </div>
-          )}
-        </FadeSection>
-
-        <div className="h-px bg-gradient-to-r from-transparent via-vinyl-dark/15 dark:via-soft-white/10 to-transparent" />
-
-        {/* ── 04 THE SOLUTION & RESULTS ── */}
-        <FadeSection delay={0.05} className="py-14">
-          <SectionNumber n="04" />
-          <h2 className="font-display text-3xl md:text-4xl text-deep-navy dark:text-soft-white mb-6 -mt-2">
-            The Solution & Results
-          </h2>
-          <div className="space-y-4">
-            {resultLines.map((line, idx) => {
-              const colonIndex = line.indexOf(":");
-              const hasColon = colonIndex !== -1;
-              const prefix = hasColon ? line.slice(0, colonIndex).trim() : "";
-              const rest = hasColon ? line.slice(colonIndex + 1).trim() : line.trim();
-              return (
-                <div
-                  key={idx}
-                  className="p-5 md:p-6 rounded-xl bg-vinyl-dark/5 dark:bg-soft-white/5 border-l-4 border-l-neon-magenta border-vinyl-dark/10 dark:border-soft-white/10"
-                >
-                  {hasColon ? (
-                    <>
-                      <span className="font-display text-base text-neon-magenta block mb-1">
-                        {prefix}
-                      </span>
-                      <p className="font-body text-base text-deep-navy/80 dark:text-soft-white/80 leading-relaxed">
-                        {rest}
-                      </p>
-                    </>
-                  ) : (
-                    <p className="font-body text-base text-deep-navy/80 dark:text-soft-white/80 leading-relaxed">
-                      {line}
+        {project.sections && project.sections.length > 0 ? (
+          project.sections.map((section, sIdx) => {
+            const badgeText = section.badge || String(sIdx + 1).padStart(2, "0");
+            const numPart = badgeText.split(" ")[0];
+            const restBadge = badgeText.includes(" ") ? badgeText.slice(badgeText.indexOf(" ") + 1) : null;
+            return (
+              <div key={sIdx}>
+                <FadeSection delay={0.05} className="py-14">
+                  <SectionNumber
+                    n={numPart}
+                    extra={
+                      restBadge ? (
+                        <span className="font-mono text-xs font-bold uppercase tracking-widest text-neon-magenta px-3 py-1 rounded-full bg-neon-magenta/10 border border-neon-magenta/30">
+                          {restBadge}
+                        </span>
+                      ) : undefined
+                    }
+                  />
+                  <h2 className="font-display text-3xl md:text-4xl text-deep-navy dark:text-soft-white mb-2 -mt-2">
+                    {section.title}
+                  </h2>
+                  {section.subtitle && (
+                    <p className="font-body text-sm md:text-base text-neon-magenta dark:text-lilac-bright font-medium mb-6">
+                      {section.subtitle}
                     </p>
                   )}
-                </div>
-              );
-            })}
-          </div>
-        </FadeSection>
 
-        <div className="h-px bg-gradient-to-r from-transparent via-vinyl-dark/15 dark:via-soft-white/10 to-transparent" />
+                  {section.content && (
+                    <div className="prose dark:prose-invert max-w-none mb-6 font-body text-base md:text-lg text-deep-navy/80 dark:text-soft-white/80 leading-relaxed whitespace-pre-line">
+                      {section.content}
+                    </div>
+                  )}
+
+                  {/* Embedded Context Image */}
+                  {section.image && (
+                    <div className="my-8 overflow-hidden rounded-2xl border border-vinyl-dark/15 dark:border-soft-white/10 bg-deep-purple/30 group">
+                      <div
+                        className="relative aspect-video md:aspect-[21/9] w-full cursor-pointer overflow-hidden"
+                        onClick={() => {
+                          const idx = allLightboxImages.indexOf(section.image!);
+                          if (idx !== -1) openLightbox(idx);
+                        }}
+                      >
+                        <Image
+                          src={section.image}
+                          alt={section.imageCaption || section.title}
+                          fill
+                          className="object-cover object-top hover:scale-[1.01] transition-transform duration-500"
+                          sizes="(max-width: 1200px) 100vw, 1200px"
+                        />
+                        <div className="absolute inset-0 bg-hot-pink/0 group-hover:bg-hot-pink/10 transition-colors duration-300 flex items-center justify-center pointer-events-none">
+                          <span className="font-body text-xs text-soft-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-dark-navy/70 px-4 py-2 rounded-full backdrop-blur-sm">
+                            View Image ✦
+                          </span>
+                        </div>
+                      </div>
+                      {section.imageCaption && (
+                        <div className="p-3 md:p-4 bg-vinyl-dark/5 dark:bg-soft-white/5 border-t border-vinyl-dark/10 dark:border-soft-white/10 flex items-center justify-between text-xs text-deep-navy/70 dark:text-soft-white/70">
+                          <span>✦ {section.imageCaption}</span>
+                          <span className="font-mono text-[10px] uppercase text-neon-magenta">Screenshot</span>
+                        </div>
+                      )}
+                    </div>
+                  )}
+
+                  {/* Items breakdown (grid or cards) */}
+                  {section.items && section.items.length > 0 && (
+                    <div
+                      className={`grid gap-4 mt-6 ${
+                        section.type === "cards"
+                          ? "grid-cols-1 md:grid-cols-3"
+                          : "grid-cols-1 md:grid-cols-2"
+                      }`}
+                    >
+                      {section.items.map((item, idx) => (
+                        <div
+                          key={idx}
+                          className="p-6 rounded-2xl bg-vinyl-dark/5 dark:bg-soft-white/5 border border-vinyl-dark/10 dark:border-soft-white/10 transition-all duration-300 hover:-translate-y-1 hover:border-hot-pink/30 flex flex-col justify-between"
+                        >
+                          <div>
+                            <div className="flex items-center justify-between gap-2 mb-2">
+                              {item.tag && (
+                                <span className="font-mono text-[10px] font-bold uppercase tracking-wider text-neon-magenta px-2.5 py-0.5 rounded-full bg-neon-magenta/10 border border-neon-magenta/20">
+                                  {item.tag}
+                                </span>
+                              )}
+                              {item.metrics && (
+                                <span className="font-mono text-xs font-bold text-electric-blue dark:text-sky-cyan">
+                                  {item.metrics}
+                                </span>
+                              )}
+                            </div>
+                            <h3 className="font-display text-lg text-deep-navy dark:text-soft-white mb-1">
+                              {item.title}
+                            </h3>
+                            {item.subtitle && (
+                              <p className="font-body text-xs text-neon-magenta/80 dark:text-lilac-bright/80 font-medium mb-2">
+                                {item.subtitle}
+                              </p>
+                            )}
+                            <p className="font-body text-sm text-deep-navy/70 dark:text-soft-white/70 leading-relaxed whitespace-pre-line">
+                              {item.description}
+                            </p>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                </FadeSection>
+                <div className="h-px bg-gradient-to-r from-transparent via-vinyl-dark/15 dark:via-soft-white/10 to-transparent" />
+              </div>
+            );
+          })
+        ) : (
+          <>
+            {/* ── 01 OVERVIEW ── */}
+            <FadeSection delay={0} className="py-14">
+              <SectionNumber n="01" />
+              <h2 className="font-display text-3xl md:text-4xl text-deep-navy dark:text-soft-white mb-6 -mt-2">
+                Project Overview
+              </h2>
+              <p className="font-body text-base md:text-lg text-deep-navy/80 dark:text-soft-white/80 leading-relaxed">
+                {project.summary}
+              </p>
+            </FadeSection>
+
+            <div className="h-px bg-gradient-to-r from-transparent via-vinyl-dark/15 dark:via-soft-white/10 to-transparent" />
+
+            {/* ── 02 THE PROBLEM ── */}
+            <FadeSection delay={0.05} className="py-14">
+              <SectionNumber n="02" extra={<span className="font-display text-sm text-hot-pink font-bold">!?</span>} />
+              <h2 className="font-display text-3xl md:text-4xl text-deep-navy dark:text-soft-white mb-6 -mt-2">
+                The Problem & Challenge
+              </h2>
+              <div className="p-6 md:p-8 rounded-2xl bg-gradient-to-br from-soft-white/80 to-sakura-pink/10 dark:from-deep-purple/30 dark:to-vinyl-dark/50 border border-sakura-pink/20 dark:border-soft-white/10 shadow-sm">
+                <p className="font-body text-base md:text-lg text-deep-navy/80 dark:text-soft-white/80 leading-relaxed">
+                  {project.problem}
+                </p>
+              </div>
+            </FadeSection>
+
+            <div className="h-px bg-gradient-to-r from-transparent via-vinyl-dark/15 dark:via-soft-white/10 to-transparent" />
+
+            {/* ── 03 PROCESS & ARCHITECTURE ── */}
+            <FadeSection delay={0.05} className="py-14">
+              <SectionNumber n="03" />
+              <h2 className="font-display text-3xl md:text-4xl text-deep-navy dark:text-soft-white mb-6 -mt-2">
+                Process & Architecture
+              </h2>
+              <p className="font-body text-base md:text-lg text-deep-navy/80 dark:text-soft-white/80 leading-relaxed mb-8">
+                {project.process}
+              </p>
+
+              {/* Detailed Phases */}
+              {project.phases && project.phases.length > 0 && (
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6">
+                  {project.phases.map((phase, idx) => (
+                    <div
+                      key={idx}
+                      className="p-6 rounded-2xl bg-vinyl-dark/5 dark:bg-soft-white/5 border border-vinyl-dark/10 dark:border-soft-white/10 transition-all duration-300 hover:-translate-y-1 hover:border-hot-pink/30"
+                    >
+                      <span className="font-mono text-xs font-bold text-neon-magenta tracking-widest block mb-2">
+                        PHASE {String(idx + 1).padStart(2, "0")}
+                      </span>
+                      <h3 className="font-display text-lg text-deep-navy dark:text-soft-white mb-2">
+                        {phase.title}
+                      </h3>
+                      <p className="font-body text-sm text-deep-navy/70 dark:text-soft-white/70 leading-relaxed">
+                        {phase.description}
+                      </p>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </FadeSection>
+
+            <div className="h-px bg-gradient-to-r from-transparent via-vinyl-dark/15 dark:via-soft-white/10 to-transparent" />
+
+            {/* ── 04 THE SOLUTION & RESULTS ── */}
+            <FadeSection delay={0.05} className="py-14">
+              <SectionNumber n="04" />
+              <h2 className="font-display text-3xl md:text-4xl text-deep-navy dark:text-soft-white mb-6 -mt-2">
+                The Solution & Results
+              </h2>
+              <div className="space-y-4">
+                {resultLines.map((line, idx) => {
+                  const colonIndex = line.indexOf(":");
+                  const hasColon = colonIndex !== -1;
+                  const prefix = hasColon ? line.slice(0, colonIndex).trim() : "";
+                  const rest = hasColon ? line.slice(colonIndex + 1).trim() : line.trim();
+                  return (
+                    <div
+                      key={idx}
+                      className="p-5 md:p-6 rounded-xl bg-vinyl-dark/5 dark:bg-soft-white/5 border-l-4 border-l-neon-magenta border-vinyl-dark/10 dark:border-soft-white/10"
+                    >
+                      {hasColon ? (
+                        <>
+                          <span className="font-display text-base text-neon-magenta block mb-1">
+                            {prefix}
+                          </span>
+                          <p className="font-body text-base text-deep-navy/80 dark:text-soft-white/80 leading-relaxed">
+                            {rest}
+                          </p>
+                        </>
+                      ) : (
+                        <p className="font-body text-base text-deep-navy/80 dark:text-soft-white/80 leading-relaxed">
+                          {line}
+                        </p>
+                      )}
+                    </div>
+                  );
+                })}
+              </div>
+            </FadeSection>
+
+            <div className="h-px bg-gradient-to-r from-transparent via-vinyl-dark/15 dark:via-soft-white/10 to-transparent" />
+          </>
+        )}
 
         {/* ── 05 FULL GALLERY ── */}
         {galleryImages.length > 0 && (
@@ -375,7 +519,7 @@ export default function ProjectDetailClient({ project }: { project: Project }) {
 
       {/* ── Lightbox Modal ── */}
       <ImageLightbox
-        images={galleryImages}
+        images={allLightboxImages}
         currentIndex={lightboxIndex}
         isOpen={lightboxOpen}
         onClose={() => setLightboxOpen(false)}

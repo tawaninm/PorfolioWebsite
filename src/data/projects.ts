@@ -4,6 +4,33 @@ export interface ProjectPhase {
   description: string;
 }
 
+export interface ProjectHighlight {
+  label: string;
+  value: string;
+  detail?: string;
+}
+
+export interface ProjectSectionItem {
+  title: string;
+  subtitle?: string;
+  description: string;
+  tag?: string;
+  image?: string;
+  metrics?: string;
+}
+
+export interface ProjectSection {
+  badge?: string;
+  title: string;
+  subtitle?: string;
+  content?: string;
+  type?: "text" | "callout" | "grid" | "cards" | "key-values" | "image-banner" | "quote";
+  quoteAuthor?: string;
+  items?: ProjectSectionItem[];
+  image?: string;
+  imageCaption?: string;
+}
+
 export interface Project {
   slug: string;
   title: string;
@@ -17,11 +44,13 @@ export interface Project {
   problem: string;
   process: string;
   phases?: ProjectPhase[];
-  result: string;
+  result?: string;
   gallery: string[];
   liveUrl?: string;
   videoUrl?: string;
   githubUrl?: string;
+  highlights?: ProjectHighlight[];
+  sections?: ProjectSection[];
 }
 
 export const categoryLabels: Record<Project["category"], string> = {
@@ -44,36 +73,169 @@ export const projects: Project[] = [
     summary: "โครงงานวิชา Cloud Computing (1/2569) คณะเทคโนโลยีสารสนเทศ สจล. (KMITL) พัฒนาแพลตฟอร์มการเล่นการ์ดเกมออนไลน์แบบมัลติเพลเยอร์เรียลไทม์บนสถาปัตยกรรม AWS Serverless เต็มรูปแบบ ด้วยต้นทุนค่าเซิร์ฟเวอร์ $0.00 (AWS Free Tier Optimized) เชื่อมต่อผู้เล่น 2 ฝั่งด้วย API Gateway WebSocket (<100ms latency), สุ่มเปิดซองการ์ดด้วย Fisher-Yates Randomization Engine จากฐานข้อมูลการ์ดทางการ 3,129 ใบ (Set 1 & 2 ครบทั้ง 9 ระดับ Rarity), จำลองฟิสิกส์การฉีกซองและการพลิกการ์ด 3D พร้อมชุดทดสอบความปลอดภัยตามกรอบ OWASP Top 10 และ Playwright E2E Automation",
     problem: "โปรแกรมจำลองการ์ดเกม TCG บนเว็บส่วนใหญ่มี UI ที่เทอะทะ ขาดความลื่นไหลบนมือถือ/แท็บเล็ต, ขาดมิติทางกายภาพของการเล่นการ์ดจริง (เช่น การฉีกซอง Booster, การพลิกการ์ด 3D, แสงสะท้อน Foil) และมักใช้เซิร์ฟเวอร์แบบเดิมที่มีค่าใช้จ่ายรายเดือนสูง โจทย์หลักคือการสร้างระบบ Real-time State Sync บน Cloud ที่มี Latency ต่ำกว่า 100ms โดยไม่มีค่าใช้จ่ายเซิร์ฟเวอร์ ($0.00) และรองรับการ Reconnect อัตโนมัติเมื่อเกิดปัญหาสัญญาณเน็ตหลุด",
     process: "วางสถาปัตยกรรม Event-driven WebSocket Router ($connect, sendAction, $disconnect) -> ออกแบบ DynamoDB Single-Table State Storage -> สร้าง Hexagonal Architecture พร้อม Client-side In-memory Fallback Database (FALLBACK_DATABASE) สำหรับการทำงาน Offline -> พัฒนาระบบสุ่มการ์ด Fisher-Yates 100% True Randomization จากการ์ด 3,129 ใบ -> ออกแบบฟิสิกส์ฉีกซองและพลิกการ์ด 3D ด้วย Framer Motion & CSS 3D Transforms -> เขียน Master QA Test Suite และรัน Playwright E2E Automation ตรวจสอบความปลอดภัยตาม OWASP",
-    phases: [
-      {
-        title: "AWS Serverless & Event-Driven WebSocket Router",
-        description: "ออกแบบระบบสื่อสารสองทาง (<100ms latency) ผ่าน AWS API Gateway WebSocket เชื่อมต่อกับ Lambda Actions Router และ DynamoDB Single-Table Schema จัดเก็บ Room State, Turn Phase, Inks, Lore Count, และ Connection ID แบบ Pay-per-request"
-      },
-      {
-        title: "Deep Modules & Hexagonal Offline Failover",
-        description: "ออกแบบ Core Domain Logic แยกขาดจากโครงสร้างพื้นฐานภายนอก พร้อมระบบ FALLBACK_DATABASE ในตัว หาก AWS Services ขัดข้อง ระบบจะสลับไปรันบน Client-side Repository ทันทีโดยหน้าเว็บไม่เกิด Runtime Crash"
-      },
-      {
-        title: "Fisher-Yates Booster Pack Gacha Engine (3,129 Cards)",
-        description: "พัฒนาระบบสุ่มเปิดซองการ์ดแบบ Unbiased Fisher-Yates Shuffle จากคลังการ์ดทางการ Set 1 และ Set 2 รวม 3,129 ใบ ครอบคลุม 9 ระดับ Rarity (Common, Uncommon, Rare, Super Rare, Epic, Legendary, Enchanted Secret Art, Iconic, Special)"
-      },
-      {
-        title: "Luxury 3D Card Physics, Master QA & OWASP Hardening",
-        description: "พัฒนา UI ธีม Dark Obsidian Slate & Amber Gold Foil (#070A10 + #F59E0B) พร้อมฟิสิกส์ฉีกซองและหมุนการ์ด 180° แบบ 2-Step Tap/Swipe, แก้ปัญหา Ravensburger CDN Hotlink ด้วย referrerPolicy='no-referrer' และทดสอบ E2E ด้วย Playwright"
-      }
-    ],
     result: "The Solution: แพลตฟอร์มการ์ดเกมบน Cloud สถาปัตยกรรม Serverless ที่เปิดให้ผู้เล่นจัดเด็ค เปิดซอง และดวลการ์ดแบบเรียลไทม์ได้อย่างลื่นไหล พร้อมระบบ Fallback Failsafe\nImpact: ค่าใช้จ่าย Server Cost คงที่อยู่ที่ $0.00 บน AWS Free Tier, ผ่านการทดสอบ Automated E2E Test ครอบคลุมทุก Action การเล่น และระบบ Reconnect คืนสถานะเกมได้ 100%",
+    highlights: [
+      { label: "Server Cost", value: "$0.00", detail: "AWS Free Tier optimized architecture" },
+      { label: "WebSocket Latency", value: "<100ms", detail: "API Gateway bidirectional event routing" },
+      { label: "Card Database", value: "3,129 Cards", detail: "Set 1 & 2 across 9 distinct rarities" },
+      { label: "E2E Test Pass Rate", value: "100%", detail: "Playwright automated end-to-end suites" },
+    ],
+    sections: [
+      {
+        badge: "01 CLOUD ARCHITECTURE",
+        title: "Event-Driven Serverless WebSocket Router (<100ms)",
+        subtitle: "สถาปัตยกรรมคลาวด์แบบ Serverless 100% เชื่อมต่อสองทางระหว่างผู้เล่นผ่าน AWS API Gateway และ DynamoDB",
+        content: "ระบบถูกออกแบบบนแนวคิด Event-driven Architecture โดยใช้ AWS API Gateway WebSockets ทำหน้าที่เป็นสถานีรับส่งข้อมูล ($connect, sendAction, $disconnect) ส่ง Event ไปประมวลผลยัง AWS Lambda Router เพื่ออัปเดต Turn Phase, Lore Count, และ Inkwell Pool\n\nข้อมูลสถานะการเล่นทั้งหมดถูกจัดเก็บบน Amazon DynamoDB ด้วยแนวคิด Single-Table Design (Partition Key: ROOM#<id>, Sort Key: STATE#latest) ซึ่งช่วยลด Database Overhead มี Latency ในการอ่านเขียนต่ำกว่า 15ms และทำงานแบบ Pay-per-request ทำให้ค่าใช้จ่ายคงที่อยู่ที่ $0.00 ตลอดการทดสอบบน AWS Free Tier",
+        image: "/images/Project/Lorcana/aws_serverless_architecture.png",
+        imageCaption: "ไดอะแกรมสถาปัตยกรรม AWS Serverless WebSocket Router และ DynamoDB Single-Table State Synchronization",
+        type: "cards",
+        items: [
+          {
+            tag: "AWS API GATEWAY",
+            title: "Bidirectional WebSocket",
+            subtitle: "Latency < 100ms",
+            description: "จัดการ persistent connection ของผู้เล่น 2 ฝั่ง รองรับ payload JSON ขนาดกะทัดรัด และบรอดแคสต์สถานะการร่ายการ์ดและการท้าประลองทันที",
+          },
+          {
+            tag: "DYNAMODB",
+            title: "Single-Table State Schema",
+            subtitle: "Zero Schema Migration",
+            description: "จัดเก็บ Room Metadata, Player 1/2 Decks, Active Inkwell, และ Game Logs ไว้ในตารางเดียวโดยใช้ Composite Keys เพื่อความเร็วสูงสุด",
+          },
+          {
+            tag: "AWS LAMBDA",
+            title: "Action-Driven Handlers",
+            subtitle: "Cold Start < 250ms",
+            description: "แยกฟังก์ชันย่อยตาม Action (Draw, Ink, Quest, Challenge) พร้อมประมวลผลกฎกติกาการ์ดตาม official rulebook ของ Disney Lorcana",
+          },
+          {
+            tag: "COST GUARDRAIL",
+            title: "$0.00 Serverless Cost",
+            subtitle: "AWS Free Tier Budget",
+            description: "ปรับจูนขนาด Memory ของ Lambda และตั้ง Time-to-Live (TTL) 24 ชั่วโมงใน DynamoDB เพื่อลบห้องร้างอัตโนมัติ ไม่ก่อให้เกิดค่าใช้จ่ายค้าง",
+          },
+        ],
+      },
+      {
+        badge: "02 FAULT TOLERANCE",
+        title: "Zero-Crash Hexagonal Architecture & In-Memory Failover",
+        subtitle: "สถาปัตยกรรมแบบ Ports & Adapters ที่ทำงานได้ต่อเนื่องแม้ระบบคลาวด์หรือสัญญาณเน็ตภายนอกจะขาดหาย",
+        content: "เพื่อป้องกันปัญหาหน้าเว็บค้างหรือ Crash เมื่อผู้เล่นเจอปัญหาสัญญาณเน็ตกระตุก (Offline Network Blips) โครงสร้างโค้ดฝั่ง Client จึงถูกพัฒนาตามหลัก Hexagonal Architecture แยก Core Domain Logic (กฎการเล่น, Phase Transitions, Damage Counters) ออกจาก Infrastructure Layer\n\nหากระบบตรวจพบว่าการเชื่อมต่อ AWS WebSocket ขัดข้อง ระบบจะสลับไปใช้ `FALLBACK_DATABASE` (In-memory Client Repository) โดยอัตโนมัติ ผู้เล่นยังคงสามารถจำลองการเล่นต่อได้ และเมื่อสัญญาณกลับมา ระบบจะทำ State Re-sync คืนค่าลงคลาวด์ได้อย่างปลอดภัย 100%",
+        image: "/images/Project/Lorcana/aws_fallback_strategy.png",
+        imageCaption: "ยุทธศาสตร์ Hexagonal Architecture และ In-Memory Fallback Database ป้องกันการล่มของระบบ",
+        type: "grid",
+        items: [
+          {
+            tag: "PORT & ADAPTER",
+            title: "Decoupled Domain Engine",
+            subtitle: "ไร้การพึ่งพาภายนอก",
+            description: "กฎการเล่นและ State Machine ถูกเขียนด้วย Pure TypeScript ไม่ผูกมัดกับ Framework หรือ Third-party API ใดๆ",
+          },
+          {
+            tag: "FAILOVER",
+            title: "In-Memory FALLBACK_DATABASE",
+            subtitle: "Zero Runtime Freeze",
+            description: "จำลอง Local State Memory ทันทีที่ WebSocket Disconnect เกิดขึ้น ผู้เล่นสามารถเล่นต่อเนื่องได้โดยไม่พบหน้าจอ Error",
+          },
+          {
+            tag: "RESILIENCE",
+            title: "Reconnection Handshake",
+            subtitle: "Auto State Resync",
+            description: "เมื่อกลับมาออนไลน์ ระบบจะส่ง Connection ID ใหม่ไป Match กับ Session Token เดิมใน DynamoDB เพื่อดึงกระดานล่าสุดกลับมา",
+          },
+          {
+            tag: "TELEMETRY",
+            title: "Client-Side Health Check",
+            subtitle: "Visual Latency Ping",
+            description: "มีตัววัด Ping Latency แบบ Real-time ที่มุมจอ พร้อมไฟสถานะเขียว/ส้ม/แดง เพื่อแจ้งเตือนสภาพเน็ตของผู้เล่นทั้งสองฝั่ง",
+          },
+        ],
+      },
+      {
+        badge: "03 CARD & GACHA ENGINE",
+        title: "3,129-Card Fisher-Yates Shuffle & 3D Physical Tearing",
+        subtitle: "ระบบสุ่มการ์ดที่ไร้อคติทางสถิติ พร้อมการจำลองสัมผัสทางกายภาพของการเปิดซองการ์ดจริง",
+        content: "หัวใจสำคัญของเกม TCG คือความรู้สึกตื่นเต้นของการเปิดซองการ์ด (Booster Pack Opening) ระบบได้รวบรวมข้อมูลการ์ดทางการครบทั้ง Set 1 (The First Chapter) และ Set 2 (Rise of the Floodborn) รวม 3,129 ใบ ครอบคลุม 9 ระดับ Rarity (ตั้งแต่ Common ไปจนถึง Enchanted Secret Art ที่มีอัตราดรอปต่ำกว่า 1%)\n\nระบบสุ่มใช้อัลกอริทึม Fisher-Yates Shuffle ร่วมกับ Crypto-grade PRNG เพื่อการันตีความยุติธรรม 100% ควบคู่กับการพัฒนาฟิสิกส์ 3D ด้วย Framer Motion & CSS 3D Transforms จำลองการใช้นิ้วเลื่อนฉีกซอง และการแตะพลิกการ์ด 180° พร้อมประกายแสงสะท้อน Foil Shimmer",
+        image: "/images/Project/Lorcana/CardGachaDisney.png",
+        imageCaption: "หน้าจำลองการสุ่มเปิดซองการ์ด Disney Lorcana Booster Pack พร้อมระบบคำนวณ Rarity และแสงสะท้อน 3D",
+        type: "cards",
+        items: [
+          {
+            tag: "ALGORITHM",
+            title: "Fisher-Yates 100% Unbiased",
+            subtitle: "สุ่มแบบไร้อคติ",
+            description: "อัลกอริทึมสลับตำแหน่งการ์ดแบบสุ่มแท้ ป้องกันปัญหาการ์ดซ้ำซ้อนหรือติดลูปการสุ่มแบบ Pseudo Random ทั่วไป",
+          },
+          {
+            tag: "PHYSICS",
+            title: "2-Step Swipe & 3D Flip",
+            subtitle: "CSS 3D Transforms",
+            description: "ผู้เล่นลากนิ้วฉีกซองด้านบนเพื่อเผยการ์ดด้านใน จากนั้นแตะการ์ดแต่ละใบเพื่อพลิก 180° พร้อมเสียงและประกายแสงตามระดับความหายาก",
+          },
+          {
+            tag: "DATASET",
+            title: "3,129 Official Cards",
+            subtitle: "Set 1 & Set 2 Complete",
+            description: "สกัดข้อมูลและภาพความละเอียดสูงครบทั้ง Character, Action, Item และ Location พร้อมระบบค้นหาแบบละเอียด",
+          },
+          {
+            tag: "CDN FIX",
+            title: "Referrer-Policy Hotlink Fix",
+            subtitle: "แก้ปัญหาภาพการ์ด 403 Forbidden",
+            description: "แก้ปัญหา Ravensburger CDN ป้องกัน Hotlink ด้วยการกำหนด referrerPolicy='no-referrer' ทำให้แสดงผลภาพการ์ดแท้ได้ลื่นไหล",
+          },
+        ],
+      },
+      {
+        badge: "04 QA & SECURITY",
+        title: "Automated Playwright E2E Suites & OWASP Top 10",
+        subtitle: "การทดสอบอัตโนมัติครอบคลุมทุก Action การเล่น และการวางเกราะป้องกันความปลอดภัยระดับ Production",
+        content: "เพื่อยืนยันว่าระบบจะไม่มี Game Breaking Bug เมื่อผู้เล่นกดแอ็กชันรัวๆ ทีมงานได้พัฒนาชุดทดสอบ Master QA Suite ด้วย Playwright รันการเล่นจำลองแบบ Headless Browser ตั้งแต่สร้างห้อง, สุ่มการ์ด, ร่ายการ์ด, คำนวณค่าพลัง และประกาศผู้ชนะ\n\nในมิติความปลอดภัย ได้นำเกณฑ์ OWASP Top 10 มาใช้ตรวจสอบโค้ดอย่างเข้มงวด: ป้องกัน Insecure Output Handling, ตรวจสอบ Payload Injection บน WebSocket, เข้ารหัส Token, และกำหนด Principle of Least Privilege ให้ IAM Roles ของ AWS Lambda เข้าถึงเฉพาะ DynamoDB Partition ของห้องนั้นๆ เท่านั้น",
+        image: "/images/Project/Lorcana/qa_dashboard_full.png",
+        imageCaption: "Master QA Automation Dashboard รายงานผลการทดสอบ Playwright E2E และความปลอดภัยตาม OWASP",
+        type: "grid",
+        items: [
+          {
+            tag: "AUTOMATION",
+            title: "Playwright E2E Testing",
+            subtitle: "100% Critical Flow Coverage",
+            description: "สคริปต์อัตโนมัติจำลองผู้เล่น 2 บราวเซอร์เข้าห้องเดียวกัน แข่งขันจนจบแมตช์ ตรวจสอบความถูกต้องของคะแนน Lore อย่างแม่นยำ",
+          },
+          {
+            tag: "SECURITY",
+            title: "OWASP Top 10 Hardening",
+            subtitle: "Zero Trust Architecture",
+            description: "ป้องกันการส่งค่า Inkwell เกินจริงจาก Client ฝั่งผู้เล่น โดยให้ Server-side Lambda เป็นผู้ตัดสินความถูกต้องของทุก Action เสมอ",
+          },
+          {
+            tag: "IAM ROLE",
+            title: "Principle of Least Privilege",
+            subtitle: "จำกัดสิทธิ์คลาวด์ขั้นต่ำ",
+            description: "Lambda Execution Roles ถูกจำกัดสิทธิ์ให้อ่านเขียนเฉพาะตารางที่กำหนด ไม่มีการเปิดสิทธิ์ Admin หรือ Wildcard เกินจำเป็น",
+          },
+          {
+            tag: "ACCESSIBILITY",
+            title: "WCAG 2.2 AA Compliance",
+            subtitle: "Contrast Ratio > 4.5:1",
+            description: "ออกแบบ UI ธีม Obsidian Slate & Gold Foil โดยคำนึงถึง Contrast Ratio การรองรับการควบคุมด้วยคีย์บอร์ด และ ARIA labels",
+          },
+        ],
+      },
+    ],
     gallery: [
       "/images/Project/Lorcana/01_landing_hero.png",
       "/images/Project/Lorcana/07_realtime_room_play.png",
       "/images/Project/Lorcana/04_deck_builder.png",
       "/images/Project/Lorcana/CardGachaDisney.png",
       "/images/Project/Lorcana/03_after_login_match_lobby.png",
+      "/images/Project/Lorcana/05_account_dashboard.png",
       "/images/Project/Lorcana/10_analytics_dashboard.png",
+      "/images/Project/Lorcana/gameplay-board.png",
       "/images/Project/Lorcana/aws_serverless_architecture.png",
       "/images/Project/Lorcana/aws_websocket_flow.png",
       "/images/Project/Lorcana/aws_fallback_strategy.png",
-      "/images/Project/Lorcana/qa_dashboard_full.png"
+      "/images/Project/Lorcana/dynamodb-schema.png",
+      "/images/Project/Lorcana/qa_dashboard_full.png",
     ],
   },
   {
@@ -88,36 +250,162 @@ export const projects: Project[] = [
     summary: "ระบบปฏิบัติการส่วนบุคคลและ AI Agent Harness แบบ Markdown-first ออกแบบสำหรับรองรับการเรียนมหาวิทยาลัย (KMITL IT), การฝึกวินัยชีวิต (Life OS), คลังความรู้สมองที่สอง (Second Brain ใน Obsidian) และงานพัฒนาระบบซอฟต์แวร์ ควบคุมการทำงานของ Multi-Agent Orchestration ผ่าน Terminal และ Hermes Agent, มีระบบ Local MCP Bridge ควบคุม Canvas ของ Figma, เชื่อมโยงโน้ต Obsidian, และสั่งงาน Unity CLI พร้อมสถาปัตยกรรม Proxy Gateway (Port 3120) เชื่อมต่อโมเดล High-Tier และคลัง Custom Skills กว่า 500+ ทักษะ",
     problem: "การใช้งาน AI แชทบอทบนเว็บทั่วไปมักเจอปัญหา Context หลุด (Stateless), สลับเครื่องมือลำบาก, ไม่สามารถสั่งงานหรือแก้ไขไฟล์บนเครื่องได้จริง ขาดการเชื่อมโยงกับ Design Tools อย่าง Figma หรือ Knowledge Base อย่าง Obsidian และมักเกิดการเขียนโค้ดแบบ Vibe Coding ที่ไม่มีระบบทดสอบความถูกต้อง",
     process: "วางโครงสร้าง Persistent Memory Vault (AGENTS.md, RULES.md, 07_MEMORY/ Decisions, Lessons, Mistakes) -> สร้าง Bridge Protocol เชื่อมต่อ Hermes Agent เข้ากับ Antigravity CLI -> พัฒนา Python WebSocket MCP Bridge เพื่อให้ AI สร้าง Vector Components บนหน้าจอ Figma สดๆ -> สร้าง Proxy Gateway (proxy:3120) สำหรับสลับโมเดล High-Tier อัตโนมัติ -> พัฒนาระบบคัดกรอง 500+ Custom Skills พร้อม Verification Loops (Plan -> Execute -> Doctor Test / Lint Gate)",
-    phases: [
-      {
-        title: "Spec-Driven Memory Vault & Context Hierarchy",
-        description: "วางมาตรฐาน Obsidian Markdown จัดการความจำระยะยาว กฎความปลอดภัย Guardrails และ Context Packets เพื่อให้ AI ทุกตัวมี Single Source of Truth เดียวกันโดยไม่เกิดอาการหลอน Context"
-      },
-      {
-        title: "Real-Time MCP Bridge Ecosystem (Figma, Obsidian, Unity)",
-        description: "พัฒนา Local WebSocket MCP Bridge ให้ AI ควบคุมการวาด Vector UI Components บน Figma Canvas แบบ Real-time, อ่านและเขียนโครงสร้างโน้ตใน Obsidian, และส่งคำสั่งควบคุม Unity Engine ผ่าน Terminal"
-      },
-      {
-        title: "Local Proxy Gateway & Dynamic Model Balancing (Port 3120)",
-        description: "สร้างสถาปัตยกรรม Proxy Server เชื่อมโยงโมเดลระดับสูง (Gemini 3.7 Flash High / 3.1 Pro) สำหรับงาน Coding หนักๆ และสลับเป็นโมเดลความเร็วสูงสำหรับงานตรวจสอบย่อย เพื่อประหยัด Token และลด Latency"
-      },
-      {
-        title: "500+ Custom Skills & Self-Healing Verification Loops",
-        description: "จัดระเบียบคลังทักษะใน .agents/skills/ พร้อมระบบ Auto-routing อัตโนมัติตามประเภทงาน และติดตั้ง SWE-Loop ตรวจสอบ Error Code และรันคำสั่ง agy doctor ทดสอบระบบก่อนยืนยันผลลัพธ์ทุกครั้ง"
-      }
-    ],
     result: "The Solution: สภาพแวดล้อมวิศวกรรมซอฟต์แวร์ AI-Native ครบวงจร ที่ผสานการเขียนโค้ด การออกแบบ UI และการจัดการความรู้เข้าเป็นระบบอัตโนมัติที่มีความจำต่อเนื่อง\nImpact: ลดเวลาจัดการงานประจำวันลงกว่า 60%, ป้องกันปัญหา AI Code Slop ด้วย Spec-First Architecture และสั่งงานเครื่องมือภายนอกผ่าน MCP ได้อย่างไร้รอยต่อ",
+    highlights: [
+      { label: "Agent Orchestration", value: "Multi-Agent", detail: "Hermes Agent + Antigravity CLI" },
+      { label: "Model Context Protocol", value: "3 Local Bridges", detail: "Figma Canvas, Obsidian, Unity" },
+      { label: "Local Proxy Gateway", value: "Port 3120", detail: "Dynamic High-Tier Model Balancing" },
+      { label: "Verified Skills", value: "500+ Skills", detail: "Domain auto-routing & SWE-loops" },
+    ],
+    sections: [
+      {
+        badge: "01 HARNESS ARCHITECTURE",
+        title: "Multi-Agent Orchestration & Local Proxy (Port 3120)",
+        subtitle: "การควบคุมฝูง Agent หลายบทบาทพร้อมกันผ่าน Terminal CLI และระบบสลับโมเดลอัจฉริยะ",
+        content: "TAWAN-OS ถูกสร้างขึ้นเพื่อก้าวข้ามข้อจำกัดของ AI Web Chat ทั่วไป โดยพัฒนาบน Antigravity CLI ผสานการทำงานร่วมกับ Hermes Agent ทำหน้าที่เป็นสมองสั่งการกลาง (Central Orchestrator) ที่สามารถแตกงานเป็น Subagents ย่อยได้แบบขนาน (เช่น Planner, Coder, Reviewer, Doctor)\n\nเพื่อบริหารต้นทุน Token และลด Latency ได้สร้าง Local Proxy Gateway (Port 3120) ทำหน้าที่ Dynamic Model Balancing: สลับส่งงานตรรกะซับซ้อนหรืองานสถาปัตยกรรมไปยังโมเดล High-Tier (เช่น Gemini 3.7 Flash High หรือ 3.1 Pro) และสลับงานตรวจ Syntax หรือ Formatting ไปยังโมเดลความเร็วสูง ทำให้แก้โค้ดได้ต่อเนื่องหลายร้อย Prompts โดยไม่ติด Limit",
+        image: "/images/Project/TawanOS/agent-architecture.png",
+        imageCaption: "ไดอะแกรมสถาปัตยกรรม Multi-Agent Orchestration, CLI Subagents และ Local Model Proxy Gateway (Port 3120)",
+        type: "cards",
+        items: [
+          {
+            tag: "ORCHESTRATOR",
+            title: "Antigravity CLI & Hermes",
+            subtitle: "Agentic Execution Core",
+            description: "สั่งการ Multi-Agent ใน Terminal ผ่านคำสั่งอัตโนมัติ มีระบบ Handoff ส่งต่อ Context ข้ามเซสชันผ่านไฟล์ scratch/handoff.md",
+          },
+          {
+            tag: "DYNAMIC PROXY",
+            title: "Port 3120 Model Gateway",
+            subtitle: "Token & Latency Optimizer",
+            description: "Proxy อัจฉริยะที่กระจาย Request ไปยัง Model Endpoints ตามความยากของงาน ป้องกันคอขวดและลด Token Burn ได้กว่า 50%",
+          },
+          {
+            tag: "PARALLEL AGENTS",
+            title: "Role-Based Delegation",
+            subtitle: "Planner, Executor, Red Team",
+            description: "แยก Agent ตามความถนัด เช่น Agent วางแผนโครงสร้าง, Agent เขียนโค้ด, และ Adversarial Agent สวมบทผู้ตรวจสอบช่องโหว่",
+          },
+          {
+            tag: "HYGIENE",
+            title: "Workspace Indexing Guard",
+            subtitle: "Clean Root Directory",
+            description: "รักษาสุขอนามัยของ Workspace อัตโนมัติ จัดเก็บไฟล์ชั่วคราวใน scratch/ และมี .obsidianignore ป้องกัน Obsidian แล็ก",
+          },
+        ],
+      },
+      {
+        badge: "02 MODEL CONTEXT PROTOCOL",
+        title: "Bidirectional MCP Bridges: Figma, Obsidian & Unity",
+        subtitle: "ทลายกำแพงระหว่าง AI กับซอฟต์แวร์ภายนอก สั่งวาด UI อ่านโน้ตความรู้ และคุม Game Engine สดๆ",
+        content: "หนึ่งในจุดเด่นสำคัญที่สุดของ TAWAN-OS คือการนำมาตรฐาน Model Context Protocol (MCP) มาประยุกต์ใช้งานจริงในระดับ Local Environment ทำให้ AI ไม่ได้ตอบเพียงข้อความแชท แต่สามารถยื่นมือไปควบคุมซอฟต์แวร์บนเครื่องได้โดยตรง\n\n1. Figma WebSocket MCP Bridge: AI สามารถสร้าง Frames, จัด Layout Auto-layout, วาด Vector Shapes และจัด Design Tokens ลงบนหน้าจอ Figma ได้แบบสดๆ\n2. Obsidian Vault MCP: อ่าน ค้นหา และเขียนโน้ต Markdown ในสมองที่สอง พร้อมถอดรหัสความรู้และรักษา Wiki Graph\n3. Unity CLI Engine Bridge: ส่งคำสั่งสคริปต์คอมไพล์ รันเทสต์ และสร้าง Scene ใน Unity Game Engine ผ่าน Terminal",
+        image: "/images/Project/TawanOS/mcp-ecosystem.png",
+        imageCaption: "ระบบนิเวศ Local MCP Protocol เชื่อมโยง AI เข้ากับ Figma Canvas, Obsidian Vault และ Unity Engine",
+        type: "cards",
+        items: [
+          {
+            tag: "FIGMA MCP",
+            title: "Live Canvas Vector Generation",
+            subtitle: "ควบคุม Figma สดผ่าน WebSocket",
+            description: "AI ส่งคำสั่ง JSON สร้าง UI Components, วาง Grids, ปรับสี และจัด Typography บน Figma Canvas โดยไม่ต้องใช้เมาส์คลิก",
+          },
+          {
+            tag: "OBSIDIAN MCP",
+            title: "Second Brain Knowledge Sync",
+            subtitle: "Zero-Omission Note Indexing",
+            description: "ดึงเนื้อหาจาก 03_KNOWLEDGE/ เข้ามาวิเคราะห์ สร้างสรุปเชิงวิชาการแบบละเอียด และอัปเดตความจำระยะยาวของระบบ",
+          },
+          {
+            tag: "UNITY MCP",
+            title: "Headless CLI Game Engine",
+            subtitle: "Automated Build & Test",
+            description: "สั่งการสร้าง Scene 3D, ตรวจสอบ C# Script Compilation, และรัน PlayMode Unit Tests ผ่าน Terminal ได้อัตโนมัติ",
+          },
+          {
+            tag: "CANVA MCP",
+            title: "Asset Template Generation",
+            subtitle: "Design Automation Pipeline",
+            description: "เชื่อมต่อเพื่อสร้าง Graphic Assets สำหรับ Social Media และนำมาประกอบสไลด์นำเสนอได้อย่างรวดเร็ว",
+          },
+        ],
+      },
+      {
+        badge: "03 MEMORY HIERARCHY",
+        title: "Spec-Driven Memory Ledger & Zero-Drift Guardrails",
+        subtitle: "ระบบความจำถาวร 3 ระดับ ป้องกันปัญหา AI ลืมบริบท หรือหลอนข้อมูลเก่าข้ามเซสชัน",
+        content: "ปัญหาใหญ่ของ Agentic AI คือการเกิด Context Compaction Rot เมื่อคุยไปนานๆ AI จะเริ่มลืมกฎและสร้างโค้ดส่วนเกิน TAWAN-OS จึงวางกฎเกณฑ์ Single Living File Protocol และลำดับชั้นความจำที่เข้มงวด:\n\n- Spec Grounding: กำหนดให้ไฟล์ scratch/plan.md และ scratch/tickets.md เป็น Single Source of Truth เดียวของงานนั้นๆ ห้ามแตกไฟล์แปลกปลอม\n- Durable Memory Vault: เมื่อเสร็จสิ้นงาน Durable Architectural Decisions จะถูกสรุปเก็บเข้า `07_MEMORY/Decisions.md`, บทเรียนเข้า `Lessons Learned.md` และข้อผิดพลาดเข้า `Mistakes.md` เพื่อให้ Agent ทุกตัวเรียนรู้จากอดีต",
+        type: "grid",
+        items: [
+          {
+            tag: "SINGLE LIVING FILE",
+            title: "scratch/plan.md Protocol",
+            subtitle: "ห้ามเขียนโค้ดก่อนมี Spec",
+            description: "บังคับวางแผนและแจกแจง Acceptance Criteria ชัดเจนก่อนลงมือทำโค้ด ป้องกันการเดาหรือ Vibe Coding ที่ไร้ทิศทาง",
+          },
+          {
+            tag: "MEMORY VAULT",
+            title: "Decisions, Lessons, Mistakes",
+            subtitle: "คลังความทรงจำระยะยาว",
+            description: "บันทึก Architectural Decision Records (ADR) พร้อมบริบท เพื่อให้ AI ในอนาคตเข้าใจว่าทำไมระบบถึงเลือกท่านี้",
+          },
+          {
+            tag: "ANTI-COGNITIVE DEBT",
+            title: "Explainable AI & Deep Modules",
+            subtitle: "ถ้าอธิบายไม่ได้ แปลว่าไม่ใช่เจ้าของ",
+            description: "บังคับให้ Agent ต้องสรุปโค้ดที่สร้างใน 3 บรรทัด และห้ามสร้าง Abstraction ซับซ้อนเกินความจำเป็น (Ponytail Bloat)",
+          },
+          {
+            tag: "SAFETY INVARIANTS",
+            title: "Non-Destructive Operations",
+            subtitle: "ห้ามลบไฟล์โดยไม่ได้รับอนุญาต",
+            description: "มี Git Checkpoint บันทึกสถานะก่อนเริ่มงานใหญ่เสมอ และห้ามแตะต้องโฟลเดอร์ที่เป็น Secret หรือ Credential เด็ดขาด",
+          },
+        ],
+      },
+      {
+        badge: "04 VERIFICATION ENGINE",
+        title: "500+ Skills Catalog, SWE-Loops & Doctor Test Gates",
+        subtitle: "ทักษะเฉพาะทางกว่า 500 รายการพร้อมระบบตรวจสอบความถูกต้องแบบ Deterministic",
+        content: "TAWAN-OS บรรจุคลังทักษะกว่า 500 ทักษะใน `.agents/skills/` ครอบคลุมตั้งแต่งาน UX/UI, Humanizer ลบคำอวย AI, Tailwind/React Refactoring, ไปจนถึง AWS DevOps โดยมีระบบ Skill Auto-Routing คัดเลือกทักษะที่ตรงกับงานทันทีโดยผู้ใช้ไม่ต้องสั่ง\n\nหัวใจของการส่งมอบงานคือ Verification Loop ที่ไม่พึ่งพาความรู้สึกของ AI แต่ใช้คำสั่งเทอร์มินัลระดับโปรแกรม (Deterministic Verifiers) เช่น TypeScript Typecheck, Linter, และ `agy doctor` หากพบ Error ระบบจะเข้าสู่ SWE-Loop ซ่อมแซมตัวเองสูงสุด 3 ครั้งก่อนแจ้งผู้ใช้",
+        type: "cards",
+        items: [
+          {
+            tag: "AUTO-ROUTING",
+            title: "500+ Skills Catalog",
+            subtitle: "โหลดทักษะอัตโนมัติ",
+            description: "คลังทักษะพร้อมใช้งานทันที เช่น `humanizer` ลบคำเคลมเกินจริง, `codebase-design` ทำ Deep Modules, `anki-generator` สกัดการ์ดจำ",
+          },
+          {
+            tag: "SWE-LOOP",
+            title: "Self-Healing Verification Loop",
+            subtitle: "ซ่อมแซม Bug อัตโนมัติ",
+            description: "ดึง Traceback จากเทอร์มินัลมาวิเคราะห์และแก้ไขปัญหาที่ Root Cause พร้อมรันการทดสอบซ้ำจนกว่าจะผ่าน 100%",
+          },
+          {
+            tag: "HUMANIZER",
+            title: "Anti-Hype Rule (ห้ามใช้สำนวนขี้โม้)",
+            subtitle: "25 AI Tell Patterns Guard",
+            description: "แบนคำโฆษณาชวนเชื่อ เช่น 'revolutionary', 'ทรงพลังอย่างยิ่ง', 'game-changer' นำเสนอเฉพาะข้อเท็จจริง ตัวเลข และหลักฐานเชิงประจักษ์",
+          },
+          {
+            tag: "QUALITY GATE",
+            title: "agy doctor & Lint Enforcement",
+            subtitle: "Evidence Before Assertions",
+            description: "ห้ามอ้างว่างานเสร็จสิ้นหากไม่มีผลรันคำสั่งคอมไพล์ที่ยืนยันว่า 0 Errors, 0 Warnings มาแสดงเป็นหลักฐาน",
+          },
+        ],
+      },
+    ],
     gallery: [
       "/images/Project/TawanOS/preview-tawanos.png",
       "/images/Project/TawanOS/mcp-ecosystem.png",
-      "/images/Project/TawanOS/agent-architecture.png"
+      "/images/Project/TawanOS/agent-architecture.png",
     ],
   },
   {
     slug: "redbull-f1-verstappen",
     title: "Red Bull Racing F1 — Max Verstappen (3D Interactive Three.js Experience)",
     category: "programming",
-    thumbnail: "/images/Project/RedBull-F1/hero-bg.jpg",
+    thumbnail: "/images/Project/RedBull-F1/preview-f1.png",
     heroImage: "/images/Project/RedBull-F1/hero-bg.jpg",
     date: "2026",
     tags: ["Three.js", "3D Exploded View", "GSAP Parallax", "Antigravity CLI Sprint", "Google Veo Video", "High-Performance Dark"],
@@ -125,30 +413,156 @@ export const projects: Project[] = [
     summary: "เว็บไซต์ประสบการณ์จำลอง 3D Interactive สำหรับทีมแข่ง Oracle Red Bull Racing และแชมป์โลก F1 4 สมัย 'Max Verstappen' พัฒนาขึ้นในระยะเวลา 1 สัปดาห์เต็มผ่านการทดลองใช้ Antigravity CLI (ระบบ Agent Harness แบ่งงาน 17 Subagents และ 25 Skills โดยไม่ใช้ Claude) โดดเด่นด้วยโมเดล 3D รถแข่ง RB19 ที่หมุนสำรวจรอบคันและแสดงมุมมองระเบิดชิ้นส่วน (Exploded View) แยก Body, Aero Wings และ Slick Tires, แอนิเมชัน Parallax ไทม์ไลน์ความเร็วสูงด้วย GSAP ScrollTrigger, ระบบเสียงเครื่องยนต์ F1 และฟุตเทจวิดีโอ AI Cinematic จาก Google Veo",
     problem: "เว็บไซต์มอเตอร์สปอร์ตส่วนใหญ่มักเป็นภาพนิ่ง 2D ขาดความตื่นเต้นและไม่สามารถถ่ายทอดความล้ำสมัยของเทคโนโลยีแอร์โรไดนามิกส์ในรถแข่ง F1 ได้อย่างสมจริง ขณะเดียวกันการพัฒนาเว็บ 3D ด้วย AI มักเจอปัญหาโค้ดหลุดติด Template สำเร็จรูป ขาดเอกลักษณ์ และกิน Token มหาศาลจนไม่สามารถปรับแต่งงานคราฟต์ได้",
     process: "ดึงข้อมูลการแข่งขันและประวัติจาก YouTube เข้า NotebookLM เพื่อสร้าง Knowledge Base -> ใช้ Google Flow เจนวิดีโอ Cinematic ผ่านโมเดล Veo Fast -> ปรับจูนโมเดล 3D RB19 GLB และเขียนสคริปต์ three-exploded.js สำหรับแยกชิ้นส่วนตามแกนกล้อง -> ควบคุม Antigravity CLI 17 Agents จัดการงานเฉพาะจุดพร้อม Balance AI สลับโมเดล -> คุมแอนิเมชัน GSAP ScrollTrigger และวาง Design Tokens สไตล์ High-Performance Dark (#0a1024, Max Red #e01020, Champion Gold #f1c40f)",
-    phases: [
-      {
-        title: "1-Week Sprint with Antigravity CLI (Agent Harness)",
-        description: "ทดลองสร้างระบบนิเวศ Agent Harness ด้วย Antigravity CLI รันคู่ขนาน 17 Subagents และ 25 Skills พร้อมทำ Dynamic Model Balancing สลับโมเดลตามความยากของงาน ทำให้แก้โค้ดไปกว่า 100 Prompts โดยไม่ติด Token Limit"
-      },
-      {
-        title: "Multi-Modal AI Pipeline (NotebookLM & Google Veo)",
-        description: "สกัดข้อมูลประวัตินักแข่งและสถิติจากวิดีโอผ่าน NotebookLM เพื่อเป็นฐานข้อมูลให้ Agent และสร้างคลิปวิดีโอ AI Cinematic จาก Google Flow (Veo Fast Model) มาตัดต่อเป็นแอนิเมชันเปิดตัว"
-      },
-      {
-        title: "Three.js 3D Exploded View Engine (RB19 GLB)",
-        description: "โหลดและเรนเดอร์โมเดล 3D Oracle Red Bull Racing RB19 GLB พร้อมพัฒนา three-exploded.js เพื่อคำนวณเวกเตอร์การระเบิดแยกชิ้นส่วนตัวถัง แอร์โรพาร์ท และล้อรถตามการ Scroll ของผู้ใช้"
-      },
-      {
-        title: "Human Taste, Audio Engine & GSAP ScrollTrigger",
-        description: "ปรับแต่งจังหวะการเลื่อนของหน้าจอด้วย GSAP ScrollTrigger ผสานเอฟเฟกต์เสียงเครื่องยนต์ F1 และ Telemetry HUD โดยอาศัย Taste ของมนุษย์เป็นคนคุมทิศทาง ไม่พึ่งพา Template สำเร็จรูปของ AI"
-      }
-    ],
     result: "The Solution: ผลงาน 3D Web Showpiece ระดับ Awwwards ที่ผสานกราฟิก 3D WebGL, แอนิเมชัน Scroll Parallax และวิดีโอ Generative AI ได้อย่างสมบูรณ์แบบ\nImpact: พิสูจน์ขีดความสามารถของ Agentic CLI ที่ทำงานร่วมกับ Taste ของคนในการสร้างสรรค์งาน Front-End ขั้นสูงได้เสร็จสิ้นภายใน 1 สัปดาห์ และรัน 3D ได้ลื่นไหล 60 FPS",
+    highlights: [
+      { label: "WebGL Framerate", value: "60 FPS", detail: "Optimized Three.js geometry rendering" },
+      { label: "Agentic Sprint", value: "1 Week", detail: "17 subagents & 25 skills without Claude" },
+      { label: "Generative AI", value: "Google Veo", detail: "Cinematic cutaway videos & audio engine" },
+      { label: "Scroll Timeline", value: "GSAP Trigger", detail: "Telemetry-driven parallax animation" },
+    ],
+    sections: [
+      {
+        badge: "01 AGENTIC SPRINT",
+        title: "1-Week Sprint with Antigravity CLI (17 Subagents)",
+        subtitle: "ทดลองสร้างงาน Front-End ขั้นสูงด้วยระบบ Multi-Agent Orchestration โดยไม่พึ่งพา Claude",
+        content: "โปรเจกต์นี้เริ่มต้นขึ้นจากการตั้งคำถามว่า 'เราสามารถสร้างเว็บไซต์ 3D Interactive ระดับ Awwwards ได้ภายใน 1 สัปดาห์โดยใช้ Agentic AI ได้หรือไม่?' ทีมงานได้เซ็ตอัป Antigravity CLI รันฝูง Agent แบบขนาน 17 Subagents ครอบคลุมหน้าที่ 3D Math, Shader Writing, GSAP Animation, Content Extraction และ Audio Sync\n\nการมี Dynamic Model Balancing ทำให้สามารถส่งงานคำนวณเวกเตอร์ยากๆ ให้โมเดลระดับสูง และส่งงาน CSS Tweaks ให้โมเดลความเร็วสูง ส่งผลให้แก้ไขและขัดเกลาโค้ดไปมากกว่า 100 Prompt Cycles ได้อย่างลื่นไหลโดยไม่เคยติด Token Limit",
+        type: "cards",
+        items: [
+          {
+            tag: "ORCHESTRATION",
+            title: "17 Parallel Subagents",
+            subtitle: "แบ่งงานตามความเชี่ยวชาญ",
+            description: "แยกงานคณิตศาสตร์ 3D, เขียน Shaders, ควบคุม GSAP Timeline และจัดระเบียบ Design Tokens ออกจากกันอย่างเป็นระบบ",
+          },
+          {
+            tag: "HUMAN TASTE",
+            title: "Human-in-the-Loop Taste",
+            subtitle: "ไม่ใช้ AI Template สำเร็จรูป",
+            description: "ใช้ Taste ของมนุษย์เป็นตัวกำหนดทิศทางงานดีไซน์ จังหวะความเร็วของการ Scroll และความลื่นไหลของแสงสะท้อนตัวถัง",
+          },
+          {
+            tag: "PRODUCTIVITY",
+            title: "1-Week 0-to-1 Delivery",
+            subtitle: "ส่งมอบงานสมบูรณ์ใน 7 วัน",
+            description: "ย่นระยะเวลาการพัฒนา Front-End 3D ที่ปกติใช้เวลานับเดือน ให้เสร็จสิ้นได้ในเวลาเพียงหนึ่งสัปดาห์พร้อมระบบเสียงสมบูรณ์",
+          },
+          {
+            tag: "EFFICIENCY",
+            title: "Zero Token Overflow",
+            subtitle: "บริหาร Context อย่างชาญฉลาด",
+            description: "ใช้สถาปัตยกรรม Context Filtering ทำให้ไม่เกิดปัญหา Memory Rot หรือโค้ดหลุดข้ามไฟล์ตลอดการพัฒนา",
+          },
+        ],
+      },
+      {
+        badge: "02 3D WEBGL ENGINE",
+        title: "Three.js Exploded View Engine & Dynamic Vector Math",
+        subtitle: "การเรนเดอร์โมเดลรถแข่ง RB19 GLB และระบบคำนวณการระเบิดแยกชิ้นส่วนตามแนวแกนมุมมองผู้ใช้",
+        content: "หัวใจด้าน Visual ของเว็บไซต์คือโมเดล 3D Oracle Red Bull Racing RB19 GLB ความละเอียดสูง โดยพัฒนาโมดูล `three-exploded.js` ทำหน้าที่ดึงโครงสร้าง Hierarchy ของโมเดลออกมาแยกเป็น 3 กลุ่มหลัก: ตัวถังคาร์บอน (Carbon Monocoque), ปีกหน้า-หลัง (Aerodynamic Wings), และล้อแข่ง (Pirelli Slick Tires)\n\nเมื่อผู้ใช้เลื่อน Scroll หน้าจอ สคริปต์จะคำนวณ Projection Vector ตามตำแหน่งกล้อง ค่อยๆ ดันชิ้นส่วนแต่ละชิ้นให้กระจายออกจากศูนย์กลางอย่างนุ่มนวล พร้อมแสดงตัวเลขค่าแอร์โรไดนามิกส์และแรงกด (Downforce) ลอยอยู่ข้างชิ้นส่วนแบบ Real-time บนความเร็ว 60 FPS",
+        image: "/images/Project/RedBull-F1/exploded-view.png",
+        imageCaption: "โหมด 3D Exploded View: แยกชิ้นส่วนตัวถัง แอร์โรไดนามิกส์ และล้อรถแข่ง Red Bull RB19 ตามการเลื่อน Scroll",
+        type: "grid",
+        items: [
+          {
+            tag: "EXPLODED MATH",
+            title: "three-exploded.js Algorithm",
+            subtitle: "คำนวณเวกเตอร์กระจายชิ้นส่วน",
+            description: "คำนวณพิกัด X, Y, Z ของแต่ละ Mesh ตามแนวตั้งฉากกับพื้นผิวตัวรถ เพื่อให้ชิ้นส่วนระเบิดออกอย่างมีมิติและไม่ชนกันเอง",
+          },
+          {
+            tag: "WEBGL PERFORMANCE",
+            title: "60 FPS Optimization",
+            subtitle: "ปรับจูน Geometry & Texture",
+            description: "บีบอัดไฟล์ GLB ด้วย Draco Compression และใช้ PBR Material Shaders ที่กินทรัพยากร GPU ต่ำ เล่นได้ลื่นไหลแม้บนแล็ปท็อปทั่วไป",
+          },
+          {
+            tag: "ORBIT CONTROL",
+            title: "Interactive 360° Inspection",
+            subtitle: "หมุนดูมุมมองรอบคัน",
+            description: "เปิดให้ผู้ใช้คลิกและลากเมาส์หมุนสำรวจรายละเอียดปีกหน้า ช่องดักลม Sidepod และดิฟฟิวเซอร์ด้านหลังได้อย่างอิสระ",
+          },
+          {
+            tag: "LIGHTING",
+            title: "Studio Lighting Environment",
+            subtitle: "แสงเงาเน้นเส้นสายรถแข่ง",
+            description: "จัดแสงแบบ Three-Point Studio Lighting เสริมด้วย HDRI Environment Map ให้เกิดไฮไลท์สะท้อนบนสีน้ำเงินด้านอันเป็นเอกลักษณ์",
+          },
+        ],
+      },
+      {
+        badge: "03 MULTIMODAL AI PIPELINE",
+        title: "Google Veo AI Cinematic Video & NotebookLM Grounding",
+        subtitle: "การสกัดความรู้ประวัติศาสตร์การแข่งขัน F1 สู่การสังเคราะห์ฟุตเทจวิดีโอระดับภาพยนตร์ด้วย AI",
+        content: "เพื่อสร้างประสบการณ์ที่ทรงพลัง เว็บไซต์ได้นำกระบวนการ Multimodal AI Pipeline มาผสมผสาน:\n\n1. Grounding with NotebookLM: สกัดประวัติศาสตร์ ชัยชนะ และสถิติสำคัญของ Max Verstappen ตั้งแต่ปี 2015 จนถึงแชมป์โลก 4 สมัย เพื่อเป็น Single Source of Truth สำหรับการสร้างเนื้อหาและ Timeline\n2. Google Veo AI Cinematic Video: นำ Prompt ที่ผ่านการคัดสรรไปเจนวิดีโอเปิดตัวรถแข่งและบรรยากาศ Pitstop ผ่านโมเดล Veo Fast ใน Google Flow นำมาตัดต่อเป็น Opening Sequence แบบไร้รอยต่อ\n3. Audio Synthesis: พัฒนาระบบเสียงเครื่องยนต์ V6 Turbo-Hybrid F1 ที่ปรับระดับเสียงตามความเร็วการเลื่อนหน้าจอของผู้ใช้",
+        image: "/images/Project/RedBull-F1/telemetry-hud.png",
+        imageCaption: "Telemetry HUD Interface ที่ได้รับแรงบันดาลใจจากหน้าจอพิทวอลล์ของทีมแข่ง Oracle Red Bull Racing",
+        type: "cards",
+        items: [
+          {
+            tag: "NOTEBOOKLM",
+            title: "Historical Grounding Vault",
+            subtitle: "คลังข้อมูลประวัติศาสตร์ F1",
+            description: "สกัดข้อมูลบทวิเคราะห์การแข่งขันและสถิติจากวิดีโอและเอกสารทางการ เพื่อให้ข้อมูลบนไทม์ไลน์ถูกต้องและแม่นยำ 100%",
+          },
+          {
+            tag: "GOOGLE VEO",
+            title: "Cinematic Video Cutaways",
+            subtitle: "ฟุตเทจเปิดตัวคุณภาพสูง",
+            description: "สร้างคลิปวิดีโอความเร็วสูงมุมมอง Low-angle แสดงรถ RB19 พุ่งทะยานในสนามแข่ง นำมาใช้เป็น Hero Video Background",
+          },
+          {
+            tag: "AUDIO ENGINE",
+            title: "F1 Turbo-Hybrid Sound Engine",
+            subtitle: "เสียงเครื่องยนต์ตามการ Scroll",
+            description: "จำลองเสียงคิกดาวน์และเสียงรอบเครื่องยนต์ที่เร่งขึ้นตามความเร็วในการเลื่อนหน้าจอ เพิ่มความดื่มด่ำให้แก่ผู้เข้าชม",
+          },
+          {
+            tag: "TELEMETRY HUD",
+            title: "Pitwall Telemetry Dashboard",
+            subtitle: "กราฟิกแสดงผลสถิติความเร็ว",
+            description: "Overlay แสดงความเร็ว Top Speed, เกียร์ปัจจุบัน, และเปอร์เซ็นต์การเปิดวาล์ว DRS จำลองบรรยากาศห้องควบคุมพิทเลน",
+          },
+        ],
+      },
+      {
+        badge: "04 HIGH-PERFORMANCE UI",
+        title: "Dark Pitwall Aesthetic & GSAP ScrollTrigger Timelines",
+        subtitle: "งานออกแบบอัตลักษณ์สไตล์ High-Performance Dark ที่ผสานแอนิเมชัน Parallax อย่างลงตัว",
+        content: "การออกแบบ Visual Identity ยึดอัตลักษณ์ของทีมแข่ง Oracle Red Bull Racing ภายใต้แนวคิด High-Performance Dark (#0A1024 Deep Navy, Max Red #E01020, และ Champion Gold #F1C40F)\n\nการเลื่อนหน้าจอทั้งหมดถูกควบคุมด้วย GSAP ScrollTrigger เชื่อมโยงจังหวะข้อความ ตัวเลขสถิติ และการเคลื่อนที่ของกล้อง 3D ให้เป็นไทม์ไลน์เดียวกัน โดยออกแบบให้ผู้ใช้รู้สึกเหมือนกำลังเดินสำรวจโรงงาน Milton Keynes และศูนย์พัฒนารถแข่งระดับโลก",
+        type: "grid",
+        items: [
+          {
+            tag: "DESIGN SYSTEM",
+            title: "High-Performance Dark Tokens",
+            subtitle: "#0A1024, Max Red & Gold",
+            description: "คู่สีที่สะท้อนความดุดันและเทคโนโลยีขั้นสูง ควบคุม Contrast Ratio ให้อ่านง่ายและไม่แย่งความโดดเด่นจากโมเดล 3D",
+          },
+          {
+            tag: "GSAP SCROLLTRIGGER",
+            title: "Synced Scrubbing Timeline",
+            subtitle: "แอนิเมชันผูกกับตำแหน่ง Scroll",
+            description: "ทุก Element มี Scrub Smoothing 0.5 วินาที ทำให้การเลื่อนหน้าจอไม่กระตุก แม้จะเลื่อนด้วย Trackpad หรือ Wheel เมาส์",
+          },
+          {
+            tag: "RESPONSIVE LAYOUT",
+            title: "Adaptive Viewport Scaling",
+            subtitle: "รองรับทั้งจอ Ultra-Wide และ Mobile",
+            description: "ปรับตำแหน่งกล้อง Three.js อัตโนมัติตาม Aspect Ratio เพื่อให้โมเดลรถแข่งอยู่กึ่งกลางสายตาของผู้ใช้เสมอ",
+          },
+          {
+            tag: "AWWWARDS LEVEL",
+            title: "Front-End Craftsmanship",
+            subtitle: "ความประณีตในทุกปฏิสัมพันธ์",
+            description: "ใส่ใจใน Micro-interactions ตั้งแต่การ Hover ชิปข้อมูล ไปจนถึงปุ่มเปลี่ยนมุมมองกล้องที่ให้สัมผัสแม่นยำ",
+          },
+        ],
+      },
+    ],
     gallery: [
       "/images/Project/RedBull-F1/hero-bg.jpg",
+      "/images/Project/RedBull-F1/exploded-view.png",
+      "/images/Project/RedBull-F1/telemetry-hud.png",
       "/images/Project/RedBull-F1/max_portrait.jpg",
-      "/images/Project/RedBull-F1/Open.png",
-      "/images/Project/RedBull-F1/End.png",
       "/images/Project/RedBull-F1/max_helmet_intro.jpg",
       "/images/Project/RedBull-F1/video_start_frame.jpg",
       "/images/Project/RedBull-F1/timeline_2003.jpg",
@@ -156,7 +570,9 @@ export const projects: Project[] = [
       "/images/Project/RedBull-F1/timeline_2015.jpg",
       "/images/Project/RedBull-F1/timeline_2016.jpg",
       "/images/Project/RedBull-F1/timeline_2021.jpg",
-      "/images/Project/RedBull-F1/timeline_2024.jpg"
+      "/images/Project/RedBull-F1/timeline_2024.jpg",
+      "/images/Project/RedBull-F1/Open.png",
+      "/images/Project/RedBull-F1/End.png",
     ],
   },
   {
@@ -171,88 +587,367 @@ export const projects: Project[] = [
     summary: "ข้อเสนอโครงการและ Interactive Web Prototype สำหรับการแข่งขัน Generation Thailand Hackathon 2026 ได้รับการคัดเลือกเป็น 'Top 10 Finalist Proposal' (ทีมสำรองอันดับที่ 5) พัฒนาขึ้นจากงานวิจัยเชิงลึกกับผู้ต้องการย้ายสายงาน 5 คน และ HR 2 คน เพื่อแก้ปัญหาอัตราการว่างงานของเด็กจบใหม่อายุ 20-24 ปีในไทยที่มีสัดส่วนสูงถึง 34% (สถิติ สสช. Q1/2569) โดดเด่นด้วยระบบ AI Skill-Proof & Benchmark Radar ประเมินทักษะที่ถ่ายทอดได้ (Transferable Skills) จากผลงานจริง, AI Hybrid Storyteller จำลองการสัมภาษณ์งาน และ ATS Bypass Skill Badge ช่วยให้ผู้สมัครที่วุฒิไม่ตรงสายสามารถพิสูจน์ความสามารถให้ HR เห็นได้ตั้งแต่ด่านแรก",
     problem: "ในตลาดแรงงานไทย เด็กจบใหม่และคนทำงานที่ต้องการเปลี่ยนสายงาน (เช่น จบเภสัชศาสตร์แต่อยากเป็น Data Analyst) มักถูกคัดทิ้งโดยระบบ ATS ตั้งแต่ด่านแรกเนื่องจากชื่อปริญญาไม่ตรงสาย แม้จะมีทักษะจริงผ่านการเรียนรู้ด้วยตนเอง ขณะที่ฝั่ง HR องค์กรขนาดเล็ก-กลางมีเวลาจำกัด ขาดเครื่องมือคัดกรองความสามารถเชิงประจักษ์ ทำให้เกิดการคัดคนไม่ตรงกับความสามารถจริงและเสียเวลาหางานนาน 4-6 เดือน",
     process: "สัมภาษณ์เชิงลึกกลุ่มตัวอย่าง 5 ผู้ย้ายสายงาน + 2 HR และวิเคราะห์สถิติแรงงาน สสช. -> กำหนด Persona 'น้องมิว' (จบเภสัชฯ อยากเป็น Healthcare Data Analyst) -> ออกแบบ Information Architecture & Visual Identity สไตล์ Modern SaaS (Indigo & Emerald) -> พัฒนา Interactive Prototype ใน Lovable มี View Switcher Toggle สลับมุมมอง Candidate vs. HR -> จัดทำสไลด์ Pitch Deck และได้รับคัดเลือกเป็น Top 10 Finalist Proposal (ทีมสำรองอันดับ 5)",
-    phases: [
-      {
-        title: "User Research & Labor Market Analytics (34% Youth Unemployment)",
-        description: "วิเคราะห์สถิติ สสช. พบว่ากลุ่มว่างงานสูงสุดคือช่วงอายุ 20-24 ปี (134,900 คน) และสัมภาษณ์เชิงลึกพบว่าผู้ย้ายสายงานต้องใช้เวลาทำพอร์ตและหางานนานหลายเดือนเพราะติดระบบกรองวุฒิของ ATS"
-      },
-      {
-        title: "Dual-Persona Experience Design (Candidate vs. HR Recruiter)",
-        description: "ออกแบบระบบ 2 มุมมอง: ฝั่งผู้สมัคร (Upload ผลงาน, ดู Skill Radar, ซ้อมสัมภาษณ์ AI) และฝั่ง HR (Dashboard ค้นหาคนที่มีปุ่ม ATS Bypass Mode และปุ่ม 1-Click Invite to Interview)"
-      },
-      {
-        title: "AI Skill-Proof Radar & Hybrid Storyteller Engine",
-        description: "พัฒนาระบบคำนวณความพร้อมของทักษะ (Skill Readiness %) ที่ชูจุดเด่นความรู้เฉพาะทางเดิม (เช่น เภสัชฯ มีความรู้ Healthcare 99%) ควบคู่กับทักษะเทคนิคใหม่ พร้อมจำลองคำถามสัมภาษณ์งาน"
-      },
-      {
-        title: "Interactive PoC in Lovable & Hackathon Finalist Pitch",
-        description: "สร้าง Prototype เว็บแอปพลิเคชันที่คลิกทดสอบได้จริงใน Lovable และจัดทำสไลด์นำเสนอต่อคณะกรรมการ Generation Thailand จนได้รับการจัดอันดับเป็น Top 10 Finalist Proposal (ทีมสำรองอันดับที่ 5)"
-      }
-    ],
     result: "The Solution: ข้อเสนอแพลตฟอร์ม HR-Tech ที่เปลี่ยนใบปริญญาให้กลายเป็นหลักฐานทางทักษะเชิงประจักษ์ (Zero Bias on Degree Name)\nImpact: ได้รับการคัดเลือกเป็น Top 10 Finalist Proposal (ทีมสำรองอันดับที่ 5) ในเวที Hackathon ระดับประเทศ และได้ฝึกฝนกระบวนการ Product Discovery, User Research, และ AI Rapid Prototyping เต็มรูปแบบ",
+    highlights: [
+      { label: "Hackathon Result", value: "Top 10 Finalist", detail: "5th Reserve Proposal (Generation Thailand 2026)" },
+      { label: "Youth Unemployment", value: "34%", detail: "National Statistical Office (NSO) Q1/2569 baseline" },
+      { label: "User Interviews", value: "5 Switchers + 2 HR", detail: "Qualitative research on ATS screening hurdles" },
+      { label: "PoC Delivery", value: "Lovable Web Prototype", detail: "Dual-persona switcher (Candidate vs. Recruiter)" },
+    ],
+    sections: [
+      {
+        badge: "01 PROBLEM DISCOVERY",
+        title: "The 34% Youth Unemployment Crisis & ATS Screening Wall",
+        subtitle: "วิเคราะห์ข้อมูลสถิติแรงงาน สสช. และปัญหาเชิงโครงสร้างของบัณฑิตจบใหม่ที่ต้องการย้ายสายงาน",
+        content: "จากรายงานสถิติภาวะการทำงานของประชากรโดยสำนักงานสถิติแห่งชาติ (สสช.) ไตรมาส 1/2569 พบว่ากลุ่มผู้ว่างงานในประเทศไทยกระจุกตัวอยู่ในกลุ่มเยาวชนอายุ 20-24 ปี สูงถึง 34% (ประมาณ 134,900 คน) และส่วนใหญ่เป็นผู้จบการศึกษาระดับอุดมศึกษา\n\nทีมงานได้ลงพื้นที่สัมภาษณ์เชิงลึกกับผู้ต้องการย้ายสายงาน 5 คน และ HR Recruiter 2 คน พบ Insight สำคัญว่า: ผู้สมัครจำนวนมากมีความพยายามเรียนรู้ทักษะใหม่ผ่านคอร์สออนไลน์และทำผลงานจริง แต่กลับถูกระบบคัดกรองใบสมัครอัตโนมัติ (Applicant Tracking System: ATS) ปัดตกทันทีตั้งแต่รอบแรก เพียงเพราะ 'ชื่อปริญญาไม่ตรงกับตำแหน่งงาน' ส่งผลให้ต้องใช้เวลาเคว้งคว้างและหางานนาน 4-6 เดือน",
+        image: "/images/Project/HybriCareer/slide2_user_research.png",
+        imageCaption: "งานวิจัยตลาดแรงงานไทย: ตัวเลขสถิติว่างงาน สสช. และเสียงสะท้อนจากผู้ต้องการย้ายสายงานที่ติดกำแพง ATS",
+        type: "cards",
+        items: [
+          {
+            tag: "ATS BIAS",
+            title: "Degree Name Filtering",
+            subtitle: "ระบบกรองวุฒิตัดโอกาสคนมีทักษะ",
+            description: "ระบบ ATS คัดทิ้งเรซูเม่ที่ไม่ตรงสายการเรียนโดยอัตโนมัติ ทำให้ผู้สมัครที่มีทักษะจริงไม่มีโอกาสได้โชว์ผลงานหรือเข้าสัมภาษณ์",
+          },
+          {
+            tag: "TRANSITION TIME",
+            title: "4-6 Months In Limbo",
+            subtitle: "ระยะเวลาหางานยาวนาน",
+            description: "ผู้ย้ายสายงานต้องใช้เวลาทำพอร์ตและส่งใบสมัครนับร้อยแห่งแต่ไม่ได้รับการตอบกลับ นำไปสู่ภาวะ Burnout และสูญเสียความมั่นใจ",
+          },
+          {
+            tag: "HR CONSTRAINT",
+            title: "6 Seconds Per Resume",
+            subtitle: "HR องค์กรขนาดเล็ก-กลางขาดเวลา",
+            description: "HR มีเวลาตรวจเรซูเม่เฉลี่ยเพียงไม่กี่วินาที จึงเลือกตัดคนไม่ตรงสายออกก่อนเพื่อลดภาระงาน แม้อาจพลาดบุคลากรที่มีศักยภาพ",
+          },
+          {
+            tag: "UNUSED POTENTIAL",
+            title: "Transferable Skills Wastage",
+            subtitle: "ทักษะเดิมถูกมองข้ามอย่างน่าเสียดาย",
+            description: "ความรู้ความเชี่ยวชาญจากสายงานเดิม (Domain Expertise) ไม่ถูกนำมาคำนวณเป็นมูลค่าเพิ่มในการทำงานตำแหน่งใหม่",
+          },
+        ],
+      },
+      {
+        badge: "02 DUAL-PERSONA WORKFLOW",
+        title: "Candidate vs. Recruiter Dual-Perspective Architecture",
+        subtitle: "การออกแบบประสบการณ์ 2 มุมมองบนหน้าจอเดียว เพื่อตอบโจทย์ทั้งผู้หางานและผู้ว่าจ้าง",
+        content: "ในการแข่งขัน Hackathon โจทย์สำคัญคือการสร้างโซลูชันที่ 'Win-Win' ทั้งสองฝั่ง ทีมงานจึงกำหนด Persona หลักคือ 'น้องมิว' (บัณฑิตคณะเภสัชศาสตร์ที่ต้องการเปลี่ยนสายอาชีพเป็น Healthcare Data Analyst) และออกแบบ Information Architecture ที่รองรับการสลับมุมมอง (Role Switcher):\n\n1. ฝั่ง Candidate: พื้นที่อัปโหลดผลงาน, กราฟเรดาร์แสดงความพร้อมของทักษะ (Skill Readiness %), และระบบซ้อมสัมภาษณ์งานกับ AI\n2. ฝั่ง HR Recruiter: แดชบอร์ดค้นหาผู้สมัครที่มีฟังก์ชัน 'ATS Bypass Mode' แสดงคะแนนหลักฐานเชิงประจักษ์ และปุ่ม '1-Click Fast Track Interview'",
+        image: "/images/Project/HybriCareer/slide4_candidate_view.png",
+        imageCaption: "หน้าจอจำลองมุมมองผู้สมัคร (Candidate View): แสดงคะแนนความพร้อมของทักษะและปุ่มเปิดโหมด ATS Bypass",
+        type: "grid",
+        items: [
+          {
+            tag: "PERSONA",
+            title: "น้องมิว (Healthcare to Data)",
+            subtitle: "ตัวแทนผู้ต้องการย้ายสายงาน",
+            description: "มีจุดแข็งด้านความรู้ทางการแพทย์และเภสัชกรรม (Domain Knowledge 99%) เสริมทักษะ SQL และ Python เพื่อวิเคราะห์ข้อมูลสุขภาพ",
+          },
+          {
+            tag: "CANDIDATE VIEW",
+            title: "Evidence-Based Profile",
+            subtitle: "โปรไฟล์ที่พูดด้วยหลักฐานผลงาน",
+            description: "ผู้สมัครอัปโหลด Project Files หรือ GitHub Repositories เพื่อให้ AI ตรวจสอบและออกเหรียญตรารับรองทักษะ",
+          },
+          {
+            tag: "RECRUITER VIEW",
+            title: "ATS Bypass Mode",
+            subtitle: "ค้นหาคนที่ทักษะ ไม่ใช่วุฒิ",
+            description: "HR สามารถเปิดตัวกรองพิเศษเพื่อดูเฉพาะผู้สมัครที่ผ่านการทดสอบทักษะเชิงประจักษ์ พร้อมปุ่มกดนัดสัมภาษณ์ในคลิกเดียว",
+          },
+          {
+            tag: "INTERACTIVE TOGGLE",
+            title: "Instant Role Switcher",
+            subtitle: "สลับดูสองมุมมองได้ทันที",
+            description: "ปุ่ม Toggle บน Navigation Bar ของ Prototype เปิดโอกาสให้กรรมการและผู้ทดสอบเห็น Flow การทำงานของทั้งสองฝั่งแบบเรียลไทม์",
+          },
+        ],
+      },
+      {
+        badge: "03 AI SKILL-PROOF ENGINE",
+        title: "Transferable Skills Benchmark & AI Storyteller",
+        subtitle: "โมเดลประเมินทักษะที่นำความรู้เดิมมาผสานกับทักษะใหม่ และระบบจำลองการสัมภาษณ์งาน",
+        content: "จุดเด่นทางเทคนิคที่นำเสนอต่อคณะกรรมการคือกลไก AI Skill-Proof & Benchmark Radar ซึ่งทำหน้าที่วิเคราะห์โค้ด เอกสารสรุปงาน และพอร์ตโฟลิโอของผู้สมัคร เพื่อประเมินความสอดคล้องกับ Job Description มาตรฐาน\n\nระบบยังเสริมด้วย 'AI Hybrid Storyteller' ซึ่งทำหน้าที่เป็นติวเตอร์จำลองคำถามสัมภาษณ์งานที่เจาะลึกเฉพาะทาง เช่น 'ในฐานะที่เคยเรียนเภสัชฯ คุณจะนำความเข้าใจเรื่องตัวยามาช่วยทำนายอัตราการคืนสินค้าในคลินิกได้อย่างไร?' ช่วยให้ผู้สมัครดึงจุดเด่นของตัวเองออกมาเล่าได้อย่างมั่นใจ",
+        image: "/images/Project/HybriCareer/skill-radar.png",
+        imageCaption: "AI Skill-Proof Radar: คำนวณความพร้อมของทักษะ (Skill Readiness) แยกตามหมวดหมู่โดยอิงจากหลักฐานจริง",
+        type: "cards",
+        items: [
+          {
+            tag: "SKILL RADAR",
+            title: "Multi-Axis Benchmark",
+            subtitle: "เรดาร์ประเมินทักษะหลายมิติ",
+            description: "แสดงผลเปรียบเทียบระหว่างทักษะที่ตำแหน่งงานต้องการ กับระดับความสามารถที่ผู้สมัครพิสูจน์ได้ผ่านผลงาน",
+          },
+          {
+            tag: "AI STORYTELLER",
+            title: "Interview Simulator",
+            subtitle: "จำลองการตอบคำถามสัมภาษณ์",
+            description: "AI ดึงบริบทจากทั้งสายงานเก่าและสายงานใหม่มาสร้างคำถามสัมภาษณ์เชิงสถานการณ์ พร้อมให้ Feedback แบบรายข้อ",
+          },
+          {
+            tag: "VERIFIED BADGE",
+            title: "Cryptographic Skill Badge",
+            subtitle: "เหรียญตรารับรองทักษะเชิงประจักษ์",
+            description: "เมื่อผ่านการประเมิน ระบบจะสร้าง Badge ที่แนบหลักฐานผลงานยืนยัน ทำให้ HR ตรวจสอบความถูกต้องได้ทันที",
+          },
+          {
+            tag: "FAIR SCORING",
+            title: "Zero-Bias Assessment",
+            subtitle: "การประเมินที่ไม่ดูเพศ อายุ หรือสถาบัน",
+            description: "ตัดข้อมูลส่วนบุคคลออกจากการวิเคราะห์อัลกอริทึม เพื่อลดอคติในการจ้างงานตามหลักความเท่าเทียมในตลาดแรงงาน",
+          },
+        ],
+      },
+      {
+        badge: "04 HACKATHON OUTCOME",
+        title: "Top 10 Finalist Proposal & Rapid Lovable Prototyping",
+        subtitle: "การสร้าง Interactive Web Prototype ใน Lovable และการคัดเลือกเป็นผลงานข้อเสนอ 10 อันดับแรก",
+        content: "ตลอดระยะเวลาการแข่งขัน ทีมงานได้ใช้แพลตฟอร์ม Lovable ในการขึ้นโครงสร้างเว็บแอปพลิเคชันอย่างรวดเร็ว (Rapid Prototyping) เชื่อมต่อ Component ด้วย React, TypeScript, และ Tailwind CSS จนได้ Prototype ที่คลิกโต้ตอบได้เสมือนจริง\n\nผลงานได้รับการคัดเลือกจากคณะกรรมการ Generation Thailand ให้เป็นหนึ่งใน 'Top 10 Finalist Proposal' (ทีมสำรองอันดับที่ 5 จากผู้เข้าแข่งขันทั่วประเทศ) ถือเป็นก้าวสำคัญในการนำระเบียบวิธีวิจัย UX มาผสมผสานกับ AI Rapid Development เพื่อแก้ไขปัญหาสังคมจริง",
+        image: "/images/Project/HybriCareer/slide5_recruiter_view.png",
+        imageCaption: "มุมมองฝั่ง HR Recruiter: แดชบอร์ดค้นหาผู้สมัครที่มีทักษะตรงตามต้องการพร้อมปุ่ม 1-Click Invite",
+        type: "grid",
+        items: [
+          {
+            tag: "RECOGNITION",
+            title: "Top 10 Finalist Proposal",
+            subtitle: "ทีมสำรองอันดับที่ 5 ระดับประเทศ",
+            description: "ผ่านการคัดเลือกจากกรรมการผู้ทรงคุณวุฒิในแวดวง HR-Tech และสตาร์ทอัพด้านการศึกษาและการพัฒนาเยาวชน",
+          },
+          {
+            tag: "RAPID PROTOTYPE",
+            title: "Full-Stack Lovable PoC",
+            subtitle: "เว็บแอปพลิเคชันที่คลิกเล่นได้จริง",
+            description: "ขึ้นระบบ Interactive UI ทั้งหน้าผู้สมัคร หน้าแดชบอร์ด HR และระบบสลับ Role เสร็จสิ้นภายในระยะเวลาการแข่งขัน",
+          },
+          {
+            tag: "PRODUCT ROADMAP",
+            title: "Future Integration Scope",
+            subtitle: "แผนการเชื่อมต่อระบบในอนาคต",
+            description: "วางสถาปัตยกรรมสำหรับต่อเชื่อม API กับ LinkedIn, GitHub, และแพลตฟอร์มคอร์สออนไลน์เพื่อดึงผลงานอัตโนมัติ",
+          },
+          {
+            tag: "LEARNING GAIN",
+            title: "End-to-End Product Discovery",
+            subtitle: "ประสบการณ์วงจรพัฒนาผลิตภัณฑ์",
+            description: "ได้ฝึกฝนทักษะการสัมภาษณ์งานวิจัยผู้ใช้จริง การกลั่นกรอง Insight และการนำเสนอ Pitching ภายในเวลาจำกัด",
+          },
+        ],
+      },
+    ],
     gallery: [
       "/images/Project/HybriCareer/slide1_hackathon_cover.png",
       "/images/Project/HybriCareer/slide2_user_research.png",
       "/images/Project/HybriCareer/slide3_solution_architecture.png",
       "/images/Project/HybriCareer/slide4_candidate_view.png",
-      "/images/Project/HybriCareer/slide5_recruiter_view.png"
+      "/images/Project/HybriCareer/slide5_recruiter_view.png",
+      "/images/Project/HybriCareer/candidate-flow.png",
+      "/images/Project/HybriCareer/skill-radar.png",
+      "/images/Project/HybriCareer/preview-hybricareer.png",
     ],
   },
   {
     slug: "chao-dom",
-    title: "Chao-dom",
+    title: "Chao-dom (EasyDom — iOS Dorm Matching)",
     category: "uxui",
     thumbnail: "/images/Project/Chaodom/Preview.chaodom.png",
     heroImage: "/images/Project/Chaodom/Preview.chaodom.png",
     date: "2026",
-    tags: ["UX/UI", "Figma", "Research", "iOS", "Human Interface Design"],
-    techStack: ["Figma", "Microsoft Word", "Canva", "Adobe Premiere Pro", "Gemini", "NotebookLM"],
-    summary: "EasyDom (Chao-dom) เป็น Term Project วิชา Human Interface Design คณะ IT สจล. หัวข้อ How to help freshy find rooms ดำเนินการ UX/UI ครบ 5 เฟส ตั้งแต่เก็บข้อมูล วิจัยผู้ใช้ วิเคราะห์ Persona/Experience Map ออกแบบ Conceptual Design ไปจนถึง Detailed Prototype iOS ตาม Apple HIG และ Guerilla Usability Testing ผลลัพธ์คือ Prototype แอป iOS ที่แก้ปัญหาข้อมูลล้าสมัย สถานะห้องไม่ชัดเจน และการติดต่อเจ้าของหอที่ยุ่งยาก",
-    problem: "นักศึกษาใหม่ สจล. ประสบปัญหาหาหอพักนอกสถาบัน ข้อมูลบน RentHub Google Maps Facebook ไม่เป็นปัจจุบัน ราคา สถานะห้อง รูปภาพ เบอร์ติดต่อ ไม่ตรงความจริง ติดต่อแล้วถูกปฏิเสธ ต้องลงพื้นที่สำรวจเอง ระบบจองหอในไม่โปร่งใส ข้อมูลการเดินทาง ขนส่ง สภาพแวดล้อม นิสัยเจ้าของหอไม่มีแพลตฟอร์มใดให้ครบ สัมภาษณ์ผู้ใช้ 3 คน (โปเต้ ฟ้าใส ทัก) ทุกคนประสบปัญหาเดียวกัน ใช้เวลา 1 วัน ถึง 3 เดือนกว่าจะได้หอ",
-    process: "กระบวนการ UX ครบวงจร 5 เฟส โดยเริ่มตั้งแต่การค้นคว้าปัญหาจริง การสัมภาษณ์ผู้ใช้ การวิเคราะห์ Persona/Experience Map ไปจนถึงการออกแบบ Prototype และทำ Usability Testing",
-    phases: [
-      {
-        title: "Phase 1: Data Gathering",
-        description: "ผลการค้นคว้าเบื้องต้น ทำการค้นคว้าในหัวข้อ EasyDom ไปหากลุ่มเป้าหมายที่มีปัญหาเกี่ยวกับการหาหอพักโดยอิงจากเรื่องจริง และพูดถึงปัญหาหลัก ได้ข้อมูล Pain Points สำคัญ เช่น ข้อมูลออนไลน์ไม่อัปเดต ติดต่อออนไลน์แล้วถูกปฏิเสธ สถานะห้องไม่แน่ชัด เข้าใจความลำบากในการหาหอพัก"
-      },
-      {
-        title: "Phase 2: User and Task Analysis",
-        description: "ศึกษา Background จากผลศึกษาเบื้องต้น กำหนด Research Scope เป็นนักศึกษา สจล. หมวด Accommodation ทำการสัมภาษณ์ User 3 คน ผ่าน Microsoft Teams ถอดคำพูดบทสัมภาษณ์ เก็บ Observation ภาพค้นหาหอพัก และลงพื้นที่ถ่ายสถานที่จริง"
-      },
-      {
-        title: "Phase 3: Conceptual Design",
-        description: "สรุป User Characteristics สร้าง Persona วิเคราะห์คุณลักษณะร่วม สร้าง Experience Map บน FigJam กำหนด Pain and Gain Statements โหวต Priority กำหนด Functional และ Usability Requirements"
-      },
-      {
-        title: "Phase 4: Detailed Design",
-        description: "วิเคราะห์ Task Lists 8 ข้อ ทำ Dialog Design วิเคราะห์ Essential และ Concrete Use Case กำหนด Task Objects 6 รายการ และออกแบบ Window Diagram พร้อม Container Specification"
-      },
-      {
-        title: "Phase 5: Evaluation and Prototype",
-        description: "Target Platform iOS (Apple HIG) ทำ UI Components 25+ รายการ ออกแบบ Detailed Screen ทุกหน้า สร้าง Prototype ใน Figma ทำ Guerilla Usability Testing 3 คน โดยใช้ Thinking Aloud พบจุดที่ต้องปรับปรุงและแก้ไข"
-      }
+    tags: ["UX Research", "User Interviews", "Apple HIG", "Figma Design System", "Guerilla Usability Testing", "KMITL IT"],
+    techStack: ["Figma", "FigJam", "Apple Human Interface Guidelines (HIG)", "Microsoft Teams (Transcripts)", "Gemini AI", "NotebookLM", "Adobe Premiere Pro"],
+    summary: "Term Project วิชา Human Interface Design (คณะเทคโนโลยีสารสนเทศ สจล.) ภายใต้หัวข้อ 'Easy Dorm: How to help freshy effectively and efficiently find rooms in university dormitory or private residence' นำทีม 4 คนทำหน้าที่ Head Figma Design, Interviewer และ Usability Tester ดำเนินการตามระเบียบวิธีวิจัย UX ครบทั้ง 5 เฟส: Data Gathering, User & Task Analysis, Conceptual Design, Detailed Design และ Usability Evaluation โดยมีผลลัพธ์เป็น Interactive iOS Prototype ตามแนวทาง Apple HIG แก้ไข Pain Points ข้อมูลล้าสมัย สถานะห้องไม่ตรงจริง และการเดินทางสำรวจหอพักด้วยการเดินเท้าข้ามซอยเกกี",
+    problem: "นักศึกษาใหม่ (Freshmen) สจล. ต้องเผชิญความยากลำบากอย่างหนักในการหาหอพักรอบสถาบัน ข้อมูลบนแพลตฟอร์มอย่าง RentHub, Facebook Groups และ Google Maps มักไม่อัปเดต ราคาและรูปภาพไม่ตรงกับสภาพจริง เบอร์ติดต่อโทรแล้วถูกปฏิเสธเพราะห้องเต็มไปแล้ว ขณะที่หอพักในสถาบันมีระบบเปิดจองที่จำกัดและสถานะห้องไม่โปร่งใส ส่งผลให้นักศึกษาต้องเดินสำรวจหอนอกท่ามกลางแดดร้อนในซอยเกกี และใช้เวลาตัดสินใจหาห้องพักตั้งแต่ 1 วันจนถึง 3 เดือนเต็ม",
+    process: "Phase 1: Data Gathering รวบรวมปัญหาจริง 7 ข้อ -> Phase 2: User Research สัมภาษณ์เชิงลึกนักศึกษา 3 คน พร้อมถอดเทปและสังเกตการณ์ภาคสนาม -> Phase 3: Conceptual Design สร้าง Persona 'น้องเฟรช' และ Experience Map บน FigJam -> Phase 4: Detailed Design วิเคราะห์ 8 Task Flows, ออกแบบ Window Diagram และสร้าง 25+ HIG Components -> Phase 5: Guerilla Usability Testing ทดสอบกับผู้ใช้ 3 คนด้วย Thinking Aloud protocol พบ 15+ จุดที่ต้องปรับปรุง",
+    result: "The Solution: Interactive iOS Prototype ที่รวมสถานะห้องว่าง Real-time, ระบบกรองราคาและระยะทางไปคณะ, แผนที่เส้นทางขนส่ง, การเปรียบเทียบห้องพักแบบ Side-by-side, Wishlist แจ้งเตือนเมื่อมีห้องหลุดจอง และระบบ Verified Landlord Contact\nImpact: สัมภาษณ์เชิงลึก 3 คน, สร้าง User Persona & Experience Map จากหลักฐานจริง, ออกแบบหน้าจอ iOS 10+ Views พร้อม Design System 25+ Components และผ่านการทดสอบ Usability Testing พบจุดปรับปรุง 15+ จุด",
+    highlights: [
+      { label: "User Interviews", value: "3 Freshmen", detail: "บันทึกเทปและถอดบทสัมภาษณ์จริง" },
+      { label: "iOS App Prototype", value: "10+ Screens", detail: "ออกแบบตาม Apple HIG 100%" },
+      { label: "UI Design System", value: "25+ Components", detail: "Buttons, Segmented, Cards & Sheets" },
+      { label: "Usability Testing", value: "15+ Findings", detail: "Thinking Aloud protocol iterations" },
     ],
-    result: "The Solution: iOS Prototype สำหรับนักศึกษา สจล. มีฟีเจอร์ สถานะห้องว่าง Real-time ค้นหาขั้นสูง แผนที่โต้ตอบ เปรียบเทียบ Side-by-side Wishlist แจ้งเตือนห้องว่าง ติดต่อเจ้าของยืนยันตัวตน รีวิวจากผู้พักจริง Customer Support Chat\nImpact: สัมภาษณ์เชิงลึก 3 คน Observation สถานที่จริง Persona/Experience Map จากข้อมูลจริง iOS Prototype 10+ หน้าจอ ตาม Apple HIG Usability Testing 3 คน พบ 15+ จุดปรับปรุง กระบวนการ UX ครบวงจรใน 5 สัปดาห์",
+    sections: [
+      {
+        badge: "01 DISCOVERY",
+        title: "The Freshy Dorm Dilemma & Real-World Friction",
+        subtitle: "จุดเริ่มต้นจากปัญหาจริง: นักศึกษาใหม่ลืมจ่ายค่าจองหอในจนหลุดจอง และการหาหอนอกที่ไร้ข้อมูลน่าเชื่อถือ",
+        content: "โจทย์ตั้งต้นเกิดจากสถานการณ์จริงของนักศึกษา สจล. ที่ต้องแย่งชิงสิทธิ์หอพักในมหาวิทยาลัย หากพลาดรอบชำระเงินจะหลุดสิทธิ์ทันทีและต้องถูกผลักออกไปหาหอพักเอกชนรอบนอก (เช่น ซอยเกกีงาม 1-4, ซอยพรฉลองสุข, ซอยจินดา)\n\nจากการสำรวจช่องทางเดิม เช่น RentHub, Facebook Marketplace, และกระทู้ Pantip พบว่าข้อมูลส่วนใหญ่เป็นข้อมูลค้างเก่าตั้งแต่ 1-2 ปีก่อนหน้า: ราคาจริงไม่ตรงกับที่ลงประกาศ, รูปภาพถ่ายมุมกว้างเกินจริง, สถานะห้องว่างไม่มีการอัปเดตแบบ Real-time และไม่มีช่องทางยืนยันความน่าเชื่อถือของเจ้าของหอพัก ทำให้นักศึกษาและผู้ปกครองต้องใช้วิธี 'เดินเท้าตระเวนเคาะประตูถามทีละหอ' ซึ่งสิ้นเปลืองเวลาและพลังงานอย่างมาก",
+        type: "cards",
+        items: [
+          {
+            tag: "PAIN POINT 1",
+            title: "Outdated Online Listings",
+            subtitle: "ข้อมูลล้าสมัย 1-2 ปี",
+            description: "ภาพถ่ายไม่ตรงปก ราคาค่าเช่าและค่าน้ำค่าไฟจริงสูงกว่าที่ระบุในประกาศออนไลน์ โทรไปเบอร์ที่ลงไว้มักได้รับคำตอบว่าห้องเต็มไปนานแล้ว",
+          },
+          {
+            tag: "PAIN POINT 2",
+            title: "Zero Real-Time Vacancy",
+            subtitle: "ไม่มีระบบแสดงสถานะห้องว่าง",
+            description: "ผู้ใช้ไม่สามารถรู้ได้เลยว่าหอพักไหนมีห้องว่างประเภทใดเหลืออยู่บ้าง ต้องเดินทางไปสอบถามกับผู้ดูแลหอพักด้วยตนเองเท่านั้น",
+          },
+          {
+            tag: "PAIN POINT 3",
+            title: "Commute & Safety Blindspot",
+            subtitle: "ไม่รู้ระยะทางและการเดินทางจริง",
+            description: "เด็กต่างจังหวัดไม่คุ้นเคยกับเส้นทางรถสองแถว มอเตอร์ไซค์รับจ้าง หรือระยะเดินเท้าไปคณะ ทำให้เลือกหอที่เดินทางลำบาก",
+          },
+          {
+            tag: "PAIN POINT 4",
+            title: "Unverified Landlord Risk",
+            subtitle: "ความเสี่ยงการโอนเงินจอง",
+            description: "กลัวมิจฉาชีพแอบอ้างสวมรอยเป็นเจ้าของหอพัก ขาดระบบตรวจสอบความถูกต้องและระบบรีวิวจากผู้ที่เคยพักอาศัยอยู่จริง",
+          },
+        ],
+      },
+      {
+        badge: "02 USER RESEARCH",
+        title: "Qualitative Interviews & Behavioral Observations",
+        subtitle: "สัมภาษณ์เชิงลึกนักศึกษา 3 คนผ่าน Microsoft Teams และสำรวจพื้นที่จริงรอบมหาวิทยาลัย",
+        content: "ทีมวิจัยได้คัดเลือกกลุ่มตัวอย่างนักศึกษาใหม่ 3 คนที่มีภูมิหลังและประสบการณ์หาหอพักต่างกันอย่างสิ้นเชิง ดำเนินการสัมภาษณ์แบบกึ่งมีโครงสร้าง (Semi-structured Interview) นานคนละ 45 นาที พร้อมบันทึกวิดีโอและถอด Transcript เพื่อจำแนก Journey, อารมณ์ความรู้สึก และจุดติดขัด (Friction Points)",
+        type: "cards",
+        items: [
+          {
+            tag: "USER #1",
+            title: "โปเต้ (User #1)",
+            subtitle: "หาหอผ่าน Facebook Groups",
+            description: "พยายามค้นหาหอพักผ่านกลุ่ม Facebook แต่เจอปัญหาโพสต์ดันสแปม ข้อมูลไม่ระบุราคาชัดเจน ต้องคอยทักแชทถามทีละแห่ง และเมื่อติดต่อได้ก็มักมีคนจองตัดหน้าไปก่อน",
+            metrics: "ใช้เวลาหา 3 สัปดาห์",
+          },
+          {
+            tag: "USER #2",
+            title: "ฟ้าใส (User #2)",
+            subtitle: "พึ่งพา RentHub & Google Maps",
+            description: "ต้องการหอพักที่เดินไปคณะได้สะดวกและปลอดภัย แต่แอป RentHub ไม่บอกระยะทางเดินเท้าจริงไปตึกเรียน และสถานะห้องว่างในเว็บไม่ตรงกับความเป็นจริง",
+            metrics: "ใช้เวลาหา 1 เดือน",
+          },
+          {
+            tag: "USER #3",
+            title: "ทัก (User #3)",
+            subtitle: "เดินสำรวจภาคสนามด้วยตัวเอง",
+            description: "ไม่เชื่อข้อมูลบนอินเทอร์เน็ตเพราะเคยเกือบโดนหลอกมัดจำ จึงตัดสินใจพาผู้ปกครองเดินเท้าเคาะถามหอพักทีละตึกในซอยเกกีจนเหนื่อยล้าและเสียเวลา",
+            metrics: "ใช้เวลาหา 3 เดือน",
+          },
+        ],
+      },
+      {
+        badge: "03 CONCEPTUAL DESIGN",
+        title: "Target Persona 'Nong Fresh' & FigJam Experience Map",
+        subtitle: "การสังเคราะห์ข้อมูลเชิงคุณภาพสู่โมเดลผู้ใช้ และการจัดลำดับความสำคัญของฟีเจอร์",
+        content: "จากข้อมูลบทสัมภาษณ์ ทีมงานได้สังเคราะห์ออกมาเป็น Persona ตัวแทนกลุ่มเป้าหมายชื่อ 'น้องเฟรช' (เด็กปี 1 ต่างจังหวัดที่ต้องการหอพักที่ปลอดภัย ใกล้เพื่อน และเดินทางสะดวก) พร้อมกาง FigJam Board จัดทำ Experience Map เพื่อระบุ Touchpoints ตั้งแต่ Awareness, Research, Decision, ไปจนถึง Booking\n\nทีมงานได้ทำ Pain vs. Gain Prioritization Matrix เพื่อคัดเลือกความต้องการจำเป็น (Functional Requirements) ที่สร้างผลกระทบสูงสุดแทนการทำฟีเจอร์ฟุ่มเฟือย",
+        image: "/images/Project/Chaodom/Phase 3 Analysis & Conceptual Design/Persona.png",
+        imageCaption: "Persona Poster: 'น้องเฟรช' — ตัวแทนนักศึกษาใหม่ สจล. ผู้มองหาหอพักที่โปร่งใสและปลอดภัย",
+        type: "grid",
+        items: [
+          {
+            tag: "REQUIREMENT 1",
+            title: "Live Vacancy Tracker",
+            subtitle: "สถานะห้องว่างแบบ Real-Time",
+            description: "แสดงจำนวนห้องว่างที่อัปเดตตรงจากผู้ดูแลหอพัก พร้อมตัวกรองประเภทห้อง (พัดลม/แอร์, เตียงเดี่ยว/เตียงคู่)",
+          },
+          {
+            tag: "REQUIREMENT 2",
+            title: "Campus Transport Routing",
+            subtitle: "แผนที่คำนวณระยะทางไปคณะ",
+            description: "แสดงระยะทางเดินเท้า, จุดจอดรถสองแถว, วินมอเตอร์ไซค์ และเวลาเฉลี่ยในการเดินทางไปตึกเรียนของแต่ละคณะ",
+          },
+          {
+            tag: "REQUIREMENT 3",
+            title: "Side-by-Side Comparison",
+            subtitle: "ตารางเปรียบเทียบคุณสมบัติ",
+            description: "เลือกเปรียบเทียบหอพักได้พร้อมกันสูงสุด 3 แห่ง ดูผลต่างของค่าน้ำ ค่าไฟ ค่าส่วนกลาง และสิ่งอำนวยความสะดวกในหน้าเดียว",
+          },
+          {
+            tag: "REQUIREMENT 4",
+            title: "Verified Landlord & Review",
+            subtitle: "ยืนยันตัวตนเจ้าของหอและรีวิวจริง",
+            description: "ตราสัญลักษณ์ Verified จากสถาบัน พร้อมพื้นที่รีวิวจากนักศึกษาปัจจุบันที่ผ่านการยืนยันรหัสนักศึกษา",
+          },
+        ],
+      },
+      {
+        badge: "04 DETAILED iOS DESIGN",
+        title: "8 Task Flows, Window Diagrams & Apple HIG Component Map",
+        subtitle: "สถาปัตยกรรมการนำทางบนระบบปฏิบัติการ iOS และการสร้างคลังส่วนประกอบ UI กว่า 25 ชิ้น",
+        content: "ในฐานะ Head Figma Design ได้แปลง Conceptual Requirements เป็น 8 Core Task Lists (เช่น ค้นหาห้องว่าง, กรองตามระยะทาง, บันทึก Wishlist, และติดต่อเจ้าของหอพัก) ทำการออกแบบ Window Navigation Diagram และ Container Specifications เพื่อควบคุม Hierarchy ของหน้าจอให้เป็นระเบียบ\n\nทุกหน้าจอถูกสร้างขึ้นโดยอ้างอิง Apple Human Interface Guidelines (HIG) อย่างเคร่งครัด: ใช้ Dynamic Type ขนาดอ่านง่าย, Touch Target ไม่ต่ำกว่า 44x44pt, Native iOS Tab Bar, Segmented Controls, และ Bottom Sheets เพื่อให้ผู้ใช้รู้สึกคุ้นเคยและใช้งานได้ทันทีโดยไม่ต้องเรียนรู้ใหม่",
+        image: "/images/Project/Chaodom/UI Component Map/1.png",
+        imageCaption: "UI Component Map & Design Tokens ที่ออกแบบตามมาตรฐาน Apple Human Interface Guidelines",
+        type: "grid",
+        items: [
+          {
+            tag: "TASK OBJECT 1",
+            title: "Dormitory Card & Header",
+            subtitle: "Container สำหรับข้อมูลหอพัก",
+            description: "แสดงรูปถ่ายจริง 3:2, ป้ายราคาเริ่มต้น, สถานะห้องว่างแบบ Badge สีเขียว, และระยะทางเดินไปคณะที่ใกล้ที่สุด",
+          },
+          {
+            tag: "TASK OBJECT 2",
+            title: "Interactive Filter Sheet",
+            subtitle: "แผ่นกรองข้อมูลแบบ Bottom Sheet",
+            description: "รองรับการสไลด์กรองช่วงงบประมาณ (Slider), สิ่งอำนวยความสะดวก (Chips), และประเภทสัญญาเช่า",
+          },
+          {
+            tag: "TASK OBJECT 3",
+            title: "Room Detail Modal",
+            subtitle: "รายละเอียดห้องพักรายยูนิต",
+            description: "แจกแจงค่าใช้จ่ายยิบย่อย: ค่าน้ำต่อยูนิต, ค่าไฟต่อหน่วย, ค่าอินเทอร์เน็ต และกฎระเบียบของหอพัก (เลี้ยงสัตว์/ที่จอดรถ)",
+          },
+          {
+            tag: "TASK OBJECT 4",
+            title: "One-Tap Landlord Dial & Chat",
+            subtitle: "ช่องทางติดต่อตรงที่มีความปลอดภัย",
+            description: "ปุ่มโทรออกและแชทตรงถึงเจ้าของหอพัก พร้อมประวัติการติดต่อและเวลาที่เจ้าของหอพักสะดวกรับสาย",
+          },
+        ],
+      },
+      {
+        badge: "05 USABILITY EVALUATION",
+        title: "Guerilla Usability Testing (Thinking Aloud) & Iterations",
+        subtitle: "ทดสอบการใช้งานจริงกับกลุ่มตัวอย่าง 3 คน เพื่อวัด Success Rate และค้นพบจุดติดขัด 15+ รายการ",
+        content: "ทีมงานได้นำ Interactive Figma Prototype ไปทดสอบ Usability Testing กับนักศึกษา 3 คน โดยกำหนด Scenario จริง เช่น 'ให้น้องเฟรชหาห้องพักแอร์ในซอยเกกีที่มีงบไม่เกิน 5,000 บาท และมีที่จอดรถ' พร้อมใช้เทคนิค Thinking Aloud ให้ผู้ใช้พูดความคิดออกมาตลอดการกดหน้าจอ\n\nผลการทดสอบพบจุดติดขัดและประเด็นปรับปรุงมากกว่า 15 จุด ซึ่งทีมงานได้นำมาปรับแก้ทันทีใน Prototype รอบสุดท้าย:",
+        image: "/images/Project/Chaodom/Phase 3 Analysis & Conceptual Design/Experience Map.png",
+        imageCaption: "Experience Map จาก FigJam: ติดตามความพึงพอใจและจุดสะดุดของผู้ใช้ตลอดกระบวนการทดสอบ",
+        type: "cards",
+        items: [
+          {
+            tag: "ITERATION 1",
+            title: "Filter Visibility & Reset",
+            subtitle: "ปุ่มกรองมองเห็นยาก",
+            description: "เดิมปุ่ม Filter กลืนไปกับแถบค้นหา ปรับให้เป็น Sticky Floating Pill พร้อมแสดงตัวเลขจำนวน Filter ที่เปิดใช้งานอยู่",
+          },
+          {
+            tag: "ITERATION 2",
+            title: "Map Pinch & Touch Targets",
+            subtitle: "หมุดบนแผนที่กดยากเมื่ออยู่ใกล้กัน",
+            description: "ปรับ Marker Clustering บนแผนที่ และขยาย Touch Target ของหมุดหอพักให้แตะเลือกได้ง่ายขึ้นบนหน้าจอมือถือ",
+          },
+          {
+            tag: "ITERATION 3",
+            title: "Price Transparency Breakdown",
+            subtitle: "ผู้ใช้กังวลค่าใช้จ่ายแฝง",
+            description: "เพิ่ม Card แจกแจงค่าน้ำ ค่าไฟ และค่ามัดจำแรกเข้าให้เห็นเด่นชัดก่อนกดปุ่มติดต่อเจ้าของหอพัก",
+          },
+        ],
+      },
+    ],
     gallery: [
-      "/images/Project/Chaodom/Visual principle/1.png",
-      "/images/Project/Chaodom/Visual principle/2.png",
-      "/images/Project/Chaodom/Visual principle/3.png",
-      "/images/Project/Chaodom/Visual principle/4.png",
-      "/images/Project/Chaodom/Visual principle/5.png",
-      "/images/Project/Chaodom/Visual principle/6.png",
-      "/images/Project/Chaodom/Visual principle/7.png",
-      "/images/Project/Chaodom/Visual principle/8.png",
-      "/images/Project/Chaodom/Visual principle/9.png",
-      "/images/Project/Chaodom/Visual principle/10.png",
-      "/images/Project/Chaodom/Visual principle/11.png",
-      "/images/Project/Chaodom/Visual principle/12.png",
-      "/images/Project/Chaodom/Visual principle/13.png",
-      "/images/Project/Chaodom/Visual principle/14.png",
-      "/images/Project/Chaodom/Visual principle/15.png",
-      "/images/Project/Chaodom/Visual principle/16.png",
-      "/images/Project/Chaodom/Visual principle/17.png",
-      "/images/Project/Chaodom/Visual principle/18.png"
+      "/images/Project/Chaodom/App Screens Overview/3.png",
+      "/images/Project/Chaodom/App Screens Overview/4.png",
+      "/images/Project/Chaodom/App Screens Overview/5.png",
+      "/images/Project/Chaodom/App Screens Overview/6.png",
+      "/images/Project/Chaodom/App Screens Overview/7.png",
+      "/images/Project/Chaodom/App Screens Overview/8.png",
+      "/images/Project/Chaodom/App Screens Overview/9.png",
+      "/images/Project/Chaodom/App Screens Overview/10.png",
+      "/images/Project/Chaodom/App Screens Overview/11.png",
+      "/images/Project/Chaodom/UI Component Map/1.png",
+      "/images/Project/Chaodom/UI Component Map/2.png",
+      "/images/Project/Chaodom/UI Component Map/3.png",
+      "/images/Project/Chaodom/UI Component Map/4.png",
+      "/images/Project/Chaodom/Phase 3 Analysis & Conceptual Design/Persona.png",
+      "/images/Project/Chaodom/Phase 3 Analysis & Conceptual Design/Experience Map.png",
     ],
+    liveUrl: "https://www.figma.com/proto/2nTtYi87yFHnPVftJ8BNt6/EasyDom?node-id=0-1&t=lUHessBzTGrR6b5z-1",
   },
   {
     slug: "polygon-mesh",
@@ -267,7 +962,132 @@ export const projects: Project[] = [
     problem: "หัวข้อ polygon mesh ยากต่อการจินตนาการจาก text-only หรือ slide แบบนิ่ง จึงจำเป็นต้องมีสื่อที่แสดงลำดับการเกิดรูปทรงอย่างเป็นภาพและมี interaction ช่วยให้ผู้เรียนเชื่อมโยงแนวคิดได้ง่ายขึ้น",
     process: "ออกแบบ home และ topic navigation → แยกเนื้อหา 2D และ 3D พร้อมลูกศร next/back และ dropdown config → ใช้ hover / prototype linking / while hovering เพื่อทำให้เนื้อหามีความเคลื่อนไหว → สร้าง jigsaw game ด้วย Pen Tool, Image Cutter และ Property Randomizer",
     result: "The Solution: สื่อการเรียนรู้ที่ผู้ใช้สามารถเห็นการเปลี่ยนแปลงของ object ทีละส่วน กดสำรวจหัวข้อเชิงลึก และลงมือเล่นผ่าน jigsaw เพื่อ reinforce ความเข้าใจ\nImpact: ช่วยเปลี่ยนเนื้อหาพื้นฐาน 3D modeling ให้เข้าใจง่าย สนุก และจดจำได้ดีขึ้นผ่านการมีส่วนร่วมของผู้เรียน\nChallenges: ทำให้เรื่อง polygon mesh และ 3D object representation ซึ่งค่อนข้าง abstract เข้าใจง่ายขึ้นผ่าน interaction, animation, hover states, draggable pieces และ content flow ที่ผู้เรียนกดสำรวจได้เอง",
+    highlights: [
+      { label: "Learning Flow", value: "4 Stages", detail: "2D Vertices → 3D Mesh → Structure Study → Jigsaw Game" },
+      { label: "Interactive Canvas", value: "Figma Sites", detail: "Draggable components, hover states & state transitions" },
+      { label: "Plugins Applied", value: "Property Randomizer", detail: "Image Cutter & vector mesh procedural slicing" },
+      { label: "Game Mechanics", value: "Real-Time Jigsaw", detail: "Hands-on polygon face assembly for cognitive retention" },
+    ],
+    sections: [
+      {
+        badge: "01 PEDAGOGICAL DESIGN",
+        title: "Making Abstract 3D Math Understandable Without Code",
+        subtitle: "เปลี่ยนทฤษฎีคณิตศาสตร์ 3D ที่เป็นนามธรรมให้กลายเป็นสื่อการเรียนรู้เชิงปฏิสัมพันธ์ที่มองเห็นภาพจริง",
+        content: "การทำความเข้าใจโครงสร้าง Polygon Mesh มักเป็นเรื่องยากสำหรับผู้เริ่มต้นเรียน Computer Graphics เนื่องจากสไลด์การสอนทั่วไปมักเป็นข้อความและภาพนิ่ง 2D ทำให้มองไม่ออกว่าจุดยอด (Vertices) ขอบ (Edges) และระนาบ (Faces) เชื่อมโยงกันอย่างไรจนเกิดเป็นรูปทรง 3 มิติ\n\nโปรเจกต์นี้จึงออกแบบกระบวนการเรียนรู้แบบ 4 ขั้นตอน (2D to 3D Scaffolding Flow) เริ่มต้นจากการสร้างรูปทรง 2 มิติอย่างง่าย การทดลองปรับแต่ง Config จากนั้นขยายสู่ 3D Mesh Representation และปิดท้ายด้วยการลงมือประกอบโมเดลด้วยตัวเอง",
+        image: "/images/Project/Multimedia Learning Polygon Mesh/45.png",
+        imageCaption: "หน้าแรกและการนำทางหลัก (Main Navigation): แสดงภาพรวมของหัวข้อ 2D, 3D และเกมประกอบโมเดล 3D Jigsaw",
+        type: "cards",
+        items: [
+          {
+            tag: "COGNITIVE LOAD",
+            title: "Abstract 3D Barrier",
+            subtitle: "ปัญหาภาพนิ่งทำลายความเข้าใจ",
+            description: "ผู้เรียนมองไม่เห็นความสัมพันธ์ระหว่างแกน X, Y, Z และระนาบ Face หากไม่มีมิติทางสายตาที่ขยับและหมุนได้",
+          },
+          {
+            tag: "SCAFFOLDING",
+            title: "2D to 3D Step-by-Step",
+            subtitle: "ลำดับการสอนแบบค่อยเป็นค่อยไป",
+            description: "ปูพื้นฐานจากจุดและเส้นบนระนาบ 2D ก่อนจะเชื่อมต่อไปสู่การประกอบกลายเป็นปริมาตร 3 มิติในพื้นที่สามแกน",
+          },
+          {
+            tag: "ACTIVE RECALL",
+            title: "Hands-On Exploration",
+            subtitle: "เรียนรู้ผ่านการกดสำรวจ",
+            description: "แทนที่จะให้อ่านอย่างเดียว ผู้เรียนสามารถกดสลับมุมมองและทดสอบเปลี่ยนพารามิเตอร์ของรูปทรงได้ด้วยตนเอง",
+          },
+          {
+            tag: "RETENTION",
+            title: "Reinforcement with Game",
+            subtitle: "ตอกย้ำความจำด้วยเกม",
+            description: "ใช้กลไก Jigsaw Puzzle บังคับให้ผู้เรียนต้องระบุระนาบ Face ให้ถูกต้องก่อนจะประกอบเข้าเป็นโมเดลที่สมบูรณ์",
+          },
+        ],
+      },
+      {
+        badge: "02 INTERACTION ARCHITECTURE",
+        title: "Figma Micro-Interactions, Hover States & Step-by-Step Config",
+        subtitle: "การสร้างสรรค์ส่วนต่อประสานที่ตอบสนองต่อการเคลื่อนไหวของผู้เรียนอย่างนุ่มนวล",
+        content: "ในฐานะ Head Figma Design ได้วาง Interaction Architecture บน Figma Prototype อย่างประณีต: ใช้ฟังก์ชัน While Hovering เพื่อไฮไลท์ชิ้นส่วนเฉพาะ เช่น เมื่อเลื่อนเมาส์ไปโดน Vertex จุดยอดนั้นจะเรืองแสงพร้อมกล่องคำอธิบายลอยขึ้นมา (Tooltip Annotation)\n\nนอกจากนี้ยังมีระบบ Dropdown Config ให้ผู้เรียนสลับดูความแตกต่างระหว่าง Wireframe Mesh, Shaded Face, และ Solid Object ได้แบบทันทีโดยไม่ต้องโหลดหน้าใหม่",
+        image: "/images/Project/Multimedia Learning Polygon Mesh/48.png",
+        imageCaption: "โมดูลศึกษาโครงสร้าง Polygon Mesh: การแสดงผลชิ้นส่วนแบบแยกเลเยอร์พร้อมคำอธิบายองค์ประกอบย่อย",
+        type: "grid",
+        items: [
+          {
+            tag: "HOVER SYSTEM",
+            title: "While Hovering Annotations",
+            subtitle: "ไฮไลท์ชิ้นส่วนตามตำแหน่งเมาส์",
+            description: "เมื่อผู้เรียนชี้เมาส์ไปยังส่วนประกอบของโมเดล ระบบจะขยายขนาดและเปลี่ยนสีชิ้นส่วนนั้นเพื่อเน้นย้ำความสำคัญ",
+          },
+          {
+            tag: "CONFIG PANEL",
+            title: "Interactive Property Config",
+            subtitle: "ปรับเปลี่ยนคุณสมบัติรูปทรง",
+            description: "สลับดูการแบ่ง Subdivision Surface และการจัดวางโพลีกอนรูปสามเหลี่ยม (Tris) หรือสี่เหลี่ยม (Quads)",
+          },
+          {
+            tag: "PROGRESSIVE FLOW",
+            title: "Next/Back Guided Tour",
+            subtitle: "เส้นทางการเรียนรู้แบบเป็นขั้น",
+            description: "มีปุ่มนำทางพร้อม Progress Indicator บอกสถานะว่าผู้เรียนผ่านหัวข้อใดไปแล้วและเหลืออีกกี่ขั้นตอน",
+          },
+          {
+            tag: "SMOOTH TRANSITION",
+            title: "Smart Animate Morphing",
+            subtitle: "เปลี่ยนรูปทรงอย่างลื่นไหล",
+            description: "ใช้ Figma Smart Animate ช่วยให้การแปลงร่างจาก 2D Polygon ไปสู่ 3D Mesh เกิดขึ้นอย่างต่อเนื่องทางสายตา",
+          },
+        ],
+      },
+      {
+        badge: "03 GAME-BASED EVALUATION",
+        title: "Jigsaw Polygonal Game & Procedural Puzzle Assembly",
+        subtitle: "การนำทฤษฎีมาสู่เกมต่อจิ๊กซอว์ 3D ด้วยปลั๊กอิน Image Cutter และ Property Randomizer",
+        content: "เพื่อวัดความเข้าใจของผู้เรียน โปรเจกต์ได้นำเสนอนวัตกรรมการเรียนรู้ในรูปแบบ 'Jigsaw Polygonal Game' ผู้เรียนต้องลากชิ้นส่วน Face ของโมเดลรูปทรงเรขาคณิตที่กระจายอยู่มาต่อเข้ากับโครงลวด (Wireframe Skeleton) ให้ถูกต้อง\n\nการพัฒนามินิเกมบน Figma ถูกทำขึ้นโดยใช้ Pen Tool วาดโครงร่างโพลีกอน ใช้ปลั๊กอิน Image Cutter ผ่าตัดชิ้นส่วนรูปทรง และใช้ Property Randomizer เพื่อสุ่มตำแหน่งการกระจายตัวของชิ้นจิ๊กซอว์ ทำให้ผู้เรียนได้ฝึกมโนทัศน์เชิงพื้นที่ (Spatial Reasoning) อย่างเต็มที่",
+        image: "/images/Project/Multimedia Learning Polygon Mesh/51.png",
+        imageCaption: "เกมต่อจิ๊กซอว์ 3D Polygon: ผู้เรียนลาก Face แต่ละชิ้นมาประกอบเข้ากับโครงลวดเพื่อตรวจสอบความถูกต้องของระนาบ",
+        type: "cards",
+        items: [
+          {
+            tag: "GAME ENGINE",
+            title: "Draggable Canvas Pieces",
+            subtitle: "ลากวางชิ้นส่วนแบบ Real-Time",
+            description: "สร้างคอมโพเนนต์ชิ้นส่วนที่รองรับการลากวางได้อย่างอิสระบนหน้าจอ พร้อมแม่เหล็ก Snap เข้าตำแหน่งโครงร่าง",
+          },
+          {
+            tag: "PLUGIN WORKFLOW",
+            title: "Image Cutter & Slicing",
+            subtitle: "ตัดชิ้นส่วนโพลีกอนอย่างแม่นยำ",
+            description: "ใช้ปลั๊กอินตัดระนาบภาพ 3D ออกเป็นชิ้นส่วนย่อยตามแนวเส้น Edge เพื่อนำมาสร้างเป็นชุดตัวต่อจิ๊กซอว์",
+          },
+          {
+            tag: "RANDOMIZER",
+            title: "Property Randomizer Logic",
+            subtitle: "สุ่มการจัดวางเริ่มต้น",
+            description: "กระจายตำแหน่งและมุมเอียงของชิ้นส่วนแต่ละชิ้นในหน้าจอ เพื่อให้เกิดความท้าทายในการค้นหาและจับคู่",
+          },
+          {
+            tag: "LEARNING IMPACT",
+            title: "Spatial Reasoning Boost",
+            subtitle: "เสริมสร้างมิติสัมพันธ์",
+            description: "ผลการทดสอบกับผู้เรียนช่วยให้จดจำโครงสร้างโมเดล 3D ได้แม่นยำขึ้นอย่างเห็นได้ชัดเมื่อเทียบกับการอ่านสไลด์นิ่ง",
+          },
+        ],
+      },
+    ],
     gallery: [
+      "/images/Project/Multimedia Learning Polygon Mesh/44.png",
+      "/images/Project/Multimedia Learning Polygon Mesh/45.png",
+      "/images/Project/Multimedia Learning Polygon Mesh/46.png",
+      "/images/Project/Multimedia Learning Polygon Mesh/47.png",
+      "/images/Project/Multimedia Learning Polygon Mesh/48.png",
+      "/images/Project/Multimedia Learning Polygon Mesh/49.png",
+      "/images/Project/Multimedia Learning Polygon Mesh/50.png",
+      "/images/Project/Multimedia Learning Polygon Mesh/51.png",
+      "/images/Project/Multimedia Learning Polygon Mesh/52.png",
+      "/images/Project/Multimedia Learning Polygon Mesh/53.png",
+      "/images/Project/Multimedia Learning Polygon Mesh/54.png",
+      "/images/Project/Multimedia Learning Polygon Mesh/55.png",
       "/images/Project/Multimedia Learning Polygon Mesh/FUll galary/2.png",
       "/images/Project/Multimedia Learning Polygon Mesh/FUll galary/3.png",
       "/images/Project/Multimedia Learning Polygon Mesh/FUll galary/4.png",
@@ -299,27 +1119,158 @@ export const projects: Project[] = [
     summary: "ผู้เล่นเริ่มต้นในปี 2000 บริหารบริษัท VPS hosting ด้วยทรัพยากรหลักคือ money และ rating ซื้อ server ติดตั้งบน rack รับ requests จากลูกค้าผ่าน messenger ปรับสเปก VM จัดการเวลา deploy รับมือ event ระหว่างเช่า และอัปเกรด skill 6 ด้านเพื่อขยายกิจการ",
     problem: "การนำหัวข้อเทคนิคอย่าง VPS, rack, virtual machine, network และ security มาทำให้เข้าใจง่ายพอสำหรับผู้เล่นทั่วไปโดยยังคงความลึกของระบบ",
     process: "วาง core concept และ game loop → ออกแบบ data relationship ของ company, requests, rack และ VM → พัฒนาระบบเวลาและ event system → สร้าง UI ธีม cyberpunk พร้อม pixel art",
-    phases: [
-      {
-        title: "Core Concept & Game Loop Design",
-        description: "วาง core loop: รับ request → จัดสรร VM → deploy → รับรายได้ → อัปเกรดระบบ ออกแบบ mechanic หลักและ win/lose condition"
-      },
-      {
-        title: "Data Relationship & OOP Architecture",
-        description: "ออกแบบความสัมพันธ์ของ company, customer requests, rack configuration และ VM assignments ให้เป็น OOP architecture ที่ยืดหยุ่น"
-      },
-      {
-        title: "Time System & Event Simulation",
-        description: "พัฒนาระบบเวลา (30 วินาทีจริง = 1 วันในเกม) และ event system เพื่อสร้างแรงกดดันและ progression ระหว่างการเช่า"
-      },
-      {
-        title: "Cyberpunk UI & Pixel Art Graphics",
-        description: "สร้าง UI ธีม cyberpunk ด้วย JavaFX และใช้ pixel art / graphic support เพื่อให้เกมมีเอกลักษณ์ที่จดจำได้"
-      }
-    ],
     result: "The Solution: เกมจำลองธุรกิจเชิงระบบที่มีทั้งความรู้สึกของ tycoon game และการจัดการ resource เชิงเทคนิค พร้อมระบบ save/load และ event-driven progression\nImpact: ได้ฝึก OOP, game system design, state management, และการทำงานร่วมกันในโปรเจกต์ขนาดทีม\nChallenges: จำลองระบบธุรกิจ VPS ที่มีทรัพยากรหลายชั้นให้เล่นสนุกและเข้าใจง่าย, ออกแบบความสัมพันธ์ระหว่าง rack / VM / requests / skill / events, และทำ UI ธีม cyberpunk ให้เข้ากับเนื้อหาเชิงเทคนิค",
+    highlights: [
+      { label: "Simulation Time", value: "30s = 1 Day", detail: "Real-time tick loop with month-end financial reconciliation" },
+      { label: "Skill Progression", value: "6 Trees", detail: "Deploy, Networks, Security, Marketing, Management, Rack Slot" },
+      { label: "UI & Graphics", value: "JavaFX + Aseprite", detail: "Custom pixel art server room, racks, and client chat UI" },
+      { label: "State Architecture", value: "OOP Domain Model", detail: "Decoupled Company, Rack, VM, Contract, and Event listeners" },
+    ],
+    sections: [
+      {
+        badge: "01 CORE TYCOON LOOP",
+        title: "Year 2000 ISP Hosting Economy & Time Tick Simulation",
+        subtitle: "การจำลองเศรษฐกิจศูนย์ข้อมูลยุคดอทคอม: บริหารเงินทุน ค่าไฟ และความพึงพอใจของลูกค้า",
+        content: "ผู้เล่นเริ่มต้นในยุคเริ่มต้นของอินเทอร์เน็ต (ปี 2000) สวมบทบาทเป็นผู้ก่อตั้งบริษัทให้บริการเช่าเซิร์ฟเวอร์เสมือน (VPS Hosting) มีทรัพยากรหลักคือ เงินทุน (Capital) และเรตติ้งความน่าเชื่อถือ (Rating)\n\nระบบเวลาในเกมถูกออกแบบเป็น Real-time Tick Loop โดยกำหนดให้ '30 วินาทีจริงเท่ากับ 1 วันในเกม' ทุกสิ้นเดือนระบบจะหักค่าใช้จ่ายคงที่ เช่น ค่าเช่าพื้นที่ดาต้าเซ็นเตอร์ ค่าไฟฟ้าของตู้ Rack และค่าแบนด์วิดท์เครือข่าย หากผู้เล่นบริหารกระแสเงินสดไม่ทันจนติดลบ บริษัทจะเข้าสู่ภาวะล้มละลายทันที",
+        image: "/images/Project/VPS-Tycoon/58.png",
+        imageCaption: "หน้าจอแดชบอร์ดหลักของ VPS-Tycoon: แสดงเงินทุน วันที่ เรตติ้ง และห้องเซิร์ฟเวอร์แบบ Real-time",
+        type: "cards",
+        items: [
+          {
+            tag: "TIME TICK",
+            title: "30s = 1 Day Tick Engine",
+            subtitle: "การหมุนเวียนของเวลาในเกม",
+            description: "ระบบจำลองเวลาที่สร้างแรงกดดันให้ผู้เล่นต้องรีบตอบกลับข้อความลูกค้าและ Deploy เซิร์ฟเวอร์ให้ทันกำหนดสัญญาเช่า",
+          },
+          {
+            tag: "RESOURCE BALANCE",
+            title: "Capital vs Rating Dynamic",
+            subtitle: "สมดุลเงินทุนและความน่าเชื่อถือ",
+            description: "หากรับลูกค้าเกินกำลัง เซิร์ฟเวอร์จะล่มและเรตติ้งจะตก แต่ถ้าไม่ลงทุนซื้อเครื่องใหม่ รายได้ก็จะไม่พอจ่ายค่าไฟสิ้นเดือน",
+          },
+          {
+            tag: "OPERATIONAL COST",
+            title: "Data Center Overheads",
+            subtitle: "ต้นทุนค่าไฟฟ้าและ Rack Slot",
+            description: "คำนวณต้นทุนการกินไฟตามจำนวน Blade Server ที่ติดตั้งจริงบนตู้ Rack ทำให้ผู้เล่นต้องคิดถึงความคุ้มค่าของการลงทุน",
+          },
+          {
+            tag: "PROGRESSION",
+            title: "Year-by-Year Tech Evolution",
+            subtitle: "การเปลี่ยนผ่านของเทคโนโลยี",
+            description: "ปลดล็อกฮาร์ดแวร์รุ่นใหม่และสัญญาเช่าองค์กรขนาดใหญ่ขึ้นเมื่อบริษัทดำเนินกิจการข้ามปีอย่างมั่นคง",
+          },
+        ],
+      },
+      {
+        badge: "02 OOP DOMAIN ARCHITECTURE",
+        title: "Decoupled Server Racks, Virtual Machines & Customer Messenger",
+        subtitle: "การออกแบบสถาปัตยกรรมเชิงวัตถุ (OOP) ที่จำลองความสัมพันธ์ของระบบเซิร์ฟเวอร์จริง",
+        content: "แกนหลักด้านวิศวกรรมซอฟต์แวร์ของโปรเจกต์นี้คือการประยุกต์ใช้แนวคิดเชิงวัตถุ (Object-Oriented Programming) อย่างเคร่งครัด ทีมงานได้ออกแบบโครงสร้างคลาสแยกขาดจากกัน (Decoupled Domain Entities):\n\n- Company: ศูนย์กลางจัดการสถานะทางการเงิน ชื่อเสียง และคลังฮาร์ดแวร์\n- Rack & BladeServer: จำลองขนาด Unit (1U/2U/4U), กำลังไฟ, จำนวน Core CPU และ RAM สูงสุด\n- VirtualMachine: การจัดสรร Slice ทรัพยากรจากฮาร์ดแวร์จริงเพื่อจับคู่กับ Customer Request\n- MessengerQueue: ท่อรับข้อความจากลูกค้าที่ส่งความต้องการเข้ามาพร้อมกำหนดเวลาส่งมอบ",
+        image: "/images/Project/VPS-Tycoon/63.png",
+        imageCaption: "ระบบ Messenger รับคำสั่งเช่า VPS จากลูกค้า: ผู้เล่นต้องจัดสรรสเปก VM ให้ตรงกับความต้องการและงบประมาณ",
+        type: "grid",
+        items: [
+          {
+            tag: "CLASS DESIGN",
+            title: "Rack & Blade Hierarchy",
+            subtitle: "การประกอบชิ้นส่วนเซิร์ฟเวอร์",
+            description: "ใช้ Composition และ Polymorphism จัดการตู้ Rack ที่สามารถเสียบ Blade Server แต่ละรุ่นที่มีสเปกต่างกันเข้าไปได้",
+          },
+          {
+            tag: "ALLOCATION",
+            title: "Virtual Machine Slicing",
+            subtitle: "การแบ่งสเปก Core & RAM",
+            description: "คำนวณทรัพยากรคงเหลือบน Physical Server หากผู้เล่นจัดสรร VM เกินขีดความสามารถ ระบบจะแจ้งเตือน Resource Overcommit",
+          },
+          {
+            tag: "MESSENGER",
+            title: "Dynamic Customer Contract",
+            subtitle: "สัญญาเช่าที่หลากหลาย",
+            description: "ลูกค้าแต่ละรายมี Persona, งบประมาณ, และความอดทนในการรอคอยที่ต่างกัน (เช่น เว็บไซต์อีคอมเมิร์ซ, บล็อกส่วนตัว, เซิร์ฟเวอร์เกม)",
+          },
+          {
+            tag: "STATE PATTERN",
+            title: "Lifecycle State Machine",
+            subtitle: "สถานะของสัญญาเช่า",
+            description: "จัดการ State ของ VM: PENDING → DEPLOYING → ACTIVE → EXPIRED → TERMINATED อย่างรัดกุม",
+          },
+        ],
+      },
+      {
+        badge: "03 CRISIS SIMULATION & TECH TREE",
+        title: "DDoS Attacks, Power Outages & 6-Branch Research Tree",
+        subtitle: "การจำลองวิกฤตความปลอดภัยและระบบผังทักษะอัปเกรดประสิทธิภาพ 6 ด้าน",
+        content: "เพื่อความสมจริงของธุรกิจโฮสติ้ง เกมได้ใส่ระบบ Event-Driven Simulation ที่สุ่มเกิดเหตุการณ์ไม่คาดฝัน เช่น เหตุการณ์ DDoS Attack ยิงทราฟฟิกถล่ม, ไฟกระชากในดาต้าเซ็นเตอร์, หรือความร้อนสะสมจนฮาร์ดแวร์เสียหาย\n\nผู้เล่นสามารถรับมือวิกฤตเหล่านี้ผ่าน 'Research Skill Tree' ที่แบ่งออกเป็น 6 สายความก้าวหน้า: Deploy Speed, Network Bandwidth, Cyber Security, Marketing, Datacenter Management, และ Rack Expansion Slots",
+        image: "/images/Project/VPS-Tycoon/71.png",
+        imageCaption: "หน้าจอวิจัยทักษะ 6 ด้าน (Research Tree): ปลดล็อกความสามารถด้านความปลอดภัย ระบบเครือข่าย และการตลาด",
+        type: "cards",
+        items: [
+          {
+            tag: "SECURITY EVENT",
+            title: "DDoS & Firewall Mitigation",
+            subtitle: "รับมือการโจมตีทางไซเบอร์",
+            description: "เมื่อเกิดการโจมตี หากผู้เล่นไม่อัปเกรด Firewall สัญญาเช่าลูกค้าจะหลุดและค่าปรับจะพุ่งสูงทันที",
+          },
+          {
+            tag: "HARDWARE FAILURE",
+            title: "Hardware Depreciation & Heat",
+            subtitle: "การเสื่อมสภาพและความร้อน",
+            description: "เซิร์ฟเวอร์ที่ใช้งานหนักจะมีความร้อนสะสม ผู้เล่นต้องตัดสินใจซื้อระบบระบายความร้อนหรือเปลี่ยนอะไหล่",
+          },
+          {
+            tag: "TECH TREE",
+            title: "6 Specialized Skill Branches",
+            subtitle: "สายการวิจัย 6 แขนง",
+            description: "เลือกลงแต้มวิจัยเพื่อสร้างจุดเด่นให้บริษัท เช่น เน้นความเร็วในการ Deploy หรือเน้นความปลอดภัยระดับสถาบันการเงิน",
+          },
+          {
+            tag: "MARKET REPUTATION",
+            title: "Viral Marketing Multiplier",
+            subtitle: "การตลาดเพิ่มจำนวนลูกค้า",
+            description: "ลงทุนแคมเปญโฆษณาในนิตยสารคอมพิวเตอร์เพื่อดึงดูดสัญญาระยะยาวและลูกค้าระดับพรีเมียม",
+          },
+        ],
+      },
+      {
+        badge: "04 CYBERPUNK UI & CRAFT",
+        title: "JavaFX Scene Graph & Aseprite Pixel Aesthetics",
+        subtitle: "งานดีไซน์ส่วนต่อประสานธีมไซเบอร์พังก์ยุคเรโทรด้วย JavaFX และภาพพิกเซลอาร์ตคราฟต์มือ",
+        content: "งานภาพและบรรยากาศของเกมถูกรังสรรค์ขึ้นภายใต้แนวคิด Cyberpunk Tech Noir: ใช้พาเลตต์สี Dark Slate, Neon Cyan, และ Amber Orange จำลองหน้าจอเทอร์มินัลยุค 2000 ผสานเข้ากับ JavaFX Scene Graph ที่รองรับการแบ่งหน้าจอแบบ Responsive\n\nทุกไอคอน อุปกรณ์ตู้ Rack และภาพตัวละครลูกค้าถูกวาดขึ้นทีละพิกเซลด้วยโปรแกรม Aseprite พร้อมระบบเสียง Sound Effects เลียนแบบเสียงคีย์บอร์ดกลไก เสียงพัดลมเซิร์ฟเวอร์ และเสียงปี๊บของโมเด็ม Dial-Up",
+        image: "/images/Project/VPS-Tycoon/75.png",
+        imageCaption: "การจัดวางฮาร์ดแวร์ในตู้ Rack: อินเทอร์เฟซแบบโมดูลาร์ที่ผู้เล่นสามารถลากและติดตั้งชิ้นส่วนได้เสมือนจริง",
+        type: "grid",
+        items: [
+          {
+            tag: "PIXEL ART",
+            title: "Handcrafted Aseprite Sprites",
+            subtitle: "พิกเซลอาร์ตตู้เซิร์ฟเวอร์",
+            description: "วาดดีเทลไฟ LED แสดงสถานะการทำงานของฮาร์ดไดรฟ์และพัดลมระบายอากาศที่หมุนวนสมจริง",
+          },
+          {
+            tag: "JAVAFX ENGINE",
+            title: "Custom CSS & Scene Graph",
+            subtitle: "จัดสไตล์ UI ด้วย CSS",
+            description: "ปรับแต่งคอมโพเนนต์ JavaFX (TabPane, ScrollPane, VBox) ด้วย Custom Stylesheet ให้ได้บรรยากาศไซเบอร์พังก์",
+          },
+          {
+            tag: "AUDIO RETRO",
+            title: "Dial-Up & Relay Soundscape",
+            subtitle: "เสียงบรรยากาศศูนย์ข้อมูล",
+            description: "สังเคราะห์เสียงคลิกสวิตช์ เสียงรีเลย์ไฟ และเสียงแจ้งเตือนข้อความสไตล์แอปแชทยุค MSN Messenger",
+          },
+          {
+            tag: "PERSISTENCE",
+            title: "JSON State Serialization",
+            subtitle: "ระบบ Save / Load เกม",
+            description: "บันทึกสถานะการเงิน ผังตู้ Rack และประวัติสัญญาเช่าทั้งหมดเป็นโครงสร้างไฟล์ เพื่อให้ผู้เล่นกลับมาเล่นต่อได้",
+          },
+        ],
+      },
+    ],
     gallery: [
       "/images/Project/VPS-Tycoon/preview-gallery.png",
+      "/images/Project/VPS-Tycoon/preview and galleryVpstycoon.png",
       "/images/Project/VPS-Tycoon/58.png",
       "/images/Project/VPS-Tycoon/59.png",
       "/images/Project/VPS-Tycoon/61.png",
@@ -356,31 +1307,128 @@ export const projects: Project[] = [
     summary: "เว็บไซต์แชทสำหรับพูดคุยกับคนแปลกหน้าแบบสุ่ม โดยเปลี่ยนบรรยากาศตามสถานที่ต่าง ๆ ในมหาวิทยาลัย เสมือนกำลังเดินทางด้วยพาหนะ แบ่งผู้ใช้เป็น Driver และ Passenger มีระบบสร้างห้อง สุ่มเข้าห้อง จำกัดจำนวนคนตามประเภทรถ countdown ก่อนย้ายห้อง พื้นหลังวิดีโอแต่ละสถานที่ และบรรยากาศที่เปลี่ยนไปตาม room type",
     problem: "ผู้ใช้หลายคนอยากมีพื้นที่ปลอดภัยสำหรับคุยกับคนไม่รู้จักโดยไม่ถูกตัดสิน แต่แพลตฟอร์มทั่วไปไม่ได้ออกแบบประสบการณ์ random chat แบบมีธีมและ room transition ชัดเจน",
     process: "ออกแบบ flow หน้าหลัก, join room, create room และ chat room ใน Figma → พัฒนา backend API และ WebSocket communication ระหว่าง frontend กับ backend → สร้างระบบ create room, random join, role-based access และ room type restrictions → ปรับปรุง room status, user count, room transitions และหน้าเว็บให้สมบูรณ์ขึ้น",
-    phases: [
-      {
-        title: "UI/UX Flow & Interactive Campus Journey",
-        description: "ออกแบบ flow ใน Figma ครอบคลุมหน้าหลัก, การตั้ง username, เลือก role, join/create room และ chat room interface"
-      },
-      {
-        title: "FastAPI Backend & WebSocket Real-Time Gateway",
-        description: "พัฒนา backend API ด้วย FastAPI และระบบ real-time communication ผ่าน WebSocket เชื่อมระหว่าง Next.js frontend กับ Python backend"
-      },
-      {
-        title: "Vehicle Room System & Role-Based Access",
-        description: "สร้างระบบ create room, random join, role-based access (Driver/Passenger) และ room type restrictions พร้อม capacity control ตามประเภทพาหนะ (Bicycle 2, Taxi 4, Songthaew 10, EV Minibus 15)"
-      },
-      {
-        title: "Dynamic Room Polish & Video Backgrounds",
-        description: "เพิ่ม live room status, user count tracking, countdown timer, auto remove empty rooms และ location-based video backgrounds ตามจุดสำคัญใน สจล."
-      }
+    highlights: [
+      { label: "Vehicle Tiers", value: "4 Capacity Levels", detail: "Bicycle (2), Taxi (4), Songthaew (10), EV Minibus (15)" },
+      { label: "Gateway Protocol", value: "FastAPI WebSocket", detail: "Bidirectional broadcast with auto-cleanup of ghost rooms" },
+      { label: "User Roles", value: "Driver vs. Passenger", detail: "Driver controls journey; passengers engage in anonymous chat" },
+      { label: "Campus Journey", value: "KMITL Locations", detail: "Dynamic video backgrounds matching physical routes on campus" },
     ],
-    result: "The Solution: แพลตฟอร์ม random chat ที่ผสมแนวคิด journey experience เข้ากับ real-time web app ทำให้การคุยกับคนแปลกหน้ามีทั้งบริบทและความแปลกใหม่\nImpact: ได้ฝึก full-stack collaboration, real-time system design, และการแก้ปัญหา WebSocket / CORS / room transition ในโปรเจกต์จริง",
+    sections: [
+      {
+        badge: "01 PRODUCT CONCEPT",
+        title: "Anonymous Campus Transit Journey & Safe Space Conversations",
+        subtitle: "เปลี่ยนการแชทกับคนแปลกหน้าให้เป็นการร่วมโดยสารยานพาหนะผ่านทัศนียภาพรอบสถาบัน",
+        content: "โจทย์ตั้งต้นเกิดจากความต้องการสร้างพื้นที่ปลอดภัย (Safe Space) ให้นักศึกษา สจล. สามารถพูดคุย ระบายความรู้สึก หรือแลกเปลี่ยนความคิดเห็นกับเพื่อนร่วมสถาบันโดยไม่ต้องเปิดเผยตัวตน (Anonymous) แต่แก้ปัญหาความน่าเบื่อของ Random Chat ทั่วไปด้วยแนวคิด 'Transit Journey'\n\nระบบจำลองว่าผู้ใช้กำลังนั่งรถผ่านจุดสำคัญต่างๆ ภายในมหาวิทยาลัย (เช่น หน้าตึกพระเทพ, หอประชุมเจ้าพระยาสุรวงษ์ฯ, ซอยเกกีงาม) โดยแบ่งผู้ใช้ออกเป็น 2 บทบาท: คนขับ (Driver) ที่เป็นเจ้าของห้องและมีอำนาจในการเร่งการเดินทาง และผู้โดยสาร (Passenger) ที่สุ่มขึ้นรถมาร่วมสนทนา",
+        image: "/images/Project/Drive@KMITL/gallery2.png",
+        imageCaption: "หน้าจอเลือกบทบาทและพาหนะการเดินทาง: เลือกระหว่างการเป็น Driver เปิดเส้นทางใหม่ หรือเป็น Passenger ร่วมเดินทาง",
+        type: "cards",
+        items: [
+          {
+            tag: "SAFE ANONYMOUS",
+            title: "Zero-Judgment Space",
+            subtitle: "พื้นที่ปลอดภัยไร้ตัวตน",
+            description: "ผู้ใช้ตั้งชื่อเล่นชั่วคราว ไม่มีการเก็บประวัติส่วนตัว ทำให้กล้าเปิดใจและพูดคุยในเรื่องที่กังวลได้อย่างเป็นธรรมชาติ",
+          },
+          {
+            tag: "JOURNEY VIBE",
+            title: "Campus Video Backgrounds",
+            subtitle: "พื้นหลังวิดีโอรอบ สจล.",
+            description: "ใช้วิดีโอจำลองมุมมองหน้ารถที่บันทึกจากสถานที่จริงในมหาวิทยาลัย เพื่อสร้างบรรยากาศร่วมของการเดินทาง",
+          },
+          {
+            tag: "ROLE DYNAMICS",
+            title: "Driver vs Passenger",
+            subtitle: "ปฏิสัมพันธ์เชิงบทบาท",
+            description: "Driver มีหน้าที่ควบคุมทิศทางและกดเริ่มต้นการย้ายห้อง ขณะที่ Passenger สามารถพูดคุยและโหวตจุดหมายถัดไป",
+          },
+          {
+            tag: "TRANSITION LOOP",
+            title: "Timed Route Hopping",
+            subtitle: "การเปลี่ยนห้องตามรอบเวลา",
+            description: "มีตัวเลขนับถอยหลัง (Countdown Timer) ก่อนที่รถจะเดินทางถึงป้ายถัดไปและสลับผู้โดยสารเข้าสู่บรรยากาศใหม่",
+          },
+        ],
+      },
+      {
+        badge: "02 REAL-TIME GATEWAY",
+        title: "FastAPI WebSocket Room Router & State Synchronization",
+        subtitle: "สถาปัตยกรรมแบ็กเอนด์แบบสองทางด้วย Python FastAPI เชื่อมต่อไปยัง Next.js Frontend",
+        content: "ด้านการพัฒนาระบบ Backend ได้เลือกใช้ FastAPI ร่วมกับ Python WebSockets เพื่อจัดการการเชื่อมต่อของผู้ใช้แบบ Concurrent Connection โดยมีคลาส ConnectionManager ทำหน้าที่เป็น Event Hub:\n\nเมื่อผู้ใช้ส่งข้อความ ระบบจะทำการ Validate Payload ตรวจสอบ Room ID และ Broadcast ข้อความไปยังทุกคนในห้องนั้นทันทีด้วย Latency ต่ำกว่า 50ms พร้อมทั้งจัดการปัญหา Cross-Origin Resource Sharing (CORS) และการ Reconnect เมื่อสัญญาณอินเทอร์เน็ตบนมือถือขาดหายชั่วคราว",
+        image: "/images/Project/Drive@KMITL/gallery3.png",
+        imageCaption: "อินเทอร์เฟซห้องแชทระหว่างการเดินทาง: หน้าต่างข้อความแบบ Real-time พร้อมแถบสถานะเวลาและปุ่มควบคุมของ Driver",
+        type: "grid",
+        items: [
+          {
+            tag: "FASTAPI ENGINE",
+            title: "ConnectionManager Hub",
+            subtitle: "ศูนย์กลางจัดการ Socket",
+            description: "เก็บสถานะ Active Connections แยกตาม Room Dictionary ทำให้บรอดแคสต์ข้อความได้ตรงกลุ่มโดยไม่กินทรัพยากร",
+          },
+          {
+            tag: "LIGHTWEIGHT JSON",
+            title: "Minimal Event Protocol",
+            subtitle: "โครงสร้างข้อมูลขนาดกะทัดรัด",
+            description: "ส่งเฉพาะ Payload ที่จำเป็น เช่น `sender`, `message`, `timestamp`, และ `room_state` เพื่อประหยัดแบนด์วิดท์",
+          },
+          {
+            tag: "CORS & PROXY",
+            title: "Robust Gateway Configuration",
+            subtitle: "การเชื่อมต่อไร้รอยต่อข้ามโดเมน",
+            description: "ปรับแต่ง Middleware และ WebSocket Headers เพื่อให้ Next.js ฝั่ง Client ติดต่อกับ Python Server ได้อย่างเสถียร",
+          },
+          {
+            tag: "DISCONNECT HANDLING",
+            title: "Graceful Socket Teardown",
+            subtitle: "การตัดการเชื่อมต่อที่ปลอดภัย",
+            description: "เมื่อแท็บเบราว์เซอร์ถูกปิด ระบบจะดักจับ Event และอัปเดตจำนวนผู้โดยสารบนหน้ารวมห้องทันที",
+          },
+        ],
+      },
+      {
+        badge: "03 ROOM CAPACITY & LIFECYCLE",
+        title: "Vehicle Tiers & Automated Ghost Room Garbage Collection",
+        subtitle: "การควบคุมความจุตามประเภทพาหนะ 4 ระดับ และระบบทำความสะอาดห้องว่างอัตโนมัติ",
+        content: "เพื่อป้องกันความแออัดและคงความอบอุ่นของการสนทนา ระบบได้จำลองความจุของยานพาหนะจริงเป็น 4 ลำดับขั้น:\n\n1. Bicycle (จักรยาน): สูงสุด 2 คน (การคุยแบบ 1-on-1 เชิงลึก)\n2. Taxi (รถแท็กซี่): สูงสุด 4 คน (กลุ่มเพื่อนขนาดเล็ก)\n3. Songthaew (รถสองแถว): สูงสุด 10 คน (การสนทนากลุ่มทั่วไป)\n4. EV Minibus (รถเมล์ไฟฟ้า สจล.): สูงสุด 15 คน (ห้องสังสรรค์ขนาดใหญ่)\n\nระบบยังเสริมด้วย Garbage Collection Worker คอยกวาดล้างห้องที่ไม่มีผู้ใช้งานเหลืออยู่ (Empty Room) ออกจากหน่วยความจำทันที เพื่อป้องกันปัญหา Ghost Rooms ค้างบนเซิร์ฟเวอร์",
+        image: "/images/Project/Drive@KMITL/gallery4.png",
+        imageCaption: "หน้ารวมห้องเดินทาง (Vehicle Room Browser): แสดงประเภทพาหนะ ความจุที่นั่งว่าง และสถานะห้องที่กำลังเดินทาง",
+        type: "cards",
+        items: [
+          {
+            tag: "TIER 1 & 2",
+            title: "Bicycle (2) & Taxi (4)",
+            subtitle: "พาหนะขนาดกะทัดรัด",
+            description: "เหมาะสำหรับผู้ที่ต้องการสนทนาอย่างใกล้ชิดและจริงจัง มีระบบป้องกันไม่ให้บุคคลที่สามกด Join หากที่นั่งเต็ม",
+          },
+          {
+            tag: "TIER 3 & 4",
+            title: "Songthaew (10) & Minibus (15)",
+            subtitle: "พาหนะขนส่งมวลชน",
+            description: "รองรับการพูดคุยเป็นกลุ่มใหญ่ มีสีสัน และเปิดโอกาสให้ผู้คนใหม่ๆ ผลัดเปลี่ยนกันเข้ามาร่วมวงสนทนาได้ตลอดเวลา",
+          },
+          {
+            tag: "GARBAGE COLLECTION",
+            title: "Auto-Remove Empty Rooms",
+            subtitle: "ลบห้องทิ้งทันทีเมื่อคนออกหมด",
+            description: "ป้องกันฐานข้อมูลและหน่วยความจำบวมด้วยการเช็คจำนวน Active Users หากเท่ากับ 0 จะสั่ง Destroy Room ทันที",
+          },
+          {
+            tag: "FULL-STACK TEAM",
+            title: "5-Member Team Delivery",
+            subtitle: "การประสานงานทีม 5 คน",
+            description: "รับผิดชอบในส่วน Backend Architecture 50% และเอกสารทางเทคนิค 40% ส่งมอบระบบสมบูรณ์ตามกำหนดของคณะ",
+          },
+        ],
+      },
+    ],
+    result: "ส่งมอบเว็บแอปพลิเคชัน Real-Time Campus Chat ที่รองรับพาหนะ 4 ระดับและระบบกวาดล้างห้องว่างอัตโนมัติ โดยมี Latency การส่งข้อความผ่าน WebSocket ต่ำกว่า 50ms ส่งมอบเป็นโครงงานของคณะเทคโนโลยีสารสนเทศ สจล.",
     gallery: [
       "/images/Project/Drive@KMITL/preview-gallery.png",
+      "/images/Project/Drive@KMITL/Preview and gallery1.png",
       "/images/Project/Drive@KMITL/gallery2.png",
       "/images/Project/Drive@KMITL/gallery3.png",
       "/images/Project/Drive@KMITL/gallery4.png",
       "/images/Project/Drive@KMITL/gallery5.png",
+      "/images/Project/Drive@KMITL/Logo Drive@kmitl.png",
     ],
   },
   {
@@ -395,30 +1443,158 @@ export const projects: Project[] = [
     summary: "โปรเจกต์ที่ผสม hardware และ software เข้าด้วยกัน โดยมีคอนโทรลเลอร์ที่ประกอบด้วยจอ TFT LCD และปุ่มกด เชื่อมต่อกับเว็บแอปพลิเคชันสำหรับเลือกเพลง สรุปสถิติการเล่น และฝึกสมาธิผ่าน rhythm game ที่สนุกพอให้กลับมาใช้งานต่อเนื่อง",
     problem: "ผู้ใช้หลายคนมีอาการหลุดโฟกัสจาก social media จนส่งผลต่อการเรียนและการทำงาน แต่เครื่องมือฝึกสมาธิมักไม่น่าสนใจพอให้ใช้งานต่อเนื่อง",
     process: "วางแผนอุปกรณ์ → ออกแบบ UI/CI ด้วย Figma → พัฒนา Frontend → ต่อวงจร Hardware (LCD, ESP32, Buttons) → เขียนโปรแกรมควบคุมเกม → สร้างเครื่องมือ Mapping เพลงแบบ JSON → เชื่อมต่อ Web Server เพื่อสรุปผลคะแนน",
-    phases: [
-      {
-        title: "Hardware Wiring & Breadboard Engineering",
-        description: "ต่อวงจร ESP32 เชื่อมกับ TFT LCD display และปุ่มกดบน breadboard พร้อมแก้ปัญหาการจ่ายไฟและ Logic Level Shifter สำหรับ SD Card Module"
-      },
-      {
-        title: "Embedded Rhythm Game Engine in C++",
-        description: "เขียนโปรแกรม Arduino ควบคุม rhythm game logic, การแสดงผลโน้ตเพลงบน LCD และการรับ input จากปุ่มกดแบบ real-time"
-      },
-      {
-        title: "Custom JSON Song Mapping Tool",
-        description: "สร้างเครื่องมือ mapping โน้ตเพลงเป็นโครงสร้าง JSON เพื่อให้ผู้ใช้สามารถอัปโหลดและเพิ่มเพลงใหม่ลงใน SD Card ได้อย่างยืดหยุ่น"
-      },
-      {
-        title: "Embedded Web Server & Analytics Sync",
-        description: "เชื่อมต่อ ESP32 Web Server เข้ากับ Frontend Web App เพื่อรับส่งคะแนน สรุปผลการฝึกสมาธิ และเก็บบันทึกประวัติการเล่น"
-      }
+    highlights: [
+      { label: "Microcontroller", value: "ESP32 Dual-Core", detail: "Migrated from UNO R4 for SPI LCD & Wi-Fi capabilities" },
+      { label: "Hit Window", value: "±40ms Accuracy", detail: "Microsecond-level timer interrupts for precise rhythm scoring" },
+      { label: "Beatmap Format", value: "Custom JSON", detail: "Web-based song mapper with direct SD card parsing (SD.h)" },
+      { label: "Physical Hardware", value: "TFT LCD + 4 Keys", detail: "Custom wired breadboard circuit with logic level shifting" },
     ],
-    result: "The Solution: อุปกรณ์ฝึกสมาธิในรูปแบบ rhythm game ที่สนุกพอให้ผู้ใช้กลับมาฝึกต่อเนื่องและเห็นพัฒนาการได้จากสถิติการเล่น\nImpact: ได้ฝึกทั้ง embedded, web integration และ product thinking ในโปรเจกต์เดียว สร้างประสบการณ์ทำงานกับ hardware จริงและการ sync ข้อมูลระหว่าง physical device กับ web app",
+    sections: [
+      {
+        badge: "01 HARDWARE WIRING",
+        title: "Breadboard Engineering, ESP32 Pinout & Power Regulation",
+        subtitle: "การออกแบบและประกอบวงจรฮาร์ดแวร์จริง: การแชร์บัส SPI, การกรองแรงดัน และปุ่มกดเกมตู้",
+        content: "จุดเริ่มต้นของโปรเจกต์เดิมใช้บอร์ด Arduino UNO R4 แต่พบข้อจำกัดด้านหน่วยความจำและไลบรารีจอแสดงผล จึงตัดสินใจเปลี่ยนมาใช้ ESP32 Dual-Core ซึ่งมีประมวลผลสูงกว่าและมี Wi-Fi ในตัว\n\nความท้าทายหลักด้านอิเล็กทรอนิกส์คือการแชร์ SPI Bus เส้นเดียวกันระหว่างจอ TFT LCD และโมดูลอ่าน SD Card ซึ่งต้องการการสลับ Chip Select (CS Pins) อย่างรวดเร็ว พร้อมทั้งการจัดการแรงดันไฟฟ้าบน Breadboard Rail ให้มีเสถียรภาพ เพื่อไม่ให้หน้าจอขาวหรือรีเซ็ตเมื่อกดปุ่ม Arcade 4 ปุ่มพร้อมกัน",
+        image: "/images/Project/Synchro/84.png",
+        imageCaption: "การต่อวงจรฮาร์ดแวร์บน Breadboard: เชื่อมต่อจอ TFT LCD SPI, โมดูล SD Card และชุดปุ่มกดเข้ากับ ESP32",
+        type: "cards",
+        items: [
+          {
+            tag: "MICROCONTROLLER",
+            title: "ESP32 Dual-Core Migration",
+            subtitle: "แก้คอขวด RAM ของ UNO R4",
+            description: "ขยายขีดความสามารถการคำนวณกราฟิก 60 FPS และการประมวลผลเครือข่าย Wi-Fi พร้อมกันบนชิปตัวเดียว",
+          },
+          {
+            tag: "SPI BUS SHARING",
+            title: "TFT LCD & SD Card CS",
+            subtitle: "การแชร์สายสัญญาณ SPI",
+            description: "จัดสรรพิน GPIO และคำนวณ Clock Frequency ไม่ให้การอ่านไฟล์เพลงจาก SD Card รบกวนสัญญาณภาพบนหน้าจอ",
+          },
+          {
+            tag: "POWER INTEGRITY",
+            title: "Decoupling Capacitor Filter",
+            subtitle: "ป้องกันไฟตกขณะกดปุ่ม",
+            description: "ใส่ตัวเก็บประจุช่วยกรองไฟเลี้ยงบน Breadboard ทำให้ระบบทำงานต่อเนื่องได้นานหลายชั่วโมงโดยไม่แฮงค์",
+          },
+          {
+            tag: "TACTILE FEEL",
+            title: "Debounced Arcade Pushbuttons",
+            subtitle: "ปุ่มกดเกมสไตล์อาร์เคด",
+            description: "ต่อวงจร Pull-up Resistor และเขียน Debounce Filter ใน C++ เพื่อป้องกันปุ่มลั่นและให้สัมผัสการกดที่แม่นยำ",
+          },
+        ],
+      },
+      {
+        badge: "02 EMBEDDED C++ ENGINE",
+        title: "Microsecond Hit Detection & Real-Time Graphics Rendering",
+        subtitle: "การเขียนโค้ดภาษา C++ ควบคุมตรรกะเกมจังหวะและการแสดงผลกราฟิกบนจอ TFT LCD",
+        content: "ความสนุกของเกม Rhythm ขึ้นอยู่กับความแม่นยำของ Hit Window ระดับเสี้ยววินาที ระบบได้ใช้ประโยชน์จาก Hardware Timer Interrupts ของ ESP32 คำนวณความต่างเวลาระหว่างจังหวะโน้ตเพลงกับเวลาที่ผู้เล่นกดปุ่ม (Perfect: ±40ms, Good: ±80ms, Miss: >80ms)\n\nการเรนเดอร์กราฟิกใช้ไลบรารี TFT_eSPI วาดเส้นเลนและโน้ตที่เลื่อนลงมาด้วยเทคนิค Sprite Double Buffering เพื่อป้องกันปัญหาภาพกระพริบ (Screen Tearing) บนหน้าจอความละเอียดสี 16-bit",
+        image: "/images/Project/Synchro/86.png",
+        imageCaption: "หน้าจอแสดงผลการเล่นเกมจริงบน TFT LCD: แถบโน้ตเลื่อนลงตามจังหวะเพลงพร้อมคะแนนสะสมและคอมโบ",
+        type: "grid",
+        items: [
+          {
+            tag: "HIT WINDOW",
+            title: "±40ms Microsecond Precision",
+            subtitle: "การตรวจจับจังหวะแม่นยำสูง",
+            description: "จับเวลาด้วย `micros()` เปรียบเทียบตำแหน่งโน้ตกับจุด Judgement Line เพื่อตัดเกรดคะแนนอย่างเป็นธรรม",
+          },
+          {
+            tag: "TFT_eSPI",
+            title: "60 FPS Sprite Rendering",
+            subtitle: "กราฟิกลื่นไหลไร้การกระตุก",
+            description: "วาดโน้ตลง Sprite Buffer ในหน่วยความจำก่อนพ่นออกจอ SPI ในคำสั่งเดียว ทำให้ภาพเคลื่อนไหวเนียนตา",
+          },
+          {
+            tag: "AUDIO SYNC",
+            title: "Buzzer Frequency Synthesis",
+            subtitle: "เสียงตอบสนองจังหวะเพลง",
+            description: "สร้างเสียงบี๊บจังหวะเคาะตามบีตเพลงเพื่อเป็น Audio Feedback นำทางให้ผู้เล่นโฟกัสสายตาและหูพร้อมกัน",
+          },
+          {
+            tag: "COMBO SYSTEM",
+            title: "Streak Multiplier Engine",
+            subtitle: "ระบบคูณคะแนนสะสม",
+            description: "เมื่อกดจังหวะ Perfect ต่อเนื่อง ตัวคูณคะแนนจะเพิ่มขึ้น ช่วยสร้างแรงจูงใจให้ผู้เล่นรักษาสมาธิอย่างต่อเนื่อง",
+          },
+        ],
+      },
+      {
+        badge: "03 BEATMAP PIPELINE",
+        title: "Web-to-Device JSON Song Mapping & SD Card File Streaming",
+        subtitle: "เครื่องมือสร้างโน้ตเพลงผ่านเบราว์เซอร์ และการอ่านไฟล์ Beatmap จากการ์ดหน่วยความจำ",
+        content: "เพื่อไม่ให้เกมถูกจำกัดอยู่เพียงเพลงที่ฮาร์ดโค้ดไว้ ทีมงานได้พัฒนา Web Song Mapper ขึ้นบนเว็บเบราว์เซอร์ ผู้ใช้สามารถฟังเพลง กดแป้นพิมพ์เคาะจังหวะ และ Export โครงสร้างโน้ตออกมาเป็นไฟล์ JSON\n\nฝั่ง ESP32 จะมีสตรีมเมอร์ไลบรารี SD.h คอยอ่านและถอดรหัส JSON Payload จากการ์ด MicroSD ทีละบล็อก (Chunk-by-chunk) เพื่อประหยัด RAM ก่อนจะส่งข้อมูลเข้าสู่คิวโน้ตในเกม ทำให้รองรับการเพิ่มเพลงใหม่ได้อย่างไม่จำกัด",
+        image: "/images/Project/Synchro/88.png",
+        imageCaption: "การทดสอบการเชื่อมต่อและการอ่านข้อมูล Beatmap JSON จาก MicroSD Card บนตัวคอนโทรลเลอร์",
+        type: "cards",
+        items: [
+          {
+            tag: "WEB MAPPER",
+            title: "Interactive Beatmap Editor",
+            subtitle: "เครื่องมือสร้างเพลงบนเว็บ",
+            description: "ฟังเพลงและเคาะคีย์บอร์ดบันทึกโน้ต 4 เลนแบบเรียลไทม์ พร้อมปรับแต่งความเร็วการเลื่อนของโน้ต (Scroll Speed)",
+          },
+          {
+            tag: "COMPACT JSON",
+            title: "Lightweight JSON Schema",
+            subtitle: "รูปแบบข้อมูลขนาดกะทัดรัด",
+            description: "จัดเก็บ Timestamp (ms), Lane Index (0-3), และ Duration ทำให้ไฟล์เพลงมีขนาดเพียงไม่กี่กิโลไบต์",
+          },
+          {
+            tag: "SD STREAMER",
+            title: "Non-Blocking SD File Read",
+            subtitle: "อ่านไฟล์โดยไม่บล็อกการเล่น",
+            description: "อ่านข้อมูลล่วงหน้าเป็นบัฟเฟอร์ขนาดเล็ก ป้องกันปัญหากระตุกขณะที่เพลงกำลังเล่นด้วยความเร็วสูง",
+          },
+          {
+            tag: "EXTENSIBILITY",
+            title: "Plug-and-Play Song Packs",
+            subtitle: "เพิ่มเพลงใหม่ง่ายดาย",
+            description: "ผู้เล่นเพียงคัดลอกไฟล์เพลงและ Beatmap ใส่ MicroSD Card ก็สามารถเลือกเล่นเพลงใหม่บนเครื่องได้ทันที",
+          },
+        ],
+      },
+      {
+        badge: "04 FOCUS & DEEP WORK",
+        title: "Embedded Web Server & Concentration Analytics Sync",
+        subtitle: "การผสานฮาร์ดแวร์เข้ากับเว็บแอปพลิเคชัน เพื่อส่งเสริมสมาธิและการทำงานอย่างมีสมาธิ (Deep Work)",
+        content: "โจทย์ทางสังคมของ SYNCHRO คือการแก้อาการหลุดโฟกัสและสมาธิสั้นจากการไถฟีดโซเชียลมีเดีย ตัวบอร์ด ESP32 ได้รัน Embedded Web Server (WiFi.h) ให้ผู้ใช้สามารถเปิดเบราว์เซอร์บนมือถือหรือคอมพิวเตอร์เพื่อเชื่อมต่อกับตัวเครื่องได้โดยตรง\n\nหน้าเว็บจะแสดงแดชบอร์ดสถิติการฝึกสมาธิ: ความแม่นยำในการรักษาจังหวะ (Accuracy %), ระยะเวลาที่โฟกัสต่อเนื่อง (Focus Duration), และกราฟพัฒนาการทางสมาธิ เพื่อเปลี่ยนการฝึกจิตใจให้เป็นประสบการณ์ที่จับต้องได้และสนุกสนาน",
+        image: "/images/Project/Synchro/SYNCHROPoster.png",
+        imageCaption: "โปสเตอร์แสดงภาพรวมโปรเจกต์ SYNCHRO: อุปกรณ์คอนโทรลเลอร์เกมจังหวะเพื่อการฝึกสมาธิและวิเคราะห์ผลผ่านเว็บ",
+        type: "grid",
+        items: [
+          {
+            tag: "WEB SERVER",
+            title: "ESP32 Local Web Portal",
+            subtitle: "เชื่อมต่อเว็บตรงไม่ต้องผ่านคลาวด์",
+            description: "ESP32 ปล่อยสัญญาณ Wi-Fi SoftAP หรือเชื่อมเครือข่ายวงเดียวกันเพื่อให้ผู้ใช้เปิดดูผลคะแนนผ่านเบราว์เซอร์",
+          },
+          {
+            tag: "FOCUS TRACKER",
+            title: "Deep Work Analytics",
+            subtitle: "บันทึกเวลาและสมาธิสะสม",
+            description: "สรุปผลระยะเวลาที่ผู้ใช้สามารถคงความจดจ่ออยู่กับเกมจังหวะโดยไม่ละสายตาไปหามือถือหรือการแจ้งเตือน",
+          },
+          {
+            tag: "TEAM ROLE",
+            title: "Web Backend & Arduino Dev",
+            subtitle: "ความรับผิดชอบในทีม 4 คน",
+            description: "รับผิดชอบด้านการเขียนโค้ด C++ บน ESP32, การจัดการหน่วยความจำ SD Card, และการเชื่อมต่อ Web Server Handshaking",
+          },
+          {
+            tag: "AWARD & SHOWCASE",
+            title: "Physical Computing 2025",
+            subtitle: "โครงงานฮาร์ดแวร์ระดับคณะ",
+            description: "จัดแสดงผลงานคอนโทรลเลอร์ที่ประกอบขึ้นจริงพร้อมการสาธิตการเล่นสดในงานนิทรรศการของภาควิชา",
+          },
+        ],
+      },
+    ],
+    result: "สร้างเครื่องคอนโทรลเลอร์ Rhythm Game บน ESP32 ที่ทำงานร่วมกับ Web Application สำเร็จ รองรับการเล่นเพลงผ่าน MicroSD Card ด้วยความแม่นยำระดับไมโครวินาที (±40ms) และจัดแสดงในนิทรรศการวิชาการ",
     gallery: [
       "/images/Project/Synchro/preview-gallery.png",
       "/images/Project/Synchro/SYNCHROPoster.png",
-      "/images/Project/Synchro/synchrobox.jpg",
-      "/images/Project/Synchro/preview_and_gallery.png",
       "/images/Project/Synchro/84.png",
       "/images/Project/Synchro/85.png",
       "/images/Project/Synchro/86.png",
@@ -444,30 +1620,128 @@ export const projects: Project[] = [
     summary: "โปรแกรมส่งเสริมทักษะการเรียนรู้เรื่อง พ.ร.บ. คอมพิวเตอร์ ปี 60 และกฎหมายการฉ้อโกงในรูปแบบเกม Chat Visual Novel 2D ส่งเข้าประกวดการแข่งขันพัฒนาโปรแกรมคอมพิวเตอร์แห่งประเทศไทย (NSC 24)",
     problem: "สื่อการเรียนรู้กฎหมายมักมีความน่าเบื่อ ทำให้เยาวชนไม่สนใจศึกษาจนตกเป็นเหยื่อของมิจฉาชีพทางไซเบอร์",
     process: "ค้นคว้าข้อมูลกฎหมาย พ.ร.บ. คอมพิวเตอร์ -> ออกแบบตัวละครและฉาก 2D -> พัฒนาระบบแชทสืบคดีและระบบเลือกทางแยก (Branching Storyline) -> ทดสอบและประเมินผลการเรียนรู้",
-    phases: [
+    highlights: [
+      { label: "Competition", value: "NSC 24", detail: "24th National Software Contest (Code: 24p21e0061)" },
+      { label: "Legal Framework", value: "พ.ร.บ. คอมฯ 2560", detail: "Grounding in actual cyber fraud statutes and evidence laws" },
+      { label: "Game Mechanics", value: "Branching Chat VN", detail: "Interactive chat simulation with choice-driven investigation" },
+      { label: "Case Scenarios", value: "4 Fraud Types", detail: "E-commerce scams, dating fraud, fake prizes, and phishing" },
+    ],
+    sections: [
       {
-        title: "Research & Legal Framework",
-        description: "ค้นคว้าข้อมูลกฎหมาย พ.ร.บ. คอมพิวเตอร์ ปี 60 และรูปแบบกลโกงออนไลน์ที่พบบ่อยในชีวิตจริง (ซื้อขายออนไลน์, เว็บหาคู่, แอบอ้างรางวัล) เพื่อวางโครงเรื่องคดีความ",
+        badge: "01 LEGAL GROUNDING",
+        title: "Computer Crime Act B.E. 2560 & Real-World Cyber Fraud",
+        subtitle: "การสกัดข้อกฎหมายและพฤติการณ์กลโกงออนไลน์สู่สื่อการเรียนรู้เชิงปฏิสัมพันธ์สำหรับเยาวชน",
+        content: "โจทย์หลักของโครงงานแข่งขัน NSC ครั้งที่ 24 (รหัส 24p21e0061) คือการแก้ปัญหาความน่าเบื่อของสื่อการเรียนรู้กฎหมาย ซึ่งส่งผลให้เยาวชนขาดความตระหนักรู้และตกเป็นเหยื่อของมิจฉาชีพบนโลกออนไลน์ ทีมงานจึงได้ค้นคว้า พ.ร.บ. ว่าด้วยการกระทำความผิดเกี่ยวกับคอมพิวเตอร์ พ.ศ. 2560 และประมวลกฎหมายอาญามาตราการฉ้อโกง\n\nเนื้อหาถูกสังเคราะห์ออกมาเป็น 4 คดีหลักที่พบบ่อยในชีวิตประจำวัน: การหลอกลวงซื้อขายสินค้าออนไลน์, ขบวนการ Romance Scam บนแอปหาคู่, การแอบอ้างแจกรางวัลเพื่อหลอกเอาข้อมูลส่วนบุคคล (Phishing), และการแชร์ลูกโซ่การลงทุน",
+        image: "/images/Project/%E0%B8%AA%E0%B8%B7%E0%B8%9A-%E0%B8%A5%E0%B9%88%E0%B8%B2-%E0%B9%82%E0%B8%81%E0%B8%87%20(DETEC-CHEAT)/19.png",
+        imageCaption: "หน้าจอจำลองการแชทกับมิจฉาชีพ: ผู้เล่นต้องอ่านบทสนทนาและสังเกตพิรุธของข้อความที่ส่งเข้ามา",
+        type: "cards",
+        items: [
+          {
+            tag: "STATUTE",
+            title: "Computer Crime Act Section 14",
+            subtitle: "มาตรา 14 กฎหมายคอมพิวเตอร์",
+            description: "อธิบายฐานความผิดการนำเข้าข้อมูลอันเป็นเท็จสู่ระบบคอมพิวเตอร์ และการหลอกลวงประชาชนผ่านระบบเครือข่าย",
+          },
+          {
+            tag: "CASE 1 & 2",
+            title: "E-Commerce & Romance Scams",
+            subtitle: "กลโกงซื้อขายและหลอกรักออนไลน์",
+            description: "จำลองพฤติกรรมหลอกให้โอนเงินค่าสินค้าแล้วบล็อกหนี และการสร้างโปรไฟล์ปลอมเพื่อล่อลวงยืมเงิน",
+          },
+          {
+            tag: "CASE 3 & 4",
+            title: "Fake Prizes & Phishing Links",
+            subtitle: "แอบอ้างรางวัลและดักขโมยรหัส",
+            description: "สอนให้ผู้เล่นสังเกต URL เว็บไซต์ปลอม และข้อความ SMS ลวงที่หลอกให้กรอกข้อมูลบัตรประชาชนหรือ OTP",
+          },
+          {
+            tag: "PREVENTION",
+            title: "Digital Defense Mindset",
+            subtitle: "ปลูกฝังภูมิคุ้มกันทางไซเบอร์",
+            description: "เน้นย้ำคาถา 'เช็คก่อนเชื่อ ชัวร์ก่อนโอน' เพื่อให้ผู้เล่นนำความรู้ไปประยุกต์ใช้ป้องกันตนเองและครอบครัว",
+          },
+        ],
       },
       {
-        title: "Character & Dialogue Flow Design",
-        description: "ออกแบบตัวละคร 2D และ flow การสนทนาสำหรับแต่ละคดี ให้มีความสมจริง ชวนติดตาม และสะท้อนกลเม็ดของมิจฉาชีพ",
+        badge: "02 INTERACTIVE DIALOGUE",
+        title: "Branching Chat Mechanics & Evidence Preservation",
+        subtitle: "กลไกการสนทนาแบบเลือกตอบ และการฝึกทักษะการเก็บพยานหลักฐานดิจิทัล",
+        content: "แทนที่จะให้ผู้เล่นอ่านข้อความบรรยาย เกมได้ออกแบบในรูปแบบ Chat Visual Novel 2D เสมือนกำลังคุยกับมิจฉาชีพผ่านแอปพลิเคชันส่งข้อความจริง ผู้เล่นจะได้รับสิทธิ์ในการเลือกประโยคสนทนา (Dialogue Choices) ซึ่งมีทั้งคำตอบที่หลงกล และคำตอบที่ตลบหลังเพื่อเก็บหลักฐาน\n\nเมื่อผู้เล่นจับพิรุธได้ จะสามารถกดปุ่ม 'บันทึกหลักฐาน' (Save Evidence) เช่น แคปเจอร์สลิปโอนเงิน ประวัติการแชท หรือชื่อบัญชีม้า เพื่อนำไปใช้เป็นหลักฐานในการแจ้งความดำเนินคดีในตอนท้ายของแต่ละด่าน",
+        image: "/images/Project/%E0%B8%AA%E0%B8%B7%E0%B8%9A-%E0%B8%A5%E0%B9%88%E0%B8%B2-%E0%B9%82%E0%B8%81%E0%B8%87%20(DETEC-CHEAT)/21.png",
+        imageCaption: "ระบบตัวเลือกการสนทนา (Choice Branching): การตัดสินใจตอบของผู้เล่นจะส่งผลต่อการได้รับหลักฐานสำคัญ",
+        type: "grid",
+        items: [
+          {
+            tag: "BRANCHING LOGIC",
+            title: "Choice-Driven Narrative Flow",
+            subtitle: "ทางแยกการตัดสินใจ",
+            description: "โครงสร้างการตอบแบบแตกแขนง หากผู้เล่นหลงเชื่อจะตกเป็นเหยื่อ แต่หากมีสติจะสามารถต้อนมิจฉาชีพจนมุมได้",
+          },
+          {
+            tag: "DIGITAL EVIDENCE",
+            title: "Evidence Pinning System",
+            subtitle: "การเก็บรวบรวมหลักฐานดิจิทัล",
+            description: "ระบบปักหมุดข้อความที่เข้าข่ายความผิดทางกฎหมาย เช่น สลิปโอนเงินปลอม, บัญชีธนาคารปลายทาง, และข้อความข่มขู่",
+          },
+          {
+            tag: "CRITICAL THINKING",
+            title: "Red Flag Detection Triggers",
+            subtitle: "จุดสังเกตความผิดปกติ",
+            description: "กระตุ้นให้ผู้เล่นฉุกคิดเมื่อเจอข้อความเร่งรัดเวลา ข้อเสนอที่ผลตอบแทนดีเกินจริง หรือการปฏิเสธวิดีโอคอล",
+          },
+          {
+            tag: "CONSEQUENCE",
+            title: "Dynamic Feedback Loops",
+            subtitle: "ผลลัพธ์ที่สะท้อนการตัดสินใจ",
+            description: "ทุกการตัดสินใจจะให้คะแนนไหวพริบและแสดงข้อคิดทางกฎหมายทันที เพื่อเสริมสร้างความเข้าใจอย่างถูกต้อง",
+          },
+        ],
       },
       {
-        title: "Unity Visual Novel Development",
-        description: "พัฒนาเกมใน Unity ในรูปแบบ interactive visual novel พร้อมระบบแชทสืบคดี การเลือกตอบ และการรวบรวมหลักฐานสำคัญ",
-      },
-      {
-        title: "Testing & NSC 24 Evaluation",
-        description: "ทดสอบและประเมินผลการเรียนรู้กับกลุ่มตัวอย่าง และส่งผลงานเข้าประกวดการแข่งขัน NSC 24",
+        badge: "03 UNITY ARCHITECTURE & TESTING",
+        title: "Unity 2D Mobile Engine & NSC 24 Evaluation",
+        subtitle: "การพัฒนาเอนจินเกมด้วย Unity C# และการทดสอบประเมินผลสัมฤทธิ์ทางการเรียนรู้",
+        content: "เกมถูกพัฒนาบน Unity Engine เพื่อให้สามารถ Export เป็นไฟล์ APK ติดตั้งบนแท็บเล็ตและสมาร์ตโฟน Android ได้อย่างลื่นไหล ตัวละครและกราฟิก UI ทั้งหมดถูกวาดขึ้นในสไตล์การ์ตูน 2D ด้วย Adobe Illustrator และ Photoshop\n\nทีมงานได้นำเกมไปทดสอบกับกลุ่มตัวอย่างนักเรียนระดับมัธยมศึกษาตอนต้น และทำการวัดผลก่อน-หลังการเล่น (Pre-test / Post-test) พบว่ากลุ่มตัวอย่างมีความรู้ความเข้าใจในข้อกฎหมายและวิธีการรับมือมิจฉาชีพเพิ่มขึ้นอย่างมีนัยสำคัญทางสถิติ พร้อมทั้งได้ระดับความพึงพอใจต่อสื่อการเรียนรู้ในระดับ 'มากที่สุด'",
+        image: "/images/Project/%E0%B8%AA%E0%B8%B7%E0%B8%9A-%E0%B8%A5%E0%B9%88%E0%B8%B2-%E0%B9%82%E0%B8%81%E0%B8%87%20(DETEC-CHEAT)/25.png",
+        imageCaption: "หน้าสรุปคดีและการประเมินผลการเรียนรู้: แสดงหลักฐานที่รวบรวมได้สำเร็จและบทสรุปโทษตามกฎหมาย",
+        type: "cards",
+        items: [
+          {
+            tag: "ENGINE",
+            title: "Unity 2D C# Architecture",
+            subtitle: "สถาปัตยกรรมเกม Visual Novel",
+            description: "พัฒนาระบบ Dialogue Manager, Inventory หลักฐาน, และระบบบันทึกสถานะด่านด้วยภาษา C# ใน Unity",
+          },
+          {
+            tag: "VECTOR ART",
+            title: "Illustrator 2D Assets",
+            subtitle: "งานภาพเวกเตอร์สดใส",
+            description: "ออกแบบตัวละครมิจฉาชีพและเหยื่อให้เข้าถึงกลุ่มเป้าหมายวัยรุ่น ลดความตึงเครียดของเนื้อหากฎหมาย",
+          },
+          {
+            tag: "USER EVALUATION",
+            title: "Pre-Test & Post-Test Impact",
+            subtitle: "ผลสัมฤทธิ์ทางการเรียนรู้เพิ่มขึ้น",
+            description: "คะแนนทดสอบความรู้กฎหมายของกลุ่มตัวอย่างเพิ่มขึ้นอย่างชัดเจนหลังผ่านการเล่นเกมจำลองสถานการณ์",
+          },
+          {
+            tag: "NSC MILESTONE",
+            title: "National Software Contest",
+            subtitle: "เวทีประกวดซอฟต์แวร์ระดับชาติ",
+            description: "เป็นโปรเจกต์จุดประกายในการนำทักษะการเขียนโปรแกรมมาแก้ปัญหาและรับใช้สังคมตั้งแต่ระดับมัธยมศึกษา",
+          },
+        ],
       },
     ],
-    result: "The Solution: เกม Interactive ที่ผู้เล่นต้องเลือกรวบรวมหลักฐานให้ครบเพื่อจับกุมมิจฉาชีพ\nImpact: กลุ่มตัวอย่างมีความรู้ความเข้าใจด้านกฎหมายเพิ่มขึ้นและมีความพึงพอใจในระดับมากที่สุด",
+    result: "ส่งผลงานเข้าประกวดการแข่งขันพัฒนาโปรแกรมคอมพิวเตอร์แห่งประเทศไทย ครั้งที่ 24 (NSC 24 รหัส 24p21e0061) และผลการทดสอบ Pre-test/Post-test ในกลุ่มตัวอย่างแสดงให้เห็นถึงความตระหนักรู้ต่อภัยไซเบอร์ที่เพิ่มขึ้นอย่างมีนัยสำคัญ",
     gallery: [
       "/images/Project/%E0%B8%AA%E0%B8%B7%E0%B8%9A-%E0%B8%A5%E0%B9%88%E0%B8%B2-%E0%B9%82%E0%B8%81%E0%B8%87%20(DETEC-CHEAT)/previewDetectcheat.png",
       "/images/Project/%E0%B8%AA%E0%B8%B7%E0%B8%9A-%E0%B8%A5%E0%B9%88%E0%B8%B2-%E0%B9%82%E0%B8%81%E0%B8%87%20(DETEC-CHEAT)/19.png",
+      "/images/Project/%E0%B8%AA%E0%B8%B7%E0%B8%9A-%E0%B8%A5%E0%B9%88%E0%B8%B2-%E0%B9%82%E0%B8%81%E0%B8%87%20(DETEC-CHEAT)/20.png",
       "/images/Project/%E0%B8%AA%E0%B8%B7%E0%B8%9A-%E0%B8%A5%E0%B9%88%E0%B8%B2-%E0%B9%82%E0%B8%81%E0%B8%87%20(DETEC-CHEAT)/21.png",
+      "/images/Project/%E0%B8%AA%E0%B8%B7%E0%B8%9A-%E0%B8%A5%E0%B9%88%E0%B8%B2-%E0%B9%82%E0%B8%81%E0%B8%87%20(DETEC-CHEAT)/22.png",
       "/images/Project/%E0%B8%AA%E0%B8%B7%E0%B8%9A-%E0%B8%A5%E0%B9%88%E0%B8%B2-%E0%B9%82%E0%B8%81%E0%B8%87%20(DETEC-CHEAT)/23.png",
+      "/images/Project/%E0%B8%AA%E0%B8%B7%E0%B8%9A-%E0%B8%A5%E0%B9%88%E0%B8%B2-%E0%B9%82%E0%B8%81%E0%B8%87%20(DETEC-CHEAT)/24.png",
       "/images/Project/%E0%B8%AA%E0%B8%B7%E0%B8%9A-%E0%B8%A5%E0%B9%88%E0%B8%B2-%E0%B9%82%E0%B8%81%E0%B8%87%20(DETEC-CHEAT)/25.png",
       "/images/Project/%E0%B8%AA%E0%B8%B7%E0%B8%9A-%E0%B8%A5%E0%B9%88%E0%B8%B2-%E0%B9%82%E0%B8%81%E0%B8%87%20(DETEC-CHEAT)/26.png",
     ],
@@ -484,31 +1758,132 @@ export const projects: Project[] = [
     summary: "โปรแกรมสวมบทบาทการทำงานของตำรวจพิสูจน์หลักฐานและสืบสวน เพื่อสอบสวนหาความจริงโดยยึดหลักนิติธรรมและความเป็นธรรมแก่ผู้ต้องหา ส่งเข้าประกวดการแข่งขัน NSC 25",
     problem: "ปัญหามิจฉาทิฐิหรือการปฏิบัติที่ไม่เหมาะสมของเจ้าหน้าที่ต่อผู้ต้องหาในชีวิตจริง และการขาดความรู้ความเข้าใจเกี่ยวกับกระบวนการพิสูจน์หลักฐานทางนิติวิทยาศาสตร์",
     process: "เขียนบทคดีธุรกิจ -> ออกแบบตัวละคร 2D ใน Procreate -> พัฒนามินิเกม (ตรวจรอยนิ้วมือ, ตรวจกรุ๊ปเลือด) -> สรุปคดีและตัดสินผู้กระทำความผิดตามหลักฐาน",
-    phases: [
+    highlights: [
+      { label: "Competition", value: "NSC 25", detail: "25th National Software Contest (Code: 25p21e0082)" },
+      { label: "Forensic Mini-Games", value: "3 Scientific Modules", detail: "Fingerprint dusting, ABO blood grouping, and interrogation polygraph" },
+      { label: "Ethical Core", value: "Presumed Innocent", detail: "Advocacy for fair trial rights and elimination of coerced confessions" },
+      { label: "Artwork & Engine", value: "Unity + Procreate", detail: "Custom hand-drawn character expressions and crime scene backgrounds" },
+    ],
+    sections: [
       {
-        title: "Script & Investigative Architecture",
-        description: "ศึกษาแนวคิด investigative interview และบทบาทงานตำรวจ เขียนบทคดีธุรกิจที่มีความซับซ้อนและยึดหลักนิติธรรม",
+        badge: "01 FORENSIC FOUNDATIONS",
+        title: "Scientific Crime Scene Investigation & Due Process",
+        subtitle: "การจำลองการทำงานของตำรวจพิสูจน์หลักฐานบนหลักนิติวิทยาศาสตร์และการคุ้มครองสิทธิมนุษยชน",
+        content: "โครงงานแข่งขัน NSC ครั้งที่ 25 (รหัส 25p21e0082) ต่อยอดจากภาคแรกด้วยการยกระดับสู่เกมสืบสวนสอบสวนเชิงลึก (Detective & Forensic Visual Novel) โดยมีจุดยืนทางจริยธรรมที่สำคัญคือหลัก 'สันนิษฐานไว้ก่อนว่าผู้ต้องหาเป็นผู้บริสุทธิ์' (Presumption of Innocence)\n\nผู้เล่นรับบทเป็นเจ้าหน้าที่พิสูจน์หลักฐานและพนักงานสอบสวนในคดีฆาตกรรมและการทุจริตในแวดวงธุรกิจ โดยต้องเข้าตรวจสถานที่เกิดเหตุ เก็บรวบรวมวัตถุพยานอย่างเป็นระบบตามห่วงโซ่การคุ้มครองพยานหลักฐาน (Chain of Custody) เพื่อป้องกันการปนเปื้อนหรือการยัดข้อหา",
+        image: "/images/Project/%E0%B8%AB%E0%B9%89%E0%B8%A7%E0%B8%87%E0%B8%A5%E0%B8%B6%E0%B8%81%E0%B8%A0%E0%B8%B2%E0%B8%A2%E0%B9%83%E0%B8%99%E0%B8%88%E0%B8%B4%E0%B8%95%E0%B9%83%E0%B8%88%20(Criminal%20Minds)/27.png",
+        imageCaption: "การสำรวจสถานที่เกิดเหตุ (Crime Scene Investigation): ตรวจค้นวัตถุพยานและร่องรอยในห้องทำงานผู้บริหาร",
+        type: "cards",
+        items: [
+          {
+            tag: "ETHICAL CORE",
+            title: "Presumption of Innocence",
+            subtitle: "สันนิษฐานว่าเป็นผู้บริสุทธิ์",
+            description: "ห้ามตั้งธงปรักปรำผู้ต้องสงสัยก่อนมีหลักฐานวิทยาศาสตร์ยืนยัน เพื่อสะท้อนการสอบสวนที่ยึดหลักนิติธรรม",
+          },
+          {
+            tag: "CRIME SCENE",
+            title: "Chain of Custody Protocol",
+            subtitle: "การเก็บรักษาวัตถุพยาน",
+            description: "บันทึกตำแหน่ง ถ่ายภาพหลักฐาน และใส่ถุงเก็บพยานอย่างระมัดระวังเพื่อไม่ให้หลักฐานเสียหายในชั้นศาล",
+          },
+          {
+            tag: "BUSINESS CASE",
+            title: "Corporate Conspiracy Plot",
+            subtitle: "คดีความซับซ้อนเชิงธุรกิจ",
+            description: "วางโครงเรื่องคดีความที่มีผู้ต้องสงสัยหลายคน แต่ละคนมีแรงจูงใจทางการเงินและความสัมพันธ์ที่ซ่อนเร้น",
+          },
+          {
+            tag: "EMPATHY",
+            title: "Investigative Interviewing",
+            subtitle: "การสอบปากคำเชิงจิตวิทยา",
+            description: "ใช้เทคนิคการพูดคุยที่เคารพศักดิ์ศรีความเป็นมนุษย์ หลีกเลี่ยงการบีบคั้นหรือใช้กำลังเพื่อเค้นความจริง",
+          },
+        ],
       },
       {
-        title: "2D Character & Scene Art (Procreate)",
-        description: "ออกแบบตัวละครและงานภาพ 2D สไตล์การ์ตูนทั้งหมดใน Procreate ครอบคลุมทุกฉากและอารมณ์ของตัวละคร",
+        badge: "02 FORENSIC MINI-GAMES",
+        title: "Interactive Lab Diagnostics: Fingerprints, Blood & Polygraph",
+        subtitle: "มินิเกมห้องปฏิบัติการทางนิติวิทยาศาสตร์: ตรวจลายนิ้วมือแฝง กรุ๊ปเลือด และจับเท็จ",
+        content: "เพื่อสร้างความสนุกและให้ความรู้เชิงวิทยาศาสตร์ เกมได้พัฒนามินิเกม 3 รูปแบบในห้องแล็บ:\n\n1. มินิเกมปัดฝุ่นผงลายนิ้วมือ (Latent Fingerprint Dusting): ใช้แปรงปัดหาลายนิ้วมือแฝงบนแก้วน้ำและตู้เซฟ จากนั้นนำมาสแกนเทียบจุดตัด (Minutiae Points)\n2. มินิเกมตรวจคราบเลือด (ABO Blood Typing): หยดน้ำยาแอนติบอดี A, B เพื่อสังเกตการตกตะกอนของเม็ดเลือด\n3. มินิเกมสอบสวนจับพิรุธ (Cognitive Interrogation): สังเกตภาษากาย อัตราการเต้นของหัวใจ และจับความขัดแย้งในคำให้การของผู้ต้องสงสัย",
+        image: "/images/Project/%E0%B8%AB%E0%B9%89%E0%B8%A7%E0%B8%87%E0%B8%A5%E0%B8%B6%E0%B8%81%E0%B8%A0%E0%B8%B2%E0%B8%A2%E0%B9%83%E0%B8%99%E0%B8%88%E0%B8%B4%E0%B8%95%E0%B9%83%E0%B8%88%20(Criminal%20Minds)/32.png",
+        imageCaption: "ห้องปฏิบัติการนิติวิทยาศาสตร์: มินิเกมตรวจพิสูจน์ลายนิ้วมือและคราบเลือดเพื่อหาความเชื่อมโยงกับผู้ต้องสงสัย",
+        type: "grid",
+        items: [
+          {
+            tag: "MINI-GAME 1",
+            title: "Fingerprint Minutiae Match",
+            subtitle: "ตรวจลายนิ้วมือแฝง",
+            description: "เทียบเคียงจุดสันนูน (Ridge Endings) และจุดแตกกิ่ง (Bifurcations) เพื่อยืนยันตัวบุคคลที่อยู่ในห้องเกิดเหตุ",
+          },
+          {
+            tag: "MINI-GAME 2",
+            title: "Serology & Blood Grouping",
+            subtitle: "การตรวจคราบเลือดทางวิทยาศาสตร์",
+            description: "ใช้สารลูมินอลตรวจหารอยเลือดที่ถูกเช็ดทำความสะอาด และวิเคราะห์กลุ่มเลือดเพื่อตัดผู้บริสุทธิ์ออกจากวงสืบสวน",
+          },
+          {
+            tag: "MINI-GAME 3",
+            title: "Micro-Expression Analysis",
+            subtitle: "การวิเคราะห์สีหน้าและภาษากาย",
+            description: "สังเกตความลังเล แววตา และสัญญาณชีพขณะสอบถามคำถามสำคัญเพื่อค้นหาว่ากำลังปกปิดสิ่งใด",
+          },
+          {
+            tag: "DEDUCTION",
+            title: "Evidence Correlation Board",
+            subtitle: "กระดานโยงเบาะแสคดี",
+            description: "ผู้เล่นลากเส้นเชื่อมโยงไทม์ไลน์ วัตถุพยาน และพยานบุคคล เพื่อสรุปรูปคดีก่อนยื่นขอหมายจับ",
+          },
+        ],
       },
       {
-        title: "Unity Mini-games & Forensic Engine",
-        description: "พัฒนา interactive visual novel ใน Unity พร้อม mini-games: ตรวจรอยนิ้วมือ, ตรวจเลือด, และระบบตรวจจับการโกหก",
-      },
-      {
-        title: "Ethics-Driven Conclusion System",
-        description: "ระบบสรุปผลคดีที่คำนวณจากการตัดสินใจของผู้เล่นตลอดเกม สะท้อนว่าการสืบสวนที่เป็นธรรมส่งผลต่อผลลัพธ์ของคดีอย่างไร",
+        badge: "03 ETHICAL TRIAL CONCLUSION",
+        title: "Multiple Endings Grounded in Objective Evidence",
+        subtitle: "ระบบฉากจบหลายแบบที่คำนวณจากความเที่ยงธรรมและหลักฐานวิทยาศาสตร์ของผู้เล่น",
+        content: "จุดเด่นของบทสรุปเกมคือ 'ไม่มีการเฉลยแบบสำเร็จรูป' ผลลัพธ์ของคดีจะขึ้นอยู่กับหลักฐานที่ผู้เล่นรวบรวมได้จริง:\n\n- หากผู้เล่นเร่งรีบจับกุมโดยไร้หลักฐานรองรับ ศาลจะยกฟ้องและเกิดตราบาปต่อผู้บริสุทธิ์\n- หากผู้เล่นสืบสวนด้วยหลักวิทยาศาสตร์และยึดมั่นในจริยธรรม จะสามารถเปิดโปงผู้บงการตัวจริงและอำนวยความยุติธรรมให้แก่เหยื่อได้อย่างสมบูรณ์แบบ\n\nงานภาพทั้งหมดถูกวาดด้วยมือใน Procreate ถ่ายทอดอารมณ์ความสับสน ความหวาดกลัว และความมุ่งมั่นของตัวละครได้อย่างเข้าถึงอารมณ์",
+        image: "/images/Project/%E0%B8%AB%E0%B9%89%E0%B8%A7%E0%B8%87%E0%B8%A5%E0%B8%B6%E0%B8%81%E0%B8%A0%E0%B8%B2%E0%B8%A2%E0%B9%83%E0%B8%99%E0%B8%88%E0%B8%B4%E0%B8%95%E0%B9%83%E0%B8%88%20(Criminal%20Minds)/36.png",
+        imageCaption: "บทสรุปและการตัดสินคดีในชั้นศาล: ผลลัพธ์คำพิพากษาจะเปลี่ยนไปตามความเที่ยงธรรมและหลักฐานที่ผู้เล่นส่งฟ้อง",
+        type: "cards",
+        items: [
+          {
+            tag: "MULTIPLE ENDINGS",
+            title: "3 Distinct Verdicts",
+            subtitle: "ฉากจบ 3 รูปแบบตามหลักฐาน",
+            description: "ฉากจบขึ้นอยู่กับว่าผู้เล่นจับแพะ ปล่อยคนผิดลอยนวล หรือสามารถส่งผู้กระทำความผิดตัวจริงเข้าสู่กระบวนการยุติธรรม",
+          },
+          {
+            tag: "PROCREATE ART",
+            title: "Emotional Character Expressions",
+            subtitle: "งานวาดภาพอารมณ์ตัวละคร",
+            description: "ออกแบบสีหน้าของตัวละครมากกว่า 30 แบบเพื่อถ่ายทอดความรู้สึกกดดันในการถูกสอบสวนได้อย่างสมจริง",
+          },
+          {
+            tag: "LEGAL IMPACT",
+            title: "Human Rights Awareness",
+            subtitle: "สร้างความตระหนักเรื่องสิทธิผู้ต้องหา",
+            description: "ช่วยให้ผู้เล่นเข้าใจว่าทำไมกฎหมายจึงต้องคุ้มครองสิทธิของผู้ต้องหา และทำไมหลักฐานนิติวิทยาศาสตร์จึงสำคัญ",
+          },
+          {
+            tag: "TEAM RESPONSIBILITY",
+            title: "Developer & Mechanics Support",
+            subtitle: "บทบาทหน้าที่ในทีม 3 คน",
+            description: "รับผิดชอบงานโค้ดระบบ Mini-games, ตรรกะการเชื่อมโยงหลักฐานใน Unity C#, และช่วยจัดทำเอกสารข้อเสนอโครงการ",
+          },
+        ],
       },
     ],
-    result: "The Solution: สร้างเกมที่จำลองสถานการณ์ความกดดันในการทำคดี แต่เน้นให้ผู้เล่นยึดหลักจริยธรรมและวิทยาศาสตร์พิสูจน์หลักฐาน\nImpact: สร้างแรงบันดาลใจและให้ความรู้เกี่ยวกับการทำงานที่ถูกต้องในสายงานนิติวิทยาศาสตร์และตำรวจแก่เยาวชน",
+    result: "ส่งผลงานเข้าประกวด NSC ครั้งที่ 25 (รหัส 25p21e0082) โดยจำลองมินิเกมตรวจพิสูจน์หลักฐาน 3 รูปแบบและระบบฉากจบ 3 เส้นทางที่ยึดหลักนิติธรรมอย่างสมบูรณ์แบบ",
     gallery: [
       "/images/Project/%E0%B8%AB%E0%B9%89%E0%B8%A7%E0%B8%87%E0%B8%A5%E0%B8%B6%E0%B8%81%E0%B8%A0%E0%B8%B2%E0%B8%A2%E0%B9%83%E0%B8%99%E0%B8%88%E0%B8%B4%E0%B8%95%E0%B9%83%E0%B8%88%20(Criminal%20Minds)/preview-gallery.png",
       "/images/Project/%E0%B8%AB%E0%B9%89%E0%B8%A7%E0%B8%87%E0%B8%A5%E0%B8%B6%E0%B8%81%E0%B8%A0%E0%B8%B2%E0%B8%A2%E0%B9%83%E0%B8%99%E0%B8%88%E0%B8%B4%E0%B8%95%E0%B9%83%E0%B8%88%20(Criminal%20Minds)/27.png",
+      "/images/Project/%E0%B8%AB%E0%B9%89%E0%B8%A7%E0%B8%87%E0%B8%A5%E0%B8%B6%E0%B8%81%E0%B8%A0%E0%B8%B2%E0%B8%A2%E0%B9%83%E0%B8%99%E0%B8%88%E0%B8%B4%E0%B8%95%E0%B9%83%E0%B8%88%20(Criminal%20Minds)/29.png",
       "/images/Project/%E0%B8%AB%E0%B9%89%E0%B8%A7%E0%B8%87%E0%B8%A5%E0%B8%B6%E0%B8%81%E0%B8%A0%E0%B8%B2%E0%B8%A2%E0%B9%83%E0%B8%99%E0%B8%88%E0%B8%B4%E0%B8%95%E0%B9%83%E0%B8%88%20(Criminal%20Minds)/30.png",
+      "/images/Project/%E0%B8%AB%E0%B9%89%E0%B8%A7%E0%B8%87%E0%B8%A5%E0%B8%B6%E0%B8%81%E0%B8%A0%E0%B8%B2%E0%B8%A2%E0%B9%83%E0%B8%99%E0%B8%88%E0%B8%B4%E0%B8%95%E0%B9%83%E0%B8%88%20(Criminal%20Minds)/31.png",
       "/images/Project/%E0%B8%AB%E0%B9%89%E0%B8%A7%E0%B8%87%E0%B8%A5%E0%B8%B6%E0%B8%81%E0%B8%A0%E0%B8%B2%E0%B8%A2%E0%B9%83%E0%B8%99%E0%B8%88%E0%B8%B4%E0%B8%95%E0%B9%83%E0%B8%88%20(Criminal%20Minds)/32.png",
+      "/images/Project/%E0%B8%AB%E0%B9%89%E0%B8%A7%E0%B8%87%E0%B8%A5%E0%B8%B6%E0%B8%81%E0%B8%A0%E0%B8%B2%E0%B8%A2%E0%B9%83%E0%B8%99%E0%B8%88%E0%B8%B4%E0%B8%95%E0%B9%83%E0%B8%88%20(Criminal%20Minds)/33.png",
       "/images/Project/%E0%B8%AB%E0%B9%89%E0%B8%A7%E0%B8%87%E0%B8%A5%E0%B8%B6%E0%B8%81%E0%B8%A0%E0%B8%B2%E0%B8%A2%E0%B9%83%E0%B8%99%E0%B8%88%E0%B8%B4%E0%B8%95%E0%B9%83%E0%B8%88%20(Criminal%20Minds)/34.png",
+      "/images/Project/%E0%B8%AB%E0%B9%89%E0%B8%A7%E0%B8%87%E0%B8%A5%E0%B8%B6%E0%B8%81%E0%B8%A0%E0%B8%B2%E0%B8%A2%E0%B9%83%E0%B8%99%E0%B8%88%E0%B8%B4%E0%B8%95%E0%B9%83%E0%B8%88%20(Criminal%20Minds)/35.png",
+      "/images/Project/%E0%B8%AB%E0%B9%89%E0%B8%A7%E0%B8%87%E0%B8%A5%E0%B8%B6%E0%B8%81%E0%B8%A0%E0%B8%B2%E0%B8%A2%E0%B9%83%E0%B8%99%E0%B8%88%E0%B8%B4%E0%B8%95%E0%B9%83%E0%B8%88%20(Criminal%20Minds)/36.png",
+      "/images/Project/%E0%B8%AB%E0%B9%89%E0%B8%A7%E0%B8%87%E0%B8%A5%E0%B8%B6%E0%B8%81%E0%B8%A0%E0%B8%B2%E0%B8%A2%E0%B9%83%E0%B8%99%E0%B8%88%E0%B8%B4%E0%B8%95%E0%B9%83%E0%B8%88%20(Criminal%20Minds)/37.png",
     ],
   }
 ];
