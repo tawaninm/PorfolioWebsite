@@ -156,7 +156,7 @@ export default function Hero() {
           >
             <div className="inline-block px-6 py-2 rounded-full bg-soft-white/40 border border-soft-white/60 backdrop-blur-md shadow-sm dark:bg-white/10 dark:border-white/20">
               <span className="font-body text-sm font-bold tracking-wider text-deep-purple dark:text-sakura-white uppercase">
-                1+ Years · Coding Tutor · Game Developer · UX/UI Designer
+                AI & Automation Builder · Strategic Product Designer · KMITL IT
               </span>
             </div>
             {/* Japanese subtitle — pastel gradient in light / dark navy gradient in dark */}
@@ -170,7 +170,7 @@ export default function Hero() {
             variants={wordVariants}
             className="font-body text-lg md:text-xl text-dark-navy/80 dark:text-soft-white/80 max-w-md mb-10 leading-relaxed font-medium"
           >
-            I am Coding tutor, Game Developer and UX/UI Designer. I am a student at the School of Information Technology, KMITL. I spend time learning new things and developing my skills to make tools that entertain and help life easier.
+            I build AI-augmented systems, automation pipelines, and human-centered digital products. Second-year IT student at KMITL bridging engineering architecture, business strategy, and intuitive UX.
           </motion.p>
 
           {/* CTA Buttons */}

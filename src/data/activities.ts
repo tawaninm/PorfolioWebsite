@@ -82,6 +82,7 @@ export const activities: Activity[] = [
     organizer: "School of Information Technology, KMITL",
     image: "/images/ACTIVITIES/Game Business Workshop  เล่น..ให้เป็นเรื่อง (ธุรกิจ).jpg",
     gradient: "from-neon-magenta/30 to-deep-purple/25",
+    featured: true,
   },
   {
     id: "line-dev-workshop",
@@ -92,6 +93,7 @@ export const activities: Activity[] = [
     organizer: "School of Information Technology, KMITL",
     image: "/images/ACTIVITIES/LINE Developers University Workshop 2025.jpg",
     gradient: "from-mint/35 to-electric-blue/25",
+    featured: true,
   },
 
   // ── Training / TA ─────────────────────────────────────────

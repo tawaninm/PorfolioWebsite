@@ -10,9 +10,9 @@ import { FiMapPin, FiMail, FiPhone, FiGlobe, FiDownload, FiLinkedin, FiGithub } 
 const RESUME_DRIVE_URL = "https://drive.google.com/file/d/1ePtzO5ga6NPKyPydqEsmZ0iugoXEQRLt/view?usp=sharing";
 
 const stats = [
-  { label: "UX/UI", pct: 50, from: "#FF2D78", to: "#F06848" },
-  { label: "Frontend", pct: 65, from: "#5080F0", to: "#40C8A0" },
-  { label: "Game Dev", pct: 70, from: "#F0D040", to: "#F8A078" },
+  { label: "AI & Auto", pct: 85, from: "#FF2D78", to: "#F06848" },
+  { label: "Software", pct: 80, from: "#5080F0", to: "#40C8A0" },
+  { label: "Product/UX", pct: 75, from: "#F0D040", to: "#F8A078" },
 ];
 
 const education = [
@@ -22,61 +22,146 @@ const education = [
     module: "Module: Multimedia & Game Development",
     year: "Aug 2024 – Now",
     notes: [
-      "Freshman project on Python Web Next.js project Chat website \"Drive@Kmitl\"",
-      "Java Game project \"VPSTycoon\"",
-      "Arduino Rhythm Controller Game project \"Synchro\"",
-      "UX/UI Prototype Easy Dom \"Chao-dom\"",
+      "TAWAN-OS Personal Agentic AI Harness (Antigravity CLI, MCP, Multi-Agent)",
+      "Disney Lorcana PlayLab (AWS Serverless, Real-time WebSockets, Playwright E2E)",
+      "UX/UI Prototype EasyDom \"Chao-dom\" (Full 5-phase User Research & Usability Testing)",
+      "Java OOP Teaching Assistant & IT Openhouse Project Head",
     ],
   },
 ];
 
 const workExperience = [
   {
+    company: "School of Information Technology, KMITL",
+    role: "Teaching Assistant — Object-Oriented Programming (Java)",
+    dates: "Jan 2026 – Present",
+    achievements: [
+      "Assisting course instructors for Object-Oriented Programming (OOP) by evaluating weekly lab assignments and conducting code reviews for 1st-year students.",
+      "Facilitating conceptual Q&A sessions to reinforce core OOP principles (polymorphism, encapsulation, inheritance) and systematic debugging.",
+      "Bridging technical communication between professors and students to resolve lab blockers effectively.",
+    ],
+    tech: "Java, OOP, Git, Systematic Debugging",
+  },
+  {
+    company: "School of Information Technology — KMITL IT Openhouse 2025",
+    role: "Project Head — Multimedia Roblox Journey Workshop",
+    dates: "Nov 28 – 29, 2025",
+    achievements: [
+      "Served as Project Head for the Roblox Training Program, leading curriculum development and pitching the training syllabus to faculty members.",
+      "Recruited and supervised Teaching Assistants (TAs) and Technical Directors (TDs), overseeing live classroom instruction for 100+ attendees.",
+      "Managed workshop technical operations, lab machine environments, and hands-on Lua game prototyping sessions.",
+    ],
+    tech: "Roblox Studio, Lua, Curriculum Design, Team Management",
+  },
+  {
+    company: "School of Information Technology, KMITL — ITCAMP21",
+    role: "Technical Director (TD) — Unreal Engine 5",
+    dates: "Apr 28 – May 1, 2025",
+    achievements: [
+      "Served as Technical Director for Unreal Engine track at ITCAMP21, assisting high school campers with 3D environment setup, Blueprints logic, and technical troubleshooting.",
+      "Collaborated with camp leads to maintain stable lab machine configurations and guided students through 0-to-1 game prototyping.",
+    ],
+    tech: "Unreal Engine 5, Blueprints, Technical Mentoring",
+  },
+  {
     company: "Code genius EmQuartier",
     role: "Part-time Teacher — Information Technology",
-    dates: "Feb 22, 2026 – Now",
+    dates: "Feb 22, 2026 – Present",
     achievements: [
-      "The technology teacher for primary school students, specializing in coding education through block-based programming such as Scratch and Micro:bit, as well as introducing simple Python coding for creating educational games. I also provide learning feedback and adjust teaching content for each class to suit students' needs and progress.",
+      "Instructing primary school students in coding through block-based programming (Scratch, Micro:bit) and foundational Python.",
+      "Providing individualized learning feedback and adapting lesson pacing to fit student progress in both Thai and English.",
     ],
     tech: "Scratch, Micro:bit, Python",
   },
   {
     company: "Login-Engineering Academy",
-    role: "Part-time Tutor — Information Technology",
+    role: "Part-time Tutor — Information Technology & Math",
     dates: "Sep 2024 – Mar 2026",
     achievements: [
-      "The tutor manages projects for students to submit to competitions, such as national software contests and portfolio projects for university applications.",
-      "The tutor teaches the Godot game engine and mathematics to junior high school and senior high school students.",
+      "Mentored junior and senior high school students in game development using Godot Engine and applied mathematics.",
+      "Guided students in building competition-ready software projects and portfolios for university admissions.",
     ],
-    tech: "Godot Engine, Math",
+    tech: "Godot Engine, Math, Physics",
+  },
+];
+
+const featuredProjects = [
+  {
+    name: "TAWAN-OS — Personal Agentic AI Harness",
+    category: "AI & Automation",
+    period: "2025 – Present",
+    points: [
+      "Architected a Markdown-first AI agent harness with multi-agent orchestration, CLI proxy, and custom Model Context Protocol (MCP) bridges.",
+      "Integrated automated verification loops, doctor diagnostics, and 500+ modular engineering skills to eliminate context degradation.",
+    ],
+    tech: "TypeScript, Python, MCP, Antigravity CLI, Multi-Agent Architecture",
   },
   {
-    company: "School of Information Technology — KMITL IT Openhouse 2025",
-    role: "Head Workshop — Multimedia Roblox Journey",
-    dates: "Nov 28 – 29, 2025",
-    achievements: [
-      "Acting as the Project Head for the Roblox Training Program, responsible for curriculum development and proposing training modules to faculty members. Key duties include designing instructional plans, sourcing Teaching Assistants (TAs) and Technical Directors (TDs) for workshops, and overseeing classroom operations, including the management of lab equipment and software environments.",
+    name: "Disney Lorcana PlayLab — Cloud TCG Platform",
+    category: "Cloud & Software Architecture",
+    period: "2025 – 2026",
+    points: [
+      "Built a full-stack digital card game platform on AWS Serverless architecture with real-time WebSocket state synchronization.",
+      "Engineered automated Playwright E2E testing suites and enforced OWASP security compliance across serverless endpoints.",
     ],
-    tech: "Roblox Studio",
+    tech: "Next.js, AWS Lambda, API Gateway, DynamoDB, Playwright E2E, OWASP",
   },
   {
-    company: "School of Information Technology, KMITL — ITCAMP21",
-    role: "TD Unreal Engine",
-    dates: "28 April 2025 – 1 May 2025",
-    achievements: [
-      "Manage student projects for competitions such as national software contests and portfolio pieces required for university applications.",
-      "Teach the Godot game engine and mathematics to junior-high and senior-high students.",
+    name: "EasyDom (Chao-dom) — 0-to-1 UX Case Study",
+    category: "Product & Strategy",
+    period: "2024",
+    points: [
+      "Executed end-to-end UX research solving university dorm vacancy matching through in-depth qualitative interviews with students and dorm owners.",
+      "Developed personas, experience maps, interactive Figma prototypes, and conducted usability tests yielding 15+ actionable design insights.",
     ],
-    tech: "Unreal Engine",
+    tech: "Figma, User Research, Usability Testing, Persona Mapping, Pitching",
   },
 ];
 
 const skillGroups = [
-  { label: "UX / UI Tool", items: ["Adobe Illustrator", "Figma", "Canva"] },
-  { label: "UX / UI Knowledge", items: ["Design principle", "Visual principle", "Usability testing", "Dialog design"] },
-  { label: "Dev Tool", items: ["Godot engine (Intermediate)", "Unity engine (Intermediate)", "Unreal engine (Intermediate)", "Roblox Studio (Beginner)", "Git", "Visual studio code"] },
-  { label: "Coding Languages", items: ["C#", "GDscript", "Java", "HTML", "CSS", "JavaScript", "Lua", "SQL"] },
-  { label: "AI skill", items: ["Gemini", "NotebookLM", "Chat GPT", "Claude", "Antigravity"] },
+  {
+    label: "AI & Automation Engineering",
+    items: [
+      "Multi-Agent Orchestration",
+      "Antigravity CLI & agy",
+      "Model Context Protocol (MCP)",
+      "LINE Chatbot (Dialogflow & Messaging API)",
+      "Python Scripting & Automation",
+      "Prompt Engineering & Evals",
+    ],
+  },
+  {
+    label: "Software Architecture & Dev",
+    items: [
+      "Next.js / React / TypeScript",
+      "AWS Serverless (Lambda, API Gateway, S3)",
+      "Automated Testing (Playwright E2E)",
+      "Java OOP & C#",
+      "REST APIs & WebSockets",
+      "Git / GitHub CI",
+    ],
+  },
+  {
+    label: "Product Strategy & Management",
+    items: [
+      "User Research & In-depth Interviews",
+      "0-to-1 Product Scoping & PRD",
+      "Persona & Experience Mapping",
+      "Usability Testing & Feedback Loops",
+      "Agile Sprint & Task Decomposition",
+      "Technical Stakeholder Pitching",
+    ],
+  },
+  {
+    label: "Human-Centered UX / UI",
+    items: [
+      "Figma Prototyping & Design Systems",
+      "Information Architecture",
+      "Interaction & Motion Design",
+      "WCAG 2.2 Accessibility",
+      "Adobe Illustrator & Canva",
+    ],
+  },
 ];
 
 const languages = [
@@ -87,8 +172,18 @@ const languages = [
 
 const awards = [
   {
+    name: "LINE Developers University Workshop 2025",
+    detail: "Hands-on conversational AI development using Dialogflow and LINE Messaging API by LINE Developers Thailand",
+    year: "2025",
+  },
+  {
+    name: "Game Business Workshop (เล่น..ให้เป็นเรื่อง ธุรกิจ)",
+    detail: "Intensive 4-day workshop applying game mechanics and gamification frameworks to corporate business strategy",
+    year: "2025",
+  },
+  {
     name: "NSC 2022 — Final Round",
-    detail: "National Software Contest — Learning Mobile Application \"Detectcheat\" made with Unity engine learning how to responding to online fraud",
+    detail: "National Software Contest — Learning Mobile Application \"Detectcheat\" made with Unity engine learning how to respond to online fraud",
     year: "2022",
   },
   {
@@ -254,7 +349,7 @@ export default function ResumePage() {
               <div>
                 <h2 className="font-display text-3xl text-sakura-white print:text-black">THANATPAT PROMTHONG</h2>
                 <p className="font-body font-bold text-neon-magenta text-base mt-0.5 print:text-pink-600">
-                  Coding Tutor · Game Developer · UX/UI Designer
+                  Strategic Builder · AI & Automation Engineer · Product Designer
                 </p>
               </div>
 
@@ -288,7 +383,7 @@ export default function ResumePage() {
             <FadePanel>
               <PanelDivider title="Summary" />
               <p className="font-body text-sm text-soft-white/70 leading-relaxed print:text-gray-600">
-                Second-year IT student specializing in UX/UI through hands-on coursework in Human Interface, covering user interviews, persona development, experience mapping, and translating insights into actionable design decisions. Brings strong communication skills from experience as a university OOP Teaching Assistant and math/coding tutor, enabling effective facilitation, feedback, and user-centered collaboration. Comfortable using Figma, Adobe Illustrator, Canva, NotebookLM, ChatGPT, and Gemini to support research synthesis, ideation, wireframing, and UI design. Friendly, patient, and committed to creating intuitive experiences grounded in real user needs.
+                Second-year IT student at KMITL specializing in AI automation systems, software architecture, and product strategy. Proven track record leading technical workshops (Project Head for IT Openhouse Roblox Training), mentoring university peers as a Java OOP Teaching Assistant, and architecting multi-agent AI harnesses (TAWAN-OS) and cloud platforms (Disney Lorcana PlayLab on AWS Serverless). Grounded in structured problem-solving, stakeholder communication, and end-to-end product delivery from user research to production code.
               </p>
             </FadePanel>
           </div>
@@ -318,6 +413,44 @@ export default function ResumePage() {
                         <p className="font-mono text-[10px] text-muted-lilac/90 mt-1">Tech: {w.tech}</p>
                       )}
                     </div>
+                  </div>
+                ))}
+              </div>
+            </FadePanel>
+
+            {/* Featured Systems & Projects */}
+            <FadePanel delay={0.08}>
+              <PanelDivider title="Featured Systems & Projects" />
+              <div className="flex flex-col gap-5">
+                {featuredProjects.map((p) => (
+                  <div
+                    key={p.name}
+                    className="border-l-2 border-electric-blue/40 pl-4 print:border-gray-300"
+                  >
+                    <div className="flex flex-wrap items-baseline justify-between gap-2">
+                      <span className="font-body font-bold text-sm text-sakura-white print:text-black">
+                        {p.name}
+                      </span>
+                      <span className="font-mono text-xs text-retro-yellow shrink-0">
+                        {p.period}
+                      </span>
+                    </div>
+                    <span className="font-mono text-[10px] text-sky-cyan uppercase tracking-wider">
+                      {p.category}
+                    </span>
+                    <ul className="mt-1 flex flex-col gap-0.5">
+                      {p.points.map((pt) => (
+                        <li
+                          key={pt}
+                          className="font-body text-xs text-soft-white/60 print:text-gray-600 before:content-['·'] before:mr-1.5"
+                        >
+                          {pt}
+                        </li>
+                      ))}
+                    </ul>
+                    <p className="font-mono text-[10px] text-muted-lilac/90 mt-1">
+                      Stack: {p.tech}
+                    </p>
                   </div>
                 ))}
               </div>

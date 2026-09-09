@@ -17,19 +17,16 @@ const fadeUp = {
 };
 
 const skillCategories = [
-  { label: "Figma", color: "bg-sakura-pink text-dark-navy" },
-  { label: "Adobe Illustrator", color: "bg-lavender text-dark-navy" },
-  { label: "Canva", color: "bg-sky-cyan text-dark-navy" },
-  { label: "Godot Engine", color: "bg-mint text-dark-navy" },
-  { label: "Unity", color: "bg-mint text-dark-navy" },
-  { label: "Unreal Engine", color: "bg-sunset-gold text-dark-navy" },
-  { label: "C#", color: "bg-sakura-pink text-dark-navy" },
-  { label: "GDScript", color: "bg-lavender text-dark-navy" },
-  { label: "Java", color: "bg-coral-red text-soft-white" },
-  { label: "JavaScript", color: "bg-retro-yellow text-dark-navy" },
-  { label: "Python", color: "bg-sky-cyan text-dark-navy" },
-  { label: "HTML", color: "bg-coral-red text-soft-white" },
-  { label: "CSS", color: "bg-electric-blue text-soft-white" },
+  { label: "Agentic AI & MCP", color: "bg-neon-magenta/20 text-dark-navy dark:text-sakura-white border border-neon-magenta/30" },
+  { label: "Python Automation", color: "bg-sky-cyan text-dark-navy" },
+  { label: "Next.js & TypeScript", color: "bg-retro-yellow text-dark-navy" },
+  { label: "AWS Serverless", color: "bg-sunset-gold text-dark-navy" },
+  { label: "Figma UX/UI", color: "bg-sakura-pink text-dark-navy" },
+  { label: "LINE Chatbot & API", color: "bg-mint text-dark-navy" },
+  { label: "Java OOP", color: "bg-coral-red text-soft-white" },
+  { label: "E2E Testing (Playwright)", color: "bg-electric-blue text-soft-white" },
+  { label: "Godot & Unity", color: "bg-lavender text-dark-navy" },
+  { label: "Git & CI/CD", color: "bg-mint text-dark-navy" },
 ];
 
 /* Anime sparkle shape */
@@ -125,7 +122,7 @@ export default function About() {
 
               <div className="flex-1">
                 <p className="font-body text-dark-navy/90 dark:text-soft-white/90 leading-relaxed transition-colors duration-300">
-                  A programmer and game developer deeply focused on UX. I blend an observant eye for user needs with diverse inspirations from manga, anime, medicine, and science to craft engaging digital experiences.
+                  A strategic builder and developer bridging AI automation, software engineering, and human-centered design. I combine systematic problem-solving with an eye for user needs to build practical, scalable digital solutions.
                 </p>
 
                 {/* Manga speech bubble quote */}

@@ -10,12 +10,12 @@ import { FiGithub, FiLinkedin, FiMail } from "react-icons/fi";
 
 const profile = {
   name: "Thanatpat Promthong",
-  tagline: "Coding Tutor · Game Developer · UX/UI Designer",
+  tagline: "AI & Automation Builder · Strategic Product Designer · KMITL IT",
   location: "Bangkok, Thailand",
   bio: [
-    "By bridging the gap between the user's needs and the developer's architecture, I channel my technical skills into creating impactful programs and games.",
-    "Currently 2nd year student at the School of Information Technology, KMITL. Major in Multimedia and Game Technology.",
-    "I am constantly eager to learn new skills and love participating in campus activities. While pursuing my degree, I actively seek hands-on experience—balancing my time between tutoring and study.",
+    "By bridging user needs, business strategy, and engineering architecture, I build AI-augmented systems and intuitive digital products.",
+    "Currently 2nd year student at the School of Information Technology, KMITL, with hands-on focus on Agentic AI, Cloud Automation, and Human Interface design.",
+    "I actively seek hands-on experience—balancing technical leadership as an IT Openhouse Project Head and Java OOP Teaching Assistant with coding and continuous learning.",
   ],
   quotes: [
     { text: "stay hungry stay foolish  —Steve Jobs", bg: "bg-lavender/20", rotate: "-rotate-1" },
@@ -59,6 +59,13 @@ const profile = {
       company: "School of Information Technology, KMITL",
       desc: "Assisting the course instructor for Object-Oriented Programming (OOP) by evaluating weekly laboratory assignments and posing conceptual questions to students to reinforce their understanding and facilitate further learning.",
       tech: ["OOP Java"],
+    },
+    {
+      year: "2025",
+      role: "Project Head — Multimedia Roblox Journey Workshop",
+      company: "School of Information Technology — KMITL IT Openhouse",
+      desc: "Led curriculum design, syllabus pitching to faculty, and TA/TD team management for hands-on game development and coding workshops.",
+      tech: ["Roblox Studio", "Lua", "Curriculum Design"],
     },
     {
       year: "2024 – 2026",
