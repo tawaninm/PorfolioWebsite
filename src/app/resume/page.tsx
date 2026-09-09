@@ -282,7 +282,7 @@ export default function ResumePage() {
         target="_blank"
         rel="noopener noreferrer"
         aria-label="Download Resume from Google Drive"
-        className="print:hidden fixed bottom-8 right-8 z-50 w-14 h-14 rounded-full bg-hot-pink flex items-center justify-center text-soft-white shadow-[0_0_24px_rgba(255,96,144,0.6)] hover:shadow-[0_0_36px_rgba(255,96,144,0.8)] hover:-translate-y-1 transition-all duration-300"
+        className="print:hidden fixed bottom-28 md:bottom-32 right-6 md:right-8 z-50 w-14 h-14 rounded-full bg-hot-pink flex items-center justify-center text-soft-white shadow-[0_0_24px_rgba(255,96,144,0.6)] hover:shadow-[0_0_36px_rgba(255,96,144,0.8)] hover:-translate-y-1 transition-all duration-300"
       >
         <FiDownload size={22} />
       </a>
