@@ -7,7 +7,7 @@ import { FiMapPin, FiMail, FiPhone, FiGlobe, FiDownload, FiLinkedin, FiGithub } 
 /* ─────────────────────────────────────────
    DATA
 ───────────────────────────────────────── */
-const RESUME_DRIVE_URL = "https://drive.google.com/file/d/1oht2wjo-ojsd8lqC1lw3AzNgE6sb2uI8/view?usp=sharing";
+const RESUME_DRIVE_URL = "https://drive.google.com/file/d/1ePtzO5ga6NPKyPydqEsmZ0iugoXEQRLt/view?usp=sharing";
 
 const stats = [
   { label: "AI & Auto", pct: 85, from: "#FF2D78", to: "#F06848" },
