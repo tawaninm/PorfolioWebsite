@@ -32,83 +32,106 @@ const education = [
 
 const workExperience = [
   {
+    company: "Gumon Technology",
+    role: "User Experience Designer Intern",
+    dates: "Jun 1 – Aug 30, 2026",
+    achievements: [
+      "Managed and improved the centralized design system for Gumon Technology by organizing UI foundations, reusable components, style tokens, and design documentation.",
+      "Established clear component guidelines to enforce product design consistency and facilitate smoother collaboration between designers and engineering teams.",
+    ],
+    tech: "Figma, Design Systems, UI Foundations, Tokens, Cross-Functional Workflow",
+  },
+  {
     company: "School of Information Technology, KMITL",
     role: "Teaching Assistant — Object-Oriented Programming (Java)",
-    dates: "Jan 2026 – Present",
+    dates: "Nov 2025 – Present",
     achievements: [
-      "Assisting course instructors for Object-Oriented Programming (OOP) by evaluating weekly lab assignments and conducting code reviews for 1st-year students.",
+      "Assisting course instructors for Object-Oriented Programming (OOP) by evaluating weekly lab assignments and conducting code reviews for 100+ 1st-year students.",
       "Facilitating conceptual Q&A sessions to reinforce core OOP principles (polymorphism, encapsulation, inheritance) and systematic debugging.",
       "Bridging technical communication between professors and students to resolve lab blockers effectively.",
     ],
-    tech: "Java, OOP, Git, Systematic Debugging",
+    tech: "Java, OOP, Git, Systematic Debugging, Mentorship",
   },
   {
     company: "School of Information Technology — KMITL IT Openhouse 2025",
     role: "Project Head — Multimedia Roblox Journey Workshop",
     dates: "Nov 28 – 29, 2025",
     achievements: [
-      "Served as Project Head for the Roblox Training Program, leading curriculum development and pitching the training syllabus to faculty members.",
+      "Served as Project Head for the Roblox Training Program, leading curriculum development and pitching the training syllabus to faculty executives for sponsorship.",
       "Recruited and supervised Teaching Assistants (TAs) and Technical Directors (TDs), overseeing live classroom instruction for 100+ attendees.",
       "Managed workshop technical operations, lab machine environments, and hands-on Lua game prototyping sessions.",
     ],
     tech: "Roblox Studio, Lua, Curriculum Design, Team Management",
   },
   {
-    company: "School of Information Technology, KMITL — ITCAMP21",
-    role: "Technical Director (TD) — Unreal Engine 5",
-    dates: "Apr 28 – May 1, 2025",
+    company: "School of Information Technology, KMITL — ITCAMP 22: The Auspicious Jamboree",
+    role: "Head of Game Workshop (Unreal Engine)",
+    dates: "Apr 29 – May 2, 2026",
     achievements: [
-      "Served as Technical Director for Unreal Engine track at ITCAMP21, assisting high school campers with 3D environment setup, Blueprints logic, and technical troubleshooting.",
-      "Collaborated with camp leads to maintain stable lab machine configurations and guided students through 0-to-1 game prototyping.",
+      "Designed and structured the comprehensive Unreal Engine game development curriculum for high school campers, establishing interactive learning milestones.",
+      "Trained and mentored the cohort of TAs and TDs, managing classroom pacing, technical guidance, and operational coordination throughout the camp.",
     ],
-    tech: "Unreal Engine 5, Blueprints, Technical Mentoring",
+    tech: "Unreal Engine 5, Blueprints, Curriculum Architecture, Staff Mentorship",
   },
   {
-    company: "Code genius EmQuartier",
-    role: "Part-time Teacher — Information Technology",
-    dates: "Feb 22, 2026 – Present",
+    company: "Code Genius EmQuartier & Login-Engineering Academy",
+    role: "Part-time Technical Instructor & Mentor",
+    dates: "Sep 2024 – Present",
     achievements: [
       "Instructing primary school students in coding through block-based programming (Scratch, Micro:bit) and foundational Python.",
       "Providing individualized learning feedback and adapting lesson pacing to fit student progress in both Thai and English.",
+      "Coached students in engineering competition-ready software projects submitted to national contests and university portfolios.",
     ],
-    tech: "Scratch, Micro:bit, Python",
-  },
-  {
-    company: "Login-Engineering Academy",
-    role: "Part-time Tutor — Information Technology & Math",
-    dates: "Sep 2024 – Mar 2026",
-    achievements: [
-      "Mentored junior and senior high school students in game development using Godot Engine and applied mathematics.",
-      "Guided students in building competition-ready software projects and portfolios for university admissions.",
-    ],
-    tech: "Godot Engine, Math, Physics",
+    tech: "Scratch, Micro:bit, Python, Godot Engine",
   },
 ];
 
 const featuredProjects = [
   {
-    name: "TAWAN-OS — Personal Agentic AI Harness",
+    name: "TAWAN-OS — Autonomous Agentic Automation & Trend Intelligence",
     category: "AI & Automation",
     period: "2025 – Present",
     points: [
-      "Architected a Markdown-first AI agent harness with multi-agent orchestration, CLI proxy, and custom Model Context Protocol (MCP) bridges.",
-      "Integrated automated verification loops, doctor diagnostics, and 500+ modular engineering skills to eliminate context degradation.",
+      "Architected a Markdown-first AI agent harness with multi-agent orchestration, CLI proxy, and custom Model Context Protocol (MCP) bridges to eliminate repetitive manual workflows.",
+      "Designed structured LLM ingestion pipelines that extract, categorize, and cross-reference signals from heterogeneous transcripts and documentation into searchable knowledge repositories.",
+      "Implemented deterministic verification checks and doctor diagnostics to guarantee hallucination-free outputs and persistent state tracking.",
     ],
-    tech: "TypeScript, Python, MCP, Antigravity CLI, Multi-Agent Architecture",
+    tech: "TypeScript, Python, MCP, Antigravity CLI, Multi-Agent Architecture, LLM Evals",
   },
   {
-    name: "Disney Lorcana PlayLab — Cloud TCG Platform",
-    category: "Cloud & Software Architecture",
+    name: "NOSE TEA 'Sip to Scale' — Corporate Strategy & O2O Redesign",
+    category: "Business Strategy & Modeling",
+    period: "2026",
+    points: [
+      "Formulated an intensive 30-day celebrity-free O2O growth strategy under a strict ฿500k budget constraint for a premium cheese tea brand in a red ocean market.",
+      "Built a financial feasibility model forecasting ฿1.8M revenue, ROI of 260%, and 55% store GP margin, with break-even verified at 7,576 cups (Week 3).",
+      "Redesigned customer journeys with smart e-Queues and LINE OA loyalty rituals, turning wait-time congestion into interactive engagement stations and onboarding 15,000+ digital members.",
+    ],
+    tech: "SCQ Framework, Financial Break-Even Modeling, Booku POS, LINE OA, Customer Journey Mapping",
+  },
+  {
+    name: "HybriCareer AI (BridgeAI) — AI Labor Market Intelligence & SaaS",
+    category: "Market Discovery & Hackathon",
+    period: "2026",
+    points: [
+      "Analyzed NSO labor data highlighting a 34% youth unemployment rate; conducted qualitative interviews with career switchers and HR managers to isolate screening friction in legacy ATS software.",
+      "Conceptualized and prototyped an interactive AI Skill-Proof Benchmark Radar, pitching the solution to earn selection as a Top 10 Finalist Proposal (5th Reserve) at Generation Thailand Hackathon 2026.",
+    ],
+    tech: "User Research, Labor Analytics, AI Benchmark Prototyping, Lovable, Pitching",
+  },
+  {
+    name: "Disney Lorcana PlayLab — Cloud Serverless Real-Time Platform",
+    category: "Cloud Architecture & Scalability",
     period: "2025 – 2026",
     points: [
-      "Built a full-stack digital card game platform on AWS Serverless architecture with real-time WebSocket state synchronization.",
-      "Engineered automated Playwright E2E testing suites and enforced OWASP security compliance across serverless endpoints.",
+      "Designed a full-stack real-time multiplayer platform on AWS Serverless architecture with <100ms WebSocket synchronization and DynamoDB Single-Table Design ($0.00 cost under Free Tier).",
+      "Engineered automated Playwright E2E regression test suites and verified security integrity under the OWASP Top 10 framework.",
     ],
-    tech: "Next.js, AWS Lambda, API Gateway, DynamoDB, Playwright E2E, OWASP",
+    tech: "AWS Lambda, API Gateway WebSockets, Amazon DynamoDB, Next.js, Playwright E2E, OWASP",
   },
   {
     name: "EasyDom (Chao-dom) — 0-to-1 UX Case Study",
-    category: "Product & Strategy",
+    category: "Product & UX Strategy",
     period: "2024",
     points: [
       "Executed end-to-end UX research solving university dorm vacancy matching through in-depth qualitative interviews with students and dorm owners.",
@@ -120,12 +143,23 @@ const featuredProjects = [
 
 const skillGroups = [
   {
+    label: "Strategy & Problem Framing",
+    items: [
+      "Business Case Structuring (SCQ)",
+      "Financial Break-Even & ROI Modeling",
+      "Customer Journey Mapping (O2O)",
+      "Market & Labor Data Analytics",
+      "Agile Sprint & Task Decomposition",
+      "Executive Stakeholder Pitching",
+    ],
+  },
+  {
     label: "AI & Automation Engineering",
     items: [
       "Multi-Agent Orchestration",
       "Antigravity CLI & agy",
       "Model Context Protocol (MCP)",
-      "LINE Chatbot (Dialogflow & Messaging API)",
+      "LINE Messaging API & Dialogflow",
       "Python Scripting & Automation",
       "Prompt Engineering & Evals",
     ],
@@ -134,28 +168,18 @@ const skillGroups = [
     label: "Software Architecture & Dev",
     items: [
       "Next.js / React / TypeScript",
-      "AWS Serverless (Lambda, API Gateway, S3)",
+      "AWS Serverless (Lambda, API Gateway, DynamoDB)",
       "Automated Testing (Playwright E2E)",
       "Java OOP & C#",
       "REST APIs & WebSockets",
-      "Git / GitHub CI",
-    ],
-  },
-  {
-    label: "Product Strategy & Management",
-    items: [
-      "User Research & In-depth Interviews",
-      "0-to-1 Product Scoping & PRD",
-      "Persona & Experience Mapping",
-      "Usability Testing & Feedback Loops",
-      "Agile Sprint & Task Decomposition",
-      "Technical Stakeholder Pitching",
+      "Git / GitHub CI & Docker",
     ],
   },
   {
     label: "Human-Centered UX / UI",
     items: [
       "Figma Prototyping & Design Systems",
+      "User Research & Interviews",
       "Information Architecture",
       "Interaction & Motion Design",
       "WCAG 2.2 Accessibility",
@@ -166,11 +190,21 @@ const skillGroups = [
 
 const languages = [
   { lang: "Thai", pct: 100, level: "Native" },
-  { lang: "English", pct: 60, level: "Medium" },
-  { lang: "Japanese", pct: 20, level: "Beginner" },
+  { lang: "English", pct: 85, level: "Professional Working Proficiency / Fluent" },
+  { lang: "Japanese", pct: 25, level: "Beginner" },
 ];
 
 const awards = [
+  {
+    name: "Top 10 Finalist Proposal — Generation Thailand Hackathon 2026",
+    detail: "Nationwide hackathon finalist for HybriCareer AI (BridgeAI) — labor market analytics & AI skill verification radar",
+    year: "2026",
+  },
+  {
+    name: "Business Case Competitor — NOSE TEA 'Sip to Scale' 2026",
+    detail: "Formulated 30-day celebrity-free O2O growth strategy and ฿1.8M financial feasibility model for premium tea brand",
+    year: "2026",
+  },
   {
     name: "LINE Developers University Workshop 2025",
     detail: "Hands-on conversational AI development using Dialogflow and LINE Messaging API by LINE Developers Thailand",
@@ -182,12 +216,12 @@ const awards = [
     year: "2025",
   },
   {
-    name: "NSC 2022 — Final Round",
+    name: "NSC 2022 — Final Round Finalist",
     detail: "National Software Contest — Learning Mobile Application \"Detectcheat\" made with Unity engine learning how to respond to online fraud",
     year: "2022",
   },
   {
-    name: "NSC 2023 — Second Round",
+    name: "NSC 2023 — Second Round Finalist",
     detail: "National Software Contest — Computer game \"CriminalMind\" made with Unity engine",
     year: "2023",
   },
@@ -276,12 +310,13 @@ export default function ResumePage() {
   return (
     <main className="relative min-h-screen pt-28 pb-32 px-4 md:px-6 bg-soft-white dark:bg-dark-navy transition-colors duration-300 print:pt-6 print:pb-6 print:bg-white">
 
-      {/* Download button — links to Google Drive */}
+      {/* Download button — downloads latest 2-Page Executive Resume PDF directly */}
       <a
-        href={RESUME_DRIVE_URL}
+        href="/CV_Thanatpat_LINE_Strategy_2Page.pdf"
+        download="CV_Thanatpat_LINE_Strategy_2Page.pdf"
         target="_blank"
         rel="noopener noreferrer"
-        aria-label="Download Resume from Google Drive"
+        aria-label="Download Resume PDF"
         className="print:hidden fixed bottom-28 md:bottom-32 right-6 md:right-8 z-50 w-14 h-14 rounded-full bg-hot-pink flex items-center justify-center text-soft-white shadow-[0_0_24px_rgba(255,96,144,0.6)] hover:shadow-[0_0_36px_rgba(255,96,144,0.8)] hover:-translate-y-1 transition-all duration-300"
       >
         <FiDownload size={22} />
