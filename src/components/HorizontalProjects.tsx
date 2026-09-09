@@ -5,15 +5,20 @@ import Image from "next/image";
 import { Link } from "next-view-transitions";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { projects } from "@/data/projects";
+import { projects, categoryLabels } from "@/data/projects";
 
 gsap.registerPlugin(ScrollTrigger);
 
 const CATEGORY_STYLE: Record<string, string> = {
   "ux/ui": "bg-sakura-pink text-deep-purple",
+  uxui: "bg-sakura-pink text-deep-purple",
   programming: "bg-electric-blue text-white",
   "game dev": "bg-hot-pink text-white",
+  game: "bg-hot-pink text-white",
   "ci art": "bg-retro-yellow text-deep-navy",
+  "ci-art": "bg-retro-yellow text-deep-navy",
+  hackathon: "bg-neon-teal text-deep-navy",
+  "case-competition": "bg-coral-red text-white",
 };
 
 /**
@@ -122,7 +127,7 @@ export default function HorizontalProjects() {
                   CATEGORY_STYLE[p.category] ?? "bg-soft-white/20 text-soft-white"
                 }`}
               >
-                {p.category}
+                {categoryLabels[p.category] ?? p.category}
               </span>
               {/* Title */}
               <div className="absolute bottom-4 left-4 right-4 flex items-end justify-between gap-3">

@@ -9,20 +9,24 @@ import type { Project } from "@/data/projects";
 
 /* ── Filter config ── */
 const filters = [
-  { key: "all",         label: "All" },
-  { key: "uxui",        label: "UX/UI" },
-  { key: "programming", label: "Programming" },
-  { key: "game",        label: "Game Dev" },
-  { key: "ci-art",      label: "CI Art" },
+  { key: "all",              label: "All" },
+  { key: "uxui",             label: "UX/UI" },
+  { key: "programming",      label: "Programming" },
+  { key: "hackathon",        label: "Hackathon" },
+  { key: "case-competition", label: "Case Competition" },
+  { key: "game",             label: "Game Dev" },
+  { key: "ci-art",           label: "CI Art" },
 ] as const;
 
 type FilterKey = (typeof filters)[number]["key"];
 
 const categoryColor: Record<Project["category"], string> = {
-  uxui:        "text-sakura-pink",
-  programming: "text-sky-cyan",
-  "ci-art":    "text-mint",
-  game:        "text-retro-yellow",
+  uxui:               "text-sakura-pink",
+  programming:        "text-sky-cyan",
+  "ci-art":           "text-mint",
+  game:               "text-retro-yellow",
+  hackathon:          "text-electric-blue",
+  "case-competition": "text-coral-red",
 };
 
 const ease = [0.16, 1, 0.3, 1] as const;

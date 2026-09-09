@@ -16,6 +16,8 @@ const categoryBg: Record<Project["category"], string> = {
   programming: "bg-sky-cyan/20 text-cyan-deep dark:text-sky-cyan border-sky-cyan/30",
   "ci-art": "bg-mint/20 text-mint-deep dark:text-mint border-mint/30",
   game: "bg-retro-yellow/20 text-yellow-deep dark:text-retro-yellow border-retro-yellow/30",
+  hackathon: "bg-electric-blue/20 text-electric-blue border-electric-blue/30",
+  "case-competition": "bg-coral-red/20 text-coral-red border-coral-red/30",
 };
 
 /* ---- Fade-in wrapper ---- */

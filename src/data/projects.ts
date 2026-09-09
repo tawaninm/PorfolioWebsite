@@ -34,7 +34,7 @@ export interface ProjectSection {
 export interface Project {
   slug: string;
   title: string;
-  category: "uxui" | "programming" | "ci-art" | "game";
+  category: "uxui" | "programming" | "ci-art" | "game" | "hackathon" | "case-competition";
   thumbnail: string;
   heroImage: string;
   date: string;
@@ -58,6 +58,8 @@ export const categoryLabels: Record<Project["category"], string> = {
   programming: "Programming",
   "ci-art": "CI Art",
   game: "Game Dev",
+  hackathon: "Hackathon",
+  "case-competition": "Case Competition",
 };
 
 export const projects: Project[] = [
@@ -586,7 +588,7 @@ export const projects: Project[] = [
   {
     slug: "hybricareer-ai",
     title: "HybriCareer AI (BridgeAI) — Generation Thailand Hackathon 2026",
-    category: "uxui",
+    category: "hackathon",
     thumbnail: "/images/Project/HybriCareer/slides/1.png",
     heroImage: "/images/Project/HybriCareer/slides/1.png",
     date: "2026",
@@ -781,7 +783,7 @@ export const projects: Project[] = [
   {
     slug: "nose-tea-case-competition",
     title: "NOSE TEA 'Sip to Scale' — Nosey's 45° Green Mustache DIY Studio (Business Case Competition 2026)",
-    category: "uxui",
+    category: "case-competition",
     thumbnail: "/images/Project/NoseTea/Banner.jpg",
     heroImage: "/images/Project/NoseTea/1.png",
     date: "2026",

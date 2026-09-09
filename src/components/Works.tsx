@@ -13,6 +13,8 @@ const categoryColor: Record<Project["category"], string> = {
   programming: "text-sky-cyan",
   "ci-art": "text-mint",
   game: "text-retro-yellow",
+  hackathon: "text-electric-blue",
+  "case-competition": "text-coral-red",
 };
 
 /* Retro starburst SVG behind heading */
