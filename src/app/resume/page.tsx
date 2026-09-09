@@ -383,7 +383,7 @@ export default function ResumePage() {
             <FadePanel>
               <PanelDivider title="Summary" />
               <p className="font-body text-sm text-soft-white/70 leading-relaxed print:text-gray-600">
-                Second-year IT student at KMITL specializing in AI automation systems, software architecture, and product strategy. Proven track record leading technical workshops (Project Head for IT Openhouse Roblox Training), mentoring university peers as a Java OOP Teaching Assistant, and architecting multi-agent AI harnesses (TAWAN-OS) and cloud platforms (Disney Lorcana PlayLab on AWS Serverless). Grounded in structured problem-solving, stakeholder communication, and end-to-end product delivery from user research to production code.
+                Third-year IT student at KMITL specializing in AI automation systems, software architecture, and product strategy. Proven track record leading technical workshops (Project Head for IT Openhouse Roblox Training), mentoring university peers as a Java OOP Teaching Assistant, and architecting multi-agent AI harnesses (TAWAN-OS) and cloud platforms (Disney Lorcana PlayLab on AWS Serverless). Grounded in structured problem-solving, stakeholder communication, and end-to-end product delivery from user research to production code.
               </p>
             </FadePanel>
           </div>

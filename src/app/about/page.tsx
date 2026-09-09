@@ -14,7 +14,7 @@ const profile = {
   location: "Bangkok, Thailand",
   bio: [
     "By bridging user needs, business strategy, and engineering architecture, I build AI-augmented systems and intuitive digital products.",
-    "Currently 2nd year student at the School of Information Technology, KMITL, with hands-on focus on Agentic AI, Cloud Automation, and Human Interface design.",
+    "Currently 3rd year student at the School of Information Technology, KMITL, with hands-on focus on Agentic AI, Cloud Automation, and Human Interface design.",
     "I actively seek hands-on experience—balancing technical leadership as an IT Openhouse Project Head and Java OOP Teaching Assistant with coding and continuous learning.",
   ],
   quotes: [

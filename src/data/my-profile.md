@@ -30,13 +30,13 @@ Coding Languages: C# , GDscript , Java , HTML ,CSS , JavaScript , Lua, SQL
 
 paragraph1: By bridging the gap between the user's needs and the developer's architecture, I channel my technical skills into creating impactful programs and games.
 
-paragraph2: Currently 2nd year student at the School of Information Technology, KMITL. Major in Multimedia and Game Technology.
+paragraph2: Currently 3rd year student at the School of Information Technology, KMITL. Major in Multimedia and Game Technology.
 
 paragraph3: I am constantly eager to learn new skills and love participating in campus activities. While pursuing my degree, I actively seek hands-on experience—balancing my time between tutoring and study.
 
 “take care of your work, and your work will take care of you.”
 
-hero_description: Second-year IT student at KMITL specializing in UX/UI and game development. I combine my background as an OOP teaching assistant and coding tutor with hands-on experience in human interface design. Using tools like Figma, Illustrator, and AI, I translate user research and experience mapping into actionable, pixel-perfect designs. Friendly, patient, and detail-oriented, I'm dedicated to creating intuitive, user-centered experiences that entertain and make life easier.
+hero_description: Third-year IT student at KMITL specializing in UX/UI and game development. I combine my background as an OOP teaching assistant and coding tutor with hands-on experience in human interface design. Using tools like Figma, Illustrator, and AI, I translate user research and experience mapping into actionable, pixel-perfect designs. Friendly, patient, and detail-oriented, I'm dedicated to creating intuitive, user-centered experiences that entertain and make life easier.
 
 
 MOTTOS 

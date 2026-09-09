@@ -170,7 +170,7 @@ export default function Hero() {
             variants={wordVariants}
             className="font-body text-lg md:text-xl text-dark-navy/80 dark:text-soft-white/80 max-w-md mb-10 leading-relaxed font-medium"
           >
-            I build AI-augmented systems, automation pipelines, and human-centered digital products. Second-year IT student at KMITL bridging engineering architecture, business strategy, and intuitive UX.
+            I build AI-augmented systems, automation pipelines, and human-centered digital products. Third-year IT student at KMITL bridging engineering architecture, business strategy, and intuitive UX.
           </motion.p>
 
           {/* CTA Buttons */}
