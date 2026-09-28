@@ -2,30 +2,25 @@
 
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
+import { Link } from "next-view-transitions";
 import { FiMapPin, FiMail, FiPhone, FiGlobe, FiDownload, FiLinkedin, FiGithub } from "react-icons/fi";
 
 /* ─────────────────────────────────────────
    DATA
 ───────────────────────────────────────── */
-const RESUME_DRIVE_URL = "https://drive.google.com/file/d/1oht2wjo-ojsd8lqC1lw3AzNgE6sb2uI8/view?usp=sharing";
-
-const stats = [
-  { label: "AI & Auto", pct: 85, from: "#FF2D78", to: "#F06848" },
-  { label: "Software", pct: 80, from: "#5080F0", to: "#40C8A0" },
-  { label: "Product/UX", pct: 75, from: "#F0D040", to: "#F8A078" },
-];
+// Content mirrors TAWAN-OS/09_WORK/Internships/Resume/Resume_Thanatpat_Promthong_Bluebik.html
+const RESUME_PDF_URL = "/Resume_Thanatpat_Promthong_Bluebik_2Page.pdf";
+const AVAILABILITY = "Full-time internship, 5 days/week, 1 Apr – 30 Jun 2027";
 
 const education = [
   {
     school: "King Mongkut's Institute of Technology Ladkrabang (KMITL)",
-    degree: "Bachelor of Science Program in Information Technology",
+    degree: "Bachelor of Science in Information Technology (Third-year)",
     module: "Module: Multimedia & Game Development",
     year: "Aug 2024 – Now",
     notes: [
-      "TAWAN-OS Personal Agentic AI Harness (Antigravity CLI, MCP, Multi-Agent)",
-      "Disney Lorcana PlayLab (AWS Serverless, Real-time WebSockets, Playwright E2E)",
-      "UX/UI Prototype EasyDom \"Chao-dom\" (Full 5-phase User Research & Usability Testing)",
-      "Java OOP Teaching Assistant & IT Openhouse Project Head",
+      "Relevant coursework: Human Interface Design, Web Development, Computer Graphics, Object-Oriented Programming (Java), Cloud Computing, Database Systems",
+      "Academic projects: Drive@KMITL (FastAPI/Next.js WebSocket chat), VPS-Tycoon (JavaFX OOP simulation), Synchro (ESP32 rhythm controller)",
     ],
   },
 ];
@@ -36,51 +31,49 @@ const workExperience = [
     role: "User Experience Designer Intern",
     dates: "Jun 1 – Aug 30, 2026",
     achievements: [
-      "Managed and improved the centralized design system for Gumon Technology by organizing UI foundations, reusable components, style tokens, and design documentation.",
-      "Established clear component guidelines to enforce product design consistency and facilitate smoother collaboration between designers and engineering teams.",
+      "Redesigned the UI of MonsTask, a productivity workspace app, together with my mentor, and wrote the UX/UI requirement document (V1 to V2) for the Business Analyst.",
+      "Proposed user flows, user journeys and a phased work plan in review sessions with the BA and developers.",
+      "Set up the base of Gumon's first design system: a 4-tier token structure (Brand, Alias, Mapped, Responsive) with 121 tokens, a 22-component MVP roadmap and a 16-page Figma file structure.",
+      "Discussed with developers which tech stack to use for exporting design tokens from Figma into code.",
     ],
-    tech: "Figma, Design Systems, UI Foundations, Tokens, Cross-Functional Workflow",
+    tech: "Figma, User Flow, User Journey, UI Redesign, UX/UI Requirements, Design Tokens",
+    link: "/projects/gumon-monstask",
   },
   {
     company: "School of Information Technology, KMITL",
     role: "Teaching Assistant — Object-Oriented Programming (Java)",
     dates: "Nov 2025 – Present",
     achievements: [
-      "Assisting course instructors for Object-Oriented Programming (OOP) by evaluating weekly lab assignments and conducting code reviews for 100+ 1st-year students.",
-      "Facilitating conceptual Q&A sessions to reinforce core OOP principles (polymorphism, encapsulation, inheritance) and systematic debugging.",
-      "Bridging technical communication between professors and students to resolve lab blockers effectively.",
+      "Review weekly code submissions and give 1-on-1 feedback to 100+ first-year IT students on OOP principles and debugging.",
+      "Run weekly Q&A sessions that explain software design patterns with simple mental models.",
     ],
-    tech: "Java, OOP, Git, Systematic Debugging, Mentorship",
+    tech: "Java, OOP, Git, Mentoring",
   },
   {
-    company: "School of Information Technology — KMITL IT Openhouse 2025",
+    company: "KMITL IT Openhouse 2025",
     role: "Project Head — Multimedia Roblox Journey Workshop",
     dates: "Nov 28 – 29, 2025",
     achievements: [
-      "Served as Project Head for the Roblox Training Program, leading curriculum development and pitching the training syllabus to faculty executives for sponsorship.",
-      "Recruited and supervised Teaching Assistants (TAs) and Technical Directors (TDs), overseeing live classroom instruction for 100+ attendees.",
-      "Managed workshop technical operations, lab machine environments, and hands-on Lua game prototyping sessions.",
+      "Designed the curriculum for a 2-day Lua coding workshop and presented the syllabus to faculty to get approval and lab resources.",
+      "Recruited, trained and led 10+ Teaching Assistants and Technical Directors for 100+ high school participants.",
     ],
-    tech: "Roblox Studio, Lua, Curriculum Design, Team Management",
+    tech: "Roblox Studio, Lua, Curriculum Design, Team Leadership",
   },
   {
-    company: "School of Information Technology, KMITL — ITCAMP 22: The Auspicious Jamboree",
+    company: "ITCAMP 22, School of IT, KMITL",
     role: "Head of Game Workshop (Unreal Engine)",
     dates: "Apr 29 – May 2, 2026",
     achievements: [
-      "Designed and structured the comprehensive Unreal Engine game development curriculum for high school campers, establishing interactive learning milestones.",
-      "Trained and mentored the cohort of TAs and TDs, managing classroom pacing, technical guidance, and operational coordination throughout the camp.",
+      "Designed the Unreal Engine game development curriculum for high school participants and trained the TA and TD team who ran it.",
     ],
-    tech: "Unreal Engine 5, Blueprints, Curriculum Architecture, Staff Mentorship",
+    tech: "Unreal Engine 5, Blueprints, Curriculum Design",
   },
   {
     company: "Code Genius EmQuartier & Login-Engineering Academy",
-    role: "Part-time Technical Instructor & Mentor",
+    role: "Part-time Technical Instructor",
     dates: "Sep 2024 – Present",
     achievements: [
-      "Instructing primary school students in coding through block-based programming (Scratch, Micro:bit) and foundational Python.",
-      "Providing individualized learning feedback and adapting lesson pacing to fit student progress in both Thai and English.",
-      "Coached students in engineering competition-ready software projects submitted to national contests and university portfolios.",
+      "Teach students from primary to high school level, adjusting lesson pace and explanations to each student in Thai and English.",
     ],
     tech: "Scratch, Micro:bit, Python, Godot Engine",
   },
@@ -88,103 +81,91 @@ const workExperience = [
 
 const featuredProjects = [
   {
-    name: "TAWAN-OS — Autonomous Agentic Automation & Trend Intelligence",
-    category: "AI & Automation",
-    period: "2025 – Present",
+    name: "HybriCareer AI (BridgeAI) — Career Transition Platform Proposal",
+    category: "User Research & Prototype",
+    period: "Generation Thailand 2026",
     points: [
-      "Architected a Markdown-first AI agent harness with multi-agent orchestration, CLI proxy, and custom Model Context Protocol (MCP) bridges to eliminate repetitive manual workflows.",
-      "Designed structured LLM ingestion pipelines that extract, categorize, and cross-reference signals from heterogeneous transcripts and documentation into searchable knowledge repositories.",
-      "Implemented deterministic verification checks and doctor diagnostics to guarantee hallucination-free outputs and persistent state tracking.",
+      "Reviewed National Statistical Office (NSO) labor data (34% youth unemployment) and interviewed 5 career switchers and 2 HR managers to find where applicant screening breaks down in current ATS software.",
+      "Designed and prototyped a Skill-Proof Radar that scores transferable skills from portfolio work; the proposal was selected as a Top 10 Finalist (5th Reserve) nationwide.",
     ],
-    tech: "TypeScript, Python, MCP, Antigravity CLI, Multi-Agent Architecture, LLM Evals",
+    tech: "User Interviews, Problem Framing, Figma, Prototype (Lovable)",
   },
   {
-    name: "NOSE TEA 'Sip to Scale' — Corporate Strategy & O2O Redesign",
-    category: "Business Strategy & Modeling",
-    period: "2026",
+    name: "NOSE TEA 'Sip to Scale' — Customer Journey Redesign & Business Case",
+    category: "Customer Journey",
+    period: "Business Case Comp 2026",
     points: [
-      "Formulated an intensive 30-day celebrity-free O2O growth strategy under a strict ฿500k budget constraint for a premium cheese tea brand in a red ocean market.",
-      "Built a financial feasibility model forecasting ฿1.8M revenue, ROI of 260%, and 55% store GP margin, with break-even verified at 7,576 cups (Week 3).",
-      "Redesigned customer journeys with smart e-Queues and LINE OA loyalty rituals, turning wait-time congestion into interactive engagement stations and onboarding 15,000+ digital members.",
+      "Mapped the in-store queue journey of a cheese tea brand and redesigned it with an e-Queue and LINE OA loyalty steps so waiting time becomes in-store engagement; the plan targeted 15,000+ new digital members.",
+      "Built a 30-day growth plan within a ฿500,000 budget, with a financial model projecting ฿1.8M revenue and break-even at 7,576 cups (week 3).",
     ],
-    tech: "SCQ Framework, Financial Break-Even Modeling, Booku POS, LINE OA, Customer Journey Mapping",
-  },
-  {
-    name: "HybriCareer AI (BridgeAI) — AI Labor Market Intelligence & SaaS",
-    category: "Market Discovery & Hackathon",
-    period: "2026",
-    points: [
-      "Analyzed NSO labor data highlighting a 34% youth unemployment rate; conducted qualitative interviews with career switchers and HR managers to isolate screening friction in legacy ATS software.",
-      "Conceptualized and prototyped an interactive AI Skill-Proof Benchmark Radar, pitching the solution to earn selection as a Top 10 Finalist Proposal (5th Reserve) at Generation Thailand Hackathon 2026.",
-    ],
-    tech: "User Research, Labor Analytics, AI Benchmark Prototyping, Lovable, Pitching",
-  },
-  {
-    name: "Disney Lorcana PlayLab — Cloud Serverless Real-Time Platform",
-    category: "Cloud Architecture & Scalability",
-    period: "2025 – 2026",
-    points: [
-      "Designed a full-stack real-time multiplayer platform on AWS Serverless architecture with <100ms WebSocket synchronization and DynamoDB Single-Table Design ($0.00 cost under Free Tier).",
-      "Engineered automated Playwright E2E regression test suites and verified security integrity under the OWASP Top 10 framework.",
-    ],
-    tech: "AWS Lambda, API Gateway WebSockets, Amazon DynamoDB, Next.js, Playwright E2E, OWASP",
+    tech: "Customer Journey Mapping, SCQ Framework, Break-Even Modeling, LINE OA",
   },
   {
     name: "EasyDom (Chao-dom) — 0-to-1 UX Case Study",
-    category: "Product & UX Strategy",
+    category: "User Research & Usability Testing",
     period: "2024",
     points: [
-      "Executed end-to-end UX research solving university dorm vacancy matching through in-depth qualitative interviews with students and dorm owners.",
-      "Developed personas, experience maps, interactive Figma prototypes, and conducted usability tests yielding 15+ actionable design insights.",
+      "Interviewed students and dorm owners to understand how dorm vacancies are found and matched.",
+      "Built personas, experience maps and interactive Figma prototypes, then ran usability tests that produced 15+ design insights.",
     ],
-    tech: "Figma, User Research, Usability Testing, Persona Mapping, Pitching",
+    tech: "Figma, User Research, Usability Testing, Personas",
+  },
+  {
+    name: "Red Bull Racing F1 — Interactive 3D Web Experience",
+    category: "Interactive Experience",
+    period: "Personal Project",
+    points: ["Designed and built a scroll-driven 3D showcase with an exploded view of the car and parallax camera movement."],
+    tech: "Three.js, GSAP ScrollTrigger, Google Veo, HTML/CSS/JavaScript",
+  },
+  {
+    name: "Technical Projects — TAWAN-OS & Disney Lorcana PlayLab",
+    category: "Engineering",
+    period: "2025 – Present",
+    points: [
+      "TAWAN-OS: personal multi-agent AI workspace that connects CLI agents and MCP servers (including Figma) for research, documentation and verification tasks.",
+      "Disney Lorcana PlayLab: real-time multiplayer card game on AWS Serverless (WebSockets, Lambda, DynamoDB) with Playwright E2E tests that include OWASP Top 10 checks.",
+    ],
+    tech: "Python, TypeScript, MCP, AWS Serverless, Playwright",
   },
 ];
 
 const skillGroups = [
   {
-    label: "Strategy & Problem Framing",
+    label: "Experience Design",
     items: [
-      "Business Case Structuring (SCQ)",
-      "Financial Break-Even & ROI Modeling",
-      "Customer Journey Mapping (O2O)",
-      "Market & Labor Data Analytics",
-      "Agile Sprint & Task Decomposition",
-      "Executive Stakeholder Pitching",
-    ],
-  },
-  {
-    label: "AI & Automation Engineering",
-    items: [
-      "Multi-Agent Orchestration",
-      "Antigravity CLI & agy",
-      "Model Context Protocol (MCP)",
-      "LINE Messaging API & Dialogflow",
-      "Python Scripting & Automation",
-      "Prompt Engineering & Evals",
-    ],
-  },
-  {
-    label: "Software Architecture & Dev",
-    items: [
-      "Next.js / React / TypeScript",
-      "AWS Serverless (Lambda, API Gateway, DynamoDB)",
-      "Automated Testing (Playwright E2E)",
-      "Java OOP & C#",
-      "REST APIs & WebSockets",
-      "Git / GitHub CI & Docker",
-    ],
-  },
-  {
-    label: "Human-Centered UX / UI",
-    items: [
-      "Figma Prototyping & Design Systems",
-      "User Research & Interviews",
+      "User Flow",
+      "User Journey",
       "Information Architecture",
-      "Interaction & Motion Design",
-      "WCAG 2.2 Accessibility",
-      "Adobe Illustrator & Canva",
+      "Wireframing",
+      "Interactive Prototyping",
+      "User Interviews",
+      "Usability Testing",
+      "UX Writing",
+      "WCAG Accessibility",
+      "Apple HIG",
     ],
+  },
+  {
+    label: "Design Tools",
+    items: ["Figma (Auto Layout, Variables, Components)", "FigJam", "Adobe Photoshop", "Adobe Illustrator", "Canva"],
+  },
+  {
+    label: "Design Systems & Front-end",
+    items: ["Design Tokens", "Component Guidelines", "HTML/CSS", "Tailwind CSS", "React", "Next.js", "TypeScript", "Git/GitHub"],
+  },
+  {
+    label: "Collaboration & Strategy",
+    items: [
+      "Stakeholder Presentation",
+      "Requirement Discussions with BA and Developers",
+      "Customer Journey Mapping (O2O)",
+      "SCQ Problem Framing",
+      "Agile Sprint Planning",
+    ],
+  },
+  {
+    label: "AI & Automation",
+    items: ["Claude Code", "Model Context Protocol (MCP)", "Prompt Engineering", "Python Scripting"],
   },
 ];
 
@@ -195,6 +176,11 @@ const languages = [
 ];
 
 const awards = [
+  {
+    name: "Google Student Ambassador Thailand",
+    detail: "Google Student Ambassador program, Thailand",
+    year: "2026",
+  },
   {
     name: "Top 10 Finalist Proposal — Generation Thailand Hackathon 2026",
     detail: "Nationwide hackathon finalist for HybriCareer AI (BridgeAI) — labor market analytics & AI skill verification radar",
@@ -230,32 +216,6 @@ const awards = [
 /* ─────────────────────────────────────────
    SMALL COMPONENTS
 ───────────────────────────────────────── */
-
-function StatBar({ label, pct, from, to }: { label: string; pct: number; from: string; to: string }) {
-  const ref = useRef<HTMLDivElement>(null);
-  const inView = useInView(ref, { once: true, margin: "-40px" });
-  const blocks = 10;
-  const filled = Math.round((pct / 100) * blocks);
-  return (
-    <div ref={ref} className="flex items-center gap-3 print:gap-2">
-      <span className="font-mono text-xs text-muted-lilac w-20 shrink-0">{label}</span>
-      <span className="font-mono text-xs text-muted-lilac/90 tracking-tight w-24 shrink-0">
-        {"█".repeat(filled)}
-        <span className="opacity-20">{"█".repeat(blocks - filled)}</span>
-      </span>
-      <div className="flex-1 h-3 rounded-full bg-white/5 dark:bg-vinyl-dark/60 overflow-hidden border border-white/10">
-        <motion.div
-          className="h-full rounded-full"
-          style={{ background: `linear-gradient(90deg, ${from}, ${to})` }}
-          initial={{ width: 0 }}
-          animate={inView ? { width: `${pct}%` } : { width: 0 }}
-          transition={{ duration: 1, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-        />
-      </div>
-      <span className="font-mono text-xs text-muted-lilac w-8 text-right shrink-0">{pct}%</span>
-    </div>
-  );
-}
 
 function LangBar({ lang, pct, level }: { lang: string; pct: number; level: string }) {
   const ref = useRef<HTMLDivElement>(null);
@@ -310,12 +270,11 @@ export default function ResumePage() {
   return (
     <main className="relative min-h-screen pt-28 pb-32 px-4 md:px-6 bg-soft-white dark:bg-dark-navy transition-colors duration-300 print:pt-6 print:pb-6 print:bg-white">
 
-      {/* Download button — links to Google Drive */}
+      {/* Download button — Bluebik resume PDF served from /public */}
       <a
-        href={RESUME_DRIVE_URL}
-        target="_blank"
-        rel="noopener noreferrer"
-        aria-label="Download Resume from Google Drive"
+        href={RESUME_PDF_URL}
+        download
+        aria-label="Download Resume (PDF)"
         className="print:hidden fixed bottom-28 md:bottom-32 right-6 md:right-8 z-50 w-14 h-14 rounded-full bg-hot-pink flex items-center justify-center text-soft-white shadow-[0_0_24px_rgba(255,96,144,0.6)] hover:shadow-[0_0_36px_rgba(255,96,144,0.8)] hover:-translate-y-1 transition-all duration-300"
       >
         <FiDownload size={22} />
@@ -382,14 +341,15 @@ export default function ResumePage() {
             <div className="flex flex-col gap-4">
               <div>
                 <h2 className="font-display text-3xl text-sakura-white print:text-black">THANATPAT PROMTHONG</h2>
+                <p className="font-body text-sm text-muted-lilac print:text-gray-500">ธนัทภัทร พรหมทอง</p>
                 <p className="font-body font-bold text-neon-magenta text-base mt-0.5 print:text-pink-600">
-                  Strategic Builder · AI & Automation Engineer · Product Designer
+                  Experience / UX-UI Designer · Third-year IT, KMITL
                 </p>
               </div>
 
               <div className="flex flex-wrap gap-x-6 gap-y-1.5">
                 {[
-                  { icon: <FiMapPin size={13} />, text: "451/1 Chalongkrung Rd, Lat Krabang, Bangkok 10520" },
+                  { icon: <FiMapPin size={13} />, text: "Lat Krabang, Bangkok 10520" },
                   { icon: <FiPhone size={13} />, text: "096-876-5392" },
                   { icon: <FiMail size={13} />, text: "tawaninm13@gmail.com" },
                   { icon: <FiGlobe size={13} />, text: "porfolio-website-five-inky.vercel.app" },
@@ -403,12 +363,13 @@ export default function ResumePage() {
                 ))}
               </div>
 
-              {/* Stat bars */}
-              <div className="flex flex-col gap-2.5 mt-2">
-                {stats.map((s) => (
-                  <StatBar key={s.label} {...s} />
-                ))}
-              </div>
+              {/* Availability */}
+              <p className="mt-2 inline-flex flex-wrap items-center gap-2 font-body text-sm text-sakura-white print:text-black">
+                <span className="font-mono text-[10px] uppercase tracking-widest text-retro-yellow border border-retro-yellow/40 rounded px-2 py-0.5">
+                  Availability
+                </span>
+                {AVAILABILITY}
+              </p>
             </div>
           </div>
 
@@ -417,7 +378,7 @@ export default function ResumePage() {
             <FadePanel>
               <PanelDivider title="Summary" />
               <p className="font-body text-sm text-soft-white/70 leading-relaxed print:text-gray-600">
-                Third-year IT student at KMITL specializing in AI automation systems, software architecture, and product strategy. Proven track record leading technical workshops (Project Head for IT Openhouse Roblox Training), mentoring university peers as a Java OOP Teaching Assistant, and architecting multi-agent AI harnesses (TAWAN-OS) and cloud platforms (Disney Lorcana PlayLab on AWS Serverless). Grounded in structured problem-solving, stakeholder communication, and end-to-end product delivery from user research to production code.
+                Third-year Information Technology student at King Mongkut&apos;s Institute of Technology Ladkrabang (KMITL), focused on experience design, design systems and design-to-development handoff. During my UX internship at Gumon Technology, I worked with my mentor on the UI redesign of MonsTask, a productivity workspace app, wrote the UX/UI requirement document for the Business Analyst, and set up the token structure for the company&apos;s first design system. I present user flows, user journeys and phased work plans to BA and development teams, and I know enough front-end code (React, Next.js, CSS) to discuss how design tokens move from Figma into code. Leading workshops for 100+ participants and working as a teaching assistant taught me to explain ideas clearly to different audiences.
               </p>
             </FadePanel>
           </div>
@@ -445,6 +406,14 @@ export default function ResumePage() {
                       </ul>
                       {w.tech && (
                         <p className="font-mono text-[10px] text-muted-lilac/90 mt-1">Tech: {w.tech}</p>
+                      )}
+                      {"link" in w && w.link && (
+                        <Link
+                          href={w.link}
+                          className="inline-block mt-1.5 font-body text-xs font-bold text-sky-cyan underline underline-offset-2 hover:text-neon-magenta print:hidden"
+                        >
+                          View case study →
+                        </Link>
                       )}
                     </div>
                   </div>
@@ -569,7 +538,7 @@ export default function ResumePage() {
 
       <style>{`
         @media print {
-          nav, footer, button, a[aria-label="Download Resume from Google Drive"] { display: none !important; }
+          nav, footer, button, a[aria-label="Download Resume (PDF)"] { display: none !important; }
           body { background: white !important; color: black !important; }
           * { animation: none !important; transition: none !important; }
           .print\\:hidden { display: none !important; }

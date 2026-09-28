@@ -67,9 +67,11 @@ function SectionNumber({ n, extra }: { n: string; extra?: React.ReactNode }) {
 /* ---- Gallery grid with lightbox ---- */
 function GalleryGrid({
   images,
+  title,
   onOpen,
 }: {
   images: string[];
+  title: string;
   onOpen: (i: number) => void;
 }) {
   return (
@@ -79,12 +81,13 @@ function GalleryGrid({
           key={idx}
           className="group relative aspect-video rounded-2xl overflow-hidden bg-deep-purple/30 border border-vinyl-dark/15 dark:border-soft-white/10 cursor-pointer focus:outline-none focus:ring-2 focus:ring-hot-pink/50"
           onClick={() => onOpen(idx)}
+          aria-label={`View ${title} image ${idx + 1} of ${images.length} full size`}
           whileHover={{ scale: 1.02 }}
           transition={{ duration: 0.3 }}
         >
           <Image
             src={img}
-            alt={`Image ${idx + 1}`}
+            alt={`${title}, image ${idx + 1}`}
             fill
             className="object-cover"
             sizes="(max-width: 768px) 100vw, 50vw"
@@ -321,8 +324,10 @@ export default function ProjectDetailClient({ project }: { project: Project }) {
                   {/* Embedded Context Image */}
                   {section.image && (
                     <div className="my-8 overflow-hidden rounded-2xl border border-vinyl-dark/15 dark:border-soft-white/10 bg-deep-purple/30 group">
-                      <div
-                        className="relative aspect-video md:aspect-[21/9] w-full cursor-pointer overflow-hidden"
+                      <button
+                        type="button"
+                        aria-label={`View full size: ${section.imageCaption || section.title}`}
+                        className="relative block aspect-video md:aspect-[21/9] w-full cursor-pointer overflow-hidden focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-hot-pink"
                         onClick={() => {
                           const idx = allLightboxImages.indexOf(section.image!);
                           if (idx !== -1) openLightbox(idx);
@@ -340,7 +345,7 @@ export default function ProjectDetailClient({ project }: { project: Project }) {
                             View Image ✦
                           </span>
                         </div>
-                      </div>
+                      </button>
                       {section.imageCaption && (
                         <div className="p-3 md:p-4 bg-vinyl-dark/5 dark:bg-soft-white/5 border-t border-vinyl-dark/10 dark:border-soft-white/10 flex items-center justify-between text-xs text-deep-navy/70 dark:text-soft-white/70">
                           <span>✦ {section.imageCaption}</span>
@@ -511,7 +516,7 @@ export default function ProjectDetailClient({ project }: { project: Project }) {
             <h2 className="font-display text-3xl md:text-4xl text-deep-navy dark:text-soft-white mb-6 -mt-2">
               Visual Showcase & Gallery
             </h2>
-            <GalleryGrid images={galleryImages} onOpen={openLightbox} />
+            <GalleryGrid images={galleryImages} title={project.title} onOpen={openLightbox} />
           </FadeSection>
         )}
 

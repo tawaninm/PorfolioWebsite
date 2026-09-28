@@ -1,0 +1,30 @@
+PASS  case study returns 200  (got 200)
+PASS  case study has section "Problem"
+PASS  case study has section "Context &amp; stakeholders"
+PASS  case study has section "User flow &amp; journey"
+PASS  case study has section "UI redesign"
+PASS  case study has section "Design system &amp; tokens"
+PASS  case study has section "Handoff to development"
+PASS  case study has section "What I learned"
+PASS  case study shows the token tiers (Brand 68)
+PASS  case study names the mentor
+PASS  case study uses a MonsTask screenshot
+PASS  home states the Experience Designer role
+PASS  home links the Gumon case study
+PASS  Gumon is the first project on /projects  (first: gumon-monstask)
+PASS  /resume says Third-year
+PASS  /resume lists Photoshop
+PASS  /resume shows availability 2027
+PASS  /resume download points to Bluebik PDF
+PASS  Bluebik PDF is served  (got 200)
+PASS  home has no "Second-year"
+PASS  home has no misspelled Thai name
+PASS  resume has no "Second-year"
+PASS  resume has no misspelled Thai name
+PASS  case study has no "Second-year"
+PASS  case study has no misspelled Thai name
+PASS  home target=_blank links use noopener  (0 unsafe)
+PASS  resume target=_blank links use noopener  (0 unsafe)
+PASS  case study target=_blank links use noopener  (0 unsafe)
+
+28/28 passed

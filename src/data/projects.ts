@@ -62,7 +62,183 @@ export const categoryLabels: Record<Project["category"], string> = {
   "case-competition": "Case Competition",
 };
 
-export const projects: Project[] = [
+const projectEntries: Project[] = [
+  {
+    // Facts: TAWAN-OS/scratch/plan.md fact table + 09_WORK/Internships/Gumon/exports/case-study-gumon-monstask.md
+    slug: "gumon-monstask",
+    title: "Gumon Design System & MonsTask Redesign",
+    category: "uxui",
+    thumbnail: "/projects/gumon-monstask/monstask-landing-hero-desktop.webp",
+    // Empty hero uses the gradient fallback: the screenshot's own headline competed with the page title.
+    heroImage: "",
+    date: "Jun – Aug 2026",
+    tags: ["UX Internship", "User Flow", "User Journey", "UI Redesign", "UX Requirements", "Design Tokens", "Figma"],
+    techStack: ["Figma (Variables, Components)", "Design Tokens (JSON)", "HTML / CSS", "React (PoC)"],
+    summary:
+      "UX internship at Gumon Technology. I redesigned the MonsTask productivity app with my mentor, wrote the UX/UI requirement document for the Business Analyst, and set up the token structure for the company's first design system.",
+    problem:
+      "MonsTask V1 worked as a proof of concept, but its words did not say what would happen, users could not tell personal data from organisation data, the worklog could read as employee monitoring, and there was no shared design foundation between designers and developers.",
+    process:
+      "Mapped user flows and journeys → proposed UI and wording changes → wrote 32 UX/UI requirements for the BA → planned delivery in phases → set up a 4-tier token structure and a 22-component roadmap → discussed the Figma-to-code token workflow with developers.",
+    result:
+      "Delivered: a V1 → V2 UX/UI requirement document with 32 items (17 P0, 11 P1, 4 P2), a 121-token structure, a 22-component MVP roadmap and a 16-page Figma file structure.\nWhat changed for the team: the BA and developers could refer to the same requirement IDs and token names in review sessions.",
+    highlights: [
+      { label: "Design tokens", value: "121", detail: "Brand 68 · Alias 12 · Mapped 33 · Responsive 8" },
+      { label: "Component roadmap", value: "22", detail: "MVP components with required states" },
+      { label: "Figma structure", value: "16 pages", detail: "4 variable collections" },
+      { label: "Requirements for BA", value: "32", detail: "17 P0 · 11 P1 · 4 P2" },
+    ],
+    sections: [
+      {
+        badge: "00 MY ROLE",
+        title: "My role",
+        subtitle: "User Experience Designer Intern, Gumon Technology · Jun 1 – Aug 30, 2026",
+        content:
+          "I worked with Nop, my mentor, on design, and with the Business Analyst and developers in review sessions.\n\nWhat I did:\n• UI redesign of MonsTask (with my mentor)\n• UX/UI requirement document from V1 to V2 for the BA\n• User flows, user journeys and a phased work plan presented to the BA and developers\n• Token structure for Gumon's first design system and a 22-component roadmap\n• Tech stack discussion with developers for exporting design tokens from Figma into code",
+        type: "callout",
+      },
+      {
+        badge: "01 PROBLEM",
+        title: "Problem",
+        subtitle: "A working prototype that was hard to take to production",
+        content:
+          "MonsTask is a productivity workspace for individuals, small teams and small-to-medium organisations. It puts a personal dashboard, tasks, calendar, notes, worklog and timesheet in one place. Three things made V1 hard to take further:",
+        type: "cards",
+        items: [
+          {
+            title: "Unclear words and boundaries",
+            description:
+              "Terms like \"Gadget\", \"Presets\" and \"Start Working\" did not say what would happen. Users could not tell which data was personal and which was shared with the organisation.",
+          },
+          {
+            title: "Privacy risk in the worklog",
+            description: "Time tracking could read as employee monitoring, which would hurt trust in the product.",
+          },
+          {
+            title: "No shared design foundation",
+            description:
+              "Colours, spacing and components were defined screen by screen, so designers and developers had no single source to work from.",
+          },
+        ],
+      },
+      {
+        badge: "02 CONTEXT",
+        title: "Context & stakeholders",
+        subtitle: "Who I designed with and for",
+        content:
+          "Team: me and my mentor (Nop) on design, one Business Analyst, and the development team.\n\nMy job in the team was to turn design decisions into something the BA could approve and developers could build: flows, journeys, written requirements and tokens.\n\nConstraint: the proof of concept was desktop-first (1440px). Mobile scope had to be decided by the BA before production.",
+        image: "/projects/gumon-monstask/monstask-landing-hero-desktop.webp",
+        imageCaption: "MonsTask PoC landing page, desktop (1440px)",
+        type: "text",
+      },
+      {
+        badge: "03 FLOW",
+        title: "User flow & journey",
+        subtitle: "Three flows I walked the BA and developers through",
+        content:
+          "I mapped the main flows and journeys and presented them in review sessions, together with a phased work plan.",
+        type: "cards",
+        items: [
+          {
+            tag: "Flow 1",
+            title: "Start the day",
+            description: "Open the dashboard → see Personal or Organization context first → see which data is private.",
+          },
+          {
+            tag: "Flow 2",
+            title: "Customise the dashboard",
+            description:
+              "Widget Library → preview → add now or customise first → save setup → remove with confirmation. Removing a widget never deletes real data.",
+          },
+          {
+            tag: "Flow 3",
+            title: "Worklog to timesheet",
+            description: "Log work privately → preview selected fields → export or submit only when the user chooses.",
+          },
+          {
+            tag: "Phase 1 · P0",
+            title: "Before production",
+            description: "Workspace boundary, shared glossary, Start Task behaviour, worklog privacy, accessible modals.",
+          },
+          {
+            tag: "Phase 2 · P1",
+            title: "Before adding features",
+            description: "Saved widget setups, layout templates, more detail in tasks, calendar and notes.",
+          },
+          {
+            tag: "Phase 3 · P2",
+            title: "Roadmap",
+            description: "Virtual Workspace, Virtual Office and Finance modules, after the BA confirms scope.",
+          },
+        ],
+      },
+      {
+        badge: "04 REDESIGN",
+        title: "UI redesign",
+        subtitle: "V2 kept every V1 feature and changed how the product explains itself",
+        content:
+          "Other changes:\n• The dashboard header shows whether you are in a Personal or Organization workspace and which data is private.\n• Dashboard editing gained Preview, Add, Customize, Save setup and Remove confirmation steps.\n• The worklog became a private work summary that is shared only when the user exports or submits.\n• Accessibility: dialogs close with Escape, focus stays inside modals, icon buttons have labels.",
+        image: "/projects/gumon-monstask/monstask-landing-features.webp",
+        imageCaption: "MonsTask PoC feature overview section",
+        type: "grid",
+        items: [
+          { tag: "Glossary", title: "Gadget → Widget", description: "A term users already know." },
+          { tag: "Glossary", title: "Presets → Starter layouts", description: "Says it changes the layout only, not the data." },
+          { tag: "Glossary", title: "Theme → Workspace skin", description: "Separates how it looks from who can see what." },
+          { tag: "Glossary", title: "Start Working → Start Task", description: "Does not suggest that time tracking starts automatically." },
+        ],
+      },
+      {
+        badge: "05 TOKENS",
+        title: "Design system & tokens",
+        subtitle: "The base of Gumon's first design system, adapted from the Ant Design token lifecycle",
+        content:
+          "Component roadmap: 22 MVP components (Button, Typography, Icon, Form, Input, Select, Checkbox, Radio, Switch, DatePicker, Table, Card, Tag, Badge, Tooltip, Modal, Drawer, Alert, Message, Pagination, Tabs, Menu). Every component needs default, hover, focus and disabled states; form components also need error and success.\n\nFigma file structure: 16 pages and 4 variable collections. The work was planned as 22 tickets on a shared kanban, split between me and my mentor.",
+        type: "grid",
+        items: [
+          { tag: "Tier 1", title: "Brand", metrics: "68 tokens", description: "Raw values: colour scales, spacing, radius, type.\nExample: brand.color.blue.600" },
+          { tag: "Tier 2", title: "Alias", metrics: "12 tokens", description: "What a colour means.\nExample: alias.color.primary.default → brand.color.blue.600" },
+          { tag: "Tier 3", title: "Mapped", metrics: "33 tokens", description: "Where a value is used in the UI.\nExample: surface.action.default → alias.color.primary.default" },
+          { tag: "Tier 4", title: "Responsive", metrics: "8 tokens", description: "Values that change by screen size.\nExample: page padding 32px on desktop, 16px on mobile" },
+        ],
+      },
+      {
+        badge: "06 HANDOFF",
+        title: "Handoff to development",
+        subtitle: "Making design decisions easy to build and check",
+        content:
+          "• Discussed with developers which tech stack to use for exporting design tokens from Figma into code, so a colour change in Figma could reach the product without manual copying.\n• Wrote each requirement with an ID, the change, the decision the BA had to make and a priority, so the BA and developers could refer to the same item. Example: BA-UX-004, \"Start Task must not suggest that time tracking starts automatically\".",
+        image: "/projects/gumon-monstask/monstask-landing-pricing.webp",
+        imageCaption: "MonsTask PoC pricing section",
+        type: "text",
+      },
+      {
+        badge: "07 LEARNED",
+        title: "What I learned",
+        type: "cards",
+        items: [
+          {
+            title: "Words are design",
+            description: "Most P0 items were about meaning and boundaries, not visuals. Changing a word removed a whole type of confusion.",
+          },
+          {
+            title: "Name the decision",
+            description: "A requirement is useful when it names the decision someone else has to make. The \"BA must decide\" column kept reviews focused.",
+          },
+          {
+            title: "Tokens are a shared language",
+            description: "Naming tokens by purpose (the Mapped tier) made handoff discussions with developers concrete.",
+          },
+        ],
+      },
+    ],
+    gallery: [
+      "/projects/gumon-monstask/monstask-landing-hero-desktop.webp",
+      "/projects/gumon-monstask/monstask-landing-hero-mobile.webp",
+      "/projects/gumon-monstask/monstask-landing-features.webp",
+      "/projects/gumon-monstask/monstask-landing-pricing.webp",
+    ],
+  },
   {
     slug: "lorcana-cloud-playlab",
     title: "Disney Lorcana PlayLab (AWS Serverless Real-Time Cloud TCG)",
@@ -2116,3 +2292,12 @@ export const projects: Project[] = [
     ],
   }
 ];
+
+/* Display order for an Experience Designer application: UX first, then
+   hackathon / case work, then programming, then game and art.
+   Array.prototype.sort is stable, so entries keep their order inside a category. */
+const categoryOrder: Project["category"][] = ["uxui", "hackathon", "case-competition", "programming", "game", "ci-art"];
+
+export const projects: Project[] = [...projectEntries].sort(
+  (a, b) => categoryOrder.indexOf(a.category) - categoryOrder.indexOf(b.category),
+);

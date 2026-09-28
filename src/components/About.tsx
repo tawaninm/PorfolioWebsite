@@ -17,16 +17,16 @@ const fadeUp = {
 };
 
 const skillCategories = [
-  { label: "Agentic AI & MCP", color: "bg-neon-magenta/20 text-dark-navy dark:text-sakura-white border border-neon-magenta/30" },
-  { label: "Python Automation", color: "bg-sky-cyan text-dark-navy" },
-  { label: "Next.js & TypeScript", color: "bg-retro-yellow text-dark-navy" },
-  { label: "AWS Serverless", color: "bg-sunset-gold text-dark-navy" },
-  { label: "Figma UX/UI", color: "bg-sakura-pink text-dark-navy" },
-  { label: "LINE Chatbot & API", color: "bg-mint text-dark-navy" },
-  { label: "Java OOP", color: "bg-coral-red text-soft-white" },
-  { label: "E2E Testing (Playwright)", color: "bg-electric-blue text-soft-white" },
-  { label: "Godot & Unity", color: "bg-lavender text-dark-navy" },
-  { label: "Git & CI/CD", color: "bg-mint text-dark-navy" },
+  { label: "User Flow & Journey", color: "bg-sakura-pink text-dark-navy" },
+  { label: "Information Architecture", color: "bg-retro-yellow text-dark-navy" },
+  { label: "Wireframe & Prototype", color: "bg-sky-cyan text-dark-navy" },
+  { label: "Figma", color: "bg-neon-magenta/20 text-dark-navy dark:text-sakura-white border border-neon-magenta/30" },
+  { label: "Photoshop & Illustrator", color: "bg-sunset-gold text-dark-navy" },
+  { label: "Design Tokens", color: "bg-mint text-dark-navy" },
+  { label: "UX Writing", color: "bg-lavender text-dark-navy" },
+  { label: "WCAG Accessibility", color: "bg-electric-blue text-soft-white" },
+  { label: "React & Next.js", color: "bg-coral-red text-soft-white" },
+  { label: "AI-assisted Prototyping", color: "bg-mint text-dark-navy" },
 ];
 
 /* Anime sparkle shape */
@@ -122,7 +122,7 @@ export default function About() {
 
               <div className="flex-1">
                 <p className="font-body text-dark-navy/90 dark:text-soft-white/90 leading-relaxed transition-colors duration-300">
-                  A strategic builder and developer bridging AI automation, software engineering, and human-centered design. I combine systematic problem-solving with an eye for user needs to build practical, scalable digital solutions.
+                  Third-year Information Technology student at KMITL, focused on experience design, design systems and design-to-development handoff. During my UX internship at Gumon Technology, I worked with my mentor on the UI redesign of MonsTask, wrote the UX/UI requirement document for the Business Analyst, and set up the token structure for the company&apos;s first design system. I present user flows, user journeys and phased work plans to BA and development teams, and I know enough front-end code to discuss how design tokens move from Figma into code.
                 </p>
 
                 {/* Manga speech bubble quote */}

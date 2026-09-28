@@ -42,10 +42,10 @@ function Starburst() {
 }
 
 const featuredSlugs = [
-  "lorcana-cloud-playlab",
-  "tawan-os-agent-harness",
-  "redbull-f1-verstappen",
+  "gumon-monstask",
+  "chao-dom",
   "hybricareer-ai",
+  "redbull-f1-verstappen",
 ];
 const previewProjects = featuredSlugs
   .map((slug) => projects.find((p) => p.slug === slug))

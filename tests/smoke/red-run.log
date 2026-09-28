@@ -1,0 +1,30 @@
+FAIL  case study returns 200  (got 404)
+FAIL  case study has section "Problem"
+FAIL  case study has section "Context &amp; stakeholders"
+FAIL  case study has section "User flow &amp; journey"
+FAIL  case study has section "UI redesign"
+FAIL  case study has section "Design system &amp; tokens"
+FAIL  case study has section "Handoff to development"
+FAIL  case study has section "What I learned"
+PASS  case study shows 121 tokens
+FAIL  case study names the mentor
+FAIL  case study uses a MonsTask screenshot
+FAIL  home says Experience Designer
+FAIL  home links the Gumon case study
+FAIL  Gumon is the first project on /projects  (first: lorcana-cloud-playlab)
+PASS  /resume says Third-year
+FAIL  /resume lists Photoshop
+FAIL  /resume shows availability 2027
+FAIL  /resume download points to Bluebik PDF
+FAIL  Bluebik PDF is served  (got 404)
+PASS  home has no "Second-year"
+PASS  home has no misspelled Thai name
+PASS  resume has no "Second-year"
+PASS  resume has no misspelled Thai name
+PASS  case study has no "Second-year"
+PASS  case study has no misspelled Thai name
+PASS  home target=_blank links use noopener  (0 unsafe)
+PASS  resume target=_blank links use noopener  (0 unsafe)
+PASS  case study target=_blank links use noopener  (0 unsafe)
+
+11/28 passed

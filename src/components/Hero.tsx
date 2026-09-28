@@ -62,7 +62,7 @@ function SpeedLines() {
 }
 
 export default function Hero() {
-  const titleText = "Crafting Playful & Innovative Digital Experiences";
+  const titleText = "Designing Clear & Playful Digital Experiences";
   const titleWords = titleText.split(" ");
 
   const containerVariants = {
@@ -117,7 +117,7 @@ export default function Hero() {
             variants={wordVariants}
             className="font-body text-xl md:text-2xl font-bold text-deep-purple dark:text-sakura-white mb-4"
           >
-            Hello, I'm Tawan 👋
+            Hello, I&apos;m Tawan 👋
           </motion.span>
 
           {/* Kinetic Typography Title */}
@@ -130,7 +130,7 @@ export default function Hero() {
                 className="inline-block mr-3 md:mr-5"
                 variants={wordVariants}
               >
-                {["Playful", "Innovative", "Digital"].includes(word.replace("&", "")) ? (
+                {["Clear", "Playful", "Digital"].includes(word.replace("&", "")) ? (
                   <span
                     className="drop-shadow-none"
                     style={{
@@ -156,7 +156,7 @@ export default function Hero() {
           >
             <div className="inline-block px-6 py-2 rounded-full bg-soft-white/40 border border-soft-white/60 backdrop-blur-md shadow-sm dark:bg-white/10 dark:border-white/20">
               <span className="font-body text-sm font-bold tracking-wider text-deep-purple dark:text-sakura-white uppercase">
-                AI & Automation Builder · Strategic Product Designer · KMITL IT
+                Experience / UX-UI Designer · Third-year IT, KMITL
               </span>
             </div>
             {/* Japanese subtitle — pastel gradient in light / dark navy gradient in dark */}
@@ -170,7 +170,7 @@ export default function Hero() {
             variants={wordVariants}
             className="font-body text-lg md:text-xl text-dark-navy/80 dark:text-soft-white/80 max-w-md mb-10 leading-relaxed font-medium"
           >
-            I build AI-augmented systems, automation pipelines, and human-centered digital products. Third-year IT student at KMITL bridging engineering architecture, business strategy, and intuitive UX.
+            I design user flows, journeys and interfaces that business teams and developers can agree on, and I set up design tokens that carry those decisions into code. Open for a full-time internship, 1 Apr – 30 Jun 2027.
           </motion.p>
 
           {/* CTA Buttons */}
@@ -199,7 +199,7 @@ export default function Hero() {
               href="#contact"
               className="inline-block px-8 py-3.5 bg-soft-white/40 text-deep-purple font-body font-bold rounded-full text-base transition-all duration-300 border border-soft-white/60 hover:bg-soft-white/60 shadow-sm dark:bg-white/10 dark:text-sakura-white dark:border-white/20 dark:hover:bg-white/20"
             >
-              Let's Talk
+              Let&apos;s Talk
             </a>
             </MagneticButton>
           </motion.div>

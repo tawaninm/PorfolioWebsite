@@ -11,6 +11,9 @@ export default function MotionProvider({ children }: { children: React.ReactNode
 
   /* ── Lenis smooth scroll ── */
   useEffect(() => {
+    // Respect the OS "reduce motion" setting: keep native scrolling, no smooth-scroll inertia.
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
     let isMounted = true;
     const lenis = new Lenis({
       duration: 1.2,
