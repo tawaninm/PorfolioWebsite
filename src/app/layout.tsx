@@ -46,9 +46,9 @@ const zenMaruGothic = Zen_Maru_Gothic({
 
 /* ---- Metadata ---- */
 export const metadata: Metadata = {
-  title: "Portfolio | UX/UI Designer · Programmer · CI Artist",
+  title: "Thanatpat Promthong | Experience / UX-UI Designer",
   description:
-    "City pop retro portfolio — UX/UI design, programming, and corporate identity art. Built with Next.js, Tailwind CSS, and Framer Motion.",
+    "Portfolio of Thanatpat Promthong, third-year IT student at KMITL: UX case studies, design systems and front-end work.",
 };
 
 // Ensure proper mobile viewport so the site doesn't render as a tiny desktop page.

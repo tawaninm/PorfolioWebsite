@@ -151,7 +151,8 @@ export default function ProjectDetailClient({ project }: { project: Project }) {
         className="relative w-full mt-6 overflow-hidden md:rounded-3xl md:mx-auto md:max-w-6xl"
         style={{ clipPath: "polygon(0 0, 100% 0, 100% 88%, 94% 100%, 0 100%)" }}
       >
-        <div className="aspect-[21/9] md:aspect-[21/7] relative">
+        {/* Taller on phones: a 21:9 box clipped 3-line titles on a 390px screen */}
+        <div className="aspect-[4/3] sm:aspect-[21/9] md:aspect-[21/7] relative">
           {project.heroImage ? (
             <Image
               src={project.heroImage}

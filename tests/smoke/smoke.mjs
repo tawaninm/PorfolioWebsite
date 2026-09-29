@@ -72,6 +72,16 @@ for (const [name, html] of [["home", home.html], ["resume", resume.html], ["case
   check(`${name} target=_blank links use noopener`, unsafe.length === 0, `${unsafe.length} unsafe`);
 }
 
+// Every route and every project detail page renders with its content in the HTML
+const projectsHtml = projectsPage.html;
+const slugs = [...new Set([...projectsHtml.matchAll(/\/projects\/([a-z0-9-]+)/g)].map((m) => m[1]))];
+check("projects page lists 13 projects", slugs.length === 13, `found ${slugs.length}`);
+for (const path of ["/about", "/mini-work", "/activities", "/experience", ...slugs.map((s) => `/projects/${s}`)]) {
+  const page = await get(path);
+  const text = page.html.replace(/<script[\s\S]*?<\/script>|<style[\s\S]*?<\/style>|<[^>]+>/g, " ");
+  check(`${path} returns 200 with content`, page.status === 200 && text.replace(/\s+/g, " ").length > 500, `status ${page.status}`);
+}
+
 const failed = results.filter((r) => !r.ok).length;
 console.log(`\n${results.length - failed}/${results.length} passed`);
 process.exit(failed ? 1 : 0);

@@ -108,17 +108,22 @@
    Base Styles
    ======================================== */
 
+/* overflow-x: clip (not hidden). `hidden` on both html and body turns body into
+   its own scroll container, so the window no longer scrolls the page: keyboard
+   scrolling (PageDown/Space) stopped working and IntersectionObserver-based
+   whileInView reveals never fired, leaving sections blank. `clip` still cuts
+   horizontal overflow but creates no scroll container. */
 html {
   /* scroll-behavior is handled by Lenis — do NOT add scroll-behavior: smooth here */
   max-width: 100%;
-  overflow-x: hidden;
+  overflow-x: clip;
 }
 
 body {
   /* Colors are managed via Tailwind classes in layout.tsx for next-themes support */
   font-family: var(--font-body);
   max-width: 100%;
-  overflow-x: hidden;
+  overflow-x: clip;
 }
 
 /* Selection highlight — neon magenta */

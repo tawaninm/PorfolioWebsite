@@ -10,12 +10,12 @@ import { FiGithub, FiLinkedin, FiMail } from "react-icons/fi";
 
 const profile = {
   name: "Thanatpat Promthong",
-  tagline: "AI & Automation Builder · Strategic Product Designer · KMITL IT",
+  tagline: "Experience / UX-UI Designer · Third-year IT, KMITL",
   location: "Bangkok, Thailand",
   bio: [
-    "By bridging user needs, business strategy, and engineering architecture, I build AI-augmented systems and intuitive digital products.",
-    "Currently 3rd year student at the School of Information Technology, KMITL, with hands-on focus on Agentic AI, Cloud Automation, and Human Interface design.",
-    "I actively seek hands-on experience—balancing technical leadership as an IT Openhouse Project Head and Java OOP Teaching Assistant with coding and continuous learning.",
+    "Third-year Information Technology student at KMITL, focused on experience design, design systems and design-to-development handoff.",
+    "During my UX internship at Gumon Technology, I worked with my mentor on the UI redesign of MonsTask, wrote the UX/UI requirement document for the Business Analyst, and set up the token structure for the company's first design system.",
+    "I present user flows, user journeys and phased work plans to BA and development teams. Leading workshops for 100+ participants and working as a Java OOP teaching assistant taught me to explain ideas clearly to different audiences.",
   ],
   quotes: [
     { text: "stay hungry stay foolish  —Steve Jobs", bg: "bg-lavender/20", rotate: "-rotate-1" },
@@ -46,6 +46,13 @@ const profile = {
     },
   ],
   experience: [
+    {
+      year: "2026",
+      role: "User Experience Designer Intern",
+      company: "Gumon Technology",
+      desc: "Redesigned the MonsTask UI with my mentor, wrote the V1 to V2 UX/UI requirement document for the Business Analyst, presented user flows, user journeys and a phased work plan to the BA and developers, and set up a 121-token structure and 22-component roadmap for Gumon's first design system.",
+      tech: ["Figma", "User Flow", "Design Tokens"],
+    },
     {
       year: "2026 – Present",
       role: "Part-time Tutor — Coding",
