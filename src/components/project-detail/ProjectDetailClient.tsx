@@ -21,10 +21,10 @@ const categoryBg: Record<Project["category"], string> = {
 };
 
 /* ---- Slide-in wrapper ----
-   Content stays visible (no opacity: 0 start). Starting hidden and waiting for
-   whileInView left whole sections blank when the IntersectionObserver did not
-   fire (seen on live project pages and in Playwright). */
-function FadeSection({
+   Content stays visible (no opacity: 0 start), so a section can never be blank
+   if whileInView does not fire. The original cause (overflow-x: hidden on html
+   and body) is fixed in globals.css; this is defence in depth for case studies. */
+function SlideInSection({
   children,
   delay = 0,
   className = "",
@@ -202,7 +202,7 @@ export default function ProjectDetailClient({ project }: { project: Project }) {
       </section>
 
       {/* ── Project Info & Action Links ── */}
-      <FadeSection delay={0.1} className="relative z-10 mx-auto max-w-5xl px-6 mt-10">
+      <SlideInSection delay={0.1} className="relative z-10 mx-auto max-w-5xl px-6 mt-10">
         <div className="flex flex-wrap items-center justify-between gap-4 mb-6">
           <div className="flex items-center gap-4">
             <span className="font-body text-sm text-lilac-bright font-bold">{project.date}</span>
@@ -284,7 +284,7 @@ export default function ProjectDetailClient({ project }: { project: Project }) {
             ))}
           </div>
         )}
-      </FadeSection>
+      </SlideInSection>
 
       <div className="mx-auto max-w-5xl px-6 mt-8">
         <div className="h-px bg-gradient-to-r from-transparent via-vinyl-dark/15 dark:via-soft-white/10 to-transparent" />
@@ -299,7 +299,7 @@ export default function ProjectDetailClient({ project }: { project: Project }) {
             const restBadge = badgeText.includes(" ") ? badgeText.slice(badgeText.indexOf(" ") + 1) : null;
             return (
               <div key={sIdx}>
-                <FadeSection delay={0.05} className="py-14">
+                <SlideInSection delay={0.05} className="py-14">
                   <SectionNumber
                     n={numPart}
                     extra={
@@ -402,7 +402,7 @@ export default function ProjectDetailClient({ project }: { project: Project }) {
                       ))}
                     </div>
                   )}
-                </FadeSection>
+                </SlideInSection>
                 <div className="h-px bg-gradient-to-r from-transparent via-vinyl-dark/15 dark:via-soft-white/10 to-transparent" />
               </div>
             );
@@ -410,7 +410,7 @@ export default function ProjectDetailClient({ project }: { project: Project }) {
         ) : (
           <>
             {/* ── 01 OVERVIEW ── */}
-            <FadeSection delay={0} className="py-14">
+            <SlideInSection delay={0} className="py-14">
               <SectionNumber n="01" />
               <h2 className="font-display text-3xl md:text-4xl text-deep-navy dark:text-soft-white mb-6 -mt-2">
                 Project Overview
@@ -418,12 +418,12 @@ export default function ProjectDetailClient({ project }: { project: Project }) {
               <p className="font-body text-base md:text-lg text-deep-navy/80 dark:text-soft-white/80 leading-relaxed">
                 {project.summary}
               </p>
-            </FadeSection>
+            </SlideInSection>
 
             <div className="h-px bg-gradient-to-r from-transparent via-vinyl-dark/15 dark:via-soft-white/10 to-transparent" />
 
             {/* ── 02 THE PROBLEM ── */}
-            <FadeSection delay={0.05} className="py-14">
+            <SlideInSection delay={0.05} className="py-14">
               <SectionNumber n="02" extra={<span className="font-display text-sm text-hot-pink font-bold">!?</span>} />
               <h2 className="font-display text-3xl md:text-4xl text-deep-navy dark:text-soft-white mb-6 -mt-2">
                 The Problem & Challenge
@@ -433,12 +433,12 @@ export default function ProjectDetailClient({ project }: { project: Project }) {
                   {project.problem}
                 </p>
               </div>
-            </FadeSection>
+            </SlideInSection>
 
             <div className="h-px bg-gradient-to-r from-transparent via-vinyl-dark/15 dark:via-soft-white/10 to-transparent" />
 
             {/* ── 03 PROCESS & ARCHITECTURE ── */}
-            <FadeSection delay={0.05} className="py-14">
+            <SlideInSection delay={0.05} className="py-14">
               <SectionNumber n="03" />
               <h2 className="font-display text-3xl md:text-4xl text-deep-navy dark:text-soft-white mb-6 -mt-2">
                 Process & Architecture
@@ -468,12 +468,12 @@ export default function ProjectDetailClient({ project }: { project: Project }) {
                   ))}
                 </div>
               )}
-            </FadeSection>
+            </SlideInSection>
 
             <div className="h-px bg-gradient-to-r from-transparent via-vinyl-dark/15 dark:via-soft-white/10 to-transparent" />
 
             {/* ── 04 THE SOLUTION & RESULTS ── */}
-            <FadeSection delay={0.05} className="py-14">
+            <SlideInSection delay={0.05} className="py-14">
               <SectionNumber n="04" />
               <h2 className="font-display text-3xl md:text-4xl text-deep-navy dark:text-soft-white mb-6 -mt-2">
                 The Solution & Results
@@ -507,7 +507,7 @@ export default function ProjectDetailClient({ project }: { project: Project }) {
                   );
                 })}
               </div>
-            </FadeSection>
+            </SlideInSection>
 
             <div className="h-px bg-gradient-to-r from-transparent via-vinyl-dark/15 dark:via-soft-white/10 to-transparent" />
           </>
@@ -515,13 +515,13 @@ export default function ProjectDetailClient({ project }: { project: Project }) {
 
         {/* ── 05 FULL GALLERY ── */}
         {galleryImages.length > 0 && (
-          <FadeSection delay={0.05} className="py-14">
+          <SlideInSection delay={0.05} className="py-14">
             <SectionNumber n="05" />
             <h2 className="font-display text-3xl md:text-4xl text-deep-navy dark:text-soft-white mb-6 -mt-2">
               Visual Showcase & Gallery
             </h2>
             <GalleryGrid images={galleryImages} title={project.title} onOpen={openLightbox} />
-          </FadeSection>
+          </SlideInSection>
         )}
 
         {/* ── Prev / Next Navigation ── */}

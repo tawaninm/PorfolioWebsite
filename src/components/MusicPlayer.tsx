@@ -97,7 +97,7 @@ export default function MusicPlayer() {
       {/* Toggle button */}
       <button
         onClick={toggle}
-        aria-label={playing ? "Pause background music" : "Play background music"}
+        aria-label="Background music"
         aria-pressed={playing}
         title={playing ? "Pause background music" : "Play background music"}
         className={`relative w-9 h-9 rounded-full border flex items-center justify-center transition-all duration-300

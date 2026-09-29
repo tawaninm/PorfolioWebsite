@@ -2,8 +2,9 @@
 // Usage: node tests/smoke/check-images.mjs
 import { readFileSync, existsSync } from "node:fs";
 import { join } from "node:path";
+import { fileURLToPath } from "node:url";
 
-const root = new URL("../../", import.meta.url).pathname.replace(/^\/([A-Za-z]:)/, "$1");
+const root = fileURLToPath(new URL("../../", import.meta.url));
 const source = readFileSync(join(root, "src/data/projects.ts"), "utf8");
 const paths = [...new Set(source.match(/"\/[^"]+\.(?:png|jpe?g|webp|gif|svg|avif)"/gi) || [])].map((p) => p.slice(1, -1));
 
