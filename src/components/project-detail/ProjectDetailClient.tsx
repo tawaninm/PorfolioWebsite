@@ -20,7 +20,10 @@ const categoryBg: Record<Project["category"], string> = {
   "case-competition": "bg-coral-red/20 text-coral-red border-coral-red/30",
 };
 
-/* ---- Fade-in wrapper ---- */
+/* ---- Slide-in wrapper ----
+   Content stays visible (no opacity: 0 start). Starting hidden and waiting for
+   whileInView left whole sections blank when the IntersectionObserver did not
+   fire (seen on live project pages and in Playwright). */
 function FadeSection({
   children,
   delay = 0,
@@ -32,8 +35,8 @@ function FadeSection({
 }) {
   return (
     <motion.div
-      initial={{ opacity: 0, y: 30 }}
-      whileInView={{ opacity: 1, y: 0 }}
+      initial={{ y: 24 }}
+      whileInView={{ y: 0 }}
       viewport={{ once: true, amount: 0.2 }}
       transition={{ duration: 0.6, delay, ease: [0.16, 1, 0.3, 1] }}
       className={className}
