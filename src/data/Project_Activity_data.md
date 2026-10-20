@@ -1,5 +1,33 @@
 # All project Page and project Home page
 
+## Project page name : TAWAN-OS AI Agent System
+Page Variant : ai-agent-case
+Type Work : AI / System Design
+Project name : TAWAN-OS (Ikigai Guild)
+Description : ระบบผู้ช่วยส่วนตัวแบบ Multi-Agent ที่ทำงานร่วมกันเพื่อจัดการชีวิต การเรียนรู้ สร้างเอกสาร และอัปเดตพอร์ตโฟลิโออัตโนมัติ
+Preview Image : /images/Project/preview-tawan-os.png
+Hero Focus : นำเสนอสถาปัตยกรรม AI Agents (Ikigai Guild) ที่ประสานงานกันตั้งแต่การจัดการไฟล์ (LaTeX), การบันทึกโปรเจกต์ (Fumi), ไปจนถึงการขึ้นเว็บ
+Role Responsibilities : System Architect / Prompt Engineer
+Tech Stack : Antigravity CLI, Gemini AI, NotebookLM, Markdown, PowerShell, Python
+Timeline : ต่อเนื่อง (มิถุนายน 2569)
+Team Members : 1 (Tawan)
+Challenges : การวางโครงสร้างให้ AI หลายบทบาททำงานต่อกันเป็น Pipeline อย่างราบรื่น โดยไม่ทับซ้อนและไม่ลืมบริบทเก่า
+Ideation : ต้องการสร้างทีมผู้ช่วยส่วนตัว (Guild) ที่แต่ละตัวมีความเชี่ยวชาญเฉพาะด้าน เพื่อเปลี่ยนงานจุกจิกให้เป็นระบบอัตโนมัติ
+Overview : TAWAN-OS คือระบบ OS สำหรับตัวเองที่ถูกควบคุมโดยแก๊ง AI Agents เช่น Fumi (นักประวัติศาสตร์ที่คอยจดบันทึกโปรเจกต์) และคนอื่นๆ เพื่อให้โฟกัสกับงานออกแบบและพัฒนาได้เต็มที่
+The Problem : ทำโปรเจกต์เยอะแต่ไม่มีเวลามานั่งเขียน Case Study ย้อนหลัง ทำให้พอร์ตโฟลิโอขาดการอัปเดต
+Key Features : Ikigai Agent System, Automated Web Pipeline Flow, LaTeX Document Manager, NotebookLM Grounding
+The Process :
+- กำหนดบทบาทและหน้าที่ให้ Agent แต่ละตัวอย่างชัดเจน (เช่น Fumi, Aoi, Kaito)
+- สร้าง Flow การทำงานข้ามระบบ (Markdown -> LaTeX -> Word/PDF -> Web Dashboard)
+- ทดสอบให้ Fumi สกัดข้อมูลและบันทึกลงเว็บพอร์ตโฟลิโอได้อัตโนมัติ
+The Solution : ทีม AI Assistants ที่ช่วยจดบันทึกประวัติศาสตร์การทำงานและจัดหน้าเอกสารให้แบบอัตโนมัติ
+Impact : ระบบการจัดการตัวเองที่ไร้รอยต่อ ช่วยประหยัดเวลาทำสรุปโปรเจกต์กว่า 50% และพอร์ตโฟลิโออัปเดตตลอดเวลา
+Recommended Sections : Hero Preview, System Architecture, Meet the Agents (Fumi), Pipeline Flow, Impact
+Content Priority : architecture -> agents -> pipeline -> impact
+Gallery Images : /images/Project/tawan-os-fumi.png
+Link to project : Local TAWAN-OS Repository
+
+---
 ## Project page name : Chao-dom
 Page Variant : ux-case-study
 Type Work : UX UI
@@ -204,10 +232,10 @@ Link to project : NSC ครั้งที่ 25 รหัส 25p21e0082
 
 ---
 # Project to show in Home page
-name 1: Chao-dom
-name 2: Drive@KMITL
-name 3: VPS-Tycoon
-name 4: CriminalMind
+name 1: TAWAN-OS AI Agent System
+name 2: Chao-dom
+name 3: Drive@KMITL
+name 4: VPS-Tycoon
 
 ---
 
@@ -423,3 +451,19 @@ name 3: Design challenge03 Entering data
 
 ## General Gallery (มีอยู่แล้ว)
 - 1.png through 18.png
+
+## Activity 8 YouTube Workflow Ingestion: Video to Website
+Type : workshop
+name : YouTube Workflow Ingestion: Video to Website
+Period : 21 มิ.ย. 2569
+Description : ถอดบทเรียนและวิเคราะห์สถาปัตยกรรม Orchestrated AI Workflow จากวิดีโอสอนสร้าง Premium Animated Website โดยใช้ Claude Code + Nano Banana 2 และ Veo 3.1 แบบไม่พึ่งพาโค้ด 
+Place : TAWAN-OS Second Brain (03_KNOWLEDGE/01_WIKI)
+image : /images/ACTIVITIES/default.jpg
+
+## Project Red Bull F1 3D Web Experience
+Type : project
+name : Max Verstappen 3D Web Experience
+Period : 22 มิ.ย. 2569
+Description : ออกแบบและพัฒนาเว็บไซต์ Premium Portfolio (Awwwards-level) นำเสนอรถแข่ง RB22 และ Max Verstappen ด้วยเทคโนโลยี 3D (Three.js) ผสมผสานกับ GSAP ScrollTrigger Animations, วิดีโอ Cinematic Intro, ระบบ Music Transition แบบไร้รอยต่อ และเทคนิค Parallax Scrolling แบบสมบูรณ์แบบ รองรับ Mobile Responsive (Crafted by TowoUX via Antigravity OS)
+Place : Vercel Deployment (Live)
+image : /images/Project/redbull-f1-cover.jpg
